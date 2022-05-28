@@ -53,7 +53,7 @@ namespace QSANN.ViewModels
 
                     if (value is not null)
                     {
-                        _regionManager.RequestNavigate(RegionNames.ContentRegion, $"{value.Title}View");
+                        _regionManager.RequestNavigate(RegionNames.MainContentRegion, $"{value.Title}View");
                     }
                 }
             }

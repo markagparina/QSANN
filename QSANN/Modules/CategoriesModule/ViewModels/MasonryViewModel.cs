@@ -1,10 +1,12 @@
-﻿using CategoriesModule.Models;
+﻿using CategoriesModule.Dialogs;
+using CategoriesModule.Models;
 using CategoriesModule.Validators;
 using CategoriesModule.Views;
 using MaterialDesignThemes.Wpf;
 using Prism.Commands;
 using Prism.Regions;
 using Prism.Services.Dialogs;
+using QSANN.Core.Commands;
 using QSANN.Core.Extensions;
 using QSANN.Core.Navigation;
 using QSANN.Services.Interfaces;
@@ -16,30 +18,45 @@ namespace CategoriesModule.ViewModels
     public class MasonryViewModel : MenuItem
     {
 
+
+        private readonly IMasonryCalculatorService _masonryCalculatorService;
+        private readonly MasonryInputModelValidator _validator = new();
+
         public MasonryInputModel InputModel { get; set; } = new();
         public MasonryOutputModel OutputModel { get; set; } = new();
+        public ErrorDialog ErrorDialog { get; set; } = new();
 
-        private DelegateCommand _calculateCommand;
-        public DelegateCommand CalculateCommand => _calculateCommand ??= new DelegateCommand(ExecuteCalculateCommandAsync);
+        private DelegateCommandWithValidator<MasonryInputModel, MasonryInputModelValidator> _calculateCommand;
+        public DelegateCommandWithValidator<MasonryInputModel, MasonryInputModelValidator> CalculateCommand
+            => _calculateCommand ??= new DelegateCommandWithValidator<MasonryInputModel, MasonryInputModelValidator>
+            (async () => await ExecuteCalculateCommandAsync(), InputModel, _validator, ErrorDialog);
 
-        async void ExecuteCalculateCommandAsync()
+        private string _message;
+
+        public string Message
         {
-            var validationResult = _validator.Validate(InputModel);
+            get => _message;
+            set => SetProperty(ref _message, value);
+        }
 
-            if (!validationResult.IsValid)
-            {
-                var view = new MessageDialog
-                {
-                    DataContext = new MessageDialogViewModel(null, validationResult.Errors.Select(err => err.ErrorMessage))
-                };
-
-
-                var result = await DialogHost.Show(view);
-
-                return;
-            }
+        private bool _isResultvisible;
+        public bool IsResultVisible
+        {
+            get { return _isResultvisible; }
+            set { SetProperty(ref _isResultvisible, value); }
+        }
 
 
+        public override string Title => "Masonry";
+
+        public MasonryViewModel(IMasonryCalculatorService masonryCalculatorService, IRegionManager regionManager) : base(regionManager)
+        {
+            _masonryCalculatorService = masonryCalculatorService;
+        }
+
+
+        Task ExecuteCalculateCommandAsync()
+        {
             var model = _masonryCalculatorService.CalculateThicknessAndSandMultipliers(InputModel.ThicknessInMillimeter.StripAndParseAsDecimal(), InputModel.ClassMixtureForPlaster);
 
             decimal area = _masonryCalculatorService.CalculateWallArea(InputModel.HeightOfWall.StripAndParseAsDecimal(), InputModel.LengthOfWall.StripAndParseAsDecimal());
@@ -63,34 +80,7 @@ namespace CategoriesModule.ViewModels
             OutputModel.HorizontalBars = $"{horizontalBars} pieces of 6 meter Horizontal Bars";
             OutputModel.VerticalBars = $"{verticalBars} pieces of 6 meter Vertical Bars";
             IsResultVisible = true;
-
-        }
-
-        private string _message;
-        private readonly IMasonryCalculatorService _masonryCalculatorService;
-        private readonly IDialogService _dialogService;
-        private readonly MasonryInputModelValidator _validator = new();
-
-        public string Message
-        {
-            get => _message;
-            set => SetProperty(ref _message, value);
-        }
-
-        private bool _isResultvisible;
-        public bool IsResultVisible
-        {
-            get { return _isResultvisible; }
-            set { SetProperty(ref _isResultvisible, value); }
-        }
-
-
-        public override string Title => "Masonry";
-
-        public MasonryViewModel(IMasonryCalculatorService masonryCalculatorService, IRegionManager regionManager, IDialogService dialogService) : base(regionManager)
-        {
-            _masonryCalculatorService = masonryCalculatorService;
-            _dialogService = dialogService;
+            return Task.CompletedTask;
         }
     }
 }

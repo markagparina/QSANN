@@ -1,32 +1,31 @@
-﻿using System;
+using System;
 using System.Globalization;
 using System.Windows.Data;
 
-namespace QSANN.Core.Converters
+namespace QSANN.Core.Converters;
+
+public class DecimalToBooleanConverter : IValueConverter
 {
-    public class DecimalToBooleanConverter : IValueConverter
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+
+        return parameter?.ToString() == value?.ToString();
+
+        //if (bool.TryParse(value?.ToString(), out bool result) && result)
+        //{
+        //    return parameter.ToString();
+        //}
+
+        //return string.Empty;
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        if (bool.TryParse(value.ToString(), out bool result) && result)
         {
-
-            return parameter?.ToString() == value?.ToString();
-
-            //if (bool.TryParse(value?.ToString(), out bool result) && result)
-            //{
-            //    return parameter.ToString();
-            //}
-
-            //return string.Empty;
+            return decimal.Parse(parameter.ToString(), CultureInfo.InvariantCulture);
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            if (bool.TryParse(value.ToString(), out bool result) && result)
-            {
-                return decimal.Parse(parameter.ToString());
-            }
-
-            return 0;
-        }
+        return 0;
     }
 }

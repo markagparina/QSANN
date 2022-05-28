@@ -3,11 +3,11 @@
 namespace CategoriesModule.Views
 {
     /// <summary>
-    /// Interaction logic for MessageDialog
+    /// Interaction logic for FormworksColumnView
     /// </summary>
-    public partial class MessageDialog : UserControl
+    public partial class FormworksColumnView : UserControl
     {
-        public MessageDialog()
+        public FormworksColumnView()
         {
             InitializeComponent();
         }

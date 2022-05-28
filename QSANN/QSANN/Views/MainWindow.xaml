@@ -81,7 +81,7 @@
             </materialDesign:ColorZone>
 
             <!-- The default behavior of the DockPanel is to have the last child fill the middle -->
-            <ContentControl prism:RegionManager.RegionName="{x:Static core:RegionNames.ContentRegion}" />
+            <ContentControl prism:RegionManager.RegionName="{x:Static core:RegionNames.MainContentRegion}" />
         </DockPanel>
     </materialDesign:DrawerHost>
 

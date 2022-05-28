@@ -1,15 +1,47 @@
-﻿using Prism.Regions;
+﻿using Prism.Commands;
+using Prism.Regions;
+using QSANN.Core;
 using QSANN.Core.Navigation;
+using System;
 
 namespace CategoriesModule.ViewModels
 {
     public class FormworksViewModel : MenuItem
     {
-        public FormworksViewModel(IRegionManager regionManager) : base(regionManager)
+        private readonly IRegionManager _regionManager;
+        public override string Title => "Formworks";
+
+        private string _selectedTab;
+        public string SelectedTab
         {
+            get { return _selectedTab; }
+            set
+            {
+                if (SetProperty(ref _selectedTab, value))
+                {
+                    if (!string.IsNullOrEmpty(value))
+                    {
+                        string view = $"Formworks{value}View";
+                        _regionManager.RequestNavigate(RegionNames.FormworksContentRegion, view);
+                    }
+                }
+            }
         }
 
-        public override string Title => "Formworks";
+        private DelegateCommand<string> _navigateCommand;
+        public DelegateCommand<string> NavigateCommand => _navigateCommand ??= new DelegateCommand<string>(ExecuteNavigateCommand);
+
+
+        public FormworksViewModel(IRegionManager regionManager) : base(regionManager)
+        {
+            _regionManager = regionManager;
+            SelectedTab = "Column";
+        }
+
+        private void ExecuteNavigateCommand(string param)
+        {
+            SelectedTab = param;
+        }
 
     }
 }

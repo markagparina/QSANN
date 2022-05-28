@@ -3,87 +3,95 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:prism="http://prismlibrary.com/"
              xmlns:validations="clr-namespace:QSANN.Core.ValidationRules;assembly=QSANN.Core"
+             xmlns:converters="clr-namespace:QSANN.Core.Converters;assembly=QSANN.Core"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              prism:ViewModelLocator.AutoWireViewModel="True">
 
-    <ScrollViewer>
-        <StackPanel Orientation="Vertical">
-            <TextBlock 
+    <UserControl.Resources>
+        <converters:StringToBooleanConverter x:Key="stringToBooleanConverter"/>
+        <converters:DecimalToBooleanConverter x:Key="decimalToBooleanConverter"/>
+        <converters:BoolToVisibleOrHidden x:Key="booleanToVisibilityConverter"/>
+    </UserControl.Resources>
+    <materialDesign:DialogHost>
+
+        <ScrollViewer>
+            <StackPanel Orientation="Vertical">
+                <TextBlock 
                     Margin="0,20,0,0"
                     Padding="5"
                     Text="Length of Column?" />
 
-            <TextBox
+                <TextBox
                         Style="{StaticResource MaterialDesignOutlinedTextBox}"
                         VerticalAlignment="Top"
                         Height="50"
                         TextWrapping="Wrap"
                         materialDesign:HintAssist.Hint="3 meters">
-                <TextBox.Text>
-                    <Binding Path="InputModel.HeightOfWall" UpdateSourceTrigger="LostFocus">
-                        <Binding.ValidationRules>
-                            <validations:RequiredNumericRule 
+                    <TextBox.Text>
+                        <Binding Path="InputModel.LengthOfColumn" UpdateSourceTrigger="LostFocus">
+                            <Binding.ValidationRules>
+                                <validations:RequiredNumericRule 
                             InitialMessage="This field is required"
                             ErrorMessage="Invalid value for Height of Wall" 
                             ValidatesOnTargetUpdated="True" />
-                        </Binding.ValidationRules>
-                    </Binding>
-                </TextBox.Text>
-            </TextBox>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
 
-            <TextBlock 
+                <TextBlock 
                     Margin="0,20,0,0"
                     Padding="5"
                     Text="Width of Column?" />
 
-            <TextBox
+                <TextBox
                         Style="{StaticResource MaterialDesignOutlinedTextBox}"
                         VerticalAlignment="Top"
                         Height="50"
                         TextWrapping="Wrap"
                         materialDesign:HintAssist.Hint="3 meters">
-                <TextBox.Text>
-                    <Binding Path="InputModel.HeightOfWall" UpdateSourceTrigger="LostFocus">
-                        <Binding.ValidationRules>
-                            <validations:RequiredNumericRule 
+                    <TextBox.Text>
+                        <Binding Path="InputModel.WidthOfColumn" UpdateSourceTrigger="LostFocus">
+                            <Binding.ValidationRules>
+                                <validations:RequiredNumericRule 
                             InitialMessage="This field is required"
                             ErrorMessage="Invalid value for Height of Wall" 
                             ValidatesOnTargetUpdated="True" />
-                        </Binding.ValidationRules>
-                    </Binding>
-                </TextBox.Text>
-            </TextBox>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
 
-            <TextBlock 
+                <TextBlock 
                     Margin="0,20,0,0"
                     Padding="5"
                     Text="Height of Column?" />
 
-            <TextBox
+                <TextBox
                         Style="{StaticResource MaterialDesignOutlinedTextBox}"
                         VerticalAlignment="Top"
                         Height="50"
                         TextWrapping="Wrap"
                         materialDesign:HintAssist.Hint="3 meters">
-                <TextBox.Text>
-                    <Binding Path="InputModel.HeightOfWall" UpdateSourceTrigger="LostFocus">
-                        <Binding.ValidationRules>
-                            <validations:RequiredNumericRule 
+                    <TextBox.Text>
+                        <Binding Path="InputModel.HeightOfColumn" UpdateSourceTrigger="LostFocus">
+                            <Binding.ValidationRules>
+                                <validations:RequiredNumericRule 
                             InitialMessage="This field is required"
                             ErrorMessage="Invalid value for Height of Wall" 
                             ValidatesOnTargetUpdated="True" />
-                        </Binding.ValidationRules>
-                    </Binding>
-                </TextBox.Text>
-            </TextBox>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
 
 
-            <TextBlock 
+                <TextBlock 
                     Margin="0,20,0,0"
                     Padding="5"
                     Text="Numbers of Column?" />
 
-            <TextBox
+                <TextBox
                         Style="{StaticResource MaterialDesignOutlinedTextBox}"
                         VerticalAlignment="Top"
                         Height="50"
@@ -91,22 +99,56 @@
                         Margin="0,0,0,20"
                         TextWrapping="Wrap"
                         materialDesign:HintAssist.Hint="3 meters">
-                <TextBox.Text>
-                    <Binding Path="InputModel.HeightOfWall" UpdateSourceTrigger="LostFocus">
-                        <Binding.ValidationRules>
-                            <validations:RequiredNumericRule 
+                    <TextBox.Text>
+                        <Binding Path="InputModel.NumbersOfColumn" UpdateSourceTrigger="LostFocus">
+                            <Binding.ValidationRules>
+                                <validations:RequiredNumericRule 
                             InitialMessage="This field is required"
                             ErrorMessage="Invalid value for Height of Wall" 
                             ValidatesOnTargetUpdated="True" />
-                        </Binding.ValidationRules>
-                    </Binding>
-                </TextBox.Text>
-            </TextBox>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
 
-            <Button Command="{Binding CalculateCommand}">Calculate</Button>
-        </StackPanel>
-    </ScrollViewer>
+                <Button Command="{Binding CalculateCommand}">Calculate</Button>
 
+
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="5*" />
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <GroupBox
+                    
+                    Visibility="{Binding IsResultVisible, Converter={StaticResource booleanToVisibilityConverter}}"
+                    Grid.Column="1"
+                Width="Auto"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                Header="Result"
+                Margin="16">
+                        <GroupBox.Content>
+                            <StackPanel>
+                                <!--Cement-->
+                                <TextBlock FontSize="32" Text="{Binding OutputModel.CementM}"/>
+                                <!--Sand-->
+                                <TextBlock FontSize="32" Text="{Binding OutputModel.Sand}"/>
+                                <!--Gravel-->
+                                <TextBlock FontSize="32" Text="{Binding OutputModel.Gravel}"/>
+                            </StackPanel>
+                        </GroupBox.Content>
+                    </GroupBox>
+
+
+                </Grid>
+
+            </StackPanel>
+        </ScrollViewer>
+    </materialDesign:DialogHost>
 
 
 </UserControl>

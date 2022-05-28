@@ -9,13 +9,15 @@
 		<PackageReference Include="MaterialDesignThemes" Version="4.5.0" />
 		<PackageReference Include="Prism.Unity" Version="8.1.97" />
 		<PackageReference Include="Prism.Unity.Extensions" Version="8.0.62" />
-		<PackageReference Include="ShowMeTheXAML.MSBuild" Version="2.0.0" />
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\..\QSANN.Core\QSANN.Core.csproj" />
 		<ProjectReference Include="..\..\Services\QSANN.Services\QSANN.Services.csproj" />
 	</ItemGroup>
 	<ItemGroup>
+		<Compile Update="Dialogs\ErrorDialog.xaml.cs">
+		  <SubType>Code</SubType>
+		</Compile>
 		<Compile Update="Views\CementView.xaml.cs">
 			<SubType>Code</SubType>
 		</Compile>
@@ -27,6 +29,10 @@
 		</Compile>
 	</ItemGroup>
 	<ItemGroup>
+		<Page Update="Dialogs\ErrorDialog.xaml">
+		  <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+		  <SubType>Designer</SubType>
+		</Page>
 		<Page Update="Views\CementView.xaml">
 			<XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
 			<SubType>Designer</SubType>

@@ -3,7 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:prism="http://prismlibrary.com/"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             xmlns:smtx="clr-namespace:ShowMeTheXAML;assembly=ShowMeTheXAML"
              xmlns:converters="clr-namespace:QSANN.Core.Converters;assembly=QSANN.Core"
              xmlns:validations="clr-namespace:QSANN.Core.ValidationRules;assembly=QSANN.Core"
              xmlns:system="clr-namespace:System;assembly=mscorlib"

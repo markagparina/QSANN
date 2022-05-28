@@ -17,7 +17,8 @@ namespace CategoriesModule
 
         public void OnInitialized(IContainerProvider containerProvider)
         {
-            _regionManager.RequestNavigate(RegionNames.ContentRegion, "CementView");
+            _regionManager.RequestNavigate(RegionNames.MainContentRegion, "CementView");
+            _regionManager.RequestNavigate(RegionNames.FormworksContentRegion, "FormworksColumnView");
         }
 
         public void RegisterTypes(IContainerRegistry containerRegistry)
@@ -25,6 +26,9 @@ namespace CategoriesModule
             containerRegistry.RegisterForNavigation<CementView>("CementView");
             containerRegistry.RegisterForNavigation<MasonryView>("MasonryView");
             containerRegistry.RegisterForNavigation<FormworksView>("FormworksView");
+            containerRegistry.RegisterForNavigation<FormworksColumnView>("FormworksColumnView");
+
+            containerRegistry.RegisterForNavigation<FormworksBeamView>("FormworksBeamView");
         }
     }
 }
