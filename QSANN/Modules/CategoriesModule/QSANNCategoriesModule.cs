@@ -17,6 +17,10 @@ namespace CategoriesModule
 
         public void OnInitialized(IContainerProvider containerProvider)
         {
+
+            _regionManager.RegisterViewWithRegion(RegionNames.FormworksContentRegion, "FormworksColumnView");
+            _regionManager.RegisterViewWithRegion(RegionNames.FormworksContentRegion, "FormworksBeamView");
+
             _regionManager.RequestNavigate(RegionNames.MainContentRegion, "CementView");
             _regionManager.RequestNavigate(RegionNames.FormworksContentRegion, "FormworksColumnView");
         }
