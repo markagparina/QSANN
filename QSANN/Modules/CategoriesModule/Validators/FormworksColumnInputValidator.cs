@@ -3,25 +3,27 @@ using FluentValidation;
 
 namespace CategoriesModule.Validators
 {
-    public class CementInputModelValidator : AbstractValidator<CementInputModel>
+    public class FormworksColumnInputValidator : AbstractValidator<FormworksColumnInputModel>
     {
-        public CementInputModelValidator()
+        public FormworksColumnInputValidator()
         {
+            
+
             RuleFor(input => input.LengthOfColumn)
                 .NotEmpty()
                 .WithMessage("Length of Column is required");
 
             RuleFor(input => input.WidthOfColumn)
                .NotEmpty()
-               .WithMessage("WidTH of Column is required");
+               .WithMessage("Width of Column is required");
 
             RuleFor(input => input.HeightOfColumn)
                .NotEmpty()
                .WithMessage("Height of Column is required");
 
-            RuleFor(input => input.NumbersOfColumn)
+            RuleFor(input => input.NumberOfCounts)
                .NotEmpty()
-               .WithMessage("Numbers of Column is required");
+               .WithMessage("Numbers of Count/s is required");
         }
     }
 }

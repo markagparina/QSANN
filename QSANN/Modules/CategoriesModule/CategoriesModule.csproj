@@ -18,8 +18,23 @@
 		<Compile Update="Dialogs\ErrorDialog.xaml.cs">
 		  <SubType>Code</SubType>
 		</Compile>
-		<Compile Update="Views\CementView.xaml.cs">
+		<Compile Update="Views\ConcreteFootingView.xaml.cs">
+		  <SubType>Code</SubType>
+		</Compile>
+		<Compile Update="Views\ConcreteOtherView.xaml.cs">
+		  <SubType>Code</SubType>
+		</Compile>
+		<Compile Update="Views\ConcreteSlabView.xaml.cs">
+		  <SubType>Code</SubType>
+		</Compile>
+		<Compile Update="Views\ConcreteBeamView.xaml.cs">
+		  <SubType>Code</SubType>
+		</Compile>
+		<Compile Update="Views\ConcreteColumnView.xaml.cs">
 			<SubType>Code</SubType>
+		</Compile>
+		<Compile Update="Views\ConcreteView.xaml.cs">
+		  <SubType>Code</SubType>
 		</Compile>
 		<Compile Update="Views\FormworksView.xaml.cs">
 			<SubType>Code</SubType>
@@ -33,9 +48,29 @@
 		  <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
 		  <SubType>Designer</SubType>
 		</Page>
-		<Page Update="Views\CementView.xaml">
+		<Page Update="Views\ConcreteFootingView.xaml">
+		  <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+		  <SubType>Designer</SubType>
+		</Page>
+		<Page Update="Views\ConcreteOtherView.xaml">
+		  <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+		  <SubType>Designer</SubType>
+		</Page>
+		<Page Update="Views\ConcreteSlabView.xaml">
+		  <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+		  <SubType>Designer</SubType>
+		</Page>
+		<Page Update="Views\ConcreteBeamView.xaml">
+		  <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+		  <SubType>Designer</SubType>
+		</Page>
+		<Page Update="Views\ConcreteColumnView.xaml">
 			<XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
 			<SubType>Designer</SubType>
+		</Page>
+		<Page Update="Views\ConcreteView.xaml">
+		  <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+		  <SubType>Designer</SubType>
 		</Page>
 		<Page Update="Views\FormworksView.xaml">
 			<XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>

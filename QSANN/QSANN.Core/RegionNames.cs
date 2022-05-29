@@ -4,5 +4,6 @@
     {
         public const string MainContentRegion = "ContentRegion";
         public const string FormworksContentRegion = "FormworksContentRegion";
+        public const string ConcreteContentRegion = "ConcreteContentRegion";
     }
 }

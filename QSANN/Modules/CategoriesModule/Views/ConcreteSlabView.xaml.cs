@@ -3,11 +3,11 @@
 namespace CategoriesModule.Views
 {
     /// <summary>
-    /// Interaction logic for CementView
+    /// Interaction logic for ConcreteColumnView
     /// </summary>
-    public partial class CementView : UserControl
+    public partial class ConcreteSlabView : UserControl
     {
-        public CementView()
+        public ConcreteSlabView()
         {
             InitializeComponent();
         }

@@ -1,11 +1,10 @@
 ﻿using Prism.Mvvm;
 
 namespace CategoriesModule.Models;
-public class CementOutputModel : BindableBase
+public class ConcreteBeamOutputModel : BindableBase
 {
-
     private string _cementM;
-    public string CementM
+    public string CementMixture
     {
         get { return _cementM; }
         set { SetProperty(ref _cementM, value); }

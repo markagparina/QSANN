@@ -7,14 +7,16 @@
              xmlns:converters="clr-namespace:QSANN.Core.Converters;assembly=QSANN.Core"
              prism:ViewModelLocator.AutoWireViewModel="True">
 
-        <UserControl.Resources>
-            <converters:StringToBooleanConverter x:Key="stringToBooleanConverter"/>
-            <converters:DecimalToBooleanConverter x:Key="decimalToBooleanConverter"/>
-            <converters:BoolToVisibleOrHidden x:Key="booleanToVisibilityConverter"/>
-        </UserControl.Resources>
-    <StackPanel Orientation="Vertical">
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
-            <RadioButton
+    <UserControl.Resources>
+        <converters:StringToBooleanConverter x:Key="stringToBooleanConverter"/>
+        <converters:DecimalToBooleanConverter x:Key="decimalToBooleanConverter"/>
+        <converters:BoolToVisibleOrHidden x:Key="booleanToVisibilityConverter"/>
+    </UserControl.Resources>
+
+    <ScrollViewer>
+        <StackPanel Orientation="Vertical">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
+                <RadioButton
                 HorizontalAlignment="Stretch"
                 Style="{StaticResource MaterialDesignTabRadioButtonTop}"
                 BorderBrush="{DynamicResource PrimaryHueMidBrush}"
@@ -23,7 +25,7 @@
                 CommandParameter="Column"
                 IsChecked="{Binding SelectedTab, Converter={StaticResource stringToBooleanConverter}, ConverterParameter=Column}"
                 Content="Column" />
-            <RadioButton
+                <RadioButton
                 Style="{StaticResource MaterialDesignTabRadioButtonTop}"
                 BorderBrush="{DynamicResource PrimaryHueMidBrush}"
                 Command="{Binding NavigateCommand}"
@@ -31,11 +33,12 @@
                 Margin="4"
                 IsChecked="{Binding SelectedTab, Converter={StaticResource stringToBooleanConverter}, ConverterParameter=Beam}"
                 Content="Beam" />
+            </StackPanel>
+
+
+
+            <ContentControl prism:RegionManager.RegionName="{x:Static core:RegionNames.FormworksContentRegion}" />
         </StackPanel>
+    </ScrollViewer>
 
-
-
-        <ContentControl prism:RegionManager.RegionName="{x:Static core:RegionNames.FormworksContentRegion}" />
-    </StackPanel>
-    
 </UserControl>

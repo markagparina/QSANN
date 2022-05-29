@@ -22,17 +22,14 @@ public partial class App
     protected override void RegisterTypes(IContainerRegistry containerRegistry)
     {
         containerRegistry.Register<IMasonryCalculatorService, MasonryCalculatorService>();
-        containerRegistry.Register<ICementCalculatorService, CementCalculatorService>();
+        containerRegistry.Register<IConcreteCalculatorService, ConcreteCalculatorService>();
+        containerRegistry.Register<IFormworksColumnCalculatorService, FormworksColumnCalculatorService>();
+        containerRegistry.Register<IFormworksBeamCalculatorService, FormworksBeamCalculatorService>();
     }
 
     protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)
     {
         moduleCatalog.AddModule<QSANNCategoriesModule>();
-    }
-
-    protected override void ConfigureDefaultRegionBehaviors(IRegionBehaviorFactory regionBehaviors)
-    {
-        base.ConfigureDefaultRegionBehaviors(regionBehaviors);
     }
 
     protected override void OnStartup(StartupEventArgs e)

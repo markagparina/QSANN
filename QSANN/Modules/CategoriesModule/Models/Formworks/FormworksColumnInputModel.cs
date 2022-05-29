@@ -3,7 +3,7 @@ using QSANN.Core.Extensions;
 
 namespace CategoriesModule.Models
 {
-    public class CementInputModel : BindableBase
+    public class FormworksColumnInputModel : BindableBase
     {
         private string _lengthOfColumn;
         public string LengthOfColumn
@@ -26,11 +26,25 @@ namespace CategoriesModule.Models
             set { SetProperty(ref _heightOfColumn, value.AppendIfNotExists(" meters")); }
         }
 
-        private string _numbersOfColumn;
-        public string NumbersOfColumn
+        private string _numbersOfCount;
+        public string NumberOfCounts
         {
-            get { return _numbersOfColumn; }
-            set { SetProperty(ref _numbersOfColumn, value.AppendIfNotExists(" meters")); }
+            get { return _numbersOfCount; }
+            set { SetProperty(ref _numbersOfCount, value); }
+        }
+
+        private string _lumberSize = "2x2";
+        public string LumberSize
+        {
+            get { return _lumberSize; }
+            set { SetProperty(ref _lumberSize, value); }
+        }
+
+        private string _thicknessOfPlywood = "1/4";
+        public string ThicknessOfPlywood
+        {
+            get { return _thicknessOfPlywood; }
+            set { SetProperty(ref _thicknessOfPlywood, value); }
         }
     }
 }
