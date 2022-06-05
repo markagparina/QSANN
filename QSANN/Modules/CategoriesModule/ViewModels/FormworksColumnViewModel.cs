@@ -5,7 +5,6 @@ using QSANN.Core.Commands;
 using QSANN.Core.Extensions;
 using QSANN.Core.Mvvm;
 using QSANN.Services.Interfaces;
-using System;
 
 namespace CategoriesModule.ViewModels
 {
@@ -34,7 +33,7 @@ namespace CategoriesModule.ViewModels
         {
             _formworksColumnCalculatorService = formworksColumnCalculatorService;
         }
-            
+
         private void ExecuteCalculateCommand()
         {
             decimal perimeter = _formworksColumnCalculatorService.CalculatePerimeter(InputModel.LengthOfColumn.StripAndParseAsDecimal(), InputModel.WidthOfColumn.StripAndParseAsDecimal());

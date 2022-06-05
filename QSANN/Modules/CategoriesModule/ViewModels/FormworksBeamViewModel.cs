@@ -1,14 +1,10 @@
 ﻿using CategoriesModule.Dialogs;
 using CategoriesModule.Models;
 using CategoriesModule.Validators;
-using Prism.Commands;
 using Prism.Mvvm;
 using QSANN.Core.Commands;
 using QSANN.Core.Extensions;
 using QSANN.Services.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace CategoriesModule.ViewModels
 {

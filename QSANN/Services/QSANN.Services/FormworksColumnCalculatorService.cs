@@ -31,7 +31,7 @@ namespace QSANN.Services
                 _ => throw new ArgumentException("Invalid Lumber Size/Thickness of Plywood")
             };
 
-            
+
         }
     }
 }

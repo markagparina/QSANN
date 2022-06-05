@@ -1,5 +1,4 @@
 ﻿using Prism.Mvvm;
-using QSANN.Core.Extensions;
 
 namespace CategoriesModule.Models
 {

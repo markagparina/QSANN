@@ -9,7 +9,7 @@ using System.Windows.Controls;
 
 namespace QSANN.Core.Commands
 {
-    public class DelegateCommandWithValidator<TValidatable, TValidator> : DelegateCommand 
+    public class DelegateCommandWithValidator<TValidatable, TValidator> : DelegateCommand
         where TValidatable : BindableBase
         where TValidator : AbstractValidator<TValidatable>
     {
@@ -37,7 +37,7 @@ namespace QSANN.Core.Commands
                 var dialogResult = await DialogHost.Show(_errorDialogControl);
 
                 return;
-  
+
             }
             _executeMethod();
         }

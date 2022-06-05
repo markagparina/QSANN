@@ -44,6 +44,12 @@ namespace CategoriesModule
             containerRegistry.RegisterForNavigation<FormworksView>(nameof(FormworksView));
             containerRegistry.RegisterForNavigation<FormworksColumnView>(nameof(FormworksColumnView));
             containerRegistry.RegisterForNavigation<FormworksBeamView>(nameof(FormworksBeamView));
+
+            // Tile works
+            containerRegistry.RegisterForNavigation<TileworksView>(nameof(TileworksView));
+
+            // Rebarworks
+            containerRegistry.RegisterForNavigation<RebarworksView>(nameof(RebarworksView));
         }
     }
 }

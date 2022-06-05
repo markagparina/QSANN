@@ -24,14 +24,6 @@ namespace CategoriesModule.ViewModels
             => _calculateCommand ??= new DelegateCommandWithValidator<MasonryInputModel, MasonryInputModelValidator>
             (async () => await ExecuteCalculateCommandAsync(), InputModel, _validator, ErrorDialog);
 
-        private string _message;
-
-        public string Message
-        {
-            get => _message;
-            set => SetProperty(ref _message, value);
-        }
-
         private bool _isResultvisible;
         public bool IsResultVisible
         {

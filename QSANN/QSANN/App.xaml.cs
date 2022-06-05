@@ -1,7 +1,6 @@
 ﻿using CategoriesModule;
 using Prism.Ioc;
 using Prism.Modularity;
-using Prism.Regions;
 using QSANN.Services;
 using QSANN.Services.Interfaces;
 using QSANN.Views;
@@ -25,6 +24,7 @@ public partial class App
         containerRegistry.Register<IConcreteCalculatorService, ConcreteCalculatorService>();
         containerRegistry.Register<IFormworksColumnCalculatorService, FormworksColumnCalculatorService>();
         containerRegistry.Register<IFormworksBeamCalculatorService, FormworksBeamCalculatorService>();
+        containerRegistry.Register<ITileworksCalculatorService, TileworksCalculatorService>();
     }
 
     protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)

@@ -7,7 +7,7 @@ namespace CategoriesModule.Validators
     {
         public FormworksColumnInputValidator()
         {
-            
+
 
             RuleFor(input => input.LengthOfColumn)
                 .NotEmpty()

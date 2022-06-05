@@ -2,14 +2,13 @@
 using Prism.Regions;
 using QSANN.Core;
 using QSANN.Core.Navigation;
-using System;
 
 namespace CategoriesModule.ViewModels
 {
     public class FormworksViewModel : MenuItem
     {
         private readonly IRegionManager _regionManager;
-        public override string Title => "Formworks";
+        public override string Title => "Formworks and Scaffoldings";
 
         private string _selectedTab;
         public string SelectedTab

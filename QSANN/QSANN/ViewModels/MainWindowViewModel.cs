@@ -51,9 +51,11 @@ namespace QSANN.ViewModels
                 {
                     IsMenuOpen = false;
 
+                    var viewName = value.GetType().Name.Replace("Model", "");
+
                     if (value is not null)
                     {
-                        _regionManager.RequestNavigate(RegionNames.MainContentRegion, $"{value.Title}View");
+                        _regionManager.RequestNavigate(RegionNames.MainContentRegion, viewName);
                     }
                 }
             }

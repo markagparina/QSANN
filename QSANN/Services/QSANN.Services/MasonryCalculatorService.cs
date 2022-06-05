@@ -1,7 +1,6 @@
 ﻿using QSANN.Services.Interfaces;
 using QSANN.Services.Interfaces.Models;
 using System;
-using System.Collections.Generic;
 
 namespace QSANN.Services
 {

@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 
 namespace QSANN.Core.Extensions
 {
     public static class StringExtensions
     {
-        public static decimal StripAndParseAsDecimal(this string input) 
+        public static decimal StripAndParseAsDecimal(this string input)
         {
             if (decimal.TryParse(new string(input.Where(c => char.IsDigit(c) || char.IsPunctuation(c)).ToArray()).Trim(), out decimal result))
             {
