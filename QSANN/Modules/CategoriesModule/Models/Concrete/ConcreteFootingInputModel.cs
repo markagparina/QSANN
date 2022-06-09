@@ -6,6 +6,7 @@ namespace CategoriesModule.Models
     public class ConcreteFootingInputModel : BindableBase
     {
         private string _lengthOfFooting;
+
         public string LengthOfFooting
         {
             get { return _lengthOfFooting; }
@@ -13,6 +14,7 @@ namespace CategoriesModule.Models
         }
 
         private string _widthOfFooting;
+
         public string WidthOfFooting
         {
             get { return _widthOfFooting; }
@@ -20,6 +22,7 @@ namespace CategoriesModule.Models
         }
 
         private string _thicknessOfFooting;
+
         public string ThicknessOfFooting
         {
             get { return _thicknessOfFooting; }
@@ -27,6 +30,7 @@ namespace CategoriesModule.Models
         }
 
         private string _numbersOfCount;
+
         public string NumbersOfCount
         {
             get { return _numbersOfCount; }
@@ -34,11 +38,11 @@ namespace CategoriesModule.Models
         }
 
         private string _classMixture = "AA";
+
         public string ClassMixture
         {
             get { return _classMixture; }
             set { SetProperty(ref _classMixture, value); }
         }
-
     }
 }

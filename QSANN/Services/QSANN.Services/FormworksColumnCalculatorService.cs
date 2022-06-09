@@ -30,8 +30,6 @@ namespace QSANN.Services
                 ("2x3", "1/2") => numberOfPlywood * 30.50m,
                 _ => throw new ArgumentException("Invalid Lumber Size/Thickness of Plywood")
             };
-
-
         }
     }
 }

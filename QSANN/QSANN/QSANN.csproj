@@ -1,37 +1,45 @@
-<Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <OutputType>WinExe</OutputType>
-    <TargetFramework>net6.0-windows</TargetFramework>
-    <UseWPF>true</UseWPF>
-  </PropertyGroup>
-  <ItemGroup>
-    <Compile Remove="Models\**" />
-    <Compile Remove="ViewModels\Categories\**" />
-    <Compile Remove="Views\Categories\**" />
-    <EmbeddedResource Remove="Models\**" />
-    <EmbeddedResource Remove="ViewModels\Categories\**" />
-    <EmbeddedResource Remove="Views\Categories\**" />
-    <None Remove="Models\**" />
-    <None Remove="ViewModels\Categories\**" />
-    <None Remove="Views\Categories\**" />
-    <Page Remove="Models\**" />
-    <Page Remove="ViewModels\Categories\**" />
-    <Page Remove="Views\Categories\**" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="MaterialDesignThemes" Version="4.5.0" />
-    <PackageReference Include="Prism.Unity" Version="8.1.97" />
-    <PackageReference Include="Prism.Unity.Extensions" Version="8.0.62" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Modules\CategoriesModule\CategoriesModule.csproj" />
-    <ProjectReference Include="..\QSANN.Core\QSANN.Core.csproj" />
-    <ProjectReference Include="..\Services\QSANN.Services.Interfaces\QSANN.Services.Interfaces.csproj" />
-    <ProjectReference Include="..\Services\QSANN.Services\QSANN.Services.csproj" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Update="appsettings.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>net6.0-windows</TargetFramework>
+		<UseWPF>true</UseWPF>
+	</PropertyGroup>
+	<ItemGroup>
+		<Compile Remove="ViewModels\Categories\**" />
+		<Compile Remove="Views\Categories\**" />
+		<EmbeddedResource Remove="ViewModels\Categories\**" />
+		<EmbeddedResource Remove="Views\Categories\**" />
+		<None Remove="ViewModels\Categories\**" />
+		<None Remove="Views\Categories\**" />
+		<Page Remove="ViewModels\Categories\**" />
+		<Page Remove="Views\Categories\**" />
+	</ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Mapster" Version="7.3.0" />
+		<PackageReference Include="MaterialDesignThemes" Version="4.5.0" />
+		<PackageReference Include="Prism.Unity" Version="8.1.97" />
+		<PackageReference Include="Prism.Unity.Extensions" Version="8.0.62" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.5">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+	</ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\..\QSANN.Data\QSANN.Data.csproj" />
+		<ProjectReference Include="..\Modules\CategoriesModule\CategoriesModule.csproj" />
+		<ProjectReference Include="..\QSANN.Core\QSANN.Core.csproj" />
+		<ProjectReference Include="..\Services\QSANN.Services.Interfaces\QSANN.Services.Interfaces.csproj" />
+		<ProjectReference Include="..\Services\QSANN.Services\QSANN.Services.csproj" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Compile Update="Dialogs\LoadProjectDialog.xaml.cs">
+	    <SubType>Code</SubType>
+	  </Compile>
+	</ItemGroup>
+	<ItemGroup>
+	  <Page Update="Dialogs\LoadProjectDialog.xaml">
+	    <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+	    <SubType>Designer</SubType>
+	  </Page>
+	</ItemGroup>
 </Project>

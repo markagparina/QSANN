@@ -7,8 +7,6 @@ namespace CategoriesModule.Validators
     {
         public FormworksColumnInputValidator()
         {
-
-
             RuleFor(input => input.LengthOfColumn)
                 .NotEmpty()
                 .WithMessage("Length of Column is required");

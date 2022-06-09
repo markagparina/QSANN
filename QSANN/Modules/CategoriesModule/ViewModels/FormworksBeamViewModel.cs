@@ -12,10 +12,8 @@ namespace CategoriesModule.ViewModels
     {
         private readonly IFormworksBeamCalculatorService _formworksBeamCalculatorService;
 
-
-
         private DelegateCommandWithValidator<FormworksBeamInputModel, FormworksBeamInputValidator> _calculateCommand;
-        private FormworksBeamInputValidator _validator = new();
+        private readonly FormworksBeamInputValidator _validator = new();
 
         public DelegateCommandWithValidator<FormworksBeamInputModel, FormworksBeamInputValidator> CalculateCommand => _calculateCommand
             ??= new DelegateCommandWithValidator<FormworksBeamInputModel, FormworksBeamInputValidator>(ExecuteCalculateCommand, InputModel, _validator, new ErrorDialog());
@@ -24,11 +22,13 @@ namespace CategoriesModule.ViewModels
         public FormworksBeamOutputModel OutputModel { get; set; } = new();
 
         private bool _isResultVisible;
+
         public bool IsResultVisible
         {
             get { return _isResultVisible; }
             set { SetProperty(ref _isResultVisible, value); }
         }
+
         public FormworksBeamViewModel(IFormworksBeamCalculatorService formworksBeamCalculatorService)
         {
             _formworksBeamCalculatorService = formworksBeamCalculatorService;
@@ -45,7 +45,6 @@ namespace CategoriesModule.ViewModels
             OutputModel.NumberOfBoardFeetLumber = $"{numberOfBoardFeetLumber:N2} Bd.ft Lumber";
 
             IsResultVisible = true;
-
         }
     }
 }

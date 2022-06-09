@@ -6,6 +6,7 @@ namespace CategoriesModule.Models
     public class ConcreteOtherInputModel : BindableBase
     {
         private string _totalVolume;
+
         public string TotalVolume
         {
             get { return _totalVolume; }
@@ -13,6 +14,7 @@ namespace CategoriesModule.Models
         }
 
         private string _numbersOfCount;
+
         public string NumbersOfCount
         {
             get { return _numbersOfCount; }
@@ -20,11 +22,11 @@ namespace CategoriesModule.Models
         }
 
         private string _classMixture = "AA";
+
         public string ClassMixture
         {
             get { return _classMixture; }
             set { SetProperty(ref _classMixture, value); }
         }
-
     }
 }

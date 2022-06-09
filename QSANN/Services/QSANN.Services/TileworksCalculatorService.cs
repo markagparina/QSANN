@@ -8,7 +8,6 @@ namespace QSANN.Services
     {
         public List<TileworksMultiplierModel> GetMultipliers()
         {
-
             return new List<TileworksMultiplierModel>()
             {
                 new TileworksMultiplierModel() { Name = "3x3", Multiplier = 177.8m },
@@ -27,9 +26,7 @@ namespace QSANN.Services
                 new TileworksMultiplierModel() { Name = "16x16", Multiplier = 6.25m },
                 new TileworksMultiplierModel() { Name = "20x20", Multiplier = 4m },
                 new TileworksMultiplierModel() { Name = "24x24", Multiplier = 2.78m }
-
             };
-
         }
 
         public decimal CalculateNumberOfPieces(decimal area, decimal multiplier)
@@ -37,7 +34,7 @@ namespace QSANN.Services
             return area * multiplier;
         }
 
-        public decimal CalculateBagsOfCement (decimal area)
+        public decimal CalculateBagsOfCement(decimal area)
         {
             return area * .086m;
         }

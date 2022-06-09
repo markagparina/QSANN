@@ -12,30 +12,32 @@ namespace CategoriesModule.ViewModels;
 
 public class ConcreteColumnViewModel : BindableBase
 {
-    private readonly IConcreteCalculatorService _cementCalculatorService;
+    private readonly IConcreteCalculatorService _concreteCalculatorService;
     private DelegateCommandWithValidator<ConcreteColumnInputModel, ConcreteColumnInputValidator> _calculateCommand;
-    private ConcreteColumnInputValidator _validator = new();
+    private readonly ConcreteColumnInputValidator _validator = new();
 
     public DelegateCommandWithValidator<ConcreteColumnInputModel, ConcreteColumnInputValidator> CalculateCommand => _calculateCommand
         ??= new DelegateCommandWithValidator<ConcreteColumnInputModel, ConcreteColumnInputValidator>(ExecuteCalculateCommand, InputModel, _validator, new ErrorDialog());
+
     public ConcreteColumnInputModel InputModel { get; set; } = new();
     public ConcreteColumnOutputModel OutputModel { get; set; } = new();
 
     private bool _isResultVisible;
+
     public bool IsResultVisible
     {
         get { return _isResultVisible; }
         set { SetProperty(ref _isResultVisible, value); }
     }
 
-    public ConcreteColumnViewModel(IConcreteCalculatorService cementCalculatorService, IRegionManager regionManager)
+    public ConcreteColumnViewModel(IConcreteCalculatorService concreteCalculatorService, IRegionManager regionManager)
     {
-        _cementCalculatorService = cementCalculatorService;
-
+        _concreteCalculatorService = concreteCalculatorService;
     }
+
     private void ExecuteCalculateCommand()
     {
-        decimal volume = _cementCalculatorService.CalculateVolume(
+        decimal volume = _concreteCalculatorService.CalculateVolume(
                     InputModel.LengthOfColumn.StripAndParseAsDecimal(),
                     InputModel.WidthOfColumn.StripAndParseAsDecimal(),
                     InputModel.HeightOfColumn.StripAndParseAsDecimal(),
@@ -55,6 +57,4 @@ public class ConcreteColumnViewModel : BindableBase
         OutputModel.Gravel = $"{(volume * 1)}m\xB3 (3/4\") of Gravel";
         IsResultVisible = true;
     }
-
-
 }

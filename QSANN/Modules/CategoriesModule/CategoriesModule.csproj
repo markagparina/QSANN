@@ -4,6 +4,9 @@
 		<UseWPF>true</UseWPF>
 	</PropertyGroup>
 	<ItemGroup>
+	  <Compile Remove="ViewModels\Rebarworks\RebarworksFootingViewModel.cs" />
+	</ItemGroup>
+	<ItemGroup>
 		<PackageReference Include="FluentValidation" Version="11.0.2" />
 		<PackageReference Include="Prism.Wpf" Version="8.1.97" />
 		<PackageReference Include="MaterialDesignThemes" Version="4.5.0" />
@@ -11,6 +14,7 @@
 		<PackageReference Include="Prism.Unity.Extensions" Version="8.0.62" />
 	</ItemGroup>
 	<ItemGroup>
+		<ProjectReference Include="..\..\..\QSANN.Data\QSANN.Data.csproj" />
 		<ProjectReference Include="..\..\QSANN.Core\QSANN.Core.csproj" />
 		<ProjectReference Include="..\..\Services\QSANN.Services\QSANN.Services.csproj" />
 	</ItemGroup>
@@ -41,6 +45,18 @@
 		</Compile>
 		<Compile Update="Views\MasonryView.xaml.cs">
 			<SubType>Code</SubType>
+		</Compile>
+		<Compile Update="Views\Rebarworks\RebarworksBeamView.xaml.cs">
+		  <SubType>Code</SubType>
+		</Compile>
+		<Compile Update="Views\Rebarworks\RebarworksColumnView.xaml.cs">
+		  <SubType>Code</SubType>
+		</Compile>
+		<Compile Update="Views\Rebarworks\RebarworksFootingView.xaml.cs">
+		  <SubType>Code</SubType>
+		</Compile>
+		<Compile Update="Views\Rebarworks\RebarworksView.xaml.cs">
+		  <SubType>Code</SubType>
 		</Compile>
 	</ItemGroup>
 	<ItemGroup>
@@ -79,6 +95,22 @@
 		<Page Update="Views\MasonryView.xaml">
 			<XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
 			<SubType>Designer</SubType>
+		</Page>
+		<Page Update="Views\Rebarworks\RebarworksBeamView.xaml">
+		  <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+		  <SubType>Designer</SubType>
+		</Page>
+		<Page Update="Views\Rebarworks\RebarworksColumnView.xaml">
+		  <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+		  <SubType>Designer</SubType>
+		</Page>
+		<Page Update="Views\Rebarworks\RebarworksFootingView.xaml">
+		  <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+		  <SubType>Designer</SubType>
+		</Page>
+		<Page Update="Views\Rebarworks\RebarworksView.xaml">
+		  <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+		  <SubType>Designer</SubType>
 		</Page>
 	</ItemGroup>
 </Project>

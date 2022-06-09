@@ -3,9 +3,10 @@ using System;
 
 namespace QSANN.Core.Mvvm
 {
-    public class RegionViewModelBase : ViewModelBase, INavigationAware, IConfirmNavigationRequest
+    public class RegionViewModelBase : ViewModelBase, IConfirmNavigationRequest, IRegionMemberLifetime
     {
         protected IRegionManager RegionManager { get; private set; }
+        public bool KeepAlive => true;
 
         public RegionViewModelBase(IRegionManager regionManager)
         {
@@ -24,12 +25,10 @@ namespace QSANN.Core.Mvvm
 
         public virtual void OnNavigatedFrom(NavigationContext navigationContext)
         {
-
         }
 
         public virtual void OnNavigatedTo(NavigationContext navigationContext)
         {
-
         }
     }
 }

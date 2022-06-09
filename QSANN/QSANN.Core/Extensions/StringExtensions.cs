@@ -11,7 +11,6 @@ namespace QSANN.Core.Extensions
                 return result;
             }
 
-
             return 0;
         }
 

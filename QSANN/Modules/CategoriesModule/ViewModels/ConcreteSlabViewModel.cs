@@ -12,30 +12,32 @@ namespace CategoriesModule.ViewModels;
 
 public class ConcreteSlabViewModel : BindableBase
 {
-    private readonly IConcreteCalculatorService _cementCalculatorService;
+    private readonly IConcreteCalculatorService _concreteCalculatorService;
     private DelegateCommandWithValidator<ConcreteSlabInputModel, ConcreteSlabInputValidator> _calculateCommand;
-    private ConcreteSlabInputValidator _validator = new();
+    private readonly ConcreteSlabInputValidator _validator = new();
 
     public DelegateCommandWithValidator<ConcreteSlabInputModel, ConcreteSlabInputValidator> CalculateCommand => _calculateCommand
         ??= new DelegateCommandWithValidator<ConcreteSlabInputModel, ConcreteSlabInputValidator>(ExecuteCalculateCommand, InputModel, _validator, new ErrorDialog());
+
     public ConcreteSlabInputModel InputModel { get; set; } = new();
     public ConcreteSlabOutputModel OutputModel { get; set; } = new();
 
     private bool _isResultVisible;
+
     public bool IsResultVisible
     {
         get { return _isResultVisible; }
         set { SetProperty(ref _isResultVisible, value); }
     }
 
-    public ConcreteSlabViewModel(IConcreteCalculatorService cementCalculatorService, IRegionManager regionManager)
+    public ConcreteSlabViewModel(IConcreteCalculatorService concreteCalculatorService)
     {
-        _cementCalculatorService = cementCalculatorService;
-
+        _concreteCalculatorService = concreteCalculatorService;
     }
+
     private void ExecuteCalculateCommand()
     {
-        decimal volume = _cementCalculatorService.CalculateVolume(
+        decimal volume = _concreteCalculatorService.CalculateVolume(
                     InputModel.LengthOfSlab.StripAndParseAsDecimal(),
                     InputModel.WidthOfSlab.StripAndParseAsDecimal(),
                     InputModel.ThicknessOfSlab.StripAndParseAsDecimal(),
@@ -55,6 +57,4 @@ public class ConcreteSlabViewModel : BindableBase
         OutputModel.Gravel = $"{(volume * 1)}m\xB3 (3/4\") of Gravel";
         IsResultVisible = true;
     }
-
-
 }

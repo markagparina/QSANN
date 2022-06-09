@@ -7,13 +7,17 @@ namespace QSANN.Core.Converters
     public class BoolToVisibleOrHidden : IValueConverter
     {
         #region Constructors
+
         /// <summary>
         /// The default constructor
         /// </summary>
-        public BoolToVisibleOrHidden() { }
-        #endregion
+        public BoolToVisibleOrHidden()
+        { }
+
+        #endregion Constructors
 
         #region IValueConverter Members
+
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
             bool bValue = (bool)value;
@@ -32,6 +36,7 @@ namespace QSANN.Core.Converters
             else
                 return false;
         }
-        #endregion
+
+        #endregion IValueConverter Members
     }
 }

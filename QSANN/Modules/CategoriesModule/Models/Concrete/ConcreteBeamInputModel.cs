@@ -6,6 +6,7 @@ namespace CategoriesModule.Models
     public class ConcreteBeamInputModel : BindableBase
     {
         private string _lengthOfBeam;
+
         public string LengthOfBeam
         {
             get { return _lengthOfBeam; }
@@ -13,6 +14,7 @@ namespace CategoriesModule.Models
         }
 
         private string _widthOfBeam;
+
         public string WidthOfBeam
         {
             get { return _widthOfBeam; }
@@ -20,6 +22,7 @@ namespace CategoriesModule.Models
         }
 
         private string _heightOfBeam;
+
         public string HeightOfBeam
         {
             get { return _heightOfBeam; }
@@ -27,6 +30,7 @@ namespace CategoriesModule.Models
         }
 
         private string _numbersOfCount;
+
         public string NumbersOfCount
         {
             get { return _numbersOfCount; }
@@ -34,11 +38,11 @@ namespace CategoriesModule.Models
         }
 
         private string _classMixture = "AA";
+
         public string ClassMixture
         {
             get { return _classMixture; }
             set { SetProperty(ref _classMixture, value); }
         }
-
     }
 }

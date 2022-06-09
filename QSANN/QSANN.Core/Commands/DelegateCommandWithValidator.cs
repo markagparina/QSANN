@@ -37,7 +37,6 @@ namespace QSANN.Core.Commands
                 var dialogResult = await DialogHost.Show(_errorDialogControl);
 
                 return;
-
             }
             _executeMethod();
         }

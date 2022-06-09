@@ -5,6 +5,7 @@ namespace CategoriesModule.Models
     public class FormworksColumnOutputModel : BindableBase
     {
         private string _numberOfPlywood;
+
         public string NumberOfPlywood
         {
             get { return _numberOfPlywood; }
@@ -12,6 +13,7 @@ namespace CategoriesModule.Models
         }
 
         private string _numberOfBoardFeetLumber;
+
         public string NumberOfBoardFeetLumber
         {
             get { return _numberOfBoardFeetLumber; }

@@ -3,11 +3,11 @@
 namespace CategoriesModule.Views
 {
     /// <summary>
-    /// Interaction logic for RebarworksView
+    /// Interaction logic for RebarworksFootingView
     /// </summary>
-    public partial class RebarworksView : UserControl
+    public partial class RebarworksFootingView : UserControl
     {
-        public RebarworksView()
+        public RebarworksFootingView()
         {
             InitializeComponent();
         }

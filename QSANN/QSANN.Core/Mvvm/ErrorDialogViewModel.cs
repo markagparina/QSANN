@@ -6,8 +6,8 @@ namespace QSANN.ViewModels
 {
     public class ErrorDialogViewModel : BindableBase
     {
-
         private ObservableCollection<string> _validationErrors;
+
         public ObservableCollection<string> ValidationErrors
         {
             get { return _validationErrors; }

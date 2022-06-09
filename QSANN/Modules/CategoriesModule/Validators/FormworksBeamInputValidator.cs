@@ -7,7 +7,6 @@ namespace CategoriesModule.Validators
     {
         public FormworksBeamInputValidator()
         {
-
             RuleFor(input => input.LengthOfBeam)
                 .NotEmpty()
                 .WithMessage("Length of Beam is required");

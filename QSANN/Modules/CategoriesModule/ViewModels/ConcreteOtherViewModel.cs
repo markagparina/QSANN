@@ -13,14 +13,16 @@ namespace CategoriesModule.ViewModels;
 
 public class ConcreteOtherViewModel : BindableBase
 {
-    private readonly IConcreteCalculatorService _cementCalculatorService;
+    private readonly IConcreteCalculatorService _concreteCalculatorService;
     private DelegateCommandWithValidator<ConcreteOtherInputModel, ConcreteOtherInputValidator> _calculateCommand;
-    private ConcreteOtherInputValidator _validator = new();
+    private readonly ConcreteOtherInputValidator _validator = new();
 
     public DelegateCommandWithValidator<ConcreteOtherInputModel, ConcreteOtherInputValidator> CalculateCommand => _calculateCommand
         ??= new DelegateCommandWithValidator<ConcreteOtherInputModel, ConcreteOtherInputValidator>(ExecuteCalculateCommand, InputModel, _validator, new ErrorDialog());
+
     public ConcreteOtherInputModel InputModel { get; set; } = new();
     public ConcreteOtherOutputModel OutputModel { get; set; } = new();
+
     public ObservableCollection<ConcreteSpecificationModel> Specifications { get; set; } = new(
         new ConcreteSpecificationModel[]
         {
@@ -32,24 +34,26 @@ public class ConcreteOtherViewModel : BindableBase
     );
 
     private bool _isResultVisible;
+
     public bool IsResultVisible
     {
         get { return _isResultVisible; }
         set { SetProperty(ref _isResultVisible, value); }
     }
 
-
     private ConcreteSpecificationModel _selectedSpecification;
+
     public ConcreteSpecificationModel SelectedSpecification
     {
         get { return _selectedSpecification; }
         set { SetProperty(ref _selectedSpecification, value); }
     }
 
-    public ConcreteOtherViewModel(IConcreteCalculatorService cementCalculatorService, IRegionManager regionManager)
+    public ConcreteOtherViewModel(IConcreteCalculatorService concreteCalculatorService)
     {
-        _cementCalculatorService = cementCalculatorService;
+        _concreteCalculatorService = concreteCalculatorService;
     }
+
     private void ExecuteCalculateCommand()
     {
         decimal volume = InputModel.TotalVolume.StripAndParseAsDecimal();
@@ -68,6 +72,4 @@ public class ConcreteOtherViewModel : BindableBase
         OutputModel.Gravel = $"{(volume * 1)}m\xB3 (3/4\") of Gravel";
         IsResultVisible = true;
     }
-
-
 }

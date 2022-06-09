@@ -12,10 +12,8 @@ namespace CategoriesModule.ViewModels
     {
         private readonly IFormworksColumnCalculatorService _formworksColumnCalculatorService;
 
-
-
         private DelegateCommandWithValidator<FormworksColumnInputModel, FormworksColumnInputValidator> _calculateCommand;
-        private FormworksColumnInputValidator _validator = new();
+        private readonly FormworksColumnInputValidator _validator = new();
 
         public DelegateCommandWithValidator<FormworksColumnInputModel, FormworksColumnInputValidator> CalculateCommand => _calculateCommand
             ??= new DelegateCommandWithValidator<FormworksColumnInputModel, FormworksColumnInputValidator>(ExecuteCalculateCommand, InputModel, _validator, new ErrorDialog());
@@ -24,11 +22,13 @@ namespace CategoriesModule.ViewModels
         public FormworksColumnOutputModel OutputModel { get; set; } = new();
 
         private bool _isResultVisible;
+
         public bool IsResultVisible
         {
             get { return _isResultVisible; }
             set { SetProperty(ref _isResultVisible, value); }
         }
+
         public FormworksColumnViewModel(IFormworksColumnCalculatorService formworksColumnCalculatorService)
         {
             _formworksColumnCalculatorService = formworksColumnCalculatorService;
@@ -45,8 +45,6 @@ namespace CategoriesModule.ViewModels
             OutputModel.NumberOfBoardFeetLumber = $"{numberOfBoardFeetLumber:N2} Bd.ft Lumber";
 
             IsResultVisible = true;
-
         }
-
     }
 }

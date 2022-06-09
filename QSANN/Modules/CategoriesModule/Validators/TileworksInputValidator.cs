@@ -1,7 +1,5 @@
 ﻿using CategoriesModule.Models;
 using FluentValidation;
-using Prism.Mvvm;
-using QSANN.Core.Extensions;
 
 namespace CategoriesModule.Validators
 {
@@ -16,7 +14,6 @@ namespace CategoriesModule.Validators
             RuleFor(input => input.SelectedMultiplier)
                 .NotNull()
                 .WithMessage("Please select a multiplier.");
-                
         }
     }
 }

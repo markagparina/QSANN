@@ -1,5 +1,10 @@
 ﻿using CategoriesModule;
+using CategoriesModule.Dialogs;
+using MaterialDesignThemes.Wpf;
+using Prism.Commands;
+using Prism.Ioc;
 using Prism.Regions;
+using Prism.Services.Dialogs;
 using Prism.Unity;
 using QSANN.Core;
 using QSANN.Core.Mvvm;
@@ -9,15 +14,14 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 
-
 namespace QSANN.ViewModels
 {
     public class MainWindowViewModel : ViewModelBase
     {
-
-        public List<MenuItem> AllMenuItems { get; set; } = new List<MenuItem>();
+        public List<MenuItem> AllMenuItems { get; set; }
 
         private ObservableCollection<MenuItem> _menuItems;
+
         public ObservableCollection<MenuItem> MenuItems
         {
             get { return _menuItems; }
@@ -25,14 +29,15 @@ namespace QSANN.ViewModels
         }
 
         private string _title = "QSANN";
+
         public override string Title
         {
             get { return _title; }
             set { SetProperty(ref _title, string.IsNullOrEmpty(value) ? "QSANN" : value); }
         }
 
-
         private bool _isMenuOpen;
+
         public bool IsMenuOpen
         {
             get => _isMenuOpen;
@@ -62,12 +67,38 @@ namespace QSANN.ViewModels
         }
 
         private string _searchKeyword;
+
         public string SearchKeyword
         {
             get { return _searchKeyword; }
             set { SetProperty(ref _searchKeyword, value, () => FilterCategories()); }
         }
 
+        private bool _isMainWindowDialogOpen;
+
+        public bool IsMainWindowDialogOpen
+        {
+            get { return _isMainWindowDialogOpen; }
+            set { SetProperty(ref _isMainWindowDialogOpen, value); }
+        }
+
+        private DelegateCommand _saveProjectCommand;
+        public DelegateCommand SaveProjectCommand => _saveProjectCommand ??= new DelegateCommand(ExecuteSaveProjectCommand);
+
+        private void ExecuteSaveProjectCommand()
+        {
+            //IsMainWindowDialogOpen = true;
+            //_regionManager.RequestNavigate(RegionNames.MainWindowDialogHostContentRegion, nameof(LoadProjectDialogViewModel).Replace("ViewModel", ""));
+        }
+
+        private DelegateCommand _loadProjectCommand;
+        public DelegateCommand LoadProjectCommand => _loadProjectCommand ??= new DelegateCommand(ExecuteLoadProjectCommand);
+
+        private void ExecuteLoadProjectCommand()
+        {
+            IsMainWindowDialogOpen = true;
+            _regionManager.RequestNavigate(RegionNames.MainWindowDialogHostContentRegion, nameof(LoadProjectDialogViewModel).Replace("ViewModel", ""));
+        }
 
         public MainWindowViewModel(IRegionManager regionManager)
         {

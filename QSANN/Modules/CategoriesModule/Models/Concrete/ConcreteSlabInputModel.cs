@@ -6,6 +6,7 @@ namespace CategoriesModule.Models
     public class ConcreteSlabInputModel : BindableBase
     {
         private string _lengthOfSlab;
+
         public string LengthOfSlab
         {
             get { return _lengthOfSlab; }
@@ -13,6 +14,7 @@ namespace CategoriesModule.Models
         }
 
         private string _widthOfSlab;
+
         public string WidthOfSlab
         {
             get { return _widthOfSlab; }
@@ -20,6 +22,7 @@ namespace CategoriesModule.Models
         }
 
         private string _thicknessOfSlab;
+
         public string ThicknessOfSlab
         {
             get { return _thicknessOfSlab; }
@@ -27,6 +30,7 @@ namespace CategoriesModule.Models
         }
 
         private string _numbersOfCount;
+
         public string NumbersOfCount
         {
             get { return _numbersOfCount; }
@@ -34,11 +38,11 @@ namespace CategoriesModule.Models
         }
 
         private string _classMixture = "AA";
+
         public string ClassMixture
         {
             get { return _classMixture; }
             set { SetProperty(ref _classMixture, value); }
         }
-
     }
 }

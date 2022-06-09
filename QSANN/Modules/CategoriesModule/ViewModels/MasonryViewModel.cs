@@ -20,17 +20,18 @@ namespace CategoriesModule.ViewModels
         public ErrorDialog ErrorDialog { get; set; } = new();
 
         private DelegateCommandWithValidator<MasonryInputModel, MasonryInputModelValidator> _calculateCommand;
+
         public DelegateCommandWithValidator<MasonryInputModel, MasonryInputModelValidator> CalculateCommand
             => _calculateCommand ??= new DelegateCommandWithValidator<MasonryInputModel, MasonryInputModelValidator>
             (async () => await ExecuteCalculateCommandAsync(), InputModel, _validator, ErrorDialog);
 
         private bool _isResultvisible;
+
         public bool IsResultVisible
         {
             get { return _isResultvisible; }
             set { SetProperty(ref _isResultvisible, value); }
         }
-
 
         public override string Title => "Masonry";
 
@@ -39,8 +40,7 @@ namespace CategoriesModule.ViewModels
             _masonryCalculatorService = masonryCalculatorService;
         }
 
-
-        Task ExecuteCalculateCommandAsync()
+        private Task ExecuteCalculateCommandAsync()
         {
             var model = _masonryCalculatorService.CalculateThicknessAndSandMultipliers(InputModel.ThicknessInMillimeter.StripAndParseAsDecimal(), InputModel.ClassMixtureForPlaster);
 
@@ -55,7 +55,6 @@ namespace CategoriesModule.ViewModels
 
             decimal numberOfPiecesByHeight = InputModel.HeightOfWall.StripAndParseAsDecimal() / InputModel.HorizontalBarSpacing.StripAndParseAsDecimal();
             decimal numberOfPiecesByLength = InputModel.LengthOfWall.StripAndParseAsDecimal() / InputModel.HorizontalBarSpacing.StripAndParseAsDecimal();
-
 
             decimal horizontalBars = numberOfPiecesByHeight * InputModel.LengthOfWall.StripAndParseAsDecimal() * 1.1m / 6m;
             decimal verticalBars = numberOfPiecesByLength * InputModel.HeightOfWall.StripAndParseAsDecimal() * 1.2m / 6m;

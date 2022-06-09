@@ -3,7 +3,7 @@ using FluentValidation;
 
 namespace CategoriesModule.Validators
 {
-    public class ConcreteFootingInputValidator : AbstractValidator<ConcreteFootingInputModel>
+    public class ConcreteFootingInputValidator : AbstractValidator<RebarworksFootingInputModel>
     {
         public ConcreteFootingInputValidator()
         {

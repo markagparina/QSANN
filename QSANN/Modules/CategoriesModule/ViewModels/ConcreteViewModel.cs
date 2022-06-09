@@ -36,6 +36,7 @@ namespace CategoriesModule.ViewModels
             _regionManager = regionManager;
             SelectedTab = "Column";
         }
+
         private void ExecuteNavigateCommand(string param)
         {
             SelectedTab = param;

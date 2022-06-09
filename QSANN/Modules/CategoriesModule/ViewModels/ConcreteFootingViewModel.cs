@@ -12,30 +12,32 @@ namespace CategoriesModule.ViewModels;
 
 public class ConcreteFootingViewModel : BindableBase
 {
-    private readonly IConcreteCalculatorService _cementCalculatorService;
-    private DelegateCommandWithValidator<ConcreteFootingInputModel, ConcreteFootingInputValidator> _calculateCommand;
+    private readonly IConcreteCalculatorService _concreteCalculatorService;
+    private DelegateCommandWithValidator<RebarworksFootingInputModel, ConcreteFootingInputValidator> _calculateCommand;
     private ConcreteFootingInputValidator _validator = new();
 
-    public DelegateCommandWithValidator<ConcreteFootingInputModel, ConcreteFootingInputValidator> CalculateCommand => _calculateCommand
-        ??= new DelegateCommandWithValidator<ConcreteFootingInputModel, ConcreteFootingInputValidator>(ExecuteCalculateCommand, InputModel, _validator, new ErrorDialog());
-    public ConcreteFootingInputModel InputModel { get; set; } = new();
+    public DelegateCommandWithValidator<RebarworksFootingInputModel, ConcreteFootingInputValidator> CalculateCommand => _calculateCommand
+        ??= new DelegateCommandWithValidator<RebarworksFootingInputModel, ConcreteFootingInputValidator>(ExecuteCalculateCommand, InputModel, _validator, new ErrorDialog());
+
+    public RebarworksFootingInputModel InputModel { get; set; } = new();
     public ConcreteFootingOutputModel OutputModel { get; set; } = new();
 
     private bool _isResultVisible;
+
     public bool IsResultVisible
     {
         get { return _isResultVisible; }
         set { SetProperty(ref _isResultVisible, value); }
     }
 
-    public ConcreteFootingViewModel(IConcreteCalculatorService cementCalculatorService, IRegionManager regionManager)
+    public ConcreteFootingViewModel(IConcreteCalculatorService concreteCalculatorService, IRegionManager regionManager)
     {
-        _cementCalculatorService = cementCalculatorService;
-
+        _concreteCalculatorService = concreteCalculatorService;
     }
+
     private void ExecuteCalculateCommand()
     {
-        decimal volume = _cementCalculatorService.CalculateVolume(
+        decimal volume = _concreteCalculatorService.CalculateVolume(
                     InputModel.LengthOfFooting.StripAndParseAsDecimal(),
                     InputModel.WidthOfFooting.StripAndParseAsDecimal(),
                     InputModel.ThicknessOfFooting.StripAndParseAsDecimal(),
@@ -55,6 +57,4 @@ public class ConcreteFootingViewModel : BindableBase
         OutputModel.Gravel = $"{(volume * 1)}m\xB3 (3/4\") of Gravel";
         IsResultVisible = true;
     }
-
-
 }

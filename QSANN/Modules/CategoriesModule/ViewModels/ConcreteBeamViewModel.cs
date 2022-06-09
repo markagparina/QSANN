@@ -12,30 +12,32 @@ namespace CategoriesModule.ViewModels;
 
 public class ConcreteBeamViewModel : BindableBase
 {
-    private readonly IConcreteCalculatorService _cementCalculatorService;
+    private readonly IConcreteCalculatorService _concreteCalculatorService;
     private DelegateCommandWithValidator<ConcreteBeamInputModel, ConcreteBeamInputValidator> _calculateCommand;
-    private ConcreteBeamInputValidator _validator = new();
+    private readonly ConcreteBeamInputValidator _validator = new();
 
     public DelegateCommandWithValidator<ConcreteBeamInputModel, ConcreteBeamInputValidator> CalculateCommand => _calculateCommand
         ??= new DelegateCommandWithValidator<ConcreteBeamInputModel, ConcreteBeamInputValidator>(ExecuteCalculateCommand, InputModel, _validator, new ErrorDialog());
+
     public ConcreteBeamInputModel InputModel { get; set; } = new();
     public ConcreteBeamOutputModel OutputModel { get; set; } = new();
 
     private bool _isResultVisible;
+
     public bool IsResultVisible
     {
         get { return _isResultVisible; }
         set { SetProperty(ref _isResultVisible, value); }
     }
 
-    public ConcreteBeamViewModel(IConcreteCalculatorService cementCalculatorService, IRegionManager regionManager)
+    public ConcreteBeamViewModel(IConcreteCalculatorService concreteCalculatorService)
     {
-        _cementCalculatorService = cementCalculatorService;
-
+        _concreteCalculatorService = concreteCalculatorService;
     }
+
     private void ExecuteCalculateCommand()
     {
-        decimal volume = _cementCalculatorService.CalculateVolume(
+        decimal volume = _concreteCalculatorService.CalculateVolume(
                     InputModel.LengthOfBeam.StripAndParseAsDecimal(),
                     InputModel.WidthOfBeam.StripAndParseAsDecimal(),
                     InputModel.HeightOfBeam.StripAndParseAsDecimal(),
@@ -55,6 +57,4 @@ public class ConcreteBeamViewModel : BindableBase
         OutputModel.Gravel = $"{(volume * 1)}m\xB3 (3/4\") of Gravel";
         IsResultVisible = true;
     }
-
-
 }

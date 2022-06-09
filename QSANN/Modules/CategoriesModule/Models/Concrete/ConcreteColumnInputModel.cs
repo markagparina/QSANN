@@ -6,6 +6,7 @@ namespace CategoriesModule.Models
     public class ConcreteColumnInputModel : BindableBase
     {
         private string _lengthOfColumn;
+
         public string LengthOfColumn
         {
             get { return _lengthOfColumn; }
@@ -13,6 +14,7 @@ namespace CategoriesModule.Models
         }
 
         private string _widthOfColumn;
+
         public string WidthOfColumn
         {
             get { return _widthOfColumn; }
@@ -20,6 +22,7 @@ namespace CategoriesModule.Models
         }
 
         private string _heightOfColumn;
+
         public string HeightOfColumn
         {
             get { return _heightOfColumn; }
@@ -27,6 +30,7 @@ namespace CategoriesModule.Models
         }
 
         private string _numbersOfCount;
+
         public string NumbersOfCount
         {
             get { return _numbersOfCount; }
@@ -34,11 +38,11 @@ namespace CategoriesModule.Models
         }
 
         private string _classMixture = "AA";
+
         public string ClassMixture
         {
             get { return _classMixture; }
             set { SetProperty(ref _classMixture, value); }
         }
-
     }
 }

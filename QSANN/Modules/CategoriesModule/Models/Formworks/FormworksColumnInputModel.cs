@@ -6,6 +6,7 @@ namespace CategoriesModule.Models
     public class FormworksColumnInputModel : BindableBase
     {
         private string _lengthOfColumn;
+
         public string LengthOfColumn
         {
             get { return _lengthOfColumn; }
@@ -13,6 +14,7 @@ namespace CategoriesModule.Models
         }
 
         private string _widthOfColumn;
+
         public string WidthOfColumn
         {
             get { return _widthOfColumn; }
@@ -20,6 +22,7 @@ namespace CategoriesModule.Models
         }
 
         private string _heightOfColumn;
+
         public string HeightOfColumn
         {
             get { return _heightOfColumn; }
@@ -27,6 +30,7 @@ namespace CategoriesModule.Models
         }
 
         private string _numbersOfCount;
+
         public string NumberOfCounts
         {
             get { return _numbersOfCount; }
@@ -34,6 +38,7 @@ namespace CategoriesModule.Models
         }
 
         private string _lumberSize = "2x2";
+
         public string LumberSize
         {
             get { return _lumberSize; }
@@ -41,6 +46,7 @@ namespace CategoriesModule.Models
         }
 
         private string _thicknessOfPlywood = "1/4";
+
         public string ThicknessOfPlywood
         {
             get { return _thicknessOfPlywood; }

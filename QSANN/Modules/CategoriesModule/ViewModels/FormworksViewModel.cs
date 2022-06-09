@@ -11,25 +11,22 @@ namespace CategoriesModule.ViewModels
         public override string Title => "Formworks and Scaffoldings";
 
         private string _selectedTab;
+
         public string SelectedTab
         {
             get { return _selectedTab; }
             set
             {
-                if (SetProperty(ref _selectedTab, value))
+                if (SetProperty(ref _selectedTab, value) && !string.IsNullOrEmpty(value))
                 {
-                    if (!string.IsNullOrEmpty(value))
-                    {
-                        string view = $"Formworks{value}View";
-                        _regionManager.RequestNavigate(RegionNames.FormworksContentRegion, view);
-                    }
+                    string view = $"Formworks{value}View";
+                    _regionManager.RequestNavigate(RegionNames.FormworksContentRegion, view);
                 }
             }
         }
 
         private DelegateCommand<string> _navigateCommand;
         public DelegateCommand<string> NavigateCommand => _navigateCommand ??= new DelegateCommand<string>(ExecuteNavigateCommand);
-
 
         public FormworksViewModel(IRegionManager regionManager) : base(regionManager)
         {
@@ -41,6 +38,5 @@ namespace CategoriesModule.ViewModels
         {
             SelectedTab = param;
         }
-
     }
 }

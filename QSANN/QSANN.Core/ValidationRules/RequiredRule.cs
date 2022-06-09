@@ -11,8 +11,8 @@ namespace QSANN.Core.ValidationRules
 
         public RequiredNumericRule()
         {
-
         }
+
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
             string valueAsString = value?.ToString();
@@ -26,7 +26,6 @@ namespace QSANN.Core.ValidationRules
             {
                 return new ValidationResult(false, ErrorMessage);
             }
-
 
             return ValidationResult.ValidResult;
         }

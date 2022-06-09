@@ -8,7 +8,6 @@ namespace QSANN.Core.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-
             return parameter?.ToString() == value?.ToString();
 
             //if (bool.TryParse(value?.ToString(), out bool result) && result)

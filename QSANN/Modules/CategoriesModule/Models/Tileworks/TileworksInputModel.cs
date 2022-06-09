@@ -6,6 +6,7 @@ namespace CategoriesModule.Models
     public class TileworksInputModel : BindableBase
     {
         private string _areaOfWorkDesignation;
+
         public string AreaOfWorkDesignation
         {
             get { return _areaOfWorkDesignation; }
@@ -13,6 +14,7 @@ namespace CategoriesModule.Models
         }
 
         private TileworksMultiplierModel _selectedMultiplier;
+
         public TileworksMultiplierModel SelectedMultiplier
         {
             get { return _selectedMultiplier; }

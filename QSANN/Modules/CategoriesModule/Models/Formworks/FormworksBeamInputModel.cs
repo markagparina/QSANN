@@ -6,6 +6,7 @@ namespace CategoriesModule.Models
     public class FormworksBeamInputModel : BindableBase
     {
         private string _lengthOfBeam;
+
         public string LengthOfBeam
         {
             get { return _lengthOfBeam; }
@@ -13,6 +14,7 @@ namespace CategoriesModule.Models
         }
 
         private string _widthOfBeam;
+
         public string WidthOfBeam
         {
             get { return _widthOfBeam; }
@@ -20,6 +22,7 @@ namespace CategoriesModule.Models
         }
 
         private string _heightOfBeam;
+
         public string HeightOfBeam
         {
             get { return _heightOfBeam; }
@@ -27,6 +30,7 @@ namespace CategoriesModule.Models
         }
 
         private string _numbersOfCount;
+
         public string NumberOfCounts
         {
             get { return _numbersOfCount; }
@@ -34,6 +38,7 @@ namespace CategoriesModule.Models
         }
 
         private string _lumberSize = "2x2";
+
         public string LumberSize
         {
             get { return _lumberSize; }
@@ -41,6 +46,7 @@ namespace CategoriesModule.Models
         }
 
         private string _thicknessOfPlywood = "1/4";
+
         public string ThicknessOfPlywood
         {
             get { return _thicknessOfPlywood; }
