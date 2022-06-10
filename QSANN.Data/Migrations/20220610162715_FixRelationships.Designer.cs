@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using QSANN.Data;
 
@@ -10,9 +11,10 @@ using QSANN.Data;
 namespace QSANN.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220610162715_FixRelationships")]
+    partial class FixRelationships
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.5");
@@ -103,6 +105,9 @@ namespace QSANN.Data.Migrations
                     b.Property<DateTime?>("DateCreated")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("HeightOfFooting")
+                        .HasColumnType("TEXT");
+
                     b.Property<DateTime?>("LastUpdated")
                         .HasColumnType("TEXT");
 
@@ -113,9 +118,6 @@ namespace QSANN.Data.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<Guid>("ProjectId")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("ThicknessOfFooting")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("WidthOfFooting")
@@ -171,6 +173,9 @@ namespace QSANN.Data.Migrations
                     b.Property<DateTime?>("DateCreated")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("HeightOfSlab")
+                        .HasColumnType("TEXT");
+
                     b.Property<DateTime?>("LastUpdated")
                         .HasColumnType("TEXT");
 
@@ -181,9 +186,6 @@ namespace QSANN.Data.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<Guid>("ProjectId")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("ThicknessOfSlab")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("WidthOfSlab")

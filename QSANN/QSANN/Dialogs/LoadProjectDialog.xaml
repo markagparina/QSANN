@@ -54,7 +54,7 @@
             <Button HorizontalAlignment="Center"
                     IsDefault="True"
                     Style="{StaticResource MaterialDesignFlatButton}"
-                    Command="{Binding CancelDialogCommand}">
+                    Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
                 <Button.CommandParameter>
                     <system:Boolean>False</system:Boolean>
                 </Button.CommandParameter>

@@ -22,6 +22,14 @@ namespace CategoriesModule.Validators
             RuleFor(input => input.NumberOfCounts)
                .NotEmpty()
                .WithMessage("Numbers of Count/s is required");
+
+            RuleFor(input => input.LumberSize)
+               .NotEmpty()
+               .WithMessage("Lumber Size is required");
+
+            RuleFor(input => input.ThicknessOfPlywood)
+                .NotEmpty()
+                .WithMessage("Thickness of Plywood is required");
         }
     }
 }

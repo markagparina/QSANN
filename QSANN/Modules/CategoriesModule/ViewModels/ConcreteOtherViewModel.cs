@@ -1,19 +1,25 @@
 ﻿using CategoriesModule.Dialogs;
 using CategoriesModule.Models;
 using CategoriesModule.Validators;
+using Prism.Events;
 using Prism.Mvvm;
 using Prism.Regions;
 using QSANN.Core.Commands;
+using QSANN.Core.Events;
 using QSANN.Core.Extensions;
+using QSANN.Data;
+using QSANN.Data.Entities;
 using QSANN.Services.Interfaces;
 using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace CategoriesModule.ViewModels;
 
 public class ConcreteOtherViewModel : BindableBase
 {
     private readonly IConcreteCalculatorService _concreteCalculatorService;
+    private readonly AppDbContext _context;
     private DelegateCommandWithValidator<ConcreteOtherInputModel, ConcreteOtherInputValidator> _calculateCommand;
     private readonly ConcreteOtherInputValidator _validator = new();
 
@@ -49,10 +55,14 @@ public class ConcreteOtherViewModel : BindableBase
         set { SetProperty(ref _selectedSpecification, value); }
     }
 
-    public ConcreteOtherViewModel(IConcreteCalculatorService concreteCalculatorService)
+    public ConcreteOtherViewModel(IConcreteCalculatorService concreteCalculatorService, AppDbContext context,IEventAggregator eventAggregator)
     {
         _concreteCalculatorService = concreteCalculatorService;
+        _context = context;
+        eventAggregator.GetEvent<LoadProjectEvent>().Subscribe(LoadProjectInput, ThreadOption.UIThread);
     }
+
+
 
     private void ExecuteCalculateCommand()
     {
@@ -71,5 +81,17 @@ public class ConcreteOtherViewModel : BindableBase
         OutputModel.Sand = $"{(volume * .5m)}m\xB3 of Sand";
         OutputModel.Gravel = $"{(volume * 1)}m\xB3 (3/4\") of Gravel";
         IsResultVisible = true;
+    }
+
+    private void LoadProjectInput(Guid projectId)
+    {
+        var project = _context.Set<ConcreteOtherInput>().FirstOrDefault(slab => slab.ProjectId == projectId);
+
+        if (project is not null)
+        {
+            InputModel.TotalVolume = project.TotalVolume;
+            InputModel.NumbersOfCount = project.NumbersOfCount;
+            InputModel.ClassMixture = project.ClassMixture;
+        }
     }
 }

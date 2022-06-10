@@ -1,26 +1,38 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using QSANN.Data.Entities;
 using QSANN.Data.Entities.Base;
+using QSANN.Data.Extensions;
 using System;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 
 namespace QSANN.Data
 {
     public class AppDbContext : DbContext
     {
-        public DbSet<Project> Projects { get; set; }
-        public DbSet<TileworksInput> Tileworks { get; set; }
-
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
 
-            optionsBuilder.UseSqlite("Data source=app.db");
+            string folder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+
+            string specificFolder = Path.Combine(folder, "QSANN");
+
+            Directory.CreateDirectory(specificFolder);
+
+            optionsBuilder.UseSqlite($"Data source={specificFolder}\\app.db");
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.RegisterEntitiesFromAssembly(typeof(AuditableProjectEntity).Assembly);
+            base.OnModelCreating(modelBuilder);
         }
 
         public override int SaveChanges()
         {
-            this.ChangeTracker.DetectChanges();
+            ChangeTracker.DetectChanges();
             var added = ChangeTracker.Entries()
                         .Where(t => t.State == EntityState.Added)
                         .Select(t => t.Entity)
@@ -28,9 +40,9 @@ namespace QSANN.Data
 
             foreach (var entity in added)
             {
-                if (entity is AuditableEntity)
+                if (entity is AuditableProjectEntity)
                 {
-                    var track = entity as AuditableEntity;
+                    var track = entity as AuditableProjectEntity;
                     track.DateCreated = DateTime.UtcNow;
                 }
             }
@@ -42,9 +54,9 @@ namespace QSANN.Data
 
             foreach (var entity in modified)
             {
-                if (entity is AuditableEntity)
+                if (entity is AuditableProjectEntity)
                 {
-                    var track = entity as AuditableEntity;
+                    var track = entity as AuditableProjectEntity;
                     track.LastUpdated = DateTime.UtcNow;
                 }
             }

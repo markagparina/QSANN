@@ -8,6 +8,7 @@ using QSANN.Core.Events;
 using QSANN.Core.Extensions;
 using QSANN.Core.Navigation;
 using QSANN.Data;
+using QSANN.Data.Entities;
 using QSANN.Services.Interfaces;
 using System;
 using System.Collections.ObjectModel;
@@ -74,7 +75,7 @@ namespace CategoriesModule.ViewModels
 
         private void LoadProjectInput(Guid obj)
         {
-            var tileworkProject = _context.Tileworks.FirstOrDefault(tilework => tilework.ProjectId == obj);
+            var tileworkProject = _context.Set<TileworksInput>().FirstOrDefault(tilework => tilework.ProjectId == obj);
 
             if (tileworkProject is not null)
             {

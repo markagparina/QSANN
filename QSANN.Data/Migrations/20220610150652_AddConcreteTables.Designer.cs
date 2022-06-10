@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using QSANN.Data;
 
@@ -10,9 +11,10 @@ using QSANN.Data;
 namespace QSANN.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220610150652_AddConcreteTables")]
+    partial class AddConcreteTables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.5");
@@ -91,43 +93,6 @@ namespace QSANN.Data.Migrations
                     b.ToTable("ConcreteColumnInputs", (string)null);
                 });
 
-            modelBuilder.Entity("QSANN.Data.Entities.ConcreteFootingInput", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("ClassMixture")
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime?>("DateCreated")
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime?>("LastUpdated")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("LengthOfFooting")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("NumbersOfCount")
-                        .HasColumnType("TEXT");
-
-                    b.Property<Guid>("ProjectId")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("ThicknessOfFooting")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("WidthOfFooting")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProjectId");
-
-                    b.ToTable("ConcreteFootingInputs", (string)null);
-                });
-
             modelBuilder.Entity("QSANN.Data.Entities.ConcreteOtherInput", b =>
                 {
                     b.Property<Guid>("Id")
@@ -171,6 +136,9 @@ namespace QSANN.Data.Migrations
                     b.Property<DateTime?>("DateCreated")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("HeightOfSlab")
+                        .HasColumnType("TEXT");
+
                     b.Property<DateTime?>("LastUpdated")
                         .HasColumnType("TEXT");
 
@@ -181,9 +149,6 @@ namespace QSANN.Data.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<Guid>("ProjectId")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("ThicknessOfSlab")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("WidthOfSlab")
@@ -211,9 +176,17 @@ namespace QSANN.Data.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("TEXT");
 
+                    b.Property<Guid>("ProjectId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid?>("ProjectId1")
+                        .HasColumnType("TEXT");
+
                     b.HasKey("Id");
 
-                    b.ToTable("Project");
+                    b.HasIndex("ProjectId1");
+
+                    b.ToTable("Projects", (string)null);
                 });
 
             modelBuilder.Entity("QSANN.Data.Entities.TileworksInput", b =>
@@ -266,17 +239,6 @@ namespace QSANN.Data.Migrations
                     b.Navigation("Project");
                 });
 
-            modelBuilder.Entity("QSANN.Data.Entities.ConcreteFootingInput", b =>
-                {
-                    b.HasOne("QSANN.Data.Entities.Project", "Project")
-                        .WithMany()
-                        .HasForeignKey("ProjectId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Project");
-                });
-
             modelBuilder.Entity("QSANN.Data.Entities.ConcreteOtherInput", b =>
                 {
                     b.HasOne("QSANN.Data.Entities.Project", "Project")
@@ -295,6 +257,15 @@ namespace QSANN.Data.Migrations
                         .HasForeignKey("ProjectId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Project");
+                });
+
+            modelBuilder.Entity("QSANN.Data.Entities.Project", b =>
+                {
+                    b.HasOne("QSANN.Data.Entities.Project", "Project")
+                        .WithMany()
+                        .HasForeignKey("ProjectId1");
 
                     b.Navigation("Project");
                 });

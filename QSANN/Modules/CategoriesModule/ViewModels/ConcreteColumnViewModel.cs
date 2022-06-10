@@ -1,18 +1,24 @@
 ﻿using CategoriesModule.Dialogs;
 using CategoriesModule.Models;
 using CategoriesModule.Validators;
+using Prism.Events;
 using Prism.Mvvm;
 using Prism.Regions;
 using QSANN.Core.Commands;
+using QSANN.Core.Events;
 using QSANN.Core.Extensions;
+using QSANN.Data;
+using QSANN.Data.Entities;
 using QSANN.Services.Interfaces;
 using System;
+using System.Linq;
 
 namespace CategoriesModule.ViewModels;
 
 public class ConcreteColumnViewModel : BindableBase
 {
     private readonly IConcreteCalculatorService _concreteCalculatorService;
+    private readonly AppDbContext _context;
     private DelegateCommandWithValidator<ConcreteColumnInputModel, ConcreteColumnInputValidator> _calculateCommand;
     private readonly ConcreteColumnInputValidator _validator = new();
 
@@ -30,9 +36,11 @@ public class ConcreteColumnViewModel : BindableBase
         set { SetProperty(ref _isResultVisible, value); }
     }
 
-    public ConcreteColumnViewModel(IConcreteCalculatorService concreteCalculatorService, IRegionManager regionManager)
+    public ConcreteColumnViewModel(IConcreteCalculatorService concreteCalculatorService, AppDbContext context, IEventAggregator eventAggregator)
     {
         _concreteCalculatorService = concreteCalculatorService;
+        _context = context;
+        eventAggregator.GetEvent<LoadProjectEvent>().Subscribe(LoadProjectInput);
     }
 
     private void ExecuteCalculateCommand()
@@ -56,5 +64,19 @@ public class ConcreteColumnViewModel : BindableBase
         OutputModel.Sand = $"{(volume * .5m)}m\xB3 of Sand";
         OutputModel.Gravel = $"{(volume * 1)}m\xB3 (3/4\") of Gravel";
         IsResultVisible = true;
+    }
+
+    private void LoadProjectInput(Guid projectId)
+    {
+        var columnProject = _context.Set<ConcreteColumnInput>().FirstOrDefault(column => column.ProjectId == projectId);
+
+        if (columnProject is not null)
+        {
+            InputModel.LengthOfColumn = columnProject.LengthOfColumn;
+            InputModel.WidthOfColumn = columnProject.WidthOfColumn;
+            InputModel.HeightOfColumn = columnProject.HeightOfColumn;
+            InputModel.NumbersOfCount = columnProject.NumbersOfCount;
+            InputModel.ClassMixture = columnProject.ClassMixture;
+        }
     }
 }

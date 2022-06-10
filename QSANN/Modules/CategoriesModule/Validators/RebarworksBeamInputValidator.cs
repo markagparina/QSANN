@@ -22,6 +22,10 @@ namespace CategoriesModule.Validators
             RuleFor(input => input.NumbersOfCount)
                .NotEmpty()
                .WithMessage("Numbers of Count/s is required");
+
+            RuleFor(input => input.ClassMixture)
+                .NotEmpty()
+                .WithMessage("Class Mixture is required");
         }
     }
 }

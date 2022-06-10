@@ -23,7 +23,6 @@ namespace CategoriesModule.Validators
                .NotEmpty()
                .WithMessage("Numbers of Column is required");
 
-
             RuleFor(input => input.SizeOfMainbar)
                .NotEmpty()
                .WithMessage("Size of Main bar is required");

@@ -107,7 +107,7 @@
                         Margin="0,0,0,10">
 
                 <RadioButton Margin="5"
-                             GroupName="THK_MM"
+                             GroupName="CONC_COL_CM"
                              Style="{StaticResource MaterialDesignRadioButton}"
                              Tag="True"
                              IsChecked="{Binding InputModel.ClassMixture, Converter={StaticResource stringToBooleanConverter}, ConverterParameter=AA}"
@@ -115,7 +115,7 @@
                 </RadioButton>
 
                 <RadioButton Margin="5"
-                             GroupName="THK_MM"
+                             GroupName="CONC_COL_CM"
                              Style="{StaticResource MaterialDesignRadioButton}"
                              Tag="True"
                              IsChecked="{Binding InputModel.ClassMixture, Converter={StaticResource stringToBooleanConverter}, ConverterParameter=A}"
@@ -123,7 +123,7 @@
                 </RadioButton>
 
                 <RadioButton Margin="5"
-                             GroupName="THK_MM"
+                             GroupName="CONC_COL_CM"
                              Style="{StaticResource MaterialDesignRadioButton}"
                              Tag="True"
                              IsChecked="{Binding InputModel.ClassMixture, Converter={StaticResource stringToBooleanConverter}, ConverterParameter=B}"
@@ -131,7 +131,7 @@
                 </RadioButton>
 
                 <RadioButton Margin="5"
-                             GroupName="THK_MM"
+                             GroupName="CONC_COL_CM"
                              Style="{StaticResource MaterialDesignRadioButton}"
                              Tag="True"
                              IsChecked="{Binding InputModel.ClassMixture, Converter={StaticResource stringToBooleanConverter}, ConverterParameter=C}"

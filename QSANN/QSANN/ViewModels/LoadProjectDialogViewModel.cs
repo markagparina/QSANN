@@ -11,6 +11,7 @@ using Prism.Events;
 using MaterialDesignThemes.Wpf;
 using System;
 using QSANN.Core.Events;
+using QSANN.Data.Entities;
 
 namespace QSANN.ViewModels
 {
@@ -56,8 +57,7 @@ namespace QSANN.ViewModels
 
         private async Task ExecuteLoadedCommandAsync()
         {
-            var projectsInDb = await _context.Projects.OrderBy(project => project.Name).ToListAsync();
-
+            var projectsInDb = await _context.Set<Project>().OrderBy(project => project.Name).ToListAsync();
             Projects = new ObservableCollection<ProjectItemModel>(projectsInDb.Select(project => project.Adapt<ProjectItemModel>()));
         }
 
