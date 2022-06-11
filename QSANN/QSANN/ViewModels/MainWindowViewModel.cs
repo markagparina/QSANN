@@ -52,7 +52,7 @@ namespace QSANN.ViewModels
             get => _selectedItem;
             set
             {
-                if (SetProperty(ref _selectedItem, value))
+                if (SetProperty(ref _selectedItem, value) && value is not null)
                 {
                     IsMenuOpen = false;
 

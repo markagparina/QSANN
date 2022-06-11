@@ -1,17 +1,23 @@
 ﻿using CategoriesModule.Dialogs;
 using CategoriesModule.Models;
 using CategoriesModule.Validators;
+using Prism.Events;
 using QSANN.Core.Commands;
+using QSANN.Core.Events;
 using QSANN.Core.Extensions;
 using QSANN.Core.Mvvm;
+using QSANN.Data;
+using QSANN.Data.Entities;
 using QSANN.Services.Interfaces;
+using System;
+using System.Linq;
 
 namespace CategoriesModule.ViewModels
 {
     public class FormworksColumnViewModel : ViewModelBase
     {
         private readonly IFormworksColumnCalculatorService _formworksColumnCalculatorService;
-
+        private readonly AppDbContext _context;
         private DelegateCommandWithValidator<FormworksColumnInputModel, FormworksColumnInputValidator> _calculateCommand;
         private readonly FormworksColumnInputValidator _validator = new();
 
@@ -29,9 +35,11 @@ namespace CategoriesModule.ViewModels
             set { SetProperty(ref _isResultVisible, value); }
         }
 
-        public FormworksColumnViewModel(IFormworksColumnCalculatorService formworksColumnCalculatorService)
+        public FormworksColumnViewModel(IFormworksColumnCalculatorService formworksColumnCalculatorService, AppDbContext context, IEventAggregator eventAggregator)
         {
             _formworksColumnCalculatorService = formworksColumnCalculatorService;
+            _context = context;
+            eventAggregator.GetEvent<LoadProjectEvent>().Subscribe(LoadProjectInput, ThreadOption.UIThread);
         }
 
         private void ExecuteCalculateCommand()
@@ -45,6 +53,21 @@ namespace CategoriesModule.ViewModels
             OutputModel.NumberOfBoardFeetLumber = $"{numberOfBoardFeetLumber:N2} Bd.ft Lumber";
 
             IsResultVisible = true;
+        }
+
+        private void LoadProjectInput(Guid projectId)
+        {
+            var columnProject = _context.Set<FormworksColumnInput>().FirstOrDefault(column => column.ProjectId == projectId);
+
+            if (columnProject is not null)
+            {
+                InputModel.LengthOfColumn = columnProject.LengthOfColumn;
+                InputModel.WidthOfColumn = columnProject.WidthOfColumn;
+                InputModel.HeightOfColumn = columnProject.HeightOfColumn;
+                InputModel.NumberOfCounts = columnProject.NumberOfCounts;
+                InputModel.LumberSize = columnProject.LumberSize;
+                InputModel.ThicknessOfPlywood = columnProject.ThicknessOfPlywood;
+            }
         }
     }
 }

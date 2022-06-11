@@ -1,11 +1,17 @@
 ﻿using CategoriesModule.Dialogs;
 using CategoriesModule.Models;
 using CategoriesModule.Validators;
+using Prism.Events;
 using Prism.Regions;
 using QSANN.Core.Commands;
+using QSANN.Core.Events;
 using QSANN.Core.Extensions;
 using QSANN.Core.Navigation;
+using QSANN.Data;
+using QSANN.Data.Entities;
 using QSANN.Services.Interfaces;
+using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace CategoriesModule.ViewModels
@@ -13,6 +19,7 @@ namespace CategoriesModule.ViewModels
     public class MasonryViewModel : MenuItem
     {
         private readonly IMasonryCalculatorService _masonryCalculatorService;
+        private readonly AppDbContext _context;
         private readonly MasonryInputModelValidator _validator = new();
 
         public MasonryInputModel InputModel { get; set; } = new();
@@ -35,9 +42,11 @@ namespace CategoriesModule.ViewModels
 
         public override string Title => "Masonry";
 
-        public MasonryViewModel(IMasonryCalculatorService masonryCalculatorService, IRegionManager regionManager) : base(regionManager)
+        public MasonryViewModel(IMasonryCalculatorService masonryCalculatorService, IRegionManager regionManager, AppDbContext context, IEventAggregator eventAggregator) : base(regionManager)
         {
             _masonryCalculatorService = masonryCalculatorService;
+            _context = context;
+            eventAggregator.GetEvent<LoadProjectEvent>().Subscribe(LoadProjectInput, ThreadOption.UIThread);
         }
 
         private Task ExecuteCalculateCommandAsync()
@@ -65,6 +74,23 @@ namespace CategoriesModule.ViewModels
             OutputModel.VerticalBars = $"{verticalBars} pieces of 6 meter Vertical Bars";
             IsResultVisible = true;
             return Task.CompletedTask;
+        }
+
+        private void LoadProjectInput(Guid projectId)
+        {
+            var masonryProject = _context.Set<MasonryInput>().FirstOrDefault(masonry => masonry.ProjectId == projectId);
+
+
+            if (masonryProject is not null)
+            {
+                InputModel.LengthOfWall = masonryProject.LengthOfWall;
+                InputModel.HorizontalBarSpacing = masonryProject.HorizontalBarSpacing;
+                InputModel.VerticalBarSpacing = masonryProject.VerticalBarSpacing;
+                InputModel.ClassMixtureForMortar = masonryProject.ClassMixtureForMortar;
+                InputModel.ClassMixtureForPlaster = masonryProject.ClassMixtureForPlaster;
+                InputModel.ThicknessInMillimeter = masonryProject.ThicknessInMillimeter;
+            }
+
         }
     }
 }

@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using QSANN.Data;
 
@@ -10,9 +11,10 @@ using QSANN.Data;
 namespace QSANN.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220611032504_FormworksInput")]
+    partial class FormworksInput
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.5");
@@ -276,49 +278,6 @@ namespace QSANN.Data.Migrations
                     b.ToTable("FormworksColumnInputs", (string)null);
                 });
 
-            modelBuilder.Entity("QSANN.Data.Entities.MasonryInput", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("ClassMixtureForMortar")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("ClassMixtureForPlaster")
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime?>("DateCreated")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("HeightOfWall")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("HorizontalBarSpacing")
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime?>("LastUpdated")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("LengthOfWall")
-                        .HasColumnType("TEXT");
-
-                    b.Property<Guid>("ProjectId")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("ThicknessInMillimeter")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("VerticalBarSpacing")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProjectId");
-
-                    b.ToTable("MasonryInputs", (string)null);
-                });
-
             modelBuilder.Entity("QSANN.Data.Entities.Project", b =>
                 {
                     b.Property<Guid>("Id")
@@ -434,17 +393,6 @@ namespace QSANN.Data.Migrations
                 });
 
             modelBuilder.Entity("QSANN.Data.Entities.FormworksColumnInput", b =>
-                {
-                    b.HasOne("QSANN.Data.Entities.Project", "Project")
-                        .WithMany()
-                        .HasForeignKey("ProjectId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Project");
-                });
-
-            modelBuilder.Entity("QSANN.Data.Entities.MasonryInput", b =>
                 {
                     b.HasOne("QSANN.Data.Entities.Project", "Project")
                         .WithMany()
