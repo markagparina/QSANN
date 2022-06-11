@@ -54,6 +54,8 @@ namespace CategoriesModule.ViewModels
             var model = _masonryCalculatorService.CalculateThicknessAndSandMultipliers(InputModel.ThicknessInMillimeter.StripAndParseAsDecimal(), InputModel.ClassMixtureForPlaster);
 
             decimal area = _masonryCalculatorService.CalculateWallArea(InputModel.HeightOfWall.StripAndParseAsDecimal(), InputModel.LengthOfWall.StripAndParseAsDecimal());
+            decimal concreteHollowblocks = _masonryCalculatorService.CalculateCHB(area);
+
             decimal cementM = area * _masonryCalculatorService.CalculateClassMixtureForMortarMultiplier(InputModel.ClassMixtureForMortar);
             decimal sandM = area * 1;
             decimal cementP = area * InputModel.ThicknessInMillimeter.StripAndParseAsDecimal();
@@ -68,6 +70,7 @@ namespace CategoriesModule.ViewModels
             decimal horizontalBars = numberOfPiecesByHeight * InputModel.LengthOfWall.StripAndParseAsDecimal() * 1.1m / 6m;
             decimal verticalBars = numberOfPiecesByLength * InputModel.HeightOfWall.StripAndParseAsDecimal() * 1.2m / 6m;
 
+            OutputModel.ConcreteHollowBlocks = $"{concreteHollowblocks} pcs of Hollowblocks";
             OutputModel.Cement = $"{cementTotal} Bags of Cement";
             OutputModel.Sand = $"{sandTotal}m\xB3 of Sand";
             OutputModel.HorizontalBars = $"{horizontalBars} pieces of 6 meter Horizontal Bars";
@@ -84,6 +87,7 @@ namespace CategoriesModule.ViewModels
             if (masonryProject is not null)
             {
                 InputModel.LengthOfWall = masonryProject.LengthOfWall;
+                InputModel.HeightOfWall = masonryProject.HeightOfWall;
                 InputModel.HorizontalBarSpacing = masonryProject.HorizontalBarSpacing;
                 InputModel.VerticalBarSpacing = masonryProject.VerticalBarSpacing;
                 InputModel.ClassMixtureForMortar = masonryProject.ClassMixtureForMortar;

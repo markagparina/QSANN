@@ -38,6 +38,13 @@
                              Margin="4"
                              IsChecked="{Binding SelectedTab, Converter={StaticResource stringToBooleanConverter}, ConverterParameter=Footing}"
                              Content="Footing" />
+                <RadioButton Style="{StaticResource MaterialDesignTabRadioButtonTop}"
+                             BorderBrush="{DynamicResource PrimaryHueMidBrush}"
+                             Command="{Binding NavigateCommand}"
+                             CommandParameter="Slab"
+                             Margin="4"
+                             IsChecked="{Binding SelectedTab, Converter={StaticResource stringToBooleanConverter}, ConverterParameter=Slab}"
+                             Content="Slab" />
             </StackPanel>
             <ContentControl prism:RegionManager.RegionName="{x:Static core:RegionNames.RebarworksContentRegion}" />
         </StackPanel>

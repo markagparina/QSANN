@@ -4,27 +4,35 @@ namespace CategoriesModule.Models;
 
 public class RebarworksBeamOutputModel : BindableBase
 {
-    private string _cementM;
+    private string _mainbar;
 
-    public string CementMixture
+    public string Mainbar
     {
-        get { return _cementM; }
-        set { SetProperty(ref _cementM, value); }
+        get { return _mainbar; }
+        set { SetProperty(ref _mainbar, value); }
     }
 
-    private string _sand;
+    private string _lateralTies;
 
-    public string Sand
+    public string LateralTies
     {
-        get { return _sand; }
-        set { SetProperty(ref _sand, value); }
+        get { return _lateralTies; }
+        set { SetProperty(ref _lateralTies, value); }
     }
 
-    private string _gravel;
+    private string _tiewire;
 
-    public string Gravel
+    public string Tiewire
     {
-        get { return _gravel; }
-        set { SetProperty(ref _gravel, value); }
+        get { return _tiewire; }
+        set { SetProperty(ref _tiewire, value); }
+    }
+
+    private string _shortBeamLength;
+
+    public string ShortBeamLength
+    {
+        get { return _shortBeamLength; }
+        set { SetProperty(ref _shortBeamLength, value); }
     }
 }

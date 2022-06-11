@@ -1,10 +1,13 @@
 ﻿using CategoriesModule.Dialogs;
 using CategoriesModule.Models;
 using CategoriesModule.Validators;
+using Prism.Events;
 using Prism.Mvvm;
 using Prism.Regions;
 using QSANN.Core.Commands;
+using QSANN.Core.Events;
 using QSANN.Core.Extensions;
+using QSANN.Data;
 using QSANN.Services.Interfaces;
 using System;
 
@@ -12,7 +15,9 @@ namespace CategoriesModule.ViewModels;
 
 public class RebarworksBeamViewModel : BindableBase
 {
-    private readonly IRebarworksColumnCalculatorService _concreteCalculatorService;
+    private readonly IRebarworksBeamCalculatorService _beamCalculatorService;
+    private readonly AppDbContext _context;
+    private readonly IEventAggregator _eventAggregator;
     private DelegateCommandWithValidator<RebarworksBeamInputModel, RebarworksBeamInputValidator> _calculateCommand;
     private readonly RebarworksBeamInputValidator _validator = new();
 
@@ -30,31 +35,50 @@ public class RebarworksBeamViewModel : BindableBase
         set { SetProperty(ref _isResultVisible, value); }
     }
 
-    public RebarworksBeamViewModel(IRebarworksColumnCalculatorService concreteCalculatorService, IRegionManager regionManager)
+    public RebarworksBeamViewModel(IRebarworksBeamCalculatorService beamCalculatorService, AppDbContext context, IEventAggregator eventAggregator)
     {
-        _concreteCalculatorService = concreteCalculatorService;
+        _beamCalculatorService = beamCalculatorService;
+        _context = context;
+        _eventAggregator = eventAggregator;
+
+        _eventAggregator.GetEvent<RebarworksWidthOfColumnChanged>().Subscribe(UpdateWidthOfColumn);
+    }
+
+    private void UpdateWidthOfColumn(string widthOfcolumn)
+    {
+        InputModel.WidthOfColumn = widthOfcolumn;
     }
 
     private void ExecuteCalculateCommand()
     {
-        //decimal volume = _concreteCalculatorService.CalculateVolume(
-        //            InputModel.LengthOfBeam.StripAndParseAsDecimal(),
-        //            InputModel.WidthOfBeam.StripAndParseAsDecimal(),
-        //            InputModel.HeightOfBeam.StripAndParseAsDecimal(),
-        //            InputModel.NumbersOfCount.StripAndParseAsDecimal());
+        decimal area = _beamCalculatorService.CalculateBeamArea(InputModel.HeightOfBeam.StripAndParseAsDecimal(), InputModel.WidthOfBeam.StripAndParseAsDecimal());
 
-        //decimal bagsOfCement = InputModel.ClassMixture switch
-        //{
-        //    "AA" => volume * 12m,
-        //    "A" => volume * 9m,
-        //    "B" => volume * 7m,
-        //    "C" => volume * 6.5m,
-        //    _ => throw new ArgumentException("Invalid value for Class Mixture")
-        //};
+        decimal steel = _beamCalculatorService.CalculateSteel(area, InputModel.SizeOfMainbar.StripAndParseAsDecimal());
 
-        //OutputModel.CementMixture = $"{bagsOfCement} Bags of Cement";
-        //OutputModel.Sand = $"{(volume * .5m)}m\xB3 of Sand";
-        //OutputModel.Gravel = $"{(volume * 1)}m\xB3 (3/4\") of Gravel";
-        //IsResultVisible = true;
+        decimal sbl = _beamCalculatorService.CalculateSBL(InputModel.WidthOfColumn.StripAndParseAsDecimal(), InputModel.LengthOfBeam.StripAndParseAsDecimal(),
+            InputModel.SizeOfStirrups.StripAndParseAsDecimal(), InputModel.NumbersOfBeam.StripAndParseAsDecimal());
+
+        decimal bsl = _beamCalculatorService.CalculateBSL(InputModel.LengthOfBeam.StripAndParseAsDecimal());
+
+        decimal mainbarBeam = _beamCalculatorService.CalculateMainbarBeam(InputModel.NumbersOfBeam.StripAndParseAsDecimal(), bsl, steel);
+
+        decimal stirrups = _beamCalculatorService.CalculateStirrups1(InputModel.LengthOfBeam.StripAndParseAsDecimal(),
+            InputModel.WidthOfBeam.StripAndParseAsDecimal());
+
+        decimal spacing = _beamCalculatorService.CalculateSpacing(InputModel.LengthOfBeam.StripAndParseAsDecimal());
+
+        decimal balance = _beamCalculatorService.CalculateBalance(spacing);
+
+        decimal pieces = _beamCalculatorService.CalculatePieces(balance);
+
+        decimal lateralTies = _beamCalculatorService.CalculateStirrups(stirrups, pieces);
+
+        decimal tiewire = _beamCalculatorService.CalculateTieWire(pieces, steel, InputModel.NumbersOfBeam.StripAndParseAsDecimal());
+
+        OutputModel.Mainbar = $"{mainbarBeam:N2} pcs of 6m Mainbar";
+        OutputModel.ShortBeamLength = $"{sbl:N2} pcs of 6m Bendbars";
+        OutputModel.Tiewire = $"{tiewire:N2} kg/s of (#16) Tiewire";
+        OutputModel.LateralTies = $"{lateralTies:N2} pcs of 6m Stirrups";
+        IsResultVisible = true;
     }
 }

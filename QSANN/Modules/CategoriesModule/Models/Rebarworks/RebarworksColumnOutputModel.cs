@@ -4,12 +4,20 @@ namespace CategoriesModule.Models;
 
 public class RebarworksColumnOutputModel : BindableBase
 {
-    private string _steelbar;
+    private string _mainbar;
 
-    public string Steelbar
+    public string Mainbar
     {
-        get { return _steelbar; }
-        set { SetProperty(ref _steelbar, value); }
+        get { return _mainbar; }
+        set { SetProperty(ref _mainbar, value); }
+    }
+
+    private string _lateralTies;
+
+    public string LateralTies
+    {
+        get { return _lateralTies; }
+        set { SetProperty(ref _lateralTies, value); }
     }
 
     private string _tiewire;

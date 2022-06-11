@@ -2,26 +2,26 @@
 {
     public interface IRebarworksBeamCalculatorService
     {
-        decimal CalculateColumnArea(decimal lengthOfColumn, decimal widthOfColumn);
+        decimal CalculateBeamArea(decimal lengthOfBeam, decimal widthOfBeam);
 
         decimal CalculateSteel(decimal area, decimal sizeOfMainBar);
 
-        decimal CalculateMainbarBeam(decimal numbersOfBeam, decimal bsl, decimal area);
+        decimal CalculateMainbarBeam(decimal numbersOfBeam, decimal bsl, decimal steel);
 
-        decimal CalculateTies(decimal lengthOfColumn, decimal widthOfColumn);
+        decimal CalculateStirrups1(decimal lengthOfBeam, decimal widthOfBeam);
 
-        decimal CalculateSpcaing(decimal heightOfColumn);
+        decimal CalculateSpacing(decimal lengthOfBeam);
 
         decimal CalculateBalance(decimal spacing);
 
         decimal CalculatePieces(decimal balance);
 
-        decimal CalculateLateralTies(decimal ties, decimal pieces);
+        decimal CalculateStirrups(decimal stirrups, decimal pieces);
 
-        decimal CalculateTieWire(decimal pieces, decimal steel, decimal numbersOfColumn);
+        decimal CalculateTieWire(decimal pieces, decimal steel, decimal numbersOfBeam);
 
         decimal CalculateBSL(decimal lengthOfBeam);
 
-        decimal CalculateSBL();
+        decimal CalculateSBL(decimal widthOfBeam, decimal LengthOfBeam, decimal sizeOfStirrups, decimal numbersOfBeam);
     }
 }

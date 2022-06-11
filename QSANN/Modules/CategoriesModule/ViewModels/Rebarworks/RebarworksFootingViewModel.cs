@@ -1,17 +1,24 @@
 ﻿using CategoriesModule.Dialogs;
+using CategoriesModule.Models;
+using CategoriesModule.Models.Rebarworks;
+using CategoriesModule.Validators;
+using Prism.Events;
 using Prism.Mvvm;
 using Prism.Regions;
 using QSANN.Core.Commands;
+using QSANN.Core.Events;
 using QSANN.Core.Extensions;
+using QSANN.Services.Interfaces;
 using System;
 
 namespace CategoriesModule.ViewModels;
 
 public class RebarworksFootingViewModel : BindableBase
 {
-    private readonly IRebarworksFootingCalculatorService _cementCalculatorService;
+    private readonly IRebarworksFootingCalculatorService _rebarworksFootingCalculatorService;
+    private readonly IEventAggregator _eventAggregator;
     private DelegateCommandWithValidator<RebarworksFootingInputModel, RebarworksFootingInputValidator> _calculateCommand;
-    private RebarworksFootingInputValidator _validator = new();
+    private readonly RebarworksFootingInputValidator _validator = new();
 
     public DelegateCommandWithValidator<RebarworksFootingInputModel, RebarworksFootingInputValidator> CalculateCommand => _calculateCommand
         ??= new DelegateCommandWithValidator<RebarworksFootingInputModel, RebarworksFootingInputValidator>(ExecuteCalculateCommand, InputModel, _validator, new ErrorDialog());
@@ -27,31 +34,32 @@ public class RebarworksFootingViewModel : BindableBase
         set { SetProperty(ref _isResultVisible, value); }
     }
 
-    public RebarworksFootingViewModel(IRebarworksCalculatorService cementCalculatorService, IRegionManager regionManager)
+    public RebarworksFootingViewModel(IRebarworksFootingCalculatorService rebarworksFootingCalculatorService, IEventAggregator eventAggregator)
     {
-        _cementCalculatorService = cementCalculatorService;
+        _rebarworksFootingCalculatorService = rebarworksFootingCalculatorService;
+        _eventAggregator = eventAggregator;
     }
 
     private void ExecuteCalculateCommand()
     {
-        decimal volume = _cementCalculatorService.CalculateVolume(
-                    InputModel.LengthOfFooting.StripAndParseAsDecimal(),
-                    InputModel.WidthOfFooting.StripAndParseAsDecimal(),
-                    InputModel.ThicknessOfFooting.StripAndParseAsDecimal(),
-                    InputModel.NumbersOfCount.StripAndParseAsDecimal());
+        decimal horizontalFooting = _rebarworksFootingCalculatorService.CalculateHorizontalFoootingRebar
+            (InputModel.LengthOfFooting.StripAndParseAsDecimal(),
+            InputModel.WidthOfFooting.StripAndParseAsDecimal(), InputModel.SpacingOfSteelbar.StripAndParseAsDecimal());
 
-        decimal bagsOfCement = InputModel.ClassMixture switch
-        {
-            "AA" => volume * 12m,
-            "A" => volume * 9m,
-            "B" => volume * 7m,
-            "C" => volume * 6.5m,
-            _ => throw new ArgumentException("Invalid value for Class Mixture")
-        };
+        decimal verticalFooting = _rebarworksFootingCalculatorService.CalculateVerticalFoootingRebar
+            (InputModel.WidthOfFooting.StripAndParseAsDecimal(),
+            InputModel.LengthOfFooting.StripAndParseAsDecimal(), InputModel.SpacingOfSteelbar.StripAndParseAsDecimal());
 
-        OutputModel.CementMixture = $"{bagsOfCement} Bags of Cement";
-        OutputModel.Sand = $"{(volume * .5m)}m\xB3 of Sand";
-        OutputModel.Gravel = $"{(volume * 1)}m\xB3 (3/4\") of Gravel";
+        decimal totalFooting = _rebarworksFootingCalculatorService.CalculateTotalFootingRebar(horizontalFooting, verticalFooting);
+        decimal tiewire = _rebarworksFootingCalculatorService.CalculateTiewire(InputModel.WidthOfFooting.StripAndParseAsDecimal(),
+            InputModel.LengthOfFooting.StripAndParseAsDecimal(),
+            InputModel.SpacingOfSteelbar.StripAndParseAsDecimal(),
+            InputModel.NumbersOfFooting.StripAndParseAsDecimal());
+
+
+        OutputModel.Steelbar = $"{totalFooting:N2} pcs of 6m Mainbar";
+        OutputModel.Tiewire = $"{tiewire:N2} kg/s of (#16) Tiewire";
+
         IsResultVisible = true;
     }
 }

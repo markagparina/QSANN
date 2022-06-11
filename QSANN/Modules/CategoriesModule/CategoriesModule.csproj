@@ -4,9 +4,6 @@
 		<UseWPF>true</UseWPF>
 	</PropertyGroup>
 	<ItemGroup>
-	  <Compile Remove="ViewModels\Rebarworks\RebarworksFootingViewModel.cs" />
-	</ItemGroup>
-	<ItemGroup>
 		<PackageReference Include="FluentValidation" Version="11.0.2" />
 		<PackageReference Include="Prism.Wpf" Version="8.1.97" />
 		<PackageReference Include="MaterialDesignThemes" Version="4.5.0" />
@@ -56,6 +53,15 @@
 		  <SubType>Code</SubType>
 		</Compile>
 		<Compile Update="Views\Rebarworks\RebarworksView.xaml.cs">
+		  <SubType>Code</SubType>
+		</Compile>
+		<Compile Update="Views\Rebarworks\RebarworksSlabView.xaml.cs">
+		  <SubType>Code</SubType>
+		</Compile>
+		<Compile Update="Views\PaintworksView.xaml.cs">
+		  <SubType>Code</SubType>
+		</Compile>
+		<Compile Update="Views\CarpentryworksView.xaml.cs">
 		  <SubType>Code</SubType>
 		</Compile>
 	</ItemGroup>
@@ -109,6 +115,18 @@
 		  <SubType>Designer</SubType>
 		</Page>
 		<Page Update="Views\Rebarworks\RebarworksView.xaml">
+		  <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+		  <SubType>Designer</SubType>
+		</Page>
+		<Page Update="Views\Rebarworks\RebarworksSlabView.xaml">
+		  <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+		  <SubType>Designer</SubType>
+		</Page>
+		<Page Update="Views\PaintworksView.xaml">
+		  <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+		  <SubType>Designer</SubType>
+		</Page>
+		<Page Update="Views\CarpentryworksView.xaml">
 		  <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
 		  <SubType>Designer</SubType>
 		</Page>

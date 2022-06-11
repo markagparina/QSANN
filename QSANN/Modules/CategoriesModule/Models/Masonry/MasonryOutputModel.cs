@@ -4,6 +4,14 @@ namespace CategoriesModule.Models
 {
     public class MasonryOutputModel : BindableBase
     {
+
+        private string _concreteHollowBlocks;
+        public string ConcreteHollowBlocks
+        {
+            get { return _concreteHollowBlocks; }
+            set { SetProperty(ref _concreteHollowBlocks, value); }
+        }
+
         private string _cement;
 
         public string Cement

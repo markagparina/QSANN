@@ -37,6 +37,11 @@ public partial class App
         containerRegistry.Register<IFormworksBeamCalculatorService, FormworksBeamCalculatorService>();
         containerRegistry.Register<ITileworksCalculatorService, TileworksCalculatorService>();
         containerRegistry.Register<IRebarworksColumnCalculatorService, RebarworksColumnCalculatorService>();
+        containerRegistry.Register<IRebarworksBeamCalculatorService, RebarworksBeamCalculatorService>();
+        containerRegistry.Register<IRebarworksFootingCalculatorService, RebarworksFootingCalculatorService>();
+        containerRegistry.Register<IRebarworksSlabCalculatorService, RebarworksSlabCalculatorService>();
+        containerRegistry.Register<IPaintworksCalculatorService, PaintworksCalculatorService>();
+        containerRegistry.Register<ICarpentryworksCalculatorService, CarpentryworksCalculatorService>();
         containerRegistry.RegisterForNavigation<LoadProjectDialog, LoadProjectDialogViewModel>();
     }
 

@@ -15,13 +15,17 @@ namespace CategoriesModule.Validators
                .NotEmpty()
                .WithMessage("Width of Footing is required");
 
-            RuleFor(input => input.ThicknessOfFooting)
+            RuleFor(input => input.NumbersOfFooting)
                .NotEmpty()
-               .WithMessage("Thickness of Footing is required");
+               .WithMessage("Numbers of Footing is required");
 
-            RuleFor(input => input.NumbersOfCount)
-               .NotEmpty()
-               .WithMessage("Numbers of Count/s is required");
+            RuleFor(input => input.SizeOfSteelbar)
+                .NotEmpty()
+                .WithMessage("Size of Steel Bar is required");
+
+            RuleFor(input => input.SpacingOfSteelbar)
+                .NotEmpty()
+                .WithMessage("Spacing of Steel Bar is required");
         }
     }
 }

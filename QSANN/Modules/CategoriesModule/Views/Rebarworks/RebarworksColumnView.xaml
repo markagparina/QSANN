@@ -106,9 +106,8 @@
             <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}"
                      VerticalAlignment="Top"
                      Height="50"
-                     Margin="0,0,0,20"
                      TextWrapping="Wrap"
-                     materialDesign:HintAssist.Hint="3">
+                     materialDesign:HintAssist.Hint="3 millimeters">
                 <TextBox.Text>
                     <Binding Path="InputModel.SizeOfMainbar"
                              UpdateSourceTrigger="LostFocus">
@@ -120,6 +119,30 @@
                     </Binding>
                 </TextBox.Text>
             </TextBox>
+
+
+            <TextBlock Margin="0,20,0,0"
+                       Padding="5"
+                       Text="Size of Lateral Ties?" />
+
+            <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                     VerticalAlignment="Top"
+                     Height="50"
+                     Margin="0,0,0,20"
+                     TextWrapping="Wrap"
+                     materialDesign:HintAssist.Hint="3 millimeters">
+                <TextBox.Text>
+                    <Binding Path="InputModel.SizeOfLateralties"
+                             UpdateSourceTrigger="LostFocus">
+                        <Binding.ValidationRules>
+                            <validations:RequiredNumericRule InitialMessage="This field is required"
+                                                             ErrorMessage="Invalid value for Size of Lateral Ties"
+                                                             ValidatesOnTargetUpdated="True" />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+
 
             <Button Command="{Binding CalculateCommand}">Calculate</Button>
 
@@ -139,9 +162,12 @@
                           Margin="16">
                     <GroupBox.Content>
                         <StackPanel>
-                            <!--Steelbar-->
+                            <!--Mainbar-->
                             <TextBlock FontSize="32"
-                                       Text="{Binding OutputModel.Steelbar}" />
+                                       Text="{Binding OutputModel.Mainbar}" />
+                            <!--LateralTies-->
+                            <TextBlock FontSize="32"
+                                       Text="{Binding OutputModel.LateralTies}" />
                             <!--Tiewire-->
                             <TextBlock FontSize="32"
                                        Text="{Binding OutputModel.Tiewire}" />

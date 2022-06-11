@@ -236,6 +236,9 @@
                               Margin="16">
                         <GroupBox.Content>
                             <StackPanel>
+                                <!--Hollowblocks-->
+                                <TextBlock FontSize="32"
+                                           Text="{Binding OutputModel.ConcreteHollowBlocks}" />
                                 <!--Cement-->
                                 <TextBlock FontSize="32"
                                            Text="{Binding OutputModel.Cement}" />

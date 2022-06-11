@@ -16,9 +16,11 @@
             </i:EventTrigger>
         </i:Interaction.Triggers>
 
-        <StackPanel Orientation="Horizontal"
+        <StackPanel Orientation="Vertical"
                     Margin="10">
-            <TextBlock FontSize="18">Choose a Project:</TextBlock>
+            <TextBlock FontSize="18">Save project:</TextBlock>
+
+            <TextBox Text="My new project"></TextBox>
         </StackPanel>
 
         <Border>

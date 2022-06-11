@@ -26,6 +26,10 @@ namespace CategoriesModule.Validators
             RuleFor(input => input.SizeOfMainbar)
                .NotEmpty()
                .WithMessage("Size of Main bar is required");
+
+            RuleFor(input => input.SizeOfLateralties)
+               .NotEmpty()
+               .WithMessage("Size of Lateral Ties is required");
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿using CategoriesModule.Dialogs;
-using CategoriesModule.Views;
+﻿using CategoriesModule.Views;
 using Prism.Ioc;
 using Prism.Modularity;
 using Prism.Regions;
@@ -18,6 +17,10 @@ namespace CategoriesModule
 
         public void OnInitialized(IContainerProvider containerProvider)
         {
+
+            // Carpentry works
+            _regionManager.RegisterViewWithRegion<CarpentryworksView>(RegionNames.MainContentRegion);
+
             // Concrete Tabs
             _regionManager.RegisterViewWithRegion<ConcreteView>(RegionNames.MainContentRegion);
             _regionManager.RegisterViewWithRegion<ConcreteColumnView>(RegionNames.ConcreteContentRegion);
@@ -31,18 +34,30 @@ namespace CategoriesModule
             _regionManager.RegisterViewWithRegion<FormworksColumnView>(RegionNames.FormworksContentRegion);
             _regionManager.RegisterViewWithRegion<FormworksBeamView>(RegionNames.FormworksContentRegion);
 
+            // Masonry
+            _regionManager.RegisterViewWithRegion<MasonryView>(RegionNames.MainContentRegion);
+
             // Rebarworks Tabs
             _regionManager.RegisterViewWithRegion<RebarworksView>(RegionNames.MainContentRegion);
             _regionManager.RegisterViewWithRegion<RebarworksColumnView>(RegionNames.RebarworksContentRegion);
             _regionManager.RegisterViewWithRegion<RebarworksBeamView>(RegionNames.RebarworksContentRegion);
+            _regionManager.RegisterViewWithRegion<RebarworksFootingView>(RegionNames.RebarworksContentRegion);
+            _regionManager.RegisterViewWithRegion<RebarworksSlabView>(RegionNames.RebarworksContentRegion);
+
 
             // Tileworks
             _regionManager.RegisterViewWithRegion<TileworksView>(RegionNames.MainContentRegion);
+
+            // Paintworks
+            _regionManager.RegisterViewWithRegion<PaintworksView>(RegionNames.MainContentRegion);
+
+            // Others
+            _regionManager.RegisterViewWithRegion<OthersView>(RegionNames.MainContentRegion);
         }
 
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            containerRegistry.RegisterForNavigation<MasonryView>(nameof(MasonryView));
+            //containerRegistry.RegisterForNavigation<MasonryView>(nameof(MasonryView));
 
             // Concrete Tabs
             //containerRegistry.RegisterForNavigation<ConcreteView>(nameof(ConcreteView));

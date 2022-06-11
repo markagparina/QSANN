@@ -42,7 +42,15 @@ namespace CategoriesModule.Models
         public string SizeOfMainbar
         {
             get { return _sizeOfMainbar; }
-            set { SetProperty(ref _sizeOfMainbar, value); }
+            set { SetProperty(ref _sizeOfMainbar, value.AppendIfNotExists(" millimeter")); }
+        }
+
+        private string _sizeOfLateralties;
+
+        public string SizeOfLateralties
+        {
+            get { return _sizeOfLateralties; }
+            set { SetProperty(ref _sizeOfLateralties, value.AppendIfNotExists(" millimeter")); }
         }
     }
 }

@@ -21,6 +21,16 @@ namespace CategoriesModule.Models
             set { SetProperty(ref _widthOfBeam, value.AppendIfNotExists(" meters")); }
         }
 
+        private string _widthOfColumn;
+
+        public string WidthOfColumn
+        {
+            get { return _widthOfColumn; }
+            set { SetProperty(ref _widthOfColumn, value.AppendIfNotExists(" meters")); }
+        }
+
+
+
         private string _heightOfBeam;
 
         public string HeightOfBeam
@@ -29,20 +39,28 @@ namespace CategoriesModule.Models
             set { SetProperty(ref _heightOfBeam, value.AppendIfNotExists(" meters")); }
         }
 
-        private string _numbersOfCount;
+        private string _numbersOfBeam;
 
-        public string NumbersOfCount
+        public string NumbersOfBeam
         {
-            get { return _numbersOfCount; }
-            set { SetProperty(ref _numbersOfCount, value); }
+            get { return _numbersOfBeam; }
+            set { SetProperty(ref _numbersOfBeam, value); }
         }
 
-        private string _classMixture = "AA";
-
-        public string ClassMixture
+        private string _sizeOfMainbar;
+        public string SizeOfMainbar
         {
-            get { return _classMixture; }
-            set { SetProperty(ref _classMixture, value); }
+            get { return _sizeOfMainbar; }
+            set { SetProperty(ref _sizeOfMainbar, value.AppendIfNotExists(" millimeter")); }
         }
+
+        private string _sizeOfStirrups;
+
+        public string SizeOfStirrups
+        {
+            get { return _sizeOfStirrups; }
+            set { SetProperty(ref _sizeOfStirrups, value.AppendIfNotExists(" millimeter")); }
+        }
+
     }
 }

@@ -23,34 +23,34 @@ namespace QSANN.Services
             return lengthOfBeam + allowance;
         }
 
-        public decimal CalculateColumnArea(decimal lengthOfColumn, decimal widthOfColumn)
+        public decimal CalculateBeamArea(decimal lengthOfBeam, decimal widthOfBeam)
         {
-            throw new System.NotImplementedException();
+            return _rebarworksColumnCalculatorService.CalculateColumnArea(lengthOfBeam, widthOfBeam);
         }
 
-        public decimal CalculateLateralTies(decimal ties, decimal pieces)
+        public decimal CalculateStirrups(decimal stirrups, decimal pieces)
         {
-            throw new System.NotImplementedException();
+            return _rebarworksColumnCalculatorService.CalculateLateralTies(stirrups, pieces);
         }
 
-        public decimal CalculateMainbarBeam(decimal numbersOfBeam, decimal bsl, decimal area)
+        public decimal CalculateMainbarBeam(decimal numbersOfBeam, decimal bsl, decimal steel)
         {
-            return numbersOfBeam * bsl * (area + (area * .1m));
+            return (numbersOfBeam * bsl * (steel + (steel * .1m))) / 6;
         }
 
         public decimal CalculatePieces(decimal balance)
         {
-            throw new System.NotImplementedException();
+            return _rebarworksColumnCalculatorService.CalculatePieces(balance);
         }
 
-        public decimal CalculateSBL()
+        public decimal CalculateSBL(decimal widthOfBeam, decimal LengthOfBeam, decimal sizeOfStirrups, decimal numbersOfBeam)
         {
-            throw new System.NotImplementedException();
+            return ((widthOfBeam + (LengthOfBeam / 4) + (sizeOfStirrups * .01m)) * numbersOfBeam) / 6;
         }
 
-        public decimal CalculateSpcaing(decimal heightOfColumn)
+        public decimal CalculateSpacing(decimal lengthOfBeam)
         {
-            throw new System.NotImplementedException();
+            return _rebarworksColumnCalculatorService.CalculateSpcaing(lengthOfBeam);
         }
 
         public decimal CalculateSteel(decimal area, decimal sizeOfMainBar)
@@ -58,14 +58,14 @@ namespace QSANN.Services
             return _rebarworksColumnCalculatorService.CalculateSteel(area, sizeOfMainBar);
         }
 
-        public decimal CalculateTies(decimal lengthOfColumn, decimal widthOfColumn)
+        public decimal CalculateStirrups1(decimal lengthOfBeam, decimal widthOfBeam)
         {
-            throw new System.NotImplementedException();
+            return _rebarworksColumnCalculatorService.CalculateTies(lengthOfBeam, widthOfBeam);
         }
 
-        public decimal CalculateTieWire(decimal pieces, decimal steel, decimal numbersOfColumn)
+        public decimal CalculateTieWire(decimal pieces, decimal steel, decimal numbersOfBeam)
         {
-            throw new System.NotImplementedException();
+            return _rebarworksColumnCalculatorService.CalculateTieWire(pieces, steel, numbersOfBeam);
         }
     }
 }

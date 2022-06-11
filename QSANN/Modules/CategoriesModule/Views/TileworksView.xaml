@@ -13,73 +13,75 @@
         <converters:BoolToVisibleOrHidden x:Key="booleanToVisibilityConverter" />
     </UserControl.Resources>
 
-    <materialDesign:DialogHost>
-        <ScrollViewer>
+    <AdornerDecorator>
+        <materialDesign:DialogHost>
 
-            <StackPanel Orientation="Vertical">
-                <TextBlock Margin="0,20,0,0"
+            <ScrollViewer>
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Margin="0,20,0,0"
                            Padding="5"
                            Text="Area of work Designation" />
 
-                <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                    <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}"
                          VerticalAlignment="Top"
                          Height="50"
                          TextWrapping="Wrap"
                          materialDesign:HintAssist.Hint="3m&#x00B2;">
-                    <TextBox.Text>
-                        <Binding Path="InputModel.AreaOfWorkDesignation"
+                        <TextBox.Text>
+                            <Binding Path="InputModel.AreaOfWorkDesignation"
                                  UpdateSourceTrigger="LostFocus">
-                            <Binding.ValidationRules>
-                                <validations:RequiredNumericRule ErrorMessage="Invalid value for Area of work Designation" />
-                            </Binding.ValidationRules>
-                        </Binding>
-                    </TextBox.Text>
-                </TextBox>
+                                <Binding.ValidationRules>
+                                    <validations:RequiredNumericRule ErrorMessage="Invalid value for Area of work Designation" />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
 
-                <TextBlock Margin="0,20,0,0"
+                    <TextBlock Margin="0,20,0,0"
                            Padding="5"
                            Text="Multiplier" />
 
-                <ComboBox Margin="5"
+                    <ComboBox Margin="5"
                           ItemsSource="{Binding Multipliers}"
                           SelectedItem="{Binding InputModel.SelectedMultiplier}"
                           DisplayMemberPath="Name" />
 
-                <Button Command="{Binding CalculateCommand}">Calculate</Button>
+                    <Button Command="{Binding CalculateCommand}">Calculate</Button>
 
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="6*" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="6*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
 
-                    <GroupBox Visibility="{Binding IsResultVisible, Converter={StaticResource booleanToVisibilityConverter}}"
+                        <GroupBox Visibility="{Binding IsResultVisible, Converter={StaticResource booleanToVisibilityConverter}}"
                               Grid.Column="1"
                               Width="Auto"
                               VerticalAlignment="Center"
                               HorizontalAlignment="Center"
                               Header="Result"
                               Margin="16">
-                        <GroupBox.Content>
-                            <StackPanel>
-                                <!--NumberOfPieces-->
-                                <TextBlock FontSize="32"
+                            <GroupBox.Content>
+                                <StackPanel>
+                                    <!--NumberOfPieces-->
+                                    <TextBlock FontSize="32"
                                            Text="{Binding OutputModel.NumberOfPieces}" />
-                                <!--NumberOf40KgBagsOfCement-->
-                                <TextBlock FontSize="32"
+                                    <!--NumberOf40KgBagsOfCement-->
+                                    <TextBlock FontSize="32"
                                            Text="{Binding OutputModel.NumberOf40KgBagsOfCement}" />
-                                <!--NumberOfBagOfAdhesive-->
-                                <TextBlock FontSize="32"
+                                    <!--NumberOfBagOfAdhesive-->
+                                    <TextBlock FontSize="32"
                                            Text="{Binding OutputModel.NumberOfBagOfAdhesive}" />
-                                <!--NumberOfKgOfGrout-->
-                                <TextBlock FontSize="32"
+                                    <!--NumberOfKgOfGrout-->
+                                    <TextBlock FontSize="32"
                                            Text="{Binding OutputModel.NumberOfKgOfGrout}" />
-                            </StackPanel>
-                        </GroupBox.Content>
-                    </GroupBox>
-                </Grid>
-            </StackPanel>
-        </ScrollViewer>
-    </materialDesign:DialogHost>
+                                </StackPanel>
+                            </GroupBox.Content>
+                        </GroupBox>
+                    </Grid>
+                </StackPanel>
+            </ScrollViewer>
+        </materialDesign:DialogHost>
+    </AdornerDecorator>
 </UserControl>

@@ -1,9 +1,11 @@
 ﻿using CategoriesModule.Dialogs;
 using CategoriesModule.Models;
 using CategoriesModule.Validators;
+using Prism.Events;
 using Prism.Mvvm;
 using Prism.Regions;
 using QSANN.Core.Commands;
+using QSANN.Core.Events;
 using QSANN.Core.Extensions;
 using QSANN.Services.Interfaces;
 using System;
@@ -13,6 +15,7 @@ namespace CategoriesModule.ViewModels;
 public class RebarworksColumnViewModel : BindableBase
 {
     private readonly IRebarworksColumnCalculatorService _rebarworksColumnCalculatorService;
+    private readonly IEventAggregator _eventAggregator;
     private DelegateCommandWithValidator<RebarworksColumnInputModel, RebarworksColumnInputValidator> _calculateCommand;
     private readonly RebarworksColumnInputValidator _validator = new();
 
@@ -30,9 +33,19 @@ public class RebarworksColumnViewModel : BindableBase
         set { SetProperty(ref _isResultVisible, value); }
     }
 
-    public RebarworksColumnViewModel(IRebarworksColumnCalculatorService rebarworksColumnCalculatorService, IRegionManager regionManager)
+    public RebarworksColumnViewModel(IRebarworksColumnCalculatorService rebarworksColumnCalculatorService, IEventAggregator eventAggregator)
     {
         _rebarworksColumnCalculatorService = rebarworksColumnCalculatorService;
+        _eventAggregator = eventAggregator;
+        InputModel.PropertyChanged += InputModel_PropertyChanged;
+    }
+
+    private void InputModel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+    {
+        if (e.PropertyName == nameof(InputModel.WidthOfColumn))
+        {
+            _eventAggregator.GetEvent<RebarworksWidthOfColumnChanged>().Publish(InputModel.WidthOfColumn);
+        }
     }
 
     private void ExecuteCalculateCommand()
@@ -60,8 +73,9 @@ public class RebarworksColumnViewModel : BindableBase
 
         decimal tiewire = _rebarworksColumnCalculatorService.CalculateTieWire(pieces, steel, InputModel.NumbersOfColumn.StripAndParseAsDecimal());
 
-        OutputModel.Steelbar = $"{steel} pcs of 6m Steelbar";
+        OutputModel.Mainbar = $"{mainbarColumn:N2} pcs of 6m Mainbar";
         OutputModel.Tiewire = $"{tiewire:N2} kg/s of (#16) Tiewire";
+        OutputModel.LateralTies = $"{lateralTies:N2} pcs of 6m Lateral ties";
         IsResultVisible = true;
     }
 }

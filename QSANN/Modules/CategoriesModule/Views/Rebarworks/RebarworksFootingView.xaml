@@ -59,19 +59,19 @@
 
             <TextBlock Margin="0,20,0,0"
                        Padding="5"
-                       Text="Thickness of Footing?" />
+                       Text="Numbers of Footing?" />
 
             <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}"
                      VerticalAlignment="Top"
                      Height="50"
                      TextWrapping="Wrap"
-                     materialDesign:HintAssist.Hint="3 meters">
+                     materialDesign:HintAssist.Hint="3">
                 <TextBox.Text>
-                    <Binding Path="InputModel.ThicknessOfFooting"
+                    <Binding Path="InputModel.NumbersOfFooting"
                              UpdateSourceTrigger="LostFocus">
                         <Binding.ValidationRules>
                             <validations:RequiredNumericRule InitialMessage="This field is required"
-                                                             ErrorMessage="Invalid value for Thickness of Footing"
+                                                             ErrorMessage="Invalid value for Numbers of Footing"
                                                              ValidatesOnTargetUpdated="True" />
                         </Binding.ValidationRules>
                     </Binding>
@@ -80,64 +80,48 @@
 
             <TextBlock Margin="0,20,0,0"
                        Padding="5"
-                       Text="Numbers of Count/s?" />
+                       Text="Size of Steelbar?" />
 
             <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}"
                      VerticalAlignment="Top"
                      Height="50"
-                     Margin="0,0,0,20"
                      TextWrapping="Wrap"
-                     materialDesign:HintAssist.Hint="3">
+                     materialDesign:HintAssist.Hint="3 millimeters">
                 <TextBox.Text>
-                    <Binding Path="InputModel.NumbersOfCount"
+                    <Binding Path="InputModel.SizeOfSteelbar"
                              UpdateSourceTrigger="LostFocus">
                         <Binding.ValidationRules>
                             <validations:RequiredNumericRule InitialMessage="This field is required"
-                                                             ErrorMessage="Invalid value for Numbers of Count/s"
+                                                             ErrorMessage="Invalid value for Size of Steelbar"
                                                              ValidatesOnTargetUpdated="True" />
                         </Binding.ValidationRules>
                     </Binding>
                 </TextBox.Text>
             </TextBox>
 
-            <TextBlock Padding="5"
-                       Text="Class Mixture" />
+            <TextBlock Margin="0,20,0,0"
+                       Padding="5"
+                       Text="Spacing of Steelbar?" />
 
-            <StackPanel Orientation="Horizontal"
-                        Margin="0,0,0,10">
+            <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                     VerticalAlignment="Top"
+                     Height="50"
+                     Margin="0,0,0,20"
+                     TextWrapping="Wrap"
+                     materialDesign:HintAssist.Hint="3 meters">
+                <TextBox.Text>
+                    <Binding Path="InputModel.SpacingOfSteelbar"
+                             UpdateSourceTrigger="LostFocus">
+                        <Binding.ValidationRules>
+                            <validations:RequiredNumericRule InitialMessage="This field is required"
+                                                             ErrorMessage="Invalid value for Spacing of Steelbar"
+                                                             ValidatesOnTargetUpdated="True" />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
 
-                <RadioButton Margin="5"
-                             GroupName="THK_MM"
-                             Style="{StaticResource MaterialDesignRadioButton}"
-                             Tag="True"
-                             IsChecked="{Binding InputModel.ClassMixture, Converter={StaticResource stringToBooleanConverter}, ConverterParameter=AA}"
-                             Content="AA">
-                </RadioButton>
 
-                <RadioButton Margin="5"
-                             GroupName="THK_MM"
-                             Style="{StaticResource MaterialDesignRadioButton}"
-                             Tag="True"
-                             IsChecked="{Binding InputModel.ClassMixture, Converter={StaticResource stringToBooleanConverter}, ConverterParameter=A}"
-                             Content="A">
-                </RadioButton>
-
-                <RadioButton Margin="5"
-                             GroupName="THK_MM"
-                             Style="{StaticResource MaterialDesignRadioButton}"
-                             Tag="True"
-                             IsChecked="{Binding InputModel.ClassMixture, Converter={StaticResource stringToBooleanConverter}, ConverterParameter=B}"
-                             Content="B">
-                </RadioButton>
-
-                <RadioButton Margin="5"
-                             GroupName="THK_MM"
-                             Style="{StaticResource MaterialDesignRadioButton}"
-                             Tag="True"
-                             IsChecked="{Binding InputModel.ClassMixture, Converter={StaticResource stringToBooleanConverter}, ConverterParameter=C}"
-                             Content="C">
-                </RadioButton>
-            </StackPanel>
 
             <Button Command="{Binding CalculateCommand}">Calculate</Button>
 
@@ -157,15 +141,12 @@
                           Margin="16">
                     <GroupBox.Content>
                         <StackPanel>
-                            <!--Cement-->
+                            <!--Steelbar-->
                             <TextBlock FontSize="32"
-                                       Text="{Binding OutputModel.CementMixture}" />
-                            <!--Sand-->
+                                       Text="{Binding OutputModel.Steelbar}" />
+                            <!--Tiewire-->
                             <TextBlock FontSize="32"
-                                       Text="{Binding OutputModel.Sand}" />
-                            <!--Gravel-->
-                            <TextBlock FontSize="32"
-                                       Text="{Binding OutputModel.Gravel}" />
+                                       Text="{Binding OutputModel.Tiewire}" />
                         </StackPanel>
                     </GroupBox.Content>
                 </GroupBox>

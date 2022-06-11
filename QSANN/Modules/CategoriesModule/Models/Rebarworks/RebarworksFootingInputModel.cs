@@ -21,28 +21,28 @@ namespace CategoriesModule.Models
             set { SetProperty(ref _widthOfFooting, value.AppendIfNotExists(" meters")); }
         }
 
-        private string _thicknessOfFooting;
+        private string _numbersOfFooting;
 
-        public string ThicknessOfFooting
+        public string NumbersOfFooting
         {
-            get { return _thicknessOfFooting; }
-            set { SetProperty(ref _thicknessOfFooting, value.AppendIfNotExists(" meters")); }
+            get { return _numbersOfFooting; }
+            set { SetProperty(ref _numbersOfFooting, value); }
         }
 
-        private string _numbersOfCount;
+        private string _sizeOfSteelbar;
 
-        public string NumbersOfCount
+        public string SizeOfSteelbar
         {
-            get { return _numbersOfCount; }
-            set { SetProperty(ref _numbersOfCount, value); }
+            get { return _sizeOfSteelbar; }
+            set { SetProperty(ref _sizeOfSteelbar, value); }
         }
 
-        private string _classMixture = "AA";
+        private string _spacingOfSteelbar;
 
-        public string ClassMixture
+        public string SpacingOfSteelbar
         {
-            get { return _classMixture; }
-            set { SetProperty(ref _classMixture, value); }
-        }
+            get { return _spacingOfSteelbar; }
+            set { SetProperty(ref _spacingOfSteelbar, value); }
+        }   
     }
 }

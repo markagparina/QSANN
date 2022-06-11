@@ -19,13 +19,13 @@ public class ConcreteFootingViewModel : BindableBase
 {
     private readonly IConcreteCalculatorService _concreteCalculatorService;
     private readonly AppDbContext _context;
-    private DelegateCommandWithValidator<RebarworksFootingInputModel, ConcreteFootingInputValidator> _calculateCommand;
+    private DelegateCommandWithValidator<ConcreteFootingInputModel, ConcreteFootingInputValidator> _calculateCommand;
     private readonly ConcreteFootingInputValidator _validator = new();
 
-    public DelegateCommandWithValidator<RebarworksFootingInputModel, ConcreteFootingInputValidator> CalculateCommand => _calculateCommand
-        ??= new DelegateCommandWithValidator<RebarworksFootingInputModel, ConcreteFootingInputValidator>(ExecuteCalculateCommand, InputModel, _validator, new ErrorDialog());
+    public DelegateCommandWithValidator<ConcreteFootingInputModel, ConcreteFootingInputValidator> CalculateCommand => _calculateCommand
+        ??= new DelegateCommandWithValidator<ConcreteFootingInputModel, ConcreteFootingInputValidator>(ExecuteCalculateCommand, InputModel, _validator, new ErrorDialog());
 
-    public RebarworksFootingInputModel InputModel { get; set; } = new();
+    public ConcreteFootingInputModel InputModel { get; set; } = new();
     public ConcreteFootingOutputModel OutputModel { get; set; } = new();
 
     private bool _isResultVisible;

@@ -3,7 +3,7 @@ using FluentValidation;
 
 namespace CategoriesModule.Validators
 {
-    public class ConcreteFootingInputValidator : AbstractValidator<RebarworksFootingInputModel>
+    public class ConcreteFootingInputValidator : AbstractValidator<ConcreteFootingInputModel>
     {
         public ConcreteFootingInputValidator()
         {
@@ -23,9 +23,11 @@ namespace CategoriesModule.Validators
                .NotEmpty()
                .WithMessage("Numbers of Count/s is required");
 
+
             RuleFor(input => input.ClassMixture)
-                .NotEmpty()
-                .WithMessage("Class Mixture is required");
+               .NotEmpty()
+               .WithMessage("Class Mixture is required");
+
         }
     }
 }

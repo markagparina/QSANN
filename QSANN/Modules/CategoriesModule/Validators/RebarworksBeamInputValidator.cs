@@ -19,13 +19,14 @@ namespace CategoriesModule.Validators
                .NotEmpty()
                .WithMessage("Height of Beam is required");
 
-            RuleFor(input => input.NumbersOfCount)
+            RuleFor(input => input.NumbersOfBeam)
                .NotEmpty()
                .WithMessage("Numbers of Count/s is required");
 
-            RuleFor(input => input.ClassMixture)
+            RuleFor(input => input.WidthOfColumn)
                 .NotEmpty()
-                .WithMessage("Class Mixture is required");
+                .WithMessage("Width of Column is required");
+
         }
     }
 }
