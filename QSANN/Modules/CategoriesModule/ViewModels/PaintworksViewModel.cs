@@ -17,7 +17,7 @@ using System.Linq;
 
 namespace CategoriesModule.ViewModels
 {
-    public class PaintworksViewModel : MenuItem
+    public class PaintworksViewModel : MenuItem<PaintworksInputModel, PaintworksInput>
     {
         private ObservableCollection<PaintworksMultiplierModel> _multipliers;
         private readonly IPaintworksCalculatorService _paintWorksCalculatorService;
@@ -30,7 +30,7 @@ namespace CategoriesModule.ViewModels
             set { SetProperty(ref _multipliers, value); }
         }
 
-        public PaintworksInputModel InputModel { get; set; } = new();
+        public override PaintworksInputModel InputModel { get; set; } = new();
         public PaintworksOutputModel OutputModel { get; set; } = new();
 
         private bool _isResultVisible;
@@ -51,11 +51,10 @@ namespace CategoriesModule.ViewModels
         public PaintworksViewModel(IRegionManager regionManager,
             IPaintworksCalculatorService paintworksCalculatorService,
             IEventAggregator eventAggregator,
-            AppDbContext context) : base(regionManager)
+            AppDbContext context) : base(regionManager, context, eventAggregator)
         {
             _paintWorksCalculatorService = paintworksCalculatorService;
             _context = context;
-            eventAggregator.GetEvent<LoadProjectEvent>().Subscribe(LoadProjectInput, ThreadOption.UIThread);
             Multipliers = new ObservableCollection<PaintworksMultiplierModel>(_paintWorksCalculatorService.GetMultipliers());
         }
 
@@ -77,15 +76,10 @@ namespace CategoriesModule.ViewModels
             IsResultVisible = true;
         }
 
-        private void LoadProjectInput(Guid obj)
+        protected override void LoadProjectInput(Guid projectId)
         {
-            //var tileworkProject = _context.Set<PaintworksInput>().FirstOrDefault(tilework => tilework.ProjectId == obj);
-
-            //if (tileworkProject is not null)
-            //{
-            //    InputModel.SelectedMultiplier = Multipliers.FirstOrDefault(multiplier => multiplier.Name == tileworkProject.SelectedMultiplier);
-            //    InputModel.AreaOfWorkDesignation = tileworkProject.AreaOfWorkDesignation;
-            //}
+            base.LoadProjectInput(projectId);
+            CalculateCommand.Execute();
         }
     }
 }

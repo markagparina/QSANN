@@ -7,24 +7,26 @@ using Prism.Regions;
 using QSANN.Core.Commands;
 using QSANN.Core.Events;
 using QSANN.Core.Extensions;
+using QSANN.Core.Mvvm;
 using QSANN.Data;
+using QSANN.Data.Entities;
 using QSANN.Services.Interfaces;
 using System;
+using System.Linq;
 
 namespace CategoriesModule.ViewModels;
 
-public class RebarworksBeamViewModel : BindableBase
+public class RebarworksBeamViewModel : ViewModelBase<RebarworksBeamInputModel, RebarworksBeamInput>
 {
     private readonly IRebarworksBeamCalculatorService _beamCalculatorService;
     private readonly AppDbContext _context;
-    private readonly IEventAggregator _eventAggregator;
     private DelegateCommandWithValidator<RebarworksBeamInputModel, RebarworksBeamInputValidator> _calculateCommand;
     private readonly RebarworksBeamInputValidator _validator = new();
 
     public DelegateCommandWithValidator<RebarworksBeamInputModel, RebarworksBeamInputValidator> CalculateCommand => _calculateCommand
         ??= new DelegateCommandWithValidator<RebarworksBeamInputModel, RebarworksBeamInputValidator>(ExecuteCalculateCommand, InputModel, _validator, new ErrorDialog());
 
-    public RebarworksBeamInputModel InputModel { get; set; } = new();
+    public override RebarworksBeamInputModel InputModel { get; set; } = new();
     public RebarworksBeamOutputModel OutputModel { get; set; } = new();
 
     private bool _isResultVisible;
@@ -36,17 +38,12 @@ public class RebarworksBeamViewModel : BindableBase
     }
 
     public RebarworksBeamViewModel(IRebarworksBeamCalculatorService beamCalculatorService, AppDbContext context, IEventAggregator eventAggregator)
+    : base(context, eventAggregator)
     {
         _beamCalculatorService = beamCalculatorService;
         _context = context;
-        _eventAggregator = eventAggregator;
-
-        _eventAggregator.GetEvent<RebarworksWidthOfColumnChanged>().Subscribe(UpdateWidthOfColumn);
-    }
-
-    private void UpdateWidthOfColumn(string widthOfcolumn)
-    {
-        InputModel.WidthOfColumn = widthOfcolumn;
+        eventAggregator.GetEvent<RebarworksWidthOfColumnChanged>().Subscribe(UpdateWidthOfColumn);
+        eventAggregator.GetEvent<LoadProjectEvent>().Subscribe(LoadProjectInput, ThreadOption.UIThread);
     }
 
     private void ExecuteCalculateCommand()
@@ -80,5 +77,25 @@ public class RebarworksBeamViewModel : BindableBase
         OutputModel.Tiewire = $"{tiewire:N2} kg/s of (#16) Tiewire";
         OutputModel.LateralTies = $"{lateralTies:N2} pcs of 6m Stirrups";
         IsResultVisible = true;
+    }
+
+    //private void LoadProjectInput(Guid projectId)
+    //{
+    //    var rebarworksBeamProject = _context.Set<RebarworksBeamInput>().FirstOrDefault(rebarworkBeam => rebarworkBeam.ProjectId == projectId);
+
+    //    if (rebarworksBeamProject is not null)
+    //    {
+    //        InputModel.LengthOfBeam = rebarworksBeamProject.LengthOfBeam;
+    //        InputModel.WidthOfBeam = rebarworksBeamProject.WidthOfBeam;
+    //        InputModel.HeightOfBeam = rebarworksBeamProject.HeightOfBeam;
+    //        InputModel.NumbersOfBeam = rebarworksBeamProject.NumbersOfBeam;
+    //        InputModel.SizeOfMainbar = rebarworksBeamProject.SizeOfMainbar;
+    //        InputModel.SizeOfStirrups = rebarworksBeamProject.SizeOfStirrups;
+    //    }
+    //}
+
+    private void UpdateWidthOfColumn(string widthOfcolumn)
+    {
+        InputModel.WidthOfColumn = widthOfcolumn;
     }
 }

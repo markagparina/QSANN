@@ -13,144 +13,143 @@
         <converters:BoolToVisibleOrHidden x:Key="booleanToVisibilityConverter" />
     </UserControl.Resources>
     <materialDesign:DialogHost>
+        <AdornerDecorator>
+            <StackPanel Orientation="Vertical">
+                <TextBlock Margin="0,20,0,0"
+                           Padding="5"
+                           Text="Length of Footing?" />
 
-        <StackPanel Orientation="Vertical">
-            <TextBlock Margin="0,20,0,0"
-                       Padding="5"
-                       Text="Length of Footing?" />
+                <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                         VerticalAlignment="Top"
+                         Height="50"
+                         TextWrapping="Wrap"
+                         materialDesign:HintAssist.Hint="3m">
+                    <TextBox.Text>
+                        <Binding Path="InputModel.LengthOfFooting"
+                                 UpdateSourceTrigger="LostFocus">
+                            <Binding.ValidationRules>
+                                <validations:RequiredNumericRule InitialMessage="This field is required"
+                                                                 ErrorMessage="Invalid value for Length of Footing"
+                                                                 ValidatesOnTargetUpdated="True" />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
 
-            <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                     VerticalAlignment="Top"
-                     Height="50"
-                     TextWrapping="Wrap"
-                     materialDesign:HintAssist.Hint="3 meters">
-                <TextBox.Text>
-                    <Binding Path="InputModel.LengthOfFooting"
-                             UpdateSourceTrigger="LostFocus">
-                        <Binding.ValidationRules>
-                            <validations:RequiredNumericRule InitialMessage="This field is required"
-                                                             ErrorMessage="Invalid value for Length of Footing"
-                                                             ValidatesOnTargetUpdated="True" />
-                        </Binding.ValidationRules>
-                    </Binding>
-                </TextBox.Text>
-            </TextBox>
+                <TextBlock Margin="0,20,0,0"
+                           Padding="5"
+                           Text="Width of Footing?" />
 
-            <TextBlock Margin="0,20,0,0"
-                       Padding="5"
-                       Text="Width of Footing?" />
+                <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                         VerticalAlignment="Top"
+                         Height="50"
+                         TextWrapping="Wrap"
+                         materialDesign:HintAssist.Hint="3m">
+                    <TextBox.Text>
+                        <Binding Path="InputModel.WidthOfFooting"
+                                 UpdateSourceTrigger="LostFocus">
+                            <Binding.ValidationRules>
+                                <validations:RequiredNumericRule InitialMessage="This field is required"
+                                                                 ErrorMessage="Invalid value for Width of Footing"
+                                                                 ValidatesOnTargetUpdated="True" />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
 
-            <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                     VerticalAlignment="Top"
-                     Height="50"
-                     TextWrapping="Wrap"
-                     materialDesign:HintAssist.Hint="3 meters">
-                <TextBox.Text>
-                    <Binding Path="InputModel.WidthOfFooting"
-                             UpdateSourceTrigger="LostFocus">
-                        <Binding.ValidationRules>
-                            <validations:RequiredNumericRule InitialMessage="This field is required"
-                                                             ErrorMessage="Invalid value for Width of Footing"
-                                                             ValidatesOnTargetUpdated="True" />
-                        </Binding.ValidationRules>
-                    </Binding>
-                </TextBox.Text>
-            </TextBox>
+                <TextBlock Margin="0,20,0,0"
+                           Padding="5"
+                           Text="Numbers of Footing?" />
 
-            <TextBlock Margin="0,20,0,0"
-                       Padding="5"
-                       Text="Numbers of Footing?" />
+                <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                         VerticalAlignment="Top"
+                         Height="50"
+                         TextWrapping="Wrap"
+                         materialDesign:HintAssist.Hint="3">
+                    <TextBox.Text>
+                        <Binding Path="InputModel.NumbersOfFooting"
+                                 UpdateSourceTrigger="LostFocus">
+                            <Binding.ValidationRules>
+                                <validations:RequiredNumericRule InitialMessage="This field is required"
+                                                                 ErrorMessage="Invalid value for Numbers of Footing"
+                                                                 ValidatesOnTargetUpdated="True" />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
 
-            <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                     VerticalAlignment="Top"
-                     Height="50"
-                     TextWrapping="Wrap"
-                     materialDesign:HintAssist.Hint="3">
-                <TextBox.Text>
-                    <Binding Path="InputModel.NumbersOfFooting"
-                             UpdateSourceTrigger="LostFocus">
-                        <Binding.ValidationRules>
-                            <validations:RequiredNumericRule InitialMessage="This field is required"
-                                                             ErrorMessage="Invalid value for Numbers of Footing"
-                                                             ValidatesOnTargetUpdated="True" />
-                        </Binding.ValidationRules>
-                    </Binding>
-                </TextBox.Text>
-            </TextBox>
+                <TextBlock Margin="0,20,0,0"
+                           Padding="5"
+                           Text="Size of Steelbar?" />
 
-            <TextBlock Margin="0,20,0,0"
-                       Padding="5"
-                       Text="Size of Steelbar?" />
+                <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                         VerticalAlignment="Top"
+                         Height="50"
+                         TextWrapping="Wrap"
+                         materialDesign:HintAssist.Hint="3 millimeters">
+                    <TextBox.Text>
+                        <Binding Path="InputModel.SizeOfSteelbar"
+                                 UpdateSourceTrigger="LostFocus">
+                            <Binding.ValidationRules>
+                                <validations:RequiredNumericRule InitialMessage="This field is required"
+                                                                 ErrorMessage="Invalid value for Size of Steelbar"
+                                                                 ValidatesOnTargetUpdated="True" />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
 
-            <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                     VerticalAlignment="Top"
-                     Height="50"
-                     TextWrapping="Wrap"
-                     materialDesign:HintAssist.Hint="3 millimeters">
-                <TextBox.Text>
-                    <Binding Path="InputModel.SizeOfSteelbar"
-                             UpdateSourceTrigger="LostFocus">
-                        <Binding.ValidationRules>
-                            <validations:RequiredNumericRule InitialMessage="This field is required"
-                                                             ErrorMessage="Invalid value for Size of Steelbar"
-                                                             ValidatesOnTargetUpdated="True" />
-                        </Binding.ValidationRules>
-                    </Binding>
-                </TextBox.Text>
-            </TextBox>
+                <TextBlock Margin="0,20,0,0"
+                           Padding="5"
+                           Text="Spacing of Steelbar?" />
 
-            <TextBlock Margin="0,20,0,0"
-                       Padding="5"
-                       Text="Spacing of Steelbar?" />
+                <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                         VerticalAlignment="Top"
+                         Height="50"
+                         Margin="0,0,0,20"
+                         TextWrapping="Wrap"
+                         materialDesign:HintAssist.Hint="3m">
+                    <TextBox.Text>
+                        <Binding Path="InputModel.SpacingOfSteelbar"
+                                 UpdateSourceTrigger="LostFocus">
+                            <Binding.ValidationRules>
+                                <validations:RequiredNumericRule InitialMessage="This field is required"
+                                                                 ErrorMessage="Invalid value for Spacing of Steelbar"
+                                                                 ValidatesOnTargetUpdated="True" />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
 
-            <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                     VerticalAlignment="Top"
-                     Height="50"
-                     Margin="0,0,0,20"
-                     TextWrapping="Wrap"
-                     materialDesign:HintAssist.Hint="3 meters">
-                <TextBox.Text>
-                    <Binding Path="InputModel.SpacingOfSteelbar"
-                             UpdateSourceTrigger="LostFocus">
-                        <Binding.ValidationRules>
-                            <validations:RequiredNumericRule InitialMessage="This field is required"
-                                                             ErrorMessage="Invalid value for Spacing of Steelbar"
-                                                             ValidatesOnTargetUpdated="True" />
-                        </Binding.ValidationRules>
-                    </Binding>
-                </TextBox.Text>
-            </TextBox>
+                <Button Command="{Binding CalculateCommand}">Calculate</Button>
 
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="5*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
 
-
-            <Button Command="{Binding CalculateCommand}">Calculate</Button>
-
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="5*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-
-                <GroupBox Visibility="{Binding IsResultVisible, Converter={StaticResource booleanToVisibilityConverter}}"
-                          Grid.Column="1"
-                          Width="Auto"
-                          VerticalAlignment="Center"
-                          HorizontalAlignment="Center"
-                          Header="Result"
-                          Margin="16">
-                    <GroupBox.Content>
-                        <StackPanel>
-                            <!--Steelbar-->
-                            <TextBlock FontSize="32"
-                                       Text="{Binding OutputModel.Steelbar}" />
-                            <!--Tiewire-->
-                            <TextBlock FontSize="32"
-                                       Text="{Binding OutputModel.Tiewire}" />
-                        </StackPanel>
-                    </GroupBox.Content>
-                </GroupBox>
-            </Grid>
-        </StackPanel>
+                    <GroupBox Visibility="{Binding IsResultVisible, Converter={StaticResource booleanToVisibilityConverter}}"
+                              Grid.Column="1"
+                              Width="Auto"
+                              VerticalAlignment="Center"
+                              HorizontalAlignment="Center"
+                              Header="Result"
+                              Margin="16">
+                        <GroupBox.Content>
+                            <StackPanel>
+                                <!--Steelbar-->
+                                <TextBlock FontSize="32"
+                                           Text="{Binding OutputModel.Steelbar}" />
+                                <!--Tiewire-->
+                                <TextBlock FontSize="32"
+                                           Text="{Binding OutputModel.Tiewire}" />
+                            </StackPanel>
+                        </GroupBox.Content>
+                    </GroupBox>
+                </Grid>
+            </StackPanel>
+        </AdornerDecorator>
     </materialDesign:DialogHost>
 </UserControl>

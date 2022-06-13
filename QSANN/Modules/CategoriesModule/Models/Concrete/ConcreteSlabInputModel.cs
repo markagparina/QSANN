@@ -10,7 +10,7 @@ namespace CategoriesModule.Models
         public string LengthOfSlab
         {
             get { return _lengthOfSlab; }
-            set { SetProperty(ref _lengthOfSlab, value.AppendIfNotExists(" meters")); }
+            set { SetProperty(ref _lengthOfSlab, value.AppendIfNotExists("m")); }
         }
 
         private string _widthOfSlab;
@@ -18,7 +18,7 @@ namespace CategoriesModule.Models
         public string WidthOfSlab
         {
             get { return _widthOfSlab; }
-            set { SetProperty(ref _widthOfSlab, value.AppendIfNotExists(" meters")); }
+            set { SetProperty(ref _widthOfSlab, value.AppendIfNotExists("m")); }
         }
 
         private string _thicknessOfSlab;
@@ -26,7 +26,7 @@ namespace CategoriesModule.Models
         public string ThicknessOfSlab
         {
             get { return _thicknessOfSlab; }
-            set { SetProperty(ref _thicknessOfSlab, value.AppendIfNotExists(" meters")); }
+            set { SetProperty(ref _thicknessOfSlab, value.AppendIfNotExists("m")); }
         }
 
         private string _numbersOfCount;

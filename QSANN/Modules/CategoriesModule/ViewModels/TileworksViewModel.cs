@@ -16,7 +16,7 @@ using System.Linq;
 
 namespace CategoriesModule.ViewModels
 {
-    public class TileworksViewModel : MenuItem
+    public class TileworksViewModel : MenuItem<TileworksInputModel, TileworksInput>
     {
         private ObservableCollection<TileworksMultiplierModel> _multipliers;
         private readonly ITileworksCalculatorService _tileworksCalculatorService;
@@ -29,7 +29,7 @@ namespace CategoriesModule.ViewModels
             set { SetProperty(ref _multipliers, value); }
         }
 
-        public TileworksInputModel InputModel { get; set; } = new();
+        public override TileworksInputModel InputModel { get; set; } = new();
         public TileworksOutputModel OutputModel { get; set; } = new();
 
         private bool _isResultVisible;
@@ -50,11 +50,10 @@ namespace CategoriesModule.ViewModels
         public TileworksViewModel(IRegionManager regionManager,
             ITileworksCalculatorService tileworksCalculatorService,
             IEventAggregator eventAggregator,
-            AppDbContext context) : base(regionManager)
+            AppDbContext context) : base(regionManager, context, eventAggregator)
         {
             _tileworksCalculatorService = tileworksCalculatorService;
             _context = context;
-            eventAggregator.GetEvent<LoadProjectEvent>().Subscribe(LoadProjectInput, ThreadOption.UIThread);
             Multipliers = new ObservableCollection<TileworksMultiplierModel>(_tileworksCalculatorService.GetMultipliers());
         }
 
@@ -73,9 +72,9 @@ namespace CategoriesModule.ViewModels
             IsResultVisible = true;
         }
 
-        private void LoadProjectInput(Guid obj)
+        protected override void LoadProjectInput(Guid projectId)
         {
-            var tileworkProject = _context.Set<TileworksInput>().FirstOrDefault(tilework => tilework.ProjectId == obj);
+            var tileworkProject = _context.Set<TileworksInput>().FirstOrDefault(tilework => tilework.ProjectId == projectId);
 
             if (tileworkProject is not null)
             {

@@ -7,8 +7,10 @@ using Prism.Regions;
 using QSANN.Core.Commands;
 using QSANN.Core.Events;
 using QSANN.Core.Extensions;
+using QSANN.Core.Mvvm;
 using QSANN.Core.Navigation;
 using QSANN.Data;
+using QSANN.Data.Entities;
 using QSANN.Services.Interfaces;
 using QSANN.Services.Interfaces.Models;
 using System;
@@ -17,7 +19,7 @@ using System.Linq;
 
 namespace CategoriesModule.ViewModels
 {
-    public class RebarworksSlabViewModel : BindableBase
+    public class RebarworksSlabViewModel : ViewModelBase<RebarworksSlabInputModel, RebarworksSlabInput>
     {
         private ObservableCollection<RebarworksSlabTypeMultiplier> _multipliers;
         private readonly IRebarworksSlabCalculatorService _rebarworksSlabCalculatorService;
@@ -30,7 +32,7 @@ namespace CategoriesModule.ViewModels
             set { SetProperty(ref _multipliers, value); }
         }
 
-        public RebarworksSlabInputModel InputModel { get; set; } = new();
+        public override RebarworksSlabInputModel InputModel { get; set; } = new();
         public RebarworksSlabOutputModel OutputModel { get; set; } = new();
 
         private bool _isResultVisible;
@@ -48,7 +50,7 @@ namespace CategoriesModule.ViewModels
 
         public RebarworksSlabViewModel(IRebarworksSlabCalculatorService rebarworksSlabCalculatorService,
             IEventAggregator eventAggregator,
-            AppDbContext context)
+            AppDbContext context) : base(context, eventAggregator)
         {
             _rebarworksSlabCalculatorService = rebarworksSlabCalculatorService;
             _context = context;
@@ -58,12 +60,11 @@ namespace CategoriesModule.ViewModels
 
         private void ExecuteCalculateCommand()
         {
-            var multiplier = Multipliers.FirstOrDefault(multiplier => multiplier.SlabType == (int)InputModel.OneWayOrTwoWay 
+            var multiplier = Multipliers.FirstOrDefault(multiplier => multiplier.SlabType == (int)InputModel.OneWayOrTwoWay
                                                                            && multiplier.Name == InputModel.SteelBarSpacing);
 
             decimal steelbar = _rebarworksSlabCalculatorService.CalculateSteelbar(InputModel.FloorArea.StripAndParseAsDecimal(), multiplier.SteelbarMultiplier);
             decimal tiewire = _rebarworksSlabCalculatorService.CalculateSteelbar(InputModel.FloorArea.StripAndParseAsDecimal(), multiplier.TiewireMultiplier);
-
 
             OutputModel.Steelbar = $"{steelbar} pcs of 6m Steel Bar";
             OutputModel.Tiewire = $"{tiewire} kgs of #16 Tie Wire";

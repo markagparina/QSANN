@@ -7,6 +7,7 @@ using Prism.Regions;
 using QSANN.Core.Commands;
 using QSANN.Core.Events;
 using QSANN.Core.Extensions;
+using QSANN.Core.Mvvm;
 using QSANN.Data;
 using QSANN.Data.Entities;
 using QSANN.Services.Interfaces;
@@ -15,7 +16,7 @@ using System.Linq;
 
 namespace CategoriesModule.ViewModels;
 
-public class ConcreteColumnViewModel : BindableBase
+public class ConcreteColumnViewModel : ViewModelBase<ConcreteColumnInputModel, ConcreteColumnInput>
 {
     private readonly IConcreteCalculatorService _concreteCalculatorService;
     private readonly AppDbContext _context;
@@ -25,7 +26,7 @@ public class ConcreteColumnViewModel : BindableBase
     public DelegateCommandWithValidator<ConcreteColumnInputModel, ConcreteColumnInputValidator> CalculateCommand => _calculateCommand
         ??= new DelegateCommandWithValidator<ConcreteColumnInputModel, ConcreteColumnInputValidator>(ExecuteCalculateCommand, InputModel, _validator, new ErrorDialog());
 
-    public ConcreteColumnInputModel InputModel { get; set; } = new();
+    public override ConcreteColumnInputModel InputModel { get; set; } = new();
     public ConcreteColumnOutputModel OutputModel { get; set; } = new();
 
     private bool _isResultVisible;
@@ -37,10 +38,11 @@ public class ConcreteColumnViewModel : BindableBase
     }
 
     public ConcreteColumnViewModel(IConcreteCalculatorService concreteCalculatorService, AppDbContext context, IEventAggregator eventAggregator)
+    : base(context, eventAggregator)
     {
         _concreteCalculatorService = concreteCalculatorService;
         _context = context;
-        eventAggregator.GetEvent<LoadProjectEvent>().Subscribe(LoadProjectInput);
+        //eventAggregator.GetEvent<LoadProjectEvent>().Subscribe(LoadProjectInput);
     }
 
     private void ExecuteCalculateCommand()
@@ -66,17 +68,17 @@ public class ConcreteColumnViewModel : BindableBase
         IsResultVisible = true;
     }
 
-    private void LoadProjectInput(Guid projectId)
-    {
-        var columnProject = _context.Set<ConcreteColumnInput>().FirstOrDefault(column => column.ProjectId == projectId);
+    //private void LoadProjectInput(Guid projectId)
+    //{
+    //    var columnProject = _context.Set<ConcreteColumnInput>().FirstOrDefault(column => column.ProjectId == projectId);
 
-        if (columnProject is not null)
-        {
-            InputModel.LengthOfColumn = columnProject.LengthOfColumn;
-            InputModel.WidthOfColumn = columnProject.WidthOfColumn;
-            InputModel.HeightOfColumn = columnProject.HeightOfColumn;
-            InputModel.NumbersOfCount = columnProject.NumbersOfCount;
-            InputModel.ClassMixture = columnProject.ClassMixture;
-        }
-    }
+    //    if (columnProject is not null)
+    //    {
+    //        InputModel.LengthOfColumn = columnProject.LengthOfColumn;
+    //        InputModel.WidthOfColumn = columnProject.WidthOfColumn;
+    //        InputModel.HeightOfColumn = columnProject.HeightOfColumn;
+    //        InputModel.NumbersOfCount = columnProject.NumbersOfCount;
+    //        InputModel.ClassMixture = columnProject.ClassMixture;
+    //    }
+    //}
 }

@@ -10,7 +10,7 @@ namespace CategoriesModule.Models
         public string HeightOfWall
         {
             get { return _heightOfWall; }
-            set { SetProperty(ref _heightOfWall, value.AppendIfNotExists(" meters")); }
+            set { SetProperty(ref _heightOfWall, value.AppendIfNotExists("m")); }
         }
 
         private string _lengthOfWall;
@@ -18,7 +18,7 @@ namespace CategoriesModule.Models
         public string LengthOfWall
         {
             get { return _lengthOfWall; }
-            set { SetProperty(ref _lengthOfWall, value.AppendIfNotExists(" meters")); }
+            set { SetProperty(ref _lengthOfWall, value.AppendIfNotExists("m")); }
         }
 
         private string _horizontalBarSpacing;
@@ -26,7 +26,7 @@ namespace CategoriesModule.Models
         public string HorizontalBarSpacing
         {
             get { return _horizontalBarSpacing; }
-            set { SetProperty(ref _horizontalBarSpacing, value.AppendIfNotExists(" meters")); }
+            set { SetProperty(ref _horizontalBarSpacing, value.AppendIfNotExists("m")); }
         }
 
         private string _verticalBarSpacing;
@@ -34,7 +34,7 @@ namespace CategoriesModule.Models
         public string VerticalBarSpacing
         {
             get { return _verticalBarSpacing; }
-            set { SetProperty(ref _verticalBarSpacing, value.AppendIfNotExists(" meters")); }
+            set { SetProperty(ref _verticalBarSpacing, value.AppendIfNotExists("m")); }
         }
 
         private string _classMixtureForMortar = "A";

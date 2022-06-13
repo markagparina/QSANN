@@ -1,29 +1,32 @@
 ﻿using CategoriesModule.Models;
+using Mapster;
+using Microsoft.EntityFrameworkCore;
 using Prism.Commands;
+using Prism.Events;
 using Prism.Regions;
 using QSANN.Core.Navigation;
+using QSANN.Data;
+using QSANN.Data.Entities;
 using System;
 using System.Collections.ObjectModel;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace CategoriesModule.ViewModels
 {
-    public class OthersViewModel : MenuItem
+    public class OthersViewModel : MenuItem<OtherMaterialModel, OtherMaterial>
     {
         private ObservableCollection<OtherMaterialModel> _otherMaterials;
-        private ObservableCollection<string> _constructionScopes;
 
         public override string Title => "Other Materials";
 
         public ObservableCollection<OtherMaterialModel> OtherMaterials { get => _otherMaterials; set => SetProperty(ref _otherMaterials, value); }
-        public ObservableCollection<string> ConstructionScopes { get => _constructionScopes; set => _constructionScopes = value; }
+        public ObservableCollection<string> ConstructionScopes { get; set; }
 
         private DelegateCommand _addNewItemCommand;
         public DelegateCommand AddNewItemCommand => _addNewItemCommand ??= new DelegateCommand(AddNewItem);
 
-
-
         private DelegateCommand _removeLastItemCommand;
-
 
         public DelegateCommand RemoveLastItemCommand => _removeLastItemCommand ??= new DelegateCommand(RemoveLastItem);
 
@@ -35,7 +38,7 @@ namespace CategoriesModule.ViewModels
             }
         }
 
-        public OthersViewModel(IRegionManager regionManager) : base(regionManager)
+        public OthersViewModel(IRegionManager regionManager, AppDbContext context, IEventAggregator eventAggregator) : base(regionManager, context, eventAggregator)
         {
             OtherMaterials = new();
             ConstructionScopes = new()
@@ -66,6 +69,42 @@ namespace CategoriesModule.ViewModels
         private void AddNewItem()
         {
             OtherMaterials.Add(new OtherMaterialModel());
+        }
+
+        protected override async void LoadProjectInput(Guid projectId)
+        {
+            await LoadProjectInputAsync(projectId);
+        }
+
+        private async Task LoadProjectInputAsync(Guid projectId)
+        {
+            var otherMaterialsInProject = await Context.Set<OtherMaterial>().Where(other => other.ProjectId == projectId).ToListAsync();
+
+            var otherMaterials = otherMaterialsInProject.ConvertAll(other => other.Adapt<OtherMaterialModel>());
+
+            if (otherMaterialsInProject.Count > 0)
+            {
+                OtherMaterials.Clear();
+                OtherMaterials.AddRange(otherMaterials);
+            }
+        }
+
+        protected override async void SaveProjectInput(Guid projectId)
+        {
+            await SaveProjectInputAsync(projectId);
+        }
+
+        private async Task SaveProjectInputAsync(Guid projectId)
+        {
+            var otherMaterialsInProject = await Context.Set<OtherMaterial>().Where(other => other.ProjectId == projectId).ToListAsync();
+
+            Context.RemoveRange(otherMaterialsInProject);
+
+            var currentMaterials = OtherMaterials.Select(other => other.Adapt<OtherMaterial>()).ToList();
+
+            Context.Add(currentMaterials);
+
+            Context.SaveChanges();
         }
     }
 }

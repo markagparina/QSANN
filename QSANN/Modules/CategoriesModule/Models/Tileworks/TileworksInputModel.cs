@@ -10,7 +10,7 @@ namespace CategoriesModule.Models
         public string AreaOfWorkDesignation
         {
             get { return _areaOfWorkDesignation; }
-            set { SetProperty(ref _areaOfWorkDesignation, value.AppendIfNotExists(" m\xB2")); }
+            set { SetProperty(ref _areaOfWorkDesignation, value.AppendIfNotExists("m\xB2")); }
         }
 
         private TileworksMultiplierModel _selectedMultiplier;

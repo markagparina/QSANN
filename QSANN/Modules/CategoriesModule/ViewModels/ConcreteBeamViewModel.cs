@@ -7,6 +7,7 @@ using Prism.Regions;
 using QSANN.Core.Commands;
 using QSANN.Core.Events;
 using QSANN.Core.Extensions;
+using QSANN.Core.Mvvm;
 using QSANN.Data;
 using QSANN.Data.Entities;
 using QSANN.Services.Interfaces;
@@ -15,7 +16,7 @@ using System.Linq;
 
 namespace CategoriesModule.ViewModels;
 
-public class ConcreteBeamViewModel : BindableBase
+public class ConcreteBeamViewModel : ViewModelBase<ConcreteBeamInputModel, ConcreteBeamInput>
 {
     private readonly IConcreteCalculatorService _concreteCalculatorService;
     private readonly AppDbContext _context;
@@ -25,7 +26,7 @@ public class ConcreteBeamViewModel : BindableBase
     public DelegateCommandWithValidator<ConcreteBeamInputModel, ConcreteBeamInputValidator> CalculateCommand => _calculateCommand
         ??= new DelegateCommandWithValidator<ConcreteBeamInputModel, ConcreteBeamInputValidator>(ExecuteCalculateCommand, InputModel, _validator, new ErrorDialog());
 
-    public ConcreteBeamInputModel InputModel { get; set; } = new();
+    public override ConcreteBeamInputModel InputModel { get; set; } = new();
     public ConcreteBeamOutputModel OutputModel { get; set; } = new();
 
     private bool _isResultVisible;
@@ -37,10 +38,11 @@ public class ConcreteBeamViewModel : BindableBase
     }
 
     public ConcreteBeamViewModel(IConcreteCalculatorService concreteCalculatorService, AppDbContext context, IEventAggregator eventAggregator)
+    : base(context, eventAggregator)
     {
         _concreteCalculatorService = concreteCalculatorService;
         _context = context;
-        eventAggregator.GetEvent<LoadProjectEvent>().Subscribe(LoadProjectInput, ThreadOption.UIThread);
+        //eventAggregator.GetEvent<LoadProjectEvent>().Subscribe(LoadProjectInput, ThreadOption.UIThread);
     }
 
     private void ExecuteCalculateCommand()
@@ -66,17 +68,17 @@ public class ConcreteBeamViewModel : BindableBase
         IsResultVisible = true;
     }
 
-    private void LoadProjectInput(Guid projectId)
-    {
-        var beamProject = _context.Set<ConcreteBeamInput>().FirstOrDefault(beam => beam.ProjectId == projectId);
+    //private void LoadProjectInput(Guid projectId)
+    //{
+    //    var beamProject = _context.Set<ConcreteBeamInput>().FirstOrDefault(beam => beam.ProjectId == projectId);
 
-        if (beamProject is not null)
-        {
-            InputModel.LengthOfBeam = beamProject.LengthOfBeam;
-            InputModel.WidthOfBeam = beamProject.WidthOfBeam;
-            InputModel.HeightOfBeam = beamProject.HeightOfBeam;
-            InputModel.NumbersOfCount = beamProject.NumbersOfCount;
-            InputModel.ClassMixture = beamProject.ClassMixture;
-        }
-    }
+    //    if (beamProject is not null)
+    //    {
+    //        InputModel.LengthOfBeam = beamProject.LengthOfBeam;
+    //        InputModel.WidthOfBeam = beamProject.WidthOfBeam;
+    //        InputModel.HeightOfBeam = beamProject.HeightOfBeam;
+    //        InputModel.NumbersOfCount = beamProject.NumbersOfCount;
+    //        InputModel.ClassMixture = beamProject.ClassMixture;
+    //    }
+    //}
 }

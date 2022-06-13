@@ -16,168 +16,166 @@
     </UserControl.Resources>
 
     <materialDesign:DialogHost>
-
-        <StackPanel Orientation="Vertical">
-            <TextBlock Margin="0,20,0,0"
+        <AdornerDecorator>
+            <StackPanel Orientation="Vertical">
+                <TextBlock Margin="0,20,0,0"
                            Padding="5"
                            Text="Floor Area" />
 
-            <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}"
                          VerticalAlignment="Top"
                          Height="50"
                          TextWrapping="Wrap"
                          materialDesign:HintAssist.Hint="3m&#x00B2;">
-                <TextBox.Text>
-                    <Binding Path="InputModel.FloorArea"
+                    <TextBox.Text>
+                        <Binding Path="InputModel.FloorArea"
                                  UpdateSourceTrigger="LostFocus">
-                        <Binding.ValidationRules>
-                            <validations:RequiredNumericRule ErrorMessage="Invalid value for Floor Area"
+                            <Binding.ValidationRules>
+                                <validations:RequiredNumericRule ErrorMessage="Invalid value for Floor Area"
                                                                  InitialMessage="This field is required"
-                                                                 ValidatesOnTargetUpdated="True"/>
-                        </Binding.ValidationRules>
-                    </Binding>
-                </TextBox.Text>
-            </TextBox>
+                                                                 ValidatesOnTargetUpdated="True" />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
 
-            <TextBlock Margin="0,20,0,0"
+                <TextBlock Margin="0,20,0,0"
                            Padding="5"
                            Text="Size of Steel bar" />
 
-            <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}"
                          VerticalAlignment="Top"
                          Height="50"
                          Margin="0,0,0,20"
                          TextWrapping="Wrap"
                          materialDesign:HintAssist.Hint="5 millimeter">
-                <TextBox.Text>
-                    <Binding Path="InputModel.SizeOfSteelbar"
+                    <TextBox.Text>
+                        <Binding Path="InputModel.SizeOfSteelbar"
                                  UpdateSourceTrigger="LostFocus">
-                        <Binding.ValidationRules>
-                            <validations:RequiredNumericRule ErrorMessage="Invalid value for Size of Steel bar"
+                            <Binding.ValidationRules>
+                                <validations:RequiredNumericRule ErrorMessage="Invalid value for Size of Steel bar"
                                                                  InitialMessage="This field is required"
-                                                                 ValidatesOnTargetUpdated="True"/>
-                        </Binding.ValidationRules>
-                    </Binding>
-                </TextBox.Text>
-            </TextBox>
+                                                                 ValidatesOnTargetUpdated="True" />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
 
-            <TextBlock Padding="5"
-                       Text="Steel Bar Spacing" />
+                <TextBlock Padding="5"
+                           Text="Steel Bar Spacing" />
 
-            <StackPanel Orientation="Horizontal"
-                        Margin="0,0,0,10">
+                <StackPanel Orientation="Horizontal"
+                            Margin="0,0,0,10">
 
-                <RadioButton Margin="5"
-                             GroupName="REBW_STL_SPC"
-                             Style="{StaticResource MaterialDesignRadioButton}"
-                             Tag="True"
-                             IsChecked="{Binding InputModel.SteelBarSpacing, Converter={StaticResource stringToBooleanConverter}, ConverterParameter=10}"
-                             Content="10">
-                </RadioButton>
+                    <RadioButton Margin="5"
+                                 GroupName="REBW_STL_SPC"
+                                 Style="{StaticResource MaterialDesignRadioButton}"
+                                 Tag="True"
+                                 IsChecked="{Binding InputModel.SteelBarSpacing, Converter={StaticResource stringToBooleanConverter}, ConverterParameter=10}"
+                                 Content="10">
+                    </RadioButton>
 
-                <RadioButton Margin="5"
-                             GroupName="REBW_STL_SPC"
-                             Style="{StaticResource MaterialDesignRadioButton}"
-                             Tag="True"
-                             IsChecked="{Binding InputModel.SteelBarSpacing, Converter={StaticResource stringToBooleanConverter}, ConverterParameter=12.5}"
-                             Content="12.5">
-                </RadioButton>
+                    <RadioButton Margin="5"
+                                 GroupName="REBW_STL_SPC"
+                                 Style="{StaticResource MaterialDesignRadioButton}"
+                                 Tag="True"
+                                 IsChecked="{Binding InputModel.SteelBarSpacing, Converter={StaticResource stringToBooleanConverter}, ConverterParameter=12.5}"
+                                 Content="12.5">
+                    </RadioButton>
 
-                <RadioButton Margin="5"
-                             GroupName="REBW_STL_SPC"
-                             Style="{StaticResource MaterialDesignRadioButton}"
-                             Tag="True"
-                             IsChecked="{Binding InputModel.SteelBarSpacing, Converter={StaticResource stringToBooleanConverter}, ConverterParameter=15}"
-                             Content="15">
-                </RadioButton>
+                    <RadioButton Margin="5"
+                                 GroupName="REBW_STL_SPC"
+                                 Style="{StaticResource MaterialDesignRadioButton}"
+                                 Tag="True"
+                                 IsChecked="{Binding InputModel.SteelBarSpacing, Converter={StaticResource stringToBooleanConverter}, ConverterParameter=15}"
+                                 Content="15">
+                    </RadioButton>
 
-                <RadioButton Margin="5"
-                             GroupName="REBW_STL_SPC"
-                             Style="{StaticResource MaterialDesignRadioButton}"
-                             Tag="True"
-                             IsChecked="{Binding InputModel.SteelBarSpacing, Converter={StaticResource stringToBooleanConverter}, ConverterParameter=17.5}"
-                             Content="17.5">
-                </RadioButton>
+                    <RadioButton Margin="5"
+                                 GroupName="REBW_STL_SPC"
+                                 Style="{StaticResource MaterialDesignRadioButton}"
+                                 Tag="True"
+                                 IsChecked="{Binding InputModel.SteelBarSpacing, Converter={StaticResource stringToBooleanConverter}, ConverterParameter=17.5}"
+                                 Content="17.5">
+                    </RadioButton>
 
-                <RadioButton Margin="5"
-                             GroupName="REBW_STL_SPC"
-                             Style="{StaticResource MaterialDesignRadioButton}"
-                             Tag="True"
-                             IsChecked="{Binding InputModel.SteelBarSpacing, Converter={StaticResource stringToBooleanConverter}, ConverterParameter=20}"
-                             Content="20">
-                </RadioButton>
+                    <RadioButton Margin="5"
+                                 GroupName="REBW_STL_SPC"
+                                 Style="{StaticResource MaterialDesignRadioButton}"
+                                 Tag="True"
+                                 IsChecked="{Binding InputModel.SteelBarSpacing, Converter={StaticResource stringToBooleanConverter}, ConverterParameter=20}"
+                                 Content="20">
+                    </RadioButton>
 
-                <RadioButton Margin="5"
-                             GroupName="REBW_STL_SPC"
-                             Style="{StaticResource MaterialDesignRadioButton}"
-                             Tag="True"
-                             IsChecked="{Binding InputModel.SteelBarSpacing, Converter={StaticResource stringToBooleanConverter}, ConverterParameter=22.5}"
-                             Content="22.5">
-                </RadioButton>
+                    <RadioButton Margin="5"
+                                 GroupName="REBW_STL_SPC"
+                                 Style="{StaticResource MaterialDesignRadioButton}"
+                                 Tag="True"
+                                 IsChecked="{Binding InputModel.SteelBarSpacing, Converter={StaticResource stringToBooleanConverter}, ConverterParameter=22.5}"
+                                 Content="22.5">
+                    </RadioButton>
 
-                <RadioButton Margin="5"
-                             GroupName="REBW_STL_SPC"
-                             Style="{StaticResource MaterialDesignRadioButton}"
-                             Tag="True"
-                             IsChecked="{Binding InputModel.SteelBarSpacing, Converter={StaticResource stringToBooleanConverter}, ConverterParameter=25}"
-                             Content="25">
-                </RadioButton>
-            </StackPanel>
+                    <RadioButton Margin="5"
+                                 GroupName="REBW_STL_SPC"
+                                 Style="{StaticResource MaterialDesignRadioButton}"
+                                 Tag="True"
+                                 IsChecked="{Binding InputModel.SteelBarSpacing, Converter={StaticResource stringToBooleanConverter}, ConverterParameter=25}"
+                                 Content="25">
+                    </RadioButton>
+                </StackPanel>
 
+                <TextBlock Padding="5"
+                           Text="One Way or Two Way" />
 
-            <TextBlock Padding="5"
-                       Text="One Way or Two Way" />
+                <StackPanel Orientation="Horizontal"
+                            Margin="0,0,0,10">
 
-            <StackPanel Orientation="Horizontal"
-                        Margin="0,0,0,10">
+                    <RadioButton Margin="5"
+                                 GroupName="REBW_STL_ONETWO"
+                                 Style="{StaticResource MaterialDesignRadioButton}"
+                                 Tag="True"
+                                 IsChecked="{Binding InputModel.OneWayOrTwoWay, Converter={StaticResource comparisonConverter}, ConverterParameter={x:Static enums:SlabType.OneWay}}"
+                                 Content="One Way">
+                    </RadioButton>
 
-                <RadioButton Margin="5"
-                             GroupName="REBW_STL_ONETWO"
-                             Style="{StaticResource MaterialDesignRadioButton}"
-                             Tag="True"
-                             IsChecked="{Binding InputModel.OneWayOrTwoWay, Converter={StaticResource comparisonConverter}, ConverterParameter={x:Static enums:SlabType.OneWay}}"
-                             Content="One Way">
-                </RadioButton>
+                    <RadioButton Margin="5"
+                                 GroupName="REBW_STL_ONETWO"
+                                 Style="{StaticResource MaterialDesignRadioButton}"
+                                 Tag="True"
+                                 IsChecked="{Binding InputModel.OneWayOrTwoWay, Converter={StaticResource comparisonConverter}, ConverterParameter={x:Static enums:SlabType.TwoWay}}"
+                                 Content="Two Way">
+                    </RadioButton>
+                </StackPanel>
 
-                <RadioButton Margin="5"
-                             GroupName="REBW_STL_ONETWO"
-                             Style="{StaticResource MaterialDesignRadioButton}"
-                             Tag="True"
-                             IsChecked="{Binding InputModel.OneWayOrTwoWay, Converter={StaticResource comparisonConverter}, ConverterParameter={x:Static enums:SlabType.TwoWay}}"
-                             Content="Two Way">
-                </RadioButton>
+                <Button Command="{Binding CalculateCommand}">Calculate</Button>
 
-            </StackPanel>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="6*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
 
-
-            <Button Command="{Binding CalculateCommand}">Calculate</Button>
-
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="6*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-
-                <GroupBox Visibility="{Binding IsResultVisible, Converter={StaticResource booleanToVisibilityConverter}}"
+                    <GroupBox Visibility="{Binding IsResultVisible, Converter={StaticResource booleanToVisibilityConverter}}"
                               Grid.Column="1"
                               Width="Auto"
                               VerticalAlignment="Center"
                               HorizontalAlignment="Center"
                               Header="Result"
                               Margin="16">
-                    <GroupBox.Content>
-                        <StackPanel>
-                            <!--Steelbar-->
-                            <TextBlock FontSize="32"
+                        <GroupBox.Content>
+                            <StackPanel>
+                                <!--Steelbar-->
+                                <TextBlock FontSize="32"
                                            Text="{Binding OutputModel.Steelbar}" />
-                            <!--Tiewire-->
-                            <TextBlock FontSize="32"
+                                <!--Tiewire-->
+                                <TextBlock FontSize="32"
                                            Text="{Binding OutputModel.Tiewire}" />
-                        </StackPanel>
-                    </GroupBox.Content>
-                </GroupBox>
-            </Grid>
-        </StackPanel>
+                            </StackPanel>
+                        </GroupBox.Content>
+                    </GroupBox>
+                </Grid>
+            </StackPanel>
+        </AdornerDecorator>
     </materialDesign:DialogHost>
 </UserControl>

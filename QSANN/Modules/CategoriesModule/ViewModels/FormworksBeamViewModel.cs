@@ -6,6 +6,7 @@ using Prism.Mvvm;
 using QSANN.Core.Commands;
 using QSANN.Core.Events;
 using QSANN.Core.Extensions;
+using QSANN.Core.Mvvm;
 using QSANN.Data;
 using QSANN.Data.Entities;
 using QSANN.Services.Interfaces;
@@ -14,7 +15,7 @@ using System.Linq;
 
 namespace CategoriesModule.ViewModels
 {
-    public class FormworksBeamViewModel : BindableBase
+    public class FormworksBeamViewModel : ViewModelBase<FormworksBeamInputModel, FormworksBeamInput>
     {
         private readonly IFormworksBeamCalculatorService _formworksBeamCalculatorService;
         private readonly AppDbContext _context;
@@ -24,7 +25,7 @@ namespace CategoriesModule.ViewModels
         public DelegateCommandWithValidator<FormworksBeamInputModel, FormworksBeamInputValidator> CalculateCommand => _calculateCommand
             ??= new DelegateCommandWithValidator<FormworksBeamInputModel, FormworksBeamInputValidator>(ExecuteCalculateCommand, InputModel, _validator, new ErrorDialog());
 
-        public FormworksBeamInputModel InputModel { get; set; } = new();
+        public override FormworksBeamInputModel InputModel { get; set; } = new();
         public FormworksBeamOutputModel OutputModel { get; set; } = new();
 
         private bool _isResultVisible;
@@ -36,10 +37,11 @@ namespace CategoriesModule.ViewModels
         }
 
         public FormworksBeamViewModel(IFormworksBeamCalculatorService formworksBeamCalculatorService, AppDbContext context, IEventAggregator eventAggregator)
+        : base(context, eventAggregator)
         {
             _formworksBeamCalculatorService = formworksBeamCalculatorService;
             _context = context;
-            eventAggregator.GetEvent<LoadProjectEvent>().Subscribe(LoadProjectInput, ThreadOption.UIThread);
+            //eventAggregator.GetEvent<LoadProjectEvent>().Subscribe(LoadProjectInput, ThreadOption.UIThread);
         }
 
         private void ExecuteCalculateCommand()
@@ -55,19 +57,19 @@ namespace CategoriesModule.ViewModels
             IsResultVisible = true;
         }
 
-        private void LoadProjectInput(Guid projectId)
-        {
-            var beamProject = _context.Set<FormworksBeamInput>().FirstOrDefault(Beam => Beam.ProjectId == projectId);
+        //private void LoadProjectInput(Guid projectId)
+        //{
+        //    var beamProject = _context.Set<FormworksBeamInput>().FirstOrDefault(Beam => Beam.ProjectId == projectId);
 
-            if (beamProject is not null)
-            {
-                InputModel.LengthOfBeam = beamProject.LengthOfBeam;
-                InputModel.WidthOfBeam = beamProject.WidthOfBeam;
-                InputModel.HeightOfBeam = beamProject.HeightOfBeam;
-                InputModel.NumberOfCounts = beamProject.NumberOfCounts;
-                InputModel.LumberSize = beamProject.LumberSize;
-                InputModel.ThicknessOfPlywood = beamProject.ThicknessOfPlywood;
-            }
-        }
+        //    if (beamProject is not null)
+        //    {
+        //        InputModel.LengthOfBeam = beamProject.LengthOfBeam;
+        //        InputModel.WidthOfBeam = beamProject.WidthOfBeam;
+        //        InputModel.HeightOfBeam = beamProject.HeightOfBeam;
+        //        InputModel.NumberOfCounts = beamProject.NumberOfCounts;
+        //        InputModel.LumberSize = beamProject.LumberSize;
+        //        InputModel.ThicknessOfPlywood = beamProject.ThicknessOfPlywood;
+        //    }
+        //}
     }
 }

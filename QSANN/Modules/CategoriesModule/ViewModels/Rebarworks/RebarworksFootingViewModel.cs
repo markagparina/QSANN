@@ -8,12 +8,15 @@ using Prism.Regions;
 using QSANN.Core.Commands;
 using QSANN.Core.Events;
 using QSANN.Core.Extensions;
+using QSANN.Core.Mvvm;
+using QSANN.Data;
+using QSANN.Data.Entities;
 using QSANN.Services.Interfaces;
 using System;
 
 namespace CategoriesModule.ViewModels;
 
-public class RebarworksFootingViewModel : BindableBase
+public class RebarworksFootingViewModel : ViewModelBase<RebarworksFootingInputModel, RebarworksFootingInput>
 {
     private readonly IRebarworksFootingCalculatorService _rebarworksFootingCalculatorService;
     private readonly IEventAggregator _eventAggregator;
@@ -23,7 +26,7 @@ public class RebarworksFootingViewModel : BindableBase
     public DelegateCommandWithValidator<RebarworksFootingInputModel, RebarworksFootingInputValidator> CalculateCommand => _calculateCommand
         ??= new DelegateCommandWithValidator<RebarworksFootingInputModel, RebarworksFootingInputValidator>(ExecuteCalculateCommand, InputModel, _validator, new ErrorDialog());
 
-    public RebarworksFootingInputModel InputModel { get; set; } = new();
+    public override RebarworksFootingInputModel InputModel { get; set; } = new();
     public RebarworksFootingOutputModel OutputModel { get; set; } = new();
 
     private bool _isResultVisible;
@@ -34,7 +37,8 @@ public class RebarworksFootingViewModel : BindableBase
         set { SetProperty(ref _isResultVisible, value); }
     }
 
-    public RebarworksFootingViewModel(IRebarworksFootingCalculatorService rebarworksFootingCalculatorService, IEventAggregator eventAggregator)
+    public RebarworksFootingViewModel(IRebarworksFootingCalculatorService rebarworksFootingCalculatorService, AppDbContext context, IEventAggregator eventAggregator)
+    : base(context, eventAggregator)
     {
         _rebarworksFootingCalculatorService = rebarworksFootingCalculatorService;
         _eventAggregator = eventAggregator;
@@ -55,7 +59,6 @@ public class RebarworksFootingViewModel : BindableBase
             InputModel.LengthOfFooting.StripAndParseAsDecimal(),
             InputModel.SpacingOfSteelbar.StripAndParseAsDecimal(),
             InputModel.NumbersOfFooting.StripAndParseAsDecimal());
-
 
         OutputModel.Steelbar = $"{totalFooting:N2} pcs of 6m Mainbar";
         OutputModel.Tiewire = $"{tiewire:N2} kg/s of (#16) Tiewire";

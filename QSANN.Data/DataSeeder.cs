@@ -159,6 +159,36 @@ namespace QSANN.Data
                 dbContext.AddRange(masonryInputs);
                 dbContext.SaveChanges();
             }
+
+            if (!dbContext.Set<CarpentryworksInput>().Any())
+            {
+                var carpentryInputs = new List<CarpentryworksInput>()
+                {
+                    new CarpentryworksInput () { AreaOfDesignation = "8",  SizeOfLumber = "1x2", DateCreated = DateTime.UtcNow, Project = dbContext.Set<Project>().FirstOrDefault() },
+                    new CarpentryworksInput () { AreaOfDesignation = "16", SizeOfLumber = "2x3", DateCreated = DateTime.UtcNow, Project = dbContext.Set<Project>().Skip(1).FirstOrDefault() },
+                    new CarpentryworksInput () { AreaOfDesignation = "12", SizeOfLumber = "2x2", DateCreated = DateTime.UtcNow, Project = dbContext.Set<Project>().Skip(2).FirstOrDefault() },
+                    new CarpentryworksInput () { AreaOfDesignation = "20", SizeOfLumber = "2x4", DateCreated = DateTime.UtcNow, Project = dbContext.Set<Project>().Skip(3).FirstOrDefault() },
+                    new CarpentryworksInput () { AreaOfDesignation = "25", SizeOfLumber = "2x3", DateCreated = DateTime.UtcNow, Project = dbContext.Set<Project>().Skip(4).FirstOrDefault() },
+                };
+
+                dbContext.AddRange(carpentryInputs);
+                dbContext.SaveChanges();
+            }
+
+            if (!dbContext.Set<PaintworksInput>().Any())
+            {
+                var paintworksInputs = new List<PaintworksInput>()
+                {
+                    new PaintworksInput () { AreaOfApplication = "8",   Finish = "Fine", DateCreated = DateTime.UtcNow, Project = dbContext.Set<Project>().FirstOrDefault() },
+                    new PaintworksInput () { AreaOfApplication = "16",  Finish = "Coarse", DateCreated = DateTime.UtcNow, Project = dbContext.Set<Project>().Skip(1).FirstOrDefault() },
+                    new PaintworksInput () { AreaOfApplication = "12",  Finish = "Rough", DateCreated = DateTime.UtcNow, Project = dbContext.Set<Project>().Skip(2).FirstOrDefault() },
+                    new PaintworksInput () { AreaOfApplication = "20",  Finish = "Fine", DateCreated = DateTime.UtcNow, Project = dbContext.Set<Project>().Skip(3).FirstOrDefault() },
+                    new PaintworksInput () { AreaOfApplication = "",  Finish = "Coarse", DateCreated = DateTime.UtcNow, Project = dbContext.Set<Project>().Skip(4).FirstOrDefault() },
+                };
+
+                dbContext.AddRange(paintworksInputs);
+                dbContext.SaveChanges();
+            }
         }
     }
 }

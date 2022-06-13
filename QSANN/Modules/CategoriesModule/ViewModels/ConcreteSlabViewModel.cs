@@ -7,6 +7,7 @@ using Prism.Regions;
 using QSANN.Core.Commands;
 using QSANN.Core.Events;
 using QSANN.Core.Extensions;
+using QSANN.Core.Mvvm;
 using QSANN.Data;
 using QSANN.Data.Entities;
 using QSANN.Services.Interfaces;
@@ -15,7 +16,7 @@ using System.Linq;
 
 namespace CategoriesModule.ViewModels;
 
-public class ConcreteSlabViewModel : BindableBase
+public class ConcreteSlabViewModel : ViewModelBase<ConcreteSlabInputModel, ConcreteSlabInput>
 {
     private readonly IConcreteCalculatorService _concreteCalculatorService;
     private readonly AppDbContext _context;
@@ -25,7 +26,7 @@ public class ConcreteSlabViewModel : BindableBase
     public DelegateCommandWithValidator<ConcreteSlabInputModel, ConcreteSlabInputValidator> CalculateCommand => _calculateCommand
         ??= new DelegateCommandWithValidator<ConcreteSlabInputModel, ConcreteSlabInputValidator>(ExecuteCalculateCommand, InputModel, _validator, new ErrorDialog());
 
-    public ConcreteSlabInputModel InputModel { get; set; } = new();
+    public override ConcreteSlabInputModel InputModel { get; set; } = new();
     public ConcreteSlabOutputModel OutputModel { get; set; } = new();
 
     private bool _isResultVisible;
@@ -37,10 +38,11 @@ public class ConcreteSlabViewModel : BindableBase
     }
 
     public ConcreteSlabViewModel(IConcreteCalculatorService concreteCalculatorService, AppDbContext context, IEventAggregator eventAggregator)
+    : base(context, eventAggregator)
     {
         _concreteCalculatorService = concreteCalculatorService;
         _context = context;
-        eventAggregator.GetEvent<LoadProjectEvent>().Subscribe(LoadProjectInput, ThreadOption.UIThread);
+        //eventAggregator.GetEvent<LoadProjectEvent>().Subscribe(LoadProjectInput, ThreadOption.UIThread);
     }
 
     private void ExecuteCalculateCommand()
@@ -66,17 +68,17 @@ public class ConcreteSlabViewModel : BindableBase
         IsResultVisible = true;
     }
 
-    private void LoadProjectInput(Guid projectId)
-    {
-        var slabProject = _context.Set<ConcreteSlabInput>().FirstOrDefault(slab => slab.ProjectId == projectId);
+    //private void LoadProjectInput(Guid projectId)
+    //{
+    //    var slabProject = _context.Set<ConcreteSlabInput>().FirstOrDefault(slab => slab.ProjectId == projectId);
 
-        if (slabProject is not null)
-        {
-            InputModel.LengthOfSlab = slabProject.LengthOfSlab;
-            InputModel.WidthOfSlab = slabProject.WidthOfSlab;
-            InputModel.ThicknessOfSlab = slabProject.ThicknessOfSlab;
-            InputModel.NumbersOfCount = slabProject.NumbersOfCount;
-            InputModel.ClassMixture = slabProject.ClassMixture;
-        }
-    }
+    //    if (slabProject is not null)
+    //    {
+    //        InputModel.LengthOfSlab = slabProject.LengthOfSlab;
+    //        InputModel.WidthOfSlab = slabProject.WidthOfSlab;
+    //        InputModel.ThicknessOfSlab = slabProject.ThicknessOfSlab;
+    //        InputModel.NumbersOfCount = slabProject.NumbersOfCount;
+    //        InputModel.ClassMixture = slabProject.ClassMixture;
+    //    }
+    //}
 }

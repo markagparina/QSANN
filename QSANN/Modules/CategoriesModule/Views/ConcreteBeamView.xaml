@@ -25,7 +25,7 @@
                      VerticalAlignment="Top"
                      Height="50"
                      TextWrapping="Wrap"
-                     materialDesign:HintAssist.Hint="3 meters">
+                     materialDesign:HintAssist.Hint="3m">
                     <TextBox.Text>
                         <Binding Path="InputModel.LengthOfBeam"
                              UpdateSourceTrigger="LostFocus">
@@ -46,7 +46,7 @@
                      VerticalAlignment="Top"
                      Height="50"
                      TextWrapping="Wrap"
-                     materialDesign:HintAssist.Hint="3 meters">
+                     materialDesign:HintAssist.Hint="3m">
                     <TextBox.Text>
                         <Binding Path="InputModel.WidthOfBeam"
                              UpdateSourceTrigger="LostFocus">
@@ -67,7 +67,7 @@
                      VerticalAlignment="Top"
                      Height="50"
                      TextWrapping="Wrap"
-                     materialDesign:HintAssist.Hint="3 meters">
+                     materialDesign:HintAssist.Hint="3m">
                     <TextBox.Text>
                         <Binding Path="InputModel.HeightOfBeam"
                              UpdateSourceTrigger="LostFocus">

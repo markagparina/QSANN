@@ -10,7 +10,7 @@ namespace CategoriesModule.Models
         public string LengthOfFooting
         {
             get { return _lengthOfFooting; }
-            set { SetProperty(ref _lengthOfFooting, value.AppendIfNotExists(" meters")); }
+            set { SetProperty(ref _lengthOfFooting, value.AppendIfNotExists("m")); }
         }
 
         private string _widthOfFooting;
@@ -18,7 +18,7 @@ namespace CategoriesModule.Models
         public string WidthOfFooting
         {
             get { return _widthOfFooting; }
-            set { SetProperty(ref _widthOfFooting, value.AppendIfNotExists(" meters")); }
+            set { SetProperty(ref _widthOfFooting, value.AppendIfNotExists("m")); }
         }
 
         private string _numbersOfFooting;
@@ -43,6 +43,6 @@ namespace CategoriesModule.Models
         {
             get { return _spacingOfSteelbar; }
             set { SetProperty(ref _spacingOfSteelbar, value); }
-        }   
+        }
     }
 }

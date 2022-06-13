@@ -24,7 +24,7 @@
                      VerticalAlignment="Top"
                      Height="50"
                      TextWrapping="Wrap"
-                     materialDesign:HintAssist.Hint="3 meters">
+                     materialDesign:HintAssist.Hint="3m">
                     <TextBox.Text>
                         <Binding Path="InputModel.LengthOfSlab"
                              UpdateSourceTrigger="LostFocus">
@@ -45,7 +45,7 @@
                      VerticalAlignment="Top"
                      Height="50"
                      TextWrapping="Wrap"
-                     materialDesign:HintAssist.Hint="3 meters">
+                     materialDesign:HintAssist.Hint="3m">
                     <TextBox.Text>
                         <Binding Path="InputModel.WidthOfSlab"
                              UpdateSourceTrigger="LostFocus">
@@ -66,7 +66,7 @@
                      VerticalAlignment="Top"
                      Height="50"
                      TextWrapping="Wrap"
-                     materialDesign:HintAssist.Hint="3 meters">
+                     materialDesign:HintAssist.Hint="3m">
                     <TextBox.Text>
                         <Binding Path="InputModel.ThicknessOfSlab"
                              UpdateSourceTrigger="LostFocus">

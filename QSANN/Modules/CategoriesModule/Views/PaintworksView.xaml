@@ -16,97 +16,95 @@
 
     <materialDesign:DialogHost>
         <ScrollViewer>
+            <AdornerDecorator>
 
-            <StackPanel Orientation="Vertical">
-                <TextBlock Margin="0,20,0,0"
-                           Padding="5"
-                           Text="Area of Application" />
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Margin="0,20,0,0"
+                               Padding="5"
+                               Text="Area of Application" />
 
-                <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                         VerticalAlignment="Top"
-                         Height="50"
-                         TextWrapping="Wrap"
-                         materialDesign:HintAssist.Hint="3m&#x00B2;">
-                    <TextBox.Text>
-                        <Binding Path="InputModel.AreaOfApplication"
-                                 UpdateSourceTrigger="LostFocus">
-                            <Binding.ValidationRules>
-                                <validations:RequiredNumericRule ErrorMessage="Invalid value for Area of Application" 
-                                                                 InitialMessage="This field is required"
-                                                                 ValidatesOnTargetUpdated="True" />
-                            </Binding.ValidationRules>
-                        </Binding>
-                    </TextBox.Text>
-                </TextBox>
+                    <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                             VerticalAlignment="Top"
+                             Height="50"
+                             TextWrapping="Wrap"
+                             materialDesign:HintAssist.Hint="3m&#x00B2;">
+                        <TextBox.Text>
+                            <Binding Path="InputModel.AreaOfApplication"
+                                     UpdateSourceTrigger="LostFocus">
+                                <Binding.ValidationRules>
+                                    <validations:RequiredNumericRule ErrorMessage="Invalid value for Area of Application"
+                                                                     InitialMessage="This field is required"
+                                                                     ValidatesOnTargetUpdated="True" />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
 
-                <TextBlock Margin="0,20,0,0"
-                           Padding="5"
-                           Text="Types of Finish" />
+                    <TextBlock Margin="0,20,0,0"
+                               Padding="5"
+                               Text="Types of Finish" />
 
+                    <StackPanel Orientation="Horizontal"
+                                Margin="0,0,0,10">
 
-                <StackPanel Orientation="Horizontal"
-                        Margin="0,0,0,10">
+                        <RadioButton Margin="5"
+                                     GroupName="PAINT_FIN"
+                                     Style="{StaticResource MaterialDesignRadioButton}"
+                                     Tag="True"
+                                     IsChecked="{Binding InputModel.Finish, Converter={StaticResource stringToBooleanConverter}, ConverterParameter=Rough}"
+                                     Content="Rough">
+                        </RadioButton>
 
-                    <RadioButton Margin="5"
-                             GroupName="PAINT_FIN"
-                             Style="{StaticResource MaterialDesignRadioButton}"
-                             Tag="True"
-                             IsChecked="{Binding InputModel.Finish, Converter={StaticResource stringToBooleanConverter}, ConverterParameter=Rough}"
-                             Content="Rough">
-                    </RadioButton>
+                        <RadioButton Margin="5"
+                                     GroupName="PAINT_FIN"
+                                     Style="{StaticResource MaterialDesignRadioButton}"
+                                     Tag="True"
+                                     IsChecked="{Binding InputModel.Finish, Converter={StaticResource stringToBooleanConverter}, ConverterParameter=Coarse}"
+                                     Content="Coarse">
+                        </RadioButton>
 
-                    <RadioButton Margin="5"
-                             GroupName="PAINT_FIN"
-                             Style="{StaticResource MaterialDesignRadioButton}"
-                             Tag="True"
-                             IsChecked="{Binding InputModel.Finish, Converter={StaticResource stringToBooleanConverter}, ConverterParameter=Coarse}"
-                             Content="Coarse">
-                    </RadioButton>
+                        <RadioButton Margin="5"
+                                     GroupName="PAINT_FIN"
+                                     Style="{StaticResource MaterialDesignRadioButton}"
+                                     Tag="True"
+                                     IsChecked="{Binding InputModel.Finish, Converter={StaticResource stringToBooleanConverter}, ConverterParameter=Fine}"
+                                     Content="Fine">
+                        </RadioButton>
+                    </StackPanel>
 
-                    <RadioButton Margin="5"
-                             GroupName="PAINT_FIN"
-                             Style="{StaticResource MaterialDesignRadioButton}"
-                             Tag="True"
-                             IsChecked="{Binding InputModel.Finish, Converter={StaticResource stringToBooleanConverter}, ConverterParameter=Fine}"
-                             Content="Fine">
-                    </RadioButton>
+                    <Button Command="{Binding CalculateCommand}">Calculate</Button>
 
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="6*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
 
+                        <GroupBox Visibility="{Binding IsResultVisible, Converter={StaticResource booleanToVisibilityConverter}}"
+                                  Grid.Column="1"
+                                  Width="Auto"
+                                  VerticalAlignment="Center"
+                                  HorizontalAlignment="Center"
+                                  Header="Result"
+                                  Margin="16">
+                            <GroupBox.Content>
+                                <StackPanel>
+                                    <!--PrimerPaint-->
+                                    <TextBlock FontSize="32"
+                                               Text="{Binding OutputModel.PrimerPaint}" />
+                                    <!--SideBySideCoating-->
+                                    <TextBlock FontSize="32"
+                                               Text="{Binding OutputModel.SideBySideCoating}" />
+                                    <!--Neutralizer-->
+                                    <TextBlock FontSize="32"
+                                               Text="{Binding OutputModel.Neutralizer}" />
+                                </StackPanel>
+                            </GroupBox.Content>
+                        </GroupBox>
+                    </Grid>
                 </StackPanel>
-
-
-                <Button Command="{Binding CalculateCommand}">Calculate</Button>
-
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="6*" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-
-                    <GroupBox Visibility="{Binding IsResultVisible, Converter={StaticResource booleanToVisibilityConverter}}"
-                              Grid.Column="1"
-                              Width="Auto"
-                              VerticalAlignment="Center"
-                              HorizontalAlignment="Center"
-                              Header="Result"
-                              Margin="16">
-                        <GroupBox.Content>
-                            <StackPanel>
-                                <!--PrimerPaint-->
-                                <TextBlock FontSize="32"
-                                           Text="{Binding OutputModel.PrimerPaint}" />
-                                <!--SideBySideCoating-->
-                                <TextBlock FontSize="32"
-                                           Text="{Binding OutputModel.SideBySideCoating}" />
-                                <!--Neutralizer-->
-                                <TextBlock FontSize="32"
-                                           Text="{Binding OutputModel.Neutralizer}" />
-                            </StackPanel>
-                        </GroupBox.Content>
-                    </GroupBox>
-                </Grid>
-            </StackPanel>
+            </AdornerDecorator>
         </ScrollViewer>
     </materialDesign:DialogHost>
 </UserControl>

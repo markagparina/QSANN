@@ -1,4 +1,5 @@
 ﻿using Prism.Mvvm;
+using QSANN.Core.Extensions;
 
 namespace CategoriesModule.Models
 {
@@ -9,7 +10,7 @@ namespace CategoriesModule.Models
         public string AreaOfDesignation
         {
             get { return _areaOfDesignation; }
-            set { SetProperty(ref _areaOfDesignation, value); }
+            set { SetProperty(ref _areaOfDesignation, value.AppendIfNotExists("m\xB2")); }
         }
 
         private string _sizeOfLumber;

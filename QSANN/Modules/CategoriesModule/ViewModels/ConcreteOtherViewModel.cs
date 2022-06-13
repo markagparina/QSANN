@@ -7,6 +7,7 @@ using Prism.Regions;
 using QSANN.Core.Commands;
 using QSANN.Core.Events;
 using QSANN.Core.Extensions;
+using QSANN.Core.Mvvm;
 using QSANN.Data;
 using QSANN.Data.Entities;
 using QSANN.Services.Interfaces;
@@ -16,7 +17,7 @@ using System.Linq;
 
 namespace CategoriesModule.ViewModels;
 
-public class ConcreteOtherViewModel : BindableBase
+public class ConcreteOtherViewModel : ViewModelBase<ConcreteOtherInputModel, ConcreteOtherInput>
 {
     private readonly IConcreteCalculatorService _concreteCalculatorService;
     private readonly AppDbContext _context;
@@ -26,7 +27,7 @@ public class ConcreteOtherViewModel : BindableBase
     public DelegateCommandWithValidator<ConcreteOtherInputModel, ConcreteOtherInputValidator> CalculateCommand => _calculateCommand
         ??= new DelegateCommandWithValidator<ConcreteOtherInputModel, ConcreteOtherInputValidator>(ExecuteCalculateCommand, InputModel, _validator, new ErrorDialog());
 
-    public ConcreteOtherInputModel InputModel { get; set; } = new();
+    public override ConcreteOtherInputModel InputModel { get; set; } = new();
     public ConcreteOtherOutputModel OutputModel { get; set; } = new();
 
     public ObservableCollection<ConcreteSpecificationModel> Specifications { get; set; } = new(
@@ -55,14 +56,13 @@ public class ConcreteOtherViewModel : BindableBase
         set { SetProperty(ref _selectedSpecification, value); }
     }
 
-    public ConcreteOtherViewModel(IConcreteCalculatorService concreteCalculatorService, AppDbContext context,IEventAggregator eventAggregator)
+    public ConcreteOtherViewModel(IConcreteCalculatorService concreteCalculatorService, AppDbContext context, IEventAggregator eventAggregator)
+    : base(context, eventAggregator)
     {
         _concreteCalculatorService = concreteCalculatorService;
         _context = context;
         eventAggregator.GetEvent<LoadProjectEvent>().Subscribe(LoadProjectInput, ThreadOption.UIThread);
     }
-
-
 
     private void ExecuteCalculateCommand()
     {
@@ -83,15 +83,15 @@ public class ConcreteOtherViewModel : BindableBase
         IsResultVisible = true;
     }
 
-    private void LoadProjectInput(Guid projectId)
-    {
-        var project = _context.Set<ConcreteOtherInput>().FirstOrDefault(slab => slab.ProjectId == projectId);
+    //private void LoadProjectInput(Guid projectId)
+    //{
+    //    var project = _context.Set<ConcreteOtherInput>().FirstOrDefault(slab => slab.ProjectId == projectId);
 
-        if (project is not null)
-        {
-            InputModel.TotalVolume = project.TotalVolume;
-            InputModel.NumbersOfCount = project.NumbersOfCount;
-            InputModel.ClassMixture = project.ClassMixture;
-        }
-    }
+    //    if (project is not null)
+    //    {
+    //        InputModel.TotalVolume = project.TotalVolume;
+    //        InputModel.NumbersOfCount = project.NumbersOfCount;
+    //        InputModel.ClassMixture = project.ClassMixture;
+    //    }
+    //}
 }

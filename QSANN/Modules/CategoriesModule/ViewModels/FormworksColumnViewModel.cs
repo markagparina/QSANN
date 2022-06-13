@@ -14,7 +14,7 @@ using System.Linq;
 
 namespace CategoriesModule.ViewModels
 {
-    public class FormworksColumnViewModel : ViewModelBase
+    public class FormworksColumnViewModel : ViewModelBase<FormworksColumnInputModel, FormworksColumnInput>
     {
         private readonly IFormworksColumnCalculatorService _formworksColumnCalculatorService;
         private readonly AppDbContext _context;
@@ -24,7 +24,7 @@ namespace CategoriesModule.ViewModels
         public DelegateCommandWithValidator<FormworksColumnInputModel, FormworksColumnInputValidator> CalculateCommand => _calculateCommand
             ??= new DelegateCommandWithValidator<FormworksColumnInputModel, FormworksColumnInputValidator>(ExecuteCalculateCommand, InputModel, _validator, new ErrorDialog());
 
-        public FormworksColumnInputModel InputModel { get; set; } = new();
+        public override FormworksColumnInputModel InputModel { get; set; } = new();
         public FormworksColumnOutputModel OutputModel { get; set; } = new();
 
         private bool _isResultVisible;
@@ -36,10 +36,11 @@ namespace CategoriesModule.ViewModels
         }
 
         public FormworksColumnViewModel(IFormworksColumnCalculatorService formworksColumnCalculatorService, AppDbContext context, IEventAggregator eventAggregator)
+        : base(context, eventAggregator)
         {
             _formworksColumnCalculatorService = formworksColumnCalculatorService;
             _context = context;
-            eventAggregator.GetEvent<LoadProjectEvent>().Subscribe(LoadProjectInput, ThreadOption.UIThread);
+            //eventAggregator.GetEvent<LoadProjectEvent>().Subscribe(LoadProjectInput, ThreadOption.UIThread);
         }
 
         private void ExecuteCalculateCommand()
@@ -55,19 +56,19 @@ namespace CategoriesModule.ViewModels
             IsResultVisible = true;
         }
 
-        private void LoadProjectInput(Guid projectId)
-        {
-            var columnProject = _context.Set<FormworksColumnInput>().FirstOrDefault(column => column.ProjectId == projectId);
+        //private void LoadProjectInput(Guid projectId)
+        //{
+        //    var columnProject = _context.Set<FormworksColumnInput>().FirstOrDefault(column => column.ProjectId == projectId);
 
-            if (columnProject is not null)
-            {
-                InputModel.LengthOfColumn = columnProject.LengthOfColumn;
-                InputModel.WidthOfColumn = columnProject.WidthOfColumn;
-                InputModel.HeightOfColumn = columnProject.HeightOfColumn;
-                InputModel.NumberOfCounts = columnProject.NumberOfCounts;
-                InputModel.LumberSize = columnProject.LumberSize;
-                InputModel.ThicknessOfPlywood = columnProject.ThicknessOfPlywood;
-            }
-        }
+        //    if (columnProject is not null)
+        //    {
+        //        InputModel.LengthOfColumn = columnProject.LengthOfColumn;
+        //        InputModel.WidthOfColumn = columnProject.WidthOfColumn;
+        //        InputModel.HeightOfColumn = columnProject.HeightOfColumn;
+        //        InputModel.NumberOfCounts = columnProject.NumberOfCounts;
+        //        InputModel.LumberSize = columnProject.LumberSize;
+        //        InputModel.ThicknessOfPlywood = columnProject.ThicknessOfPlywood;
+        //    }
+        //}
     }
 }

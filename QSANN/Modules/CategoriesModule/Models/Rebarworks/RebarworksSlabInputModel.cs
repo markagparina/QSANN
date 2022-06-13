@@ -39,8 +39,4 @@ namespace CategoriesModule.Models
             set { SetProperty(ref _oneWayOrTwoWay, value); }
         }
     }
-
-
-
-
 }

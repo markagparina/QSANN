@@ -10,7 +10,7 @@ namespace CategoriesModule.Models
         public string LengthOfBeam
         {
             get { return _lengthOfBeam; }
-            set { SetProperty(ref _lengthOfBeam, value.AppendIfNotExists(" meters")); }
+            set { SetProperty(ref _lengthOfBeam, value.AppendIfNotExists("m")); }
         }
 
         private string _widthOfBeam;
@@ -18,7 +18,7 @@ namespace CategoriesModule.Models
         public string WidthOfBeam
         {
             get { return _widthOfBeam; }
-            set { SetProperty(ref _widthOfBeam, value.AppendIfNotExists(" meters")); }
+            set { SetProperty(ref _widthOfBeam, value.AppendIfNotExists("m")); }
         }
 
         private string _heightOfBeam;
@@ -26,7 +26,7 @@ namespace CategoriesModule.Models
         public string HeightOfBeam
         {
             get { return _heightOfBeam; }
-            set { SetProperty(ref _heightOfBeam, value.AppendIfNotExists(" meters")); }
+            set { SetProperty(ref _heightOfBeam, value.AppendIfNotExists("m")); }
         }
 
         private string _numbersOfCount;

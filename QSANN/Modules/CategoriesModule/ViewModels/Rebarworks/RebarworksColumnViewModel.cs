@@ -2,19 +2,21 @@
 using CategoriesModule.Models;
 using CategoriesModule.Validators;
 using Prism.Events;
-using Prism.Mvvm;
-using Prism.Regions;
 using QSANN.Core.Commands;
 using QSANN.Core.Events;
 using QSANN.Core.Extensions;
+using QSANN.Core.Mvvm;
+using QSANN.Data;
+using QSANN.Data.Entities;
 using QSANN.Services.Interfaces;
 using System;
 
 namespace CategoriesModule.ViewModels;
 
-public class RebarworksColumnViewModel : BindableBase
+public class RebarworksColumnViewModel : ViewModelBase<RebarworksColumnInputModel, RebarworksColumnInput>
 {
     private readonly IRebarworksColumnCalculatorService _rebarworksColumnCalculatorService;
+    private readonly AppDbContext _context;
     private readonly IEventAggregator _eventAggregator;
     private DelegateCommandWithValidator<RebarworksColumnInputModel, RebarworksColumnInputValidator> _calculateCommand;
     private readonly RebarworksColumnInputValidator _validator = new();
@@ -22,7 +24,7 @@ public class RebarworksColumnViewModel : BindableBase
     public DelegateCommandWithValidator<RebarworksColumnInputModel, RebarworksColumnInputValidator> CalculateCommand => _calculateCommand
         ??= new DelegateCommandWithValidator<RebarworksColumnInputModel, RebarworksColumnInputValidator>(ExecuteCalculateCommand, InputModel, _validator, new ErrorDialog());
 
-    public RebarworksColumnInputModel InputModel { get; set; } = new();
+    public override RebarworksColumnInputModel InputModel { get; set; } = new();
     public RebarworksColumnOutputModel OutputModel { get; set; } = new();
 
     private bool _isResultVisible;
@@ -33,11 +35,14 @@ public class RebarworksColumnViewModel : BindableBase
         set { SetProperty(ref _isResultVisible, value); }
     }
 
-    public RebarworksColumnViewModel(IRebarworksColumnCalculatorService rebarworksColumnCalculatorService, IEventAggregator eventAggregator)
+    public RebarworksColumnViewModel(IRebarworksColumnCalculatorService rebarworksColumnCalculatorService, AppDbContext context, IEventAggregator eventAggregator)
+    : base(context, eventAggregator)
     {
         _rebarworksColumnCalculatorService = rebarworksColumnCalculatorService;
+        _context = context;
         _eventAggregator = eventAggregator;
         InputModel.PropertyChanged += InputModel_PropertyChanged;
+        eventAggregator.GetEvent<LoadProjectEvent>().Subscribe(LoadProjectInput, ThreadOption.UIThread);
     }
 
     private void InputModel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
@@ -78,4 +83,19 @@ public class RebarworksColumnViewModel : BindableBase
         OutputModel.LateralTies = $"{lateralTies:N2} pcs of 6m Lateral ties";
         IsResultVisible = true;
     }
+
+    //private void LoadProjectInput(Guid projectId)
+    //{
+    //    var rebarworksColumnProject = _context.Set<RebarworksColumnInput>().FirstOrDefault(rebarworkColumn => rebarworkColumn.ProjectId == projectId);
+
+    //    if (rebarworksColumnProject is not null)
+    //    {
+    //        InputModel.LengthOfColumn = rebarworksColumnProject.LengthOfColumn;
+    //        InputModel.WidthOfColumn = rebarworksColumnProject.WidthOfColumn;
+    //        InputModel.HeightOfColumn = rebarworksColumnProject.HeightOfColumn;
+    //        InputModel.NumbersOfColumn = rebarworksColumnProject.NumbersOfColumn;
+    //        InputModel.SizeOfMainbar = rebarworksColumnProject.SizeOfMainBar;
+    //        InputModel.SizeOfLateralties = rebarworksColumnProject.SizeOfLateralties;
+    //    }
+    //}
 }

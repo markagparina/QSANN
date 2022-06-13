@@ -10,7 +10,7 @@ namespace CategoriesModule.Models
         public string LengthOfBeam
         {
             get { return _lengthOfBeam; }
-            set { SetProperty(ref _lengthOfBeam, value.AppendIfNotExists(" meters")); }
+            set { SetProperty(ref _lengthOfBeam, value.AppendIfNotExists("m")); }
         }
 
         private string _widthOfBeam;
@@ -18,7 +18,7 @@ namespace CategoriesModule.Models
         public string WidthOfBeam
         {
             get { return _widthOfBeam; }
-            set { SetProperty(ref _widthOfBeam, value.AppendIfNotExists(" meters")); }
+            set { SetProperty(ref _widthOfBeam, value.AppendIfNotExists("m")); }
         }
 
         private string _widthOfColumn;
@@ -26,17 +26,15 @@ namespace CategoriesModule.Models
         public string WidthOfColumn
         {
             get { return _widthOfColumn; }
-            set { SetProperty(ref _widthOfColumn, value.AppendIfNotExists(" meters")); }
+            set { SetProperty(ref _widthOfColumn, value.AppendIfNotExists("m")); }
         }
-
-
 
         private string _heightOfBeam;
 
         public string HeightOfBeam
         {
             get { return _heightOfBeam; }
-            set { SetProperty(ref _heightOfBeam, value.AppendIfNotExists(" meters")); }
+            set { SetProperty(ref _heightOfBeam, value.AppendIfNotExists("m")); }
         }
 
         private string _numbersOfBeam;
@@ -48,10 +46,11 @@ namespace CategoriesModule.Models
         }
 
         private string _sizeOfMainbar;
+
         public string SizeOfMainbar
         {
             get { return _sizeOfMainbar; }
-            set { SetProperty(ref _sizeOfMainbar, value.AppendIfNotExists(" millimeter")); }
+            set { SetProperty(ref _sizeOfMainbar, value.AppendIfNotExists(" mm")); }
         }
 
         private string _sizeOfStirrups;
@@ -59,8 +58,7 @@ namespace CategoriesModule.Models
         public string SizeOfStirrups
         {
             get { return _sizeOfStirrups; }
-            set { SetProperty(ref _sizeOfStirrups, value.AppendIfNotExists(" millimeter")); }
+            set { SetProperty(ref _sizeOfStirrups, value.AppendIfNotExists(" mm")); }
         }
-
     }
 }

@@ -10,7 +10,7 @@ namespace CategoriesModule.Models
         public string LengthOfColumn
         {
             get { return _lengthOfColumn; }
-            set { SetProperty(ref _lengthOfColumn, value.AppendIfNotExists(" meters")); }
+            set { SetProperty(ref _lengthOfColumn, value.AppendIfNotExists("m")); }
         }
 
         private string _widthOfColumn;
@@ -18,7 +18,7 @@ namespace CategoriesModule.Models
         public string WidthOfColumn
         {
             get { return _widthOfColumn; }
-            set { SetProperty(ref _widthOfColumn, value.AppendIfNotExists(" meters")); }
+            set { SetProperty(ref _widthOfColumn, value.AppendIfNotExists("m")); }
         }
 
         private string _heightOfColumn;
@@ -26,7 +26,7 @@ namespace CategoriesModule.Models
         public string HeightOfColumn
         {
             get { return _heightOfColumn; }
-            set { SetProperty(ref _heightOfColumn, value.AppendIfNotExists(" meters")); }
+            set { SetProperty(ref _heightOfColumn, value.AppendIfNotExists("m")); }
         }
 
         private string _numbersOfColumn;
@@ -42,7 +42,7 @@ namespace CategoriesModule.Models
         public string SizeOfMainbar
         {
             get { return _sizeOfMainbar; }
-            set { SetProperty(ref _sizeOfMainbar, value.AppendIfNotExists(" millimeter")); }
+            set { SetProperty(ref _sizeOfMainbar, value.AppendIfNotExists(" mm")); }
         }
 
         private string _sizeOfLateralties;
@@ -50,7 +50,7 @@ namespace CategoriesModule.Models
         public string SizeOfLateralties
         {
             get { return _sizeOfLateralties; }
-            set { SetProperty(ref _sizeOfLateralties, value.AppendIfNotExists(" millimeter")); }
+            set { SetProperty(ref _sizeOfLateralties, value.AppendIfNotExists(" mm")); }
         }
     }
 }

@@ -13,166 +13,169 @@
         <converters:BoolToVisibleOrHidden x:Key="booleanToVisibilityConverter" />
     </UserControl.Resources>
     <materialDesign:DialogHost>
-        <StackPanel Orientation="Vertical">
-            <TextBlock Margin="0,20,0,0"
-                       Padding="5"
-                       Text="Length of Column?" />
+        <AdornerDecorator>
+            <StackPanel Orientation="Vertical">
+                <TextBlock Margin="0,20,0,0"
+                           Padding="5"
+                           Text="Length of Column?" />
 
-            <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                     VerticalAlignment="Top"
-                     Height="50"
-                     TextWrapping="Wrap"
-                     materialDesign:HintAssist.Hint="3 meters">
-                <TextBox.Text>
-                    <Binding Path="InputModel.LengthOfColumn"
-                             UpdateSourceTrigger="LostFocus">
-                        <Binding.ValidationRules>
-                            <validations:RequiredNumericRule InitialMessage="This field is required"
-                                                             ErrorMessage="Invalid value for Height of Wall"
-                                                             ValidatesOnTargetUpdated="True" />
-                        </Binding.ValidationRules>
-                    </Binding>
-                </TextBox.Text>
-            </TextBox>
+                <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                         VerticalAlignment="Top"
+                         Height="50"
+                         TextWrapping="Wrap"
+                         materialDesign:HintAssist.Hint="3m">
+                    <TextBox.Text>
+                        <Binding Path="InputModel.LengthOfColumn"
+                                 UpdateSourceTrigger="LostFocus">
+                            <Binding.ValidationRules>
+                                <validations:RequiredNumericRule InitialMessage="This field is required"
+                                                                 ErrorMessage="Invalid value for Height of Wall"
+                                                                 ValidatesOnTargetUpdated="True" />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
 
-            <TextBlock Margin="0,20,0,0"
-                       Padding="5"
-                       Text="Width of Column?" />
+                <TextBlock Margin="0,20,0,0"
+                           Padding="5"
+                           Text="Width of Column?" />
 
-            <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                     VerticalAlignment="Top"
-                     Height="50"
-                     TextWrapping="Wrap"
-                     materialDesign:HintAssist.Hint="3 meters">
-                <TextBox.Text>
-                    <Binding Path="InputModel.WidthOfColumn"
-                             UpdateSourceTrigger="LostFocus">
-                        <Binding.ValidationRules>
-                            <validations:RequiredNumericRule InitialMessage="This field is required"
-                                                             ErrorMessage="Invalid value for Width of Column"
-                                                             ValidatesOnTargetUpdated="True" />
-                        </Binding.ValidationRules>
-                    </Binding>
-                </TextBox.Text>
-            </TextBox>
+                <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                         VerticalAlignment="Top"
+                         Height="50"
+                         TextWrapping="Wrap"
+                         materialDesign:HintAssist.Hint="3m">
+                    <TextBox.Text>
+                        <Binding Path="InputModel.WidthOfColumn"
+                                 UpdateSourceTrigger="LostFocus">
+                            <Binding.ValidationRules>
+                                <validations:RequiredNumericRule InitialMessage="This field is required"
+                                                                 ErrorMessage="Invalid value for Width of Column"
+                                                                 ValidatesOnTargetUpdated="True" />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
 
-            <TextBlock Margin="0,20,0,0"
-                       Padding="5"
-                       Text="Height of Column?" />
+                <TextBlock Margin="0,20,0,0"
+                           Padding="5"
+                           Text="Height of Column?" />
 
-            <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                     VerticalAlignment="Top"
-                     Height="50"
-                     TextWrapping="Wrap"
-                     materialDesign:HintAssist.Hint="3 meters">
-                <TextBox.Text>
-                    <Binding Path="InputModel.HeightOfColumn"
-                             UpdateSourceTrigger="LostFocus">
-                        <Binding.ValidationRules>
-                            <validations:RequiredNumericRule InitialMessage="This field is required"
-                                                             ErrorMessage="Invalid value for Height of Column"
-                                                             ValidatesOnTargetUpdated="True" />
-                        </Binding.ValidationRules>
-                    </Binding>
-                </TextBox.Text>
-            </TextBox>
+                <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                         VerticalAlignment="Top"
+                         Height="50"
+                         TextWrapping="Wrap"
+                         materialDesign:HintAssist.Hint="3m">
+                    <TextBox.Text>
+                        <Binding Path="InputModel.HeightOfColumn"
+                                 UpdateSourceTrigger="LostFocus">
+                            <Binding.ValidationRules>
+                                <validations:RequiredNumericRule InitialMessage="This field is required"
+                                                                 ErrorMessage="Invalid value for Height of Column"
+                                                                 ValidatesOnTargetUpdated="True" />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
 
-            <TextBlock Margin="0,20,0,0"
-                       Padding="5"
-                       Text="Number of Count/s?" />
+                <TextBlock Margin="0,20,0,0"
+                           Padding="5"
+                           Text="Number of Count/s?" />
 
-            <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                     VerticalAlignment="Top"
-                     Height="50"
-                     Margin="0,0,0,20"
-                     TextWrapping="Wrap"
-                     materialDesign:HintAssist.Hint="3">
-                <TextBox.Text>
-                    <Binding Path="InputModel.NumberOfCounts"
-                             UpdateSourceTrigger="LostFocus">
-                        <Binding.ValidationRules>
-                            <validations:RequiredNumericRule InitialMessage="This field is required"
-                                                             ErrorMessage="Invalid value for Numbers of Count/s"
-                                                             ValidatesOnTargetUpdated="True" />
-                        </Binding.ValidationRules>
-                    </Binding>
-                </TextBox.Text>
-            </TextBox>
+                <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                         VerticalAlignment="Top"
+                         Height="50"
+                         Margin="0,0,0,20"
+                         TextWrapping="Wrap"
+                         materialDesign:HintAssist.Hint="3">
+                    <TextBox.Text>
+                        <Binding Path="InputModel.NumberOfCounts"
+                                 UpdateSourceTrigger="LostFocus">
+                            <Binding.ValidationRules>
+                                <validations:RequiredNumericRule InitialMessage="This field is required"
+                                                                 ErrorMessage="Invalid value for Numbers of Count/s"
+                                                                 ValidatesOnTargetUpdated="True" />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
 
-            <TextBlock Padding="5"
-                       Text="Lumber Size" />
+                <TextBlock Padding="5"
+                           Text="Lumber Size" />
 
-            <StackPanel Orientation="Horizontal"
-                        Margin="0,0,0,10">
+                <StackPanel Orientation="Horizontal"
+                            Margin="0,0,0,10">
 
-                <RadioButton Margin="5"
-                             GroupName="CHK_COL_LS"
-                             Style="{StaticResource MaterialDesignRadioButton}"
-                             Tag="True"
-                             IsChecked="{Binding InputModel.LumberSize, Converter={StaticResource stringToBooleanConverter}, ConverterParameter=2x2}"
-                             Content="2x2">
-                </RadioButton>
+                    <RadioButton Margin="5"
+                                 GroupName="FORMW_COL_LS"
+                                 Style="{StaticResource MaterialDesignRadioButton}"
+                                 Tag="True"
+                                 IsChecked="{Binding InputModel.LumberSize, Converter={StaticResource stringToBooleanConverter}, ConverterParameter=2x2}"
+                                 Content="2x2">
+                    </RadioButton>
 
-                <RadioButton Margin="5"
-                             GroupName="CHK_COL_LS"
-                             Style="{StaticResource MaterialDesignRadioButton}"
-                             Tag="True"
-                             IsChecked="{Binding InputModel.LumberSize, Converter={StaticResource stringToBooleanConverter}, ConverterParameter=2x3}"
-                             Content="2x3">
-                </RadioButton>
+                    <RadioButton Margin="5"
+                                 GroupName="FORMW_COL_LS"
+                                 Style="{StaticResource MaterialDesignRadioButton}"
+                                 Tag="True"
+                                 IsChecked="{Binding InputModel.LumberSize, Converter={StaticResource stringToBooleanConverter}, ConverterParameter=2x3}"
+                                 Content="2x3">
+                    </RadioButton>
+                </StackPanel>
+
+                <TextBlock Padding="5"
+                           Text="Thickness of Plywood" />
+
+                <StackPanel Orientation="Horizontal"
+                            Margin="0,0,0,10">
+
+                    <RadioButton Margin="5"
+                                 GroupName="FORMW_COL_THK"
+                                 Style="{StaticResource MaterialDesignRadioButton}"
+                                 Tag="True"
+                                 IsChecked="{Binding InputModel.ThicknessOfPlywood, Converter={StaticResource stringToBooleanConverter}, ConverterParameter=1/4}"
+                                 Content="1/4">
+                    </RadioButton>
+
+                    <RadioButton Margin="5"
+                                 GroupName="FORMW_COL_THK"
+                                 Style="{StaticResource MaterialDesignRadioButton}"
+                                 Tag="True"
+                                 IsChecked="{Binding InputModel.ThicknessOfPlywood, Converter={StaticResource stringToBooleanConverter}, ConverterParameter=1/2}"
+                                 Content="1/2">
+                    </RadioButton>
+                </StackPanel>
+
+                <Button Command="{Binding CalculateCommand}">Calculate</Button>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="5*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <GroupBox Visibility="{Binding IsResultVisible, Converter={StaticResource booleanToVisibilityConverter}}"
+                              Grid.Column="1"
+                              Width="Auto"
+                              VerticalAlignment="Center"
+                              HorizontalAlignment="Center"
+                              Header="Result"
+                              Margin="16">
+                        <GroupBox.Content>
+                            <StackPanel>
+                                <!--Plywood-->
+                                <TextBlock FontSize="32"
+                                           Text="{Binding OutputModel.NumberOfPlywood}" />
+                                <!--Board Feet of Lumber-->
+                                <TextBlock FontSize="32"
+                                           Text="{Binding OutputModel.NumberOfBoardFeetLumber}" />
+                            </StackPanel>
+                        </GroupBox.Content>
+                    </GroupBox>
+                </Grid>
             </StackPanel>
-
-            <TextBlock Padding="5"
-                       Text="Thickness of Plywood" />
-
-            <StackPanel Orientation="Horizontal"
-                        Margin="0,0,0,10">
-
-                <RadioButton Margin="5"
-                             GroupName="CHK_COL_THK"
-                             Style="{StaticResource MaterialDesignRadioButton}"
-                             Tag="True"
-                             IsChecked="{Binding InputModel.ThicknessOfPlywood, Converter={StaticResource stringToBooleanConverter}, ConverterParameter=1/4}"
-                             Content="1/4">
-                </RadioButton>
-
-                <RadioButton Margin="5"
-                             GroupName="CHK_COL_THK"
-                             Style="{StaticResource MaterialDesignRadioButton}"
-                             Tag="True"
-                             IsChecked="{Binding InputModel.ThicknessOfPlywood, Converter={StaticResource stringToBooleanConverter}, ConverterParameter=1/2}"
-                             Content="1/2">
-                </RadioButton>
-            </StackPanel>
-
-            <Button Command="{Binding CalculateCommand}">Calculate</Button>
-
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="5*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-
-                <GroupBox Visibility="{Binding IsResultVisible, Converter={StaticResource booleanToVisibilityConverter}}"
-                          Grid.Column="1"
-                          Width="Auto"
-                          VerticalAlignment="Center"
-                          HorizontalAlignment="Center"
-                          Header="Result"
-                          Margin="16">
-                    <GroupBox.Content>
-                        <StackPanel>
-                            <!--Plywood-->
-                            <TextBlock FontSize="32"
-                                       Text="{Binding OutputModel.NumberOfPlywood}" />
-                            <!--Board Feet of Lumber-->
-                            <TextBlock FontSize="32"
-                                       Text="{Binding OutputModel.NumberOfBoardFeetLumber}" />
-                        </StackPanel>
-                    </GroupBox.Content>
-                </GroupBox>
-            </Grid>
-        </StackPanel>
+        </AdornerDecorator>
     </materialDesign:DialogHost>
+
 </UserControl>

@@ -16,13 +16,13 @@ using System.Threading.Tasks;
 
 namespace CategoriesModule.ViewModels
 {
-    public class MasonryViewModel : MenuItem
+    public class MasonryViewModel : MenuItem<MasonryInputModel, MasonryInput>
     {
         private readonly IMasonryCalculatorService _masonryCalculatorService;
         private readonly AppDbContext _context;
         private readonly MasonryInputModelValidator _validator = new();
 
-        public MasonryInputModel InputModel { get; set; } = new();
+        public override MasonryInputModel InputModel { get; set; } = new();
         public MasonryOutputModel OutputModel { get; set; } = new();
         public ErrorDialog ErrorDialog { get; set; } = new();
 
@@ -42,11 +42,12 @@ namespace CategoriesModule.ViewModels
 
         public override string Title => "Masonry";
 
-        public MasonryViewModel(IMasonryCalculatorService masonryCalculatorService, IRegionManager regionManager, AppDbContext context, IEventAggregator eventAggregator) : base(regionManager)
+        public MasonryViewModel(IMasonryCalculatorService masonryCalculatorService, IRegionManager regionManager, AppDbContext context, IEventAggregator eventAggregator) :
+        base(regionManager, context, eventAggregator)
         {
             _masonryCalculatorService = masonryCalculatorService;
             _context = context;
-            eventAggregator.GetEvent<LoadProjectEvent>().Subscribe(LoadProjectInput, ThreadOption.UIThread);
+            //eventAggregator.GetEvent<LoadProjectEvent>().Subscribe(LoadProjectInput, ThreadOption.UIThread);
         }
 
         private Task ExecuteCalculateCommandAsync()
@@ -79,22 +80,21 @@ namespace CategoriesModule.ViewModels
             return Task.CompletedTask;
         }
 
-        private void LoadProjectInput(Guid projectId)
-        {
-            var masonryProject = _context.Set<MasonryInput>().FirstOrDefault(masonry => masonry.ProjectId == projectId);
+        //private void LoadProjectInput(Guid projectId)
+        //{
+        //    var masonryProject = _context.Set<MasonryInput>().FirstOrDefault(masonry => masonry.ProjectId == projectId);
 
+        //    if (masonryProject is not null)
+        //    {
+        //        InputModel.LengthOfWall = masonryProject.LengthOfWall;
+        //        InputModel.HeightOfWall = masonryProject.HeightOfWall;
+        //        InputModel.HorizontalBarSpacing = masonryProject.HorizontalBarSpacing;
+        //        InputModel.VerticalBarSpacing = masonryProject.VerticalBarSpacing;
+        //        InputModel.ClassMixtureForMortar = masonryProject.ClassMixtureForMortar;
+        //        InputModel.ClassMixtureForPlaster = masonryProject.ClassMixtureForPlaster;
+        //        InputModel.ThicknessInMillimeter = masonryProject.ThicknessInMillimeter;
+        //    }
 
-            if (masonryProject is not null)
-            {
-                InputModel.LengthOfWall = masonryProject.LengthOfWall;
-                InputModel.HeightOfWall = masonryProject.HeightOfWall;
-                InputModel.HorizontalBarSpacing = masonryProject.HorizontalBarSpacing;
-                InputModel.VerticalBarSpacing = masonryProject.VerticalBarSpacing;
-                InputModel.ClassMixtureForMortar = masonryProject.ClassMixtureForMortar;
-                InputModel.ClassMixtureForPlaster = masonryProject.ClassMixtureForPlaster;
-                InputModel.ThicknessInMillimeter = masonryProject.ThicknessInMillimeter;
-            }
-
-        }
+        //}
     }
 }

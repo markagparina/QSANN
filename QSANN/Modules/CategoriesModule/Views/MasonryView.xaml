@@ -14,248 +14,247 @@
     </UserControl.Resources>
 
     <materialDesign:DialogHost>
-        <ScrollViewer>
+        <AdornerDecorator>
+            <ScrollViewer>
 
-            <StackPanel Orientation="Vertical">
-                <TextBlock Margin="0,20,0,0"
-                           Padding="5"
-                           Text="Height of wall?" />
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Margin="0,20,0,0"
+                               Padding="5"
+                               Text="Height of wall?" />
 
-                <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                         VerticalAlignment="Top"
-                         Height="50"
-                         TextWrapping="Wrap"
-                         materialDesign:HintAssist.Hint="3 meters">
-                    <TextBox.Text>
-                        <Binding Path="InputModel.HeightOfWall"
-                                 UpdateSourceTrigger="LostFocus">
-                            <Binding.ValidationRules>
-                                <validations:RequiredNumericRule ErrorMessage="Invalid value for Height of Wall" />
-                            </Binding.ValidationRules>
-                        </Binding>
-                    </TextBox.Text>
-                </TextBox>
+                    <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                             VerticalAlignment="Top"
+                             Height="50"
+                             TextWrapping="Wrap"
+                             materialDesign:HintAssist.Hint="3m">
+                        <TextBox.Text>
+                            <Binding Path="InputModel.HeightOfWall"
+                                     UpdateSourceTrigger="LostFocus">
+                                <Binding.ValidationRules>
+                                    <validations:RequiredNumericRule ErrorMessage="Invalid value for Height of Wall" />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
 
-                <TextBlock Margin="0,20,0,0"
-                           Padding="5"
-                           Text="Length of wall?" />
-                <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                         VerticalAlignment="Top"
-                         Height="50"
-                         TextWrapping="Wrap"
-                         materialDesign:HintAssist.Hint="10 meters">
-                    <TextBox.Text>
-                        <Binding Path="InputModel.LengthOfWall"
-                                 UpdateSourceTrigger="LostFocus">
-                            <Binding.ValidationRules>
-                                <validations:RequiredNumericRule ErrorMessage="Invalid value for Length of Wall" />
-                            </Binding.ValidationRules>
-                        </Binding>
-                    </TextBox.Text>
-                </TextBox>
+                    <TextBlock Margin="0,20,0,0"
+                               Padding="5"
+                               Text="Length of wall?" />
+                    <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                             VerticalAlignment="Top"
+                             Height="50"
+                             TextWrapping="Wrap"
+                             materialDesign:HintAssist.Hint="10 meters">
+                        <TextBox.Text>
+                            <Binding Path="InputModel.LengthOfWall"
+                                     UpdateSourceTrigger="LostFocus">
+                                <Binding.ValidationRules>
+                                    <validations:RequiredNumericRule ErrorMessage="Invalid value for Length of Wall" />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
 
-                <TextBlock Margin="0,20,0,0"
-                           Padding="5"
-                           Text="Horizontal Bar Spacing" />
-                <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                         VerticalAlignment="Top"
-                         Height="50"
-                         TextWrapping="Wrap"
-                         materialDesign:HintAssist.Hint=".2 meters">
-                    <TextBox.Text>
-                        <Binding Path="InputModel.HorizontalBarSpacing"
-                                 UpdateSourceTrigger="LostFocus">
-                            <Binding.ValidationRules>
-                                <validations:RequiredNumericRule ErrorMessage="Invalid value for Horizontal Bar Spacing" />
-                            </Binding.ValidationRules>
-                        </Binding>
-                    </TextBox.Text>
-                </TextBox>
+                    <TextBlock Margin="0,20,0,0"
+                               Padding="5"
+                               Text="Horizontal Bar Spacing" />
+                    <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                             VerticalAlignment="Top"
+                             Height="50"
+                             TextWrapping="Wrap"
+                             materialDesign:HintAssist.Hint=".2 meters">
+                        <TextBox.Text>
+                            <Binding Path="InputModel.HorizontalBarSpacing"
+                                     UpdateSourceTrigger="LostFocus">
+                                <Binding.ValidationRules>
+                                    <validations:RequiredNumericRule ErrorMessage="Invalid value for Horizontal Bar Spacing" />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
 
-                <TextBlock Margin="0,20,0,0"
-                           Padding="5"
-                           Text="Vertical Bar Spacing" />
-                <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                         VerticalAlignment="Top"
-                         Height="50"
-                         TextWrapping="Wrap"
-                         materialDesign:HintAssist.Hint=".4 meters">
-                    <TextBox.Text>
-                        <Binding Path="InputModel.VerticalBarSpacing"
-                                 UpdateSourceTrigger="LostFocus">
-                            <Binding.ValidationRules>
-                                <validations:RequiredNumericRule ErrorMessage="Invalid value for Vertical Bar Spacing" />
-                            </Binding.ValidationRules>
-                        </Binding>
-                    </TextBox.Text>
-                </TextBox>
+                    <TextBlock Margin="0,20,0,0"
+                               Padding="5"
+                               Text="Vertical Bar Spacing" />
+                    <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                             VerticalAlignment="Top"
+                             Height="50"
+                             TextWrapping="Wrap"
+                             materialDesign:HintAssist.Hint=".4 meters">
+                        <TextBox.Text>
+                            <Binding Path="InputModel.VerticalBarSpacing"
+                                     UpdateSourceTrigger="LostFocus">
+                                <Binding.ValidationRules>
+                                    <validations:RequiredNumericRule ErrorMessage="Invalid value for Vertical Bar Spacing" />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
 
-                <TextBlock Margin="0,20,0,0"
-                           Padding="5"
-                           Text="Class Mixture for Mortar" />
+                    <TextBlock Margin="0,20,0,0"
+                               Padding="5"
+                               Text="Class Mixture for Mortar" />
 
-                <StackPanel Orientation="Horizontal">
+                    <StackPanel Orientation="Horizontal">
 
-                    <RadioButton Margin="5"
-                                 x:Name="CMM_A"
-                                 GroupName="CMM"
-                                 Style="{StaticResource MaterialDesignRadioButton}"
-                                 Tag="True"
-                                 IsChecked="{Binding InputModel.ClassMixtureForMortar, Converter={StaticResource stringToBooleanConverter}, ConverterParameter=A}"
-                                 Content="A">
-                    </RadioButton>
+                        <RadioButton Margin="5"
 
-                    <RadioButton Margin="5"
-                                 x:Name="CMM_B"
-                                 GroupName="CMM"
-                                 Style="{StaticResource MaterialDesignRadioButton}"
-                                 Tag="True"
-                                 IsChecked="{Binding InputModel.ClassMixtureForMortar, Converter={StaticResource stringToBooleanConverter}, ConverterParameter=B}"
-                                 Content="B">
-                    </RadioButton>
+                                     GroupName="MASON_CMM"
+                                     Style="{StaticResource MaterialDesignRadioButton}"
+                                     Tag="True"
+                                     IsChecked="{Binding InputModel.ClassMixtureForMortar, Converter={StaticResource stringToBooleanConverter}, ConverterParameter=A}"
+                                     Content="A">
+                        </RadioButton>
 
-                    <RadioButton Margin="5"
-                                 x:Name="CMM_C"
-                                 GroupName="CMM"
-                                 Style="{StaticResource MaterialDesignRadioButton}"
-                                 Tag="True"
-                                 IsChecked="{Binding InputModel.ClassMixtureForMortar, Converter={StaticResource stringToBooleanConverter}, ConverterParameter=C}"
-                                 Content="C">
-                    </RadioButton>
+                        <RadioButton Margin="5"
+                                     GroupName="MASON_CMM"
+                                     Style="{StaticResource MaterialDesignRadioButton}"
+                                     Tag="True"
+                                     IsChecked="{Binding InputModel.ClassMixtureForMortar, Converter={StaticResource stringToBooleanConverter}, ConverterParameter=B}"
+                                     Content="B">
+                        </RadioButton>
 
-                    <RadioButton Margin="5"
-                                 x:Name="CMM_D"
-                                 GroupName="CMM"
-                                 Style="{StaticResource MaterialDesignRadioButton}"
-                                 Tag="True"
-                                 IsChecked="{Binding InputModel.ClassMixtureForMortar, Converter={StaticResource stringToBooleanConverter}, ConverterParameter=D}"
-                                 Content="D">
-                    </RadioButton>
+                        <RadioButton Margin="5"
+                                     GroupName="MASON_CMM"
+                                     Style="{StaticResource MaterialDesignRadioButton}"
+                                     Tag="True"
+                                     IsChecked="{Binding InputModel.ClassMixtureForMortar, Converter={StaticResource stringToBooleanConverter}, ConverterParameter=C}"
+                                     Content="C">
+                        </RadioButton>
+
+                        <RadioButton Margin="5"
+                                     GroupName="MASON_CMM"
+                                     Style="{StaticResource MaterialDesignRadioButton}"
+                                     Tag="True"
+                                     IsChecked="{Binding InputModel.ClassMixtureForMortar, Converter={StaticResource stringToBooleanConverter}, ConverterParameter=D}"
+                                     Content="D">
+                        </RadioButton>
+                    </StackPanel>
+
+                    <TextBlock Padding="5"
+                               Text="Class Mixture for Plaster" />
+
+                    <StackPanel Orientation="Horizontal">
+
+                        <RadioButton Margin="5"
+                                     GroupName="MASON_CMP"
+                                     Style="{StaticResource MaterialDesignRadioButton}"
+                                     Tag="True"
+                                     IsChecked="{Binding InputModel.ClassMixtureForPlaster, Converter={StaticResource stringToBooleanConverter}, ConverterParameter=A}"
+                                     Content="A">
+                        </RadioButton>
+
+                        <RadioButton Margin="5"
+                                     GroupName="MASON_CMP"
+                                     Style="{StaticResource MaterialDesignRadioButton}"
+                                     Tag="True"
+                                     IsChecked="{Binding InputModel.ClassMixtureForPlaster, Converter={StaticResource stringToBooleanConverter}, ConverterParameter=B}"
+                                     Content="B">
+                        </RadioButton>
+
+                        <RadioButton Margin="5"
+                                     GroupName="MASON_CMP"
+                                     Style="{StaticResource MaterialDesignRadioButton}"
+                                     Tag="True"
+                                     IsChecked="{Binding InputModel.ClassMixtureForPlaster, Converter={StaticResource stringToBooleanConverter}, ConverterParameter=C}"
+                                     Content="C">
+                        </RadioButton>
+
+                        <RadioButton Margin="5"
+                                     GroupName="MASON_CMP"
+                                     Style="{StaticResource MaterialDesignRadioButton}"
+                                     Tag="True"
+                                     IsChecked="{Binding InputModel.ClassMixtureForPlaster, Converter={StaticResource stringToBooleanConverter}, ConverterParameter=D}"
+                                     Content="D">
+                        </RadioButton>
+                    </StackPanel>
+
+                    <TextBlock Padding="5"
+                               Text="Plaster Thickness" />
+
+                    <StackPanel Orientation="Horizontal"
+                                Margin="0,0,0,10">
+
+                        <RadioButton Margin="5"
+                                     GroupName="MASON_THK_MM"
+                                     Style="{StaticResource MaterialDesignRadioButton}"
+                                     Tag="True"
+                                     IsChecked="{Binding InputModel.ThicknessInMillimeter, Converter={StaticResource decimalToBooleanConverter}, ConverterParameter=8}"
+                                     Content="8mm">
+                        </RadioButton>
+
+                        <RadioButton Margin="5"
+                                     GroupName="MASON_THK_MM"
+                                     Style="{StaticResource MaterialDesignRadioButton}"
+                                     Tag="True"
+                                     IsChecked="{Binding InputModel.ThicknessInMillimeter, Converter={StaticResource decimalToBooleanConverter}, ConverterParameter=12}"
+                                     Content="12mm">
+                        </RadioButton>
+
+                        <RadioButton Margin="5"
+                                     GroupName="MASON_THK_MM"
+                                     Style="{StaticResource MaterialDesignRadioButton}"
+                                     Tag="True"
+                                     IsChecked="{Binding InputModel.ThicknessInMillimeter, Converter={StaticResource decimalToBooleanConverter}, ConverterParameter=16}"
+                                     Content="16mm">
+                        </RadioButton>
+
+                        <RadioButton Margin="5"
+                                     GroupName="MASON_THK_MM"
+                                     Style="{StaticResource MaterialDesignRadioButton}"
+                                     Tag="True"
+                                     IsChecked="{Binding InputModel.ThicknessInMillimeter, Converter={StaticResource decimalToBooleanConverter}, ConverterParameter=20}"
+                                     Content="20mm">
+                        </RadioButton>
+
+                        <RadioButton Margin="5"
+                                     GroupName="MASON_THK_MM"
+                                     Style="{StaticResource MaterialDesignRadioButton}"
+                                     Tag="True"
+                                     IsChecked="{Binding InputModel.ThicknessInMillimeter, Converter={StaticResource decimalToBooleanConverter}, ConverterParameter=25}"
+                                     Content="25mm">
+                        </RadioButton>
+                    </StackPanel>
+
+                    <Button Command="{Binding CalculateCommand}">Calculate</Button>
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="6*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <GroupBox Visibility="{Binding IsResultVisible, Converter={StaticResource booleanToVisibilityConverter}}"
+                                  Grid.Column="1"
+                                  Width="Auto"
+                                  VerticalAlignment="Center"
+                                  HorizontalAlignment="Center"
+                                  Header="Result"
+                                  Margin="16">
+                            <GroupBox.Content>
+                                <StackPanel>
+                                    <!--Hollowblocks-->
+                                    <TextBlock FontSize="32"
+                                               Text="{Binding OutputModel.ConcreteHollowBlocks}" />
+                                    <!--Cement-->
+                                    <TextBlock FontSize="32"
+                                               Text="{Binding OutputModel.Cement}" />
+                                    <!--Sand-->
+                                    <TextBlock FontSize="32"
+                                               Text="{Binding OutputModel.Sand}" />
+                                    <!--Horizontal Bars-->
+                                    <TextBlock FontSize="32"
+                                               Text="{Binding OutputModel.HorizontalBars}" />
+                                    <!--Vertical Bars-->
+                                    <TextBlock FontSize="32"
+                                               Text="{Binding OutputModel.VerticalBars}" />
+                                </StackPanel>
+                            </GroupBox.Content>
+                        </GroupBox>
+                    </Grid>
                 </StackPanel>
-
-                <TextBlock Padding="5"
-                           Text="Class Mixture for Plaster" />
-
-                <StackPanel Orientation="Horizontal">
-
-                    <RadioButton Margin="5"
-                                 GroupName="CMP"
-                                 Style="{StaticResource MaterialDesignRadioButton}"
-                                 Tag="True"
-                                 IsChecked="{Binding InputModel.ClassMixtureForPlaster, Converter={StaticResource stringToBooleanConverter}, ConverterParameter=A}"
-                                 Content="A">
-                    </RadioButton>
-
-                    <RadioButton Margin="5"
-                                 GroupName="CMP"
-                                 Style="{StaticResource MaterialDesignRadioButton}"
-                                 Tag="True"
-                                 IsChecked="{Binding InputModel.ClassMixtureForPlaster, Converter={StaticResource stringToBooleanConverter}, ConverterParameter=B}"
-                                 Content="B">
-                    </RadioButton>
-
-                    <RadioButton Margin="5"
-                                 GroupName="CMP"
-                                 Style="{StaticResource MaterialDesignRadioButton}"
-                                 Tag="True"
-                                 IsChecked="{Binding InputModel.ClassMixtureForPlaster, Converter={StaticResource stringToBooleanConverter}, ConverterParameter=C}"
-                                 Content="C">
-                    </RadioButton>
-
-                    <RadioButton Margin="5"
-                                 GroupName="CMP"
-                                 Style="{StaticResource MaterialDesignRadioButton}"
-                                 Tag="True"
-                                 IsChecked="{Binding InputModel.ClassMixtureForPlaster, Converter={StaticResource stringToBooleanConverter}, ConverterParameter=D}"
-                                 Content="D">
-                    </RadioButton>
-                </StackPanel>
-
-                <TextBlock Padding="5"
-                           Text="Plaster Thickness" />
-
-                <StackPanel Orientation="Horizontal"
-                            Margin="0,0,0,10">
-
-                    <RadioButton Margin="5"
-                                 GroupName="THK_MM"
-                                 Style="{StaticResource MaterialDesignRadioButton}"
-                                 Tag="True"
-                                 IsChecked="{Binding InputModel.ThicknessInMillimeter, Converter={StaticResource decimalToBooleanConverter}, ConverterParameter=8}"
-                                 Content="8mm">
-                    </RadioButton>
-
-                    <RadioButton Margin="5"
-                                 GroupName="THK_MM"
-                                 Style="{StaticResource MaterialDesignRadioButton}"
-                                 Tag="True"
-                                 IsChecked="{Binding InputModel.ThicknessInMillimeter, Converter={StaticResource decimalToBooleanConverter}, ConverterParameter=12}"
-                                 Content="12mm">
-                    </RadioButton>
-
-                    <RadioButton Margin="5"
-                                 GroupName="THK_MM"
-                                 Style="{StaticResource MaterialDesignRadioButton}"
-                                 Tag="True"
-                                 IsChecked="{Binding InputModel.ThicknessInMillimeter, Converter={StaticResource decimalToBooleanConverter}, ConverterParameter=16}"
-                                 Content="16mm">
-                    </RadioButton>
-
-                    <RadioButton Margin="5"
-                                 GroupName="THK_MM"
-                                 Style="{StaticResource MaterialDesignRadioButton}"
-                                 Tag="True"
-                                 IsChecked="{Binding InputModel.ThicknessInMillimeter, Converter={StaticResource decimalToBooleanConverter}, ConverterParameter=20}"
-                                 Content="20mm">
-                    </RadioButton>
-
-                    <RadioButton Margin="5"
-                                 GroupName="THK_MM"
-                                 Style="{StaticResource MaterialDesignRadioButton}"
-                                 Tag="True"
-                                 IsChecked="{Binding InputModel.ThicknessInMillimeter, Converter={StaticResource decimalToBooleanConverter}, ConverterParameter=25}"
-                                 Content="25mm">
-                    </RadioButton>
-                </StackPanel>
-
-                <Button Command="{Binding CalculateCommand}">Calculate</Button>
-
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="6*" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-
-                    <GroupBox Visibility="{Binding IsResultVisible, Converter={StaticResource booleanToVisibilityConverter}}"
-                              Grid.Column="1"
-                              Width="Auto"
-                              VerticalAlignment="Center"
-                              HorizontalAlignment="Center"
-                              Header="Result"
-                              Margin="16">
-                        <GroupBox.Content>
-                            <StackPanel>
-                                <!--Hollowblocks-->
-                                <TextBlock FontSize="32"
-                                           Text="{Binding OutputModel.ConcreteHollowBlocks}" />
-                                <!--Cement-->
-                                <TextBlock FontSize="32"
-                                           Text="{Binding OutputModel.Cement}" />
-                                <!--Sand-->
-                                <TextBlock FontSize="32"
-                                           Text="{Binding OutputModel.Sand}" />
-                                <!--Horizontal Bars-->
-                                <TextBlock FontSize="32"
-                                           Text="{Binding OutputModel.HorizontalBars}" />
-                                <!--Vertical Bars-->
-                                <TextBlock FontSize="32"
-                                           Text="{Binding OutputModel.VerticalBars}" />
-                            </StackPanel>
-                        </GroupBox.Content>
-                    </GroupBox>
-                </Grid>
-            </StackPanel>
-        </ScrollViewer>
+            </ScrollViewer>
+        </AdornerDecorator>
     </materialDesign:DialogHost>
 </UserControl>
