@@ -29,7 +29,7 @@
                              materialDesign:HintAssist.Hint="3m">
                         <TextBox.Text>
                             <Binding Path="InputModel.HeightOfWall"
-                                     UpdateSourceTrigger="LostFocus">
+                                     UpdateSourceTrigger="PropertyChanged">
                                 <Binding.ValidationRules>
                                     <validations:RequiredNumericRule ErrorMessage="Invalid value for Height of Wall" />
                                 </Binding.ValidationRules>
@@ -47,7 +47,7 @@
                              materialDesign:HintAssist.Hint="10 meters">
                         <TextBox.Text>
                             <Binding Path="InputModel.LengthOfWall"
-                                     UpdateSourceTrigger="LostFocus">
+                                     UpdateSourceTrigger="PropertyChanged">
                                 <Binding.ValidationRules>
                                     <validations:RequiredNumericRule ErrorMessage="Invalid value for Length of Wall" />
                                 </Binding.ValidationRules>
@@ -65,7 +65,7 @@
                              materialDesign:HintAssist.Hint=".2 meters">
                         <TextBox.Text>
                             <Binding Path="InputModel.HorizontalBarSpacing"
-                                     UpdateSourceTrigger="LostFocus">
+                                     UpdateSourceTrigger="PropertyChanged">
                                 <Binding.ValidationRules>
                                     <validations:RequiredNumericRule ErrorMessage="Invalid value for Horizontal Bar Spacing" />
                                 </Binding.ValidationRules>
@@ -83,7 +83,7 @@
                              materialDesign:HintAssist.Hint=".4 meters">
                         <TextBox.Text>
                             <Binding Path="InputModel.VerticalBarSpacing"
-                                     UpdateSourceTrigger="LostFocus">
+                                     UpdateSourceTrigger="PropertyChanged">
                                 <Binding.ValidationRules>
                                     <validations:RequiredNumericRule ErrorMessage="Invalid value for Vertical Bar Spacing" />
                                 </Binding.ValidationRules>
@@ -98,7 +98,6 @@
                     <StackPanel Orientation="Horizontal">
 
                         <RadioButton Margin="5"
-
                                      GroupName="MASON_CMM"
                                      Style="{StaticResource MaterialDesignRadioButton}"
                                      Tag="True"

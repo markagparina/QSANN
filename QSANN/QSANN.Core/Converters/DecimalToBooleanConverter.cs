@@ -25,6 +25,6 @@ public class DecimalToBooleanConverter : IValueConverter
             return decimal.Parse(parameter.ToString(), CultureInfo.InvariantCulture);
         }
 
-        return 0;
+        return Binding.DoNothing;
     }
 }

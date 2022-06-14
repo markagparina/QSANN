@@ -14,130 +14,130 @@
     </UserControl.Resources>
     <materialDesign:DialogHost>
 
-
         <AdornerDecorator>
-            <StackPanel Orientation="Vertical" Name="ConcreteBeam">
+            <StackPanel Orientation="Vertical"
+                        Name="ConcreteBeam">
                 <TextBlock Margin="0,20,0,0"
-                       Padding="5"
-                       Text="Length of Beam?" />
+                           Padding="5"
+                           Text="Length of Beam?" />
 
                 <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                     VerticalAlignment="Top"
-                     Height="50"
-                     TextWrapping="Wrap"
-                     materialDesign:HintAssist.Hint="3m">
+                         VerticalAlignment="Top"
+                         Height="50"
+                         TextWrapping="Wrap"
+                         materialDesign:HintAssist.Hint="3m">
                     <TextBox.Text>
                         <Binding Path="InputModel.LengthOfBeam"
-                             UpdateSourceTrigger="LostFocus">
+                                 UpdateSourceTrigger="PropertyChanged">
                             <Binding.ValidationRules>
                                 <validations:RequiredNumericRule InitialMessage="This field is required"
-                                                             ErrorMessage="Invalid value for Length of Beam"
-                                                             ValidatesOnTargetUpdated="True" />
+                                                                 ErrorMessage="Invalid value for Length of Beam"
+                                                                 ValidatesOnTargetUpdated="True" />
                             </Binding.ValidationRules>
                         </Binding>
                     </TextBox.Text>
                 </TextBox>
 
                 <TextBlock Margin="0,20,0,0"
-                       Padding="5"
-                       Text="Width of Beam?" />
+                           Padding="5"
+                           Text="Width of Beam?" />
 
                 <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                     VerticalAlignment="Top"
-                     Height="50"
-                     TextWrapping="Wrap"
-                     materialDesign:HintAssist.Hint="3m">
+                         VerticalAlignment="Top"
+                         Height="50"
+                         TextWrapping="Wrap"
+                         materialDesign:HintAssist.Hint="3m">
                     <TextBox.Text>
                         <Binding Path="InputModel.WidthOfBeam"
-                             UpdateSourceTrigger="LostFocus">
+                                 UpdateSourceTrigger="PropertyChanged">
                             <Binding.ValidationRules>
                                 <validations:RequiredNumericRule InitialMessage="This field is required"
-                                                             ErrorMessage="Invalid value for Width of Beam"
-                                                             ValidatesOnTargetUpdated="True" />
+                                                                 ErrorMessage="Invalid value for Width of Beam"
+                                                                 ValidatesOnTargetUpdated="True" />
                             </Binding.ValidationRules>
                         </Binding>
                     </TextBox.Text>
                 </TextBox>
 
                 <TextBlock Margin="0,20,0,0"
-                       Padding="5"
-                       Text="Height of Beam?" />
+                           Padding="5"
+                           Text="Height of Beam?" />
 
                 <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                     VerticalAlignment="Top"
-                     Height="50"
-                     TextWrapping="Wrap"
-                     materialDesign:HintAssist.Hint="3m">
+                         VerticalAlignment="Top"
+                         Height="50"
+                         TextWrapping="Wrap"
+                         materialDesign:HintAssist.Hint="3m">
                     <TextBox.Text>
                         <Binding Path="InputModel.HeightOfBeam"
-                             UpdateSourceTrigger="LostFocus">
+                                 UpdateSourceTrigger="PropertyChanged">
                             <Binding.ValidationRules>
                                 <validations:RequiredNumericRule InitialMessage="This field is required"
-                                                             ErrorMessage="Invalid value for Height of Beam"
-                                                             ValidatesOnTargetUpdated="True" />
+                                                                 ErrorMessage="Invalid value for Height of Beam"
+                                                                 ValidatesOnTargetUpdated="True" />
                             </Binding.ValidationRules>
                         </Binding>
                     </TextBox.Text>
                 </TextBox>
 
                 <TextBlock Margin="0,20,0,0"
-                       Padding="5"
-                       Text="Numbers of Count/s?" />
+                           Padding="5"
+                           Text="Numbers of Count/s?" />
 
                 <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                     VerticalAlignment="Top"
-                     Height="50"
-                     Margin="0,0,0,20"
-                     TextWrapping="Wrap"
-                     materialDesign:HintAssist.Hint="3">
+                         VerticalAlignment="Top"
+                         Height="50"
+                         Margin="0,0,0,20"
+                         TextWrapping="Wrap"
+                         materialDesign:HintAssist.Hint="3">
                     <TextBox.Text>
                         <Binding Path="InputModel.NumbersOfCount"
-                             UpdateSourceTrigger="LostFocus">
+                                 UpdateSourceTrigger="PropertyChanged">
                             <Binding.ValidationRules>
                                 <validations:RequiredNumericRule InitialMessage="This field is required"
-                                                             ErrorMessage="Invalid value for Numbers of Count/s"
-                                                             ValidatesOnTargetUpdated="True" />
+                                                                 ErrorMessage="Invalid value for Numbers of Count/s"
+                                                                 ValidatesOnTargetUpdated="True" />
                             </Binding.ValidationRules>
                         </Binding>
                     </TextBox.Text>
                 </TextBox>
 
                 <TextBlock Padding="5"
-                       Text="Class Mixture" />
+                           Text="Class Mixture" />
 
                 <StackPanel Orientation="Horizontal"
-                        Margin="0,0,0,10">
+                            Margin="0,0,0,10">
 
                     <RadioButton Margin="5"
-                             GroupName="CONC_BEAM_CM"
-                             Style="{StaticResource MaterialDesignRadioButton}"
-                             Tag="True"
-                             IsChecked="{Binding InputModel.ClassMixture, Converter={StaticResource stringToBooleanConverter}, ConverterParameter=AA}"
-                             Content="AA">
+                                 GroupName="CONC_BEAM_CM"
+                                 Style="{StaticResource MaterialDesignRadioButton}"
+                                 Tag="True"
+                                 IsChecked="{Binding InputModel.ClassMixture, Converter={StaticResource stringToBooleanConverter}, ConverterParameter=AA}"
+                                 Content="AA">
                     </RadioButton>
 
                     <RadioButton Margin="5"
-                             GroupName="CONC_BEAM_CM"
-                             Style="{StaticResource MaterialDesignRadioButton}"
-                             Tag="True"
-                             IsChecked="{Binding InputModel.ClassMixture, Converter={StaticResource stringToBooleanConverter}, ConverterParameter=A}"
-                             Content="A">
+                                 GroupName="CONC_BEAM_CM"
+                                 Style="{StaticResource MaterialDesignRadioButton}"
+                                 Tag="True"
+                                 IsChecked="{Binding InputModel.ClassMixture, Converter={StaticResource stringToBooleanConverter}, ConverterParameter=A}"
+                                 Content="A">
                     </RadioButton>
 
                     <RadioButton Margin="5"
-                             GroupName="CONC_BEAM_CM"
-                             Style="{StaticResource MaterialDesignRadioButton}"
-                             Tag="True"
-                             IsChecked="{Binding InputModel.ClassMixture, Converter={StaticResource stringToBooleanConverter}, ConverterParameter=B}"
-                             Content="B">
+                                 GroupName="CONC_BEAM_CM"
+                                 Style="{StaticResource MaterialDesignRadioButton}"
+                                 Tag="True"
+                                 IsChecked="{Binding InputModel.ClassMixture, Converter={StaticResource stringToBooleanConverter}, ConverterParameter=B}"
+                                 Content="B">
                     </RadioButton>
 
                     <RadioButton Margin="5"
-                             GroupName="CONC_BEAM_CM"
-                             Style="{StaticResource MaterialDesignRadioButton}"
-                             Tag="True"
-                             IsChecked="{Binding InputModel.ClassMixture, Converter={StaticResource stringToBooleanConverter}, ConverterParameter=C}"
-                             Content="C">
+                                 GroupName="CONC_BEAM_CM"
+                                 Style="{StaticResource MaterialDesignRadioButton}"
+                                 Tag="True"
+                                 IsChecked="{Binding InputModel.ClassMixture, Converter={StaticResource stringToBooleanConverter}, ConverterParameter=C}"
+                                 Content="C">
                     </RadioButton>
                 </StackPanel>
 
@@ -151,23 +151,23 @@
                     </Grid.ColumnDefinitions>
 
                     <GroupBox Visibility="{Binding IsResultVisible, Converter={StaticResource booleanToVisibilityConverter}}"
-                          Grid.Column="1"
-                          Width="Auto"
-                          VerticalAlignment="Center"
-                          HorizontalAlignment="Center"
-                          Header="Result"
-                          Margin="16">
+                              Grid.Column="1"
+                              Width="Auto"
+                              VerticalAlignment="Center"
+                              HorizontalAlignment="Center"
+                              Header="Result"
+                              Margin="16">
                         <GroupBox.Content>
                             <StackPanel>
                                 <!--Cement-->
                                 <TextBlock FontSize="32"
-                                       Text="{Binding OutputModel.CementMixture}" />
+                                           Text="{Binding OutputModel.CementMixture}" />
                                 <!--Sand-->
                                 <TextBlock FontSize="32"
-                                       Text="{Binding OutputModel.Sand}" />
+                                           Text="{Binding OutputModel.Sand}" />
                                 <!--Gravel-->
                                 <TextBlock FontSize="32"
-                                       Text="{Binding OutputModel.Gravel}" />
+                                           Text="{Binding OutputModel.Gravel}" />
                             </StackPanel>
                         </GroupBox.Content>
                     </GroupBox>

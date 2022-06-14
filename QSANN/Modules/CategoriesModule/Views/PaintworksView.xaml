@@ -30,7 +30,7 @@
                              materialDesign:HintAssist.Hint="3m&#x00B2;">
                         <TextBox.Text>
                             <Binding Path="InputModel.AreaOfApplication"
-                                     UpdateSourceTrigger="LostFocus">
+                                     UpdateSourceTrigger="PropertyChanged">
                                 <Binding.ValidationRules>
                                     <validations:RequiredNumericRule ErrorMessage="Invalid value for Area of Application"
                                                                      InitialMessage="This field is required"

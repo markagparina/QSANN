@@ -5,10 +5,14 @@
 	</PropertyGroup>
 	<ItemGroup>
 		<PackageReference Include="Mapster" Version="7.3.0" />
+		<PackageReference Include="Prism.Core" Version="8.1.97" />
 		<PackageReference Include="Prism.Wpf" Version="8.1.97" />
 		<PackageReference Include="FluentValidation" Version="11.0.2" />
 		<PackageReference Include="MaterialDesignThemes" Version="4.5.0" />
 		<PackageReference Include="Prism.Unity" Version="8.1.97" />
 		<PackageReference Include="Prism.Unity.Extensions" Version="8.0.62" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ProjectReference Include="..\..\QSANN.Data\QSANN.Data.csproj" />
 	</ItemGroup>
 </Project>

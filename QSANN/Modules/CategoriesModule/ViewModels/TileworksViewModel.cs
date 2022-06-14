@@ -12,10 +12,12 @@ using QSANN.Data.Entities;
 using QSANN.Services.Interfaces;
 using System;
 using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
 namespace CategoriesModule.ViewModels
 {
+    [Display(Name = "Tile works")]
     public class TileworksViewModel : MenuItem<TileworksInputModel, TileworksInput>
     {
         private ObservableCollection<TileworksMultiplierModel> _multipliers;
@@ -32,15 +34,7 @@ namespace CategoriesModule.ViewModels
         public override TileworksInputModel InputModel { get; set; } = new();
         public TileworksOutputModel OutputModel { get; set; } = new();
 
-        private bool _isResultVisible;
-
-        public bool IsResultVisible
-        {
-            get { return _isResultVisible; }
-            set { SetProperty(ref _isResultVisible, value); }
-        }
-
-        public override string Title => "Tileworks";
+        public override string Title => "Tile works";
 
         private DelegateCommandWithValidator<TileworksInputModel, TileworksInputValidator> _calculateCommand;
 
@@ -74,13 +68,26 @@ namespace CategoriesModule.ViewModels
 
         protected override void LoadProjectInput(Guid projectId)
         {
-            var tileworkProject = _context.Set<TileworksInput>().FirstOrDefault(tilework => tilework.ProjectId == projectId);
+            var tileworkProject = Context.Set<TileworksInput>().FirstOrDefault(tilework => tilework.ProjectId == projectId);
 
             if (tileworkProject is not null)
             {
                 InputModel.SelectedMultiplier = Multipliers.FirstOrDefault(multiplier => multiplier.Name == tileworkProject.SelectedMultiplier);
                 InputModel.AreaOfWorkDesignation = tileworkProject.AreaOfWorkDesignation;
             }
+        }
+
+        protected override void SaveProjectInput(Guid projectId)
+        {
+            var tileworkProject = Context.Set<TileworksInput>().FirstOrDefault(tilework => tilework.ProjectId == projectId);
+
+            if (tileworkProject is not null)
+            {
+                tileworkProject.SelectedMultiplier = InputModel.SelectedMultiplier?.Name;
+                tileworkProject.AreaOfWorkDesignation = InputModel.AreaOfWorkDesignation;
+            }
+
+            Context.SaveChanges();
         }
     }
 }

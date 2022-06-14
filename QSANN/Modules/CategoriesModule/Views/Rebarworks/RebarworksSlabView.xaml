@@ -29,7 +29,7 @@
                          materialDesign:HintAssist.Hint="3m&#x00B2;">
                     <TextBox.Text>
                         <Binding Path="InputModel.FloorArea"
-                                 UpdateSourceTrigger="LostFocus">
+                                 UpdateSourceTrigger="PropertyChanged">
                             <Binding.ValidationRules>
                                 <validations:RequiredNumericRule ErrorMessage="Invalid value for Floor Area"
                                                                  InitialMessage="This field is required"
@@ -51,7 +51,7 @@
                          materialDesign:HintAssist.Hint="5 millimeter">
                     <TextBox.Text>
                         <Binding Path="InputModel.SizeOfSteelbar"
-                                 UpdateSourceTrigger="LostFocus">
+                                 UpdateSourceTrigger="PropertyChanged">
                             <Binding.ValidationRules>
                                 <validations:RequiredNumericRule ErrorMessage="Invalid value for Size of Steel bar"
                                                                  InitialMessage="This field is required"

@@ -27,14 +27,6 @@ public class RebarworksColumnViewModel : ViewModelBase<RebarworksColumnInputMode
     public override RebarworksColumnInputModel InputModel { get; set; } = new();
     public RebarworksColumnOutputModel OutputModel { get; set; } = new();
 
-    private bool _isResultVisible;
-
-    public bool IsResultVisible
-    {
-        get { return _isResultVisible; }
-        set { SetProperty(ref _isResultVisible, value); }
-    }
-
     public RebarworksColumnViewModel(IRebarworksColumnCalculatorService rebarworksColumnCalculatorService, AppDbContext context, IEventAggregator eventAggregator)
     : base(context, eventAggregator)
     {

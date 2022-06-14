@@ -2,9 +2,11 @@
 using Prism.Regions;
 using QSANN.Core;
 using QSANN.Core.Navigation;
+using System.ComponentModel.DataAnnotations;
 
 namespace CategoriesModule.ViewModels
 {
+    [Display(Name = "Formworks and Scaffoldings")]
     public class FormworksViewModel : MenuItem
     {
         private readonly IRegionManager _regionManager;

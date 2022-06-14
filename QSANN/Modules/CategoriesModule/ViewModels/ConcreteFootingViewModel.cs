@@ -29,14 +29,6 @@ public class ConcreteFootingViewModel : ViewModelBase<ConcreteFootingInputModel,
     public override ConcreteFootingInputModel InputModel { get; set; } = new();
     public ConcreteFootingOutputModel OutputModel { get; set; } = new();
 
-    private bool _isResultVisible;
-
-    public bool IsResultVisible
-    {
-        get { return _isResultVisible; }
-        set { SetProperty(ref _isResultVisible, value); }
-    }
-
     public ConcreteFootingViewModel(IConcreteCalculatorService concreteCalculatorService, AppDbContext context, IEventAggregator eventAggregator)
     : base(context, eventAggregator)
     {

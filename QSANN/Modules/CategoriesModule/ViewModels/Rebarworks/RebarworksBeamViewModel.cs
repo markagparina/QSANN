@@ -29,14 +29,6 @@ public class RebarworksBeamViewModel : ViewModelBase<RebarworksBeamInputModel, R
     public override RebarworksBeamInputModel InputModel { get; set; } = new();
     public RebarworksBeamOutputModel OutputModel { get; set; } = new();
 
-    private bool _isResultVisible;
-
-    public bool IsResultVisible
-    {
-        get { return _isResultVisible; }
-        set { SetProperty(ref _isResultVisible, value); }
-    }
-
     public RebarworksBeamViewModel(IRebarworksBeamCalculatorService beamCalculatorService, AppDbContext context, IEventAggregator eventAggregator)
     : base(context, eventAggregator)
     {

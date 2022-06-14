@@ -14,14 +14,15 @@ using QSANN.Services.Interfaces.Models;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.ComponentModel.DataAnnotations;
 
 namespace CategoriesModule.ViewModels
 {
+    [Display(Name = "Carpentry Works")]
     public class CarpentryworksViewModel : MenuItem<CarpentryworksInputModel, CarpentryworksInput>
     {
         private ObservableCollection<CarpentryworksMultiplierModel> _multipliers;
         private readonly ICarpentryworksCalculatorService _carpentryworksCalculatorService;
-        private readonly AppDbContext _context;
         private readonly CarpentryworksInputValidator _validator = new();
 
         public ObservableCollection<CarpentryworksMultiplierModel> Multipliers
@@ -32,14 +33,6 @@ namespace CategoriesModule.ViewModels
 
         public override CarpentryworksInputModel InputModel { get; set; } = new();
         public CarpentryworksOutputModel OutputModel { get; set; } = new();
-
-        private bool _isResultVisible;
-
-        public bool IsResultVisible
-        {
-            get { return _isResultVisible; }
-            set { SetProperty(ref _isResultVisible, value); }
-        }
 
         public override string Title => "Carpentry Works";
 
@@ -53,7 +46,6 @@ namespace CategoriesModule.ViewModels
             AppDbContext context, IEventAggregator eventAggregator) : base(regionManager, context, eventAggregator)
         {
             _carpentryworksCalculatorService = carpentryworksCalculatorService;
-            _context = context;
             Multipliers = new ObservableCollection<CarpentryworksMultiplierModel>(_carpentryworksCalculatorService.GetMultipliers());
         }
 

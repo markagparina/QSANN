@@ -2,12 +2,14 @@
 using Prism.Regions;
 using QSANN.Core;
 using QSANN.Core.Navigation;
+using System.ComponentModel.DataAnnotations;
 
 namespace CategoriesModule.ViewModels
 {
+    [Display(Name = "Rebar works")]
     public class RebarworksViewModel : MenuItem
     {
-        public override string Title => "Rebarworks";
+        public override string Title => "Rebar works";
 
         private string _selectedTab;
         private readonly IRegionManager _regionManager;

@@ -18,7 +18,6 @@ namespace CategoriesModule.ViewModels
     public class FormworksBeamViewModel : ViewModelBase<FormworksBeamInputModel, FormworksBeamInput>
     {
         private readonly IFormworksBeamCalculatorService _formworksBeamCalculatorService;
-        private readonly AppDbContext _context;
         private DelegateCommandWithValidator<FormworksBeamInputModel, FormworksBeamInputValidator> _calculateCommand;
         private readonly FormworksBeamInputValidator _validator = new();
 
@@ -28,20 +27,10 @@ namespace CategoriesModule.ViewModels
         public override FormworksBeamInputModel InputModel { get; set; } = new();
         public FormworksBeamOutputModel OutputModel { get; set; } = new();
 
-        private bool _isResultVisible;
-
-        public bool IsResultVisible
-        {
-            get { return _isResultVisible; }
-            set { SetProperty(ref _isResultVisible, value); }
-        }
-
         public FormworksBeamViewModel(IFormworksBeamCalculatorService formworksBeamCalculatorService, AppDbContext context, IEventAggregator eventAggregator)
         : base(context, eventAggregator)
         {
             _formworksBeamCalculatorService = formworksBeamCalculatorService;
-            _context = context;
-            //eventAggregator.GetEvent<LoadProjectEvent>().Subscribe(LoadProjectInput, ThreadOption.UIThread);
         }
 
         private void ExecuteCalculateCommand()
@@ -56,20 +45,5 @@ namespace CategoriesModule.ViewModels
 
             IsResultVisible = true;
         }
-
-        //private void LoadProjectInput(Guid projectId)
-        //{
-        //    var beamProject = _context.Set<FormworksBeamInput>().FirstOrDefault(Beam => Beam.ProjectId == projectId);
-
-        //    if (beamProject is not null)
-        //    {
-        //        InputModel.LengthOfBeam = beamProject.LengthOfBeam;
-        //        InputModel.WidthOfBeam = beamProject.WidthOfBeam;
-        //        InputModel.HeightOfBeam = beamProject.HeightOfBeam;
-        //        InputModel.NumberOfCounts = beamProject.NumberOfCounts;
-        //        InputModel.LumberSize = beamProject.LumberSize;
-        //        InputModel.ThicknessOfPlywood = beamProject.ThicknessOfPlywood;
-        //    }
-        //}
     }
 }

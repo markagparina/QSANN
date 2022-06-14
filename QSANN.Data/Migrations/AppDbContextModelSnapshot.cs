@@ -423,7 +423,7 @@ namespace QSANN.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Project");
+                    b.ToTable("Project", (string)null);
                 });
 
             modelBuilder.Entity("QSANN.Data.Entities.RebarworksBeamInput", b =>

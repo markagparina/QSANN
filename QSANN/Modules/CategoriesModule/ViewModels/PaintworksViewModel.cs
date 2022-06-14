@@ -4,19 +4,19 @@ using CategoriesModule.Validators;
 using Prism.Events;
 using Prism.Regions;
 using QSANN.Core.Commands;
-using QSANN.Core.Events;
 using QSANN.Core.Extensions;
 using QSANN.Core.Navigation;
 using QSANN.Data;
 using QSANN.Data.Entities;
 using QSANN.Services.Interfaces;
 using QSANN.Services.Interfaces.Models;
-using System;
 using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
 namespace CategoriesModule.ViewModels
 {
+    [Display(Name = "Paint works")]
     public class PaintworksViewModel : MenuItem<PaintworksInputModel, PaintworksInput>
     {
         private ObservableCollection<PaintworksMultiplierModel> _multipliers;
@@ -33,15 +33,7 @@ namespace CategoriesModule.ViewModels
         public override PaintworksInputModel InputModel { get; set; } = new();
         public PaintworksOutputModel OutputModel { get; set; } = new();
 
-        private bool _isResultVisible;
-
-        public bool IsResultVisible
-        {
-            get { return _isResultVisible; }
-            set { SetProperty(ref _isResultVisible, value); }
-        }
-
-        public override string Title => "Paintworks";
+        public override string Title => "Paint works";
 
         private DelegateCommandWithValidator<PaintworksInputModel, PaintworksInputValidator> _calculateCommand;
 
@@ -74,12 +66,6 @@ namespace CategoriesModule.ViewModels
             OutputModel.Neutralizer = $"{neutralizer:N2} liters of Neutralizer";
 
             IsResultVisible = true;
-        }
-
-        protected override void LoadProjectInput(Guid projectId)
-        {
-            base.LoadProjectInput(projectId);
-            CalculateCommand.Execute();
         }
     }
 }

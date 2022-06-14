@@ -40,9 +40,9 @@ namespace QSANN.Data
 
             foreach (var entity in added)
             {
-                if (entity is AuditableProjectEntity)
+                if (entity is AuditableEntity)
                 {
-                    var track = entity as AuditableProjectEntity;
+                    var track = entity as AuditableEntity;
                     track.DateCreated = DateTime.UtcNow;
                 }
             }
@@ -54,9 +54,9 @@ namespace QSANN.Data
 
             foreach (var entity in modified)
             {
-                if (entity is AuditableProjectEntity)
+                if (entity is AuditableEntity)
                 {
-                    var track = entity as AuditableProjectEntity;
+                    var track = entity as AuditableEntity;
                     track.LastUpdated = DateTime.UtcNow;
                 }
             }

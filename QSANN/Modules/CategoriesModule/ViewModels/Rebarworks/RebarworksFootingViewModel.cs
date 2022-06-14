@@ -29,14 +29,6 @@ public class RebarworksFootingViewModel : ViewModelBase<RebarworksFootingInputMo
     public override RebarworksFootingInputModel InputModel { get; set; } = new();
     public RebarworksFootingOutputModel OutputModel { get; set; } = new();
 
-    private bool _isResultVisible;
-
-    public bool IsResultVisible
-    {
-        get { return _isResultVisible; }
-        set { SetProperty(ref _isResultVisible, value); }
-    }
-
     public RebarworksFootingViewModel(IRebarworksFootingCalculatorService rebarworksFootingCalculatorService, AppDbContext context, IEventAggregator eventAggregator)
     : base(context, eventAggregator)
     {

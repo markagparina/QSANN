@@ -40,14 +40,6 @@ public class ConcreteOtherViewModel : ViewModelBase<ConcreteOtherInputModel, Con
         }
     );
 
-    private bool _isResultVisible;
-
-    public bool IsResultVisible
-    {
-        get { return _isResultVisible; }
-        set { SetProperty(ref _isResultVisible, value); }
-    }
-
     private ConcreteSpecificationModel _selectedSpecification;
 
     public ConcreteSpecificationModel SelectedSpecification

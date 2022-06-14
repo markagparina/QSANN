@@ -26,7 +26,7 @@
                          materialDesign:HintAssist.Hint="3m">
                     <TextBox.Text>
                         <Binding Path="InputModel.LengthOfColumn"
-                                 UpdateSourceTrigger="LostFocus">
+                                 UpdateSourceTrigger="PropertyChanged">
                             <Binding.ValidationRules>
                                 <validations:RequiredNumericRule InitialMessage="This field is required"
                                                                  ErrorMessage="Invalid value for Height of Wall"
@@ -47,7 +47,7 @@
                          materialDesign:HintAssist.Hint="3m">
                     <TextBox.Text>
                         <Binding Path="InputModel.WidthOfColumn"
-                                 UpdateSourceTrigger="LostFocus">
+                                 UpdateSourceTrigger="PropertyChanged">
                             <Binding.ValidationRules>
                                 <validations:RequiredNumericRule InitialMessage="This field is required"
                                                                  ErrorMessage="Invalid value for Height of Wall"
@@ -68,7 +68,7 @@
                          materialDesign:HintAssist.Hint="3m">
                     <TextBox.Text>
                         <Binding Path="InputModel.HeightOfColumn"
-                                 UpdateSourceTrigger="LostFocus">
+                                 UpdateSourceTrigger="PropertyChanged">
                             <Binding.ValidationRules>
                                 <validations:RequiredNumericRule InitialMessage="This field is required"
                                                                  ErrorMessage="Invalid value for Height of Wall"
@@ -89,7 +89,7 @@
                          materialDesign:HintAssist.Hint="3">
                     <TextBox.Text>
                         <Binding Path="InputModel.NumbersOfColumn"
-                                 UpdateSourceTrigger="LostFocus">
+                                 UpdateSourceTrigger="PropertyChanged">
                             <Binding.ValidationRules>
                                 <validations:RequiredNumericRule InitialMessage="This field is required"
                                                                  ErrorMessage="Invalid value for Numbers of Column"
@@ -110,7 +110,7 @@
                          materialDesign:HintAssist.Hint="3 millimeters">
                     <TextBox.Text>
                         <Binding Path="InputModel.SizeOfMainbar"
-                                 UpdateSourceTrigger="LostFocus">
+                                 UpdateSourceTrigger="PropertyChanged">
                             <Binding.ValidationRules>
                                 <validations:RequiredNumericRule InitialMessage="This field is required"
                                                                  ErrorMessage="Invalid value for Size of Main bar"
@@ -119,7 +119,6 @@
                         </Binding>
                     </TextBox.Text>
                 </TextBox>
-
 
                 <TextBlock Margin="0,20,0,0"
                            Padding="5"
@@ -133,7 +132,7 @@
                          materialDesign:HintAssist.Hint="3 millimeters">
                     <TextBox.Text>
                         <Binding Path="InputModel.SizeOfLateralties"
-                                 UpdateSourceTrigger="LostFocus">
+                                 UpdateSourceTrigger="PropertyChanged">
                             <Binding.ValidationRules>
                                 <validations:RequiredNumericRule InitialMessage="This field is required"
                                                                  ErrorMessage="Invalid value for Size of Lateral Ties"
@@ -142,7 +141,6 @@
                         </Binding>
                     </TextBox.Text>
                 </TextBox>
-
 
                 <Button Command="{Binding CalculateCommand}">Calculate</Button>
 

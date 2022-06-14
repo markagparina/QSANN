@@ -11,11 +11,13 @@ using QSANN.Data;
 using QSANN.Data.Entities;
 using QSANN.Services.Interfaces;
 using System;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace CategoriesModule.ViewModels
 {
+    [Display(Name = "Masonry")]
     public class MasonryViewModel : MenuItem<MasonryInputModel, MasonryInput>
     {
         private readonly IMasonryCalculatorService _masonryCalculatorService;
@@ -31,14 +33,6 @@ namespace CategoriesModule.ViewModels
         public DelegateCommandWithValidator<MasonryInputModel, MasonryInputModelValidator> CalculateCommand
             => _calculateCommand ??= new DelegateCommandWithValidator<MasonryInputModel, MasonryInputModelValidator>
             (async () => await ExecuteCalculateCommandAsync(), InputModel, _validator, ErrorDialog);
-
-        private bool _isResultvisible;
-
-        public bool IsResultVisible
-        {
-            get { return _isResultvisible; }
-            set { SetProperty(ref _isResultvisible, value); }
-        }
 
         public override string Title => "Masonry";
 

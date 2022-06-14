@@ -27,14 +27,6 @@ namespace CategoriesModule.ViewModels
         public override FormworksColumnInputModel InputModel { get; set; } = new();
         public FormworksColumnOutputModel OutputModel { get; set; } = new();
 
-        private bool _isResultVisible;
-
-        public bool IsResultVisible
-        {
-            get { return _isResultVisible; }
-            set { SetProperty(ref _isResultVisible, value); }
-        }
-
         public FormworksColumnViewModel(IFormworksColumnCalculatorService formworksColumnCalculatorService, AppDbContext context, IEventAggregator eventAggregator)
         : base(context, eventAggregator)
         {

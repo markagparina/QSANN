@@ -4,15 +4,10 @@ using Prism.Modularity;
 using Prism.Regions;
 using QSANN.Core;
 using QSANN.Data;
-using QSANN.Data.Entities;
-using QSANN.Dialogs;
 using QSANN.Services;
 using QSANN.Services.Interfaces;
 using QSANN.ViewModels;
 using QSANN.Views;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Windows;
 
 namespace QSANN;
@@ -42,7 +37,8 @@ public partial class App
         containerRegistry.Register<IRebarworksSlabCalculatorService, RebarworksSlabCalculatorService>();
         containerRegistry.Register<IPaintworksCalculatorService, PaintworksCalculatorService>();
         containerRegistry.Register<ICarpentryworksCalculatorService, CarpentryworksCalculatorService>();
-        containerRegistry.RegisterForNavigation<LoadProjectDialog, LoadProjectDialogViewModel>();
+
+        containerRegistry.RegisterScoped<ProjectDialogViewModel>();
     }
 
     protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)
@@ -58,13 +54,5 @@ public partial class App
         dbContext.Database.EnsureCreated();
         DataSeeder.Seed(dbContext);
 #endif
-    }
-
-    protected override void OnInitialized()
-    {
-        base.OnInitialized();
-        var regionManager = Container.Resolve<IRegionManager>();
-
-        regionManager.RegisterViewWithRegion(RegionNames.MainWindowDialogHostContentRegion, nameof(LoadProjectDialog));
     }
 }

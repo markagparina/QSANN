@@ -29,14 +29,6 @@ public class ConcreteSlabViewModel : ViewModelBase<ConcreteSlabInputModel, Concr
     public override ConcreteSlabInputModel InputModel { get; set; } = new();
     public ConcreteSlabOutputModel OutputModel { get; set; } = new();
 
-    private bool _isResultVisible;
-
-    public bool IsResultVisible
-    {
-        get { return _isResultVisible; }
-        set { SetProperty(ref _isResultVisible, value); }
-    }
-
     public ConcreteSlabViewModel(IConcreteCalculatorService concreteCalculatorService, AppDbContext context, IEventAggregator eventAggregator)
     : base(context, eventAggregator)
     {

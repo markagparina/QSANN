@@ -9,11 +9,13 @@ using QSANN.Data;
 using QSANN.Data.Entities;
 using System;
 using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace CategoriesModule.ViewModels
 {
+    [Display(Name = "Other Materials")]
     public class OthersViewModel : MenuItem<OtherMaterialModel, OtherMaterial>
     {
         private ObservableCollection<OtherMaterialModel> _otherMaterials;
@@ -96,15 +98,18 @@ namespace CategoriesModule.ViewModels
 
         private async Task SaveProjectInputAsync(Guid projectId)
         {
-            var otherMaterialsInProject = await Context.Set<OtherMaterial>().Where(other => other.ProjectId == projectId).ToListAsync();
+            if (OtherMaterials.Count > 0)
+            {
+                var otherMaterialsInProject = await Context.Set<OtherMaterial>().Where(other => other.ProjectId == projectId).ToListAsync();
 
-            Context.RemoveRange(otherMaterialsInProject);
+                Context.RemoveRange(otherMaterialsInProject);
 
-            var currentMaterials = OtherMaterials.Select(other => other.Adapt<OtherMaterial>()).ToList();
+                var currentMaterials = OtherMaterials.Select(other => other.Adapt<OtherMaterial>()).ToList();
 
-            Context.Add(currentMaterials);
+                Context.Add(currentMaterials);
 
-            Context.SaveChanges();
+                Context.SaveChanges();
+            }
         }
     }
 }

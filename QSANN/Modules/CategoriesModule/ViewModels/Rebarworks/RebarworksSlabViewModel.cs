@@ -35,14 +35,6 @@ namespace CategoriesModule.ViewModels
         public override RebarworksSlabInputModel InputModel { get; set; } = new();
         public RebarworksSlabOutputModel OutputModel { get; set; } = new();
 
-        private bool _isResultVisible;
-
-        public bool IsResultVisible
-        {
-            get { return _isResultVisible; }
-            set { SetProperty(ref _isResultVisible, value); }
-        }
-
         private DelegateCommandWithValidator<RebarworksSlabInputModel, RebarworksSlabInputValidator> _calculateCommand;
 
         public DelegateCommandWithValidator<RebarworksSlabInputModel, RebarworksSlabInputValidator> CalculateCommand => _calculateCommand

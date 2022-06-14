@@ -9,20 +9,24 @@ using Prism.Unity;
 using QSANN.Core;
 using QSANN.Core.Mvvm;
 using QSANN.Core.Navigation;
+using QSANN.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace QSANN.ViewModels
 {
     public class MainWindowViewModel : ViewModelBase
     {
-        public List<MenuItem> AllMenuItems { get; set; }
+        private readonly IRegionManager _regionManager;
+        public List<MenuItemModel> AllMenuItems { get; set; }
 
-        private ObservableCollection<MenuItem> _menuItems;
+        private ObservableCollection<MenuItemModel> _menuItems;
 
-        public ObservableCollection<MenuItem> MenuItems
+        public ObservableCollection<MenuItemModel> MenuItems
         {
             get { return _menuItems; }
             set { SetProperty(ref _menuItems, value); }
@@ -44,10 +48,17 @@ namespace QSANN.ViewModels
             set => SetProperty(ref _isMenuOpen, value);
         }
 
-        private MenuItem _selectedItem;
-        private readonly IRegionManager _regionManager;
+        private bool _isSaveMode;
 
-        public MenuItem SelectedItem
+        public bool IsSaveMode
+        {
+            get { return _isSaveMode; }
+            set { SetProperty(ref _isSaveMode, value); }
+        }
+
+        private MenuItemModel _selectedItem;
+
+        public MenuItemModel SelectedItem
         {
             get => _selectedItem;
             set
@@ -56,7 +67,7 @@ namespace QSANN.ViewModels
                 {
                     IsMenuOpen = false;
 
-                    var viewName = value.GetType().Name.Replace("Model", "");
+                    var viewName = value.ViewModelName.Replace("Model", "");
 
                     if (value is not null)
                     {
@@ -65,6 +76,8 @@ namespace QSANN.ViewModels
                 }
             }
         }
+
+        public ProjectDialogViewModel ProjectViewModel { get; private set; }
 
         private string _searchKeyword;
 
@@ -85,29 +98,25 @@ namespace QSANN.ViewModels
         private DelegateCommand _saveProjectCommand;
         public DelegateCommand SaveProjectCommand => _saveProjectCommand ??= new DelegateCommand(ExecuteSaveProjectCommand);
 
-        private void ExecuteSaveProjectCommand()
-        {
-            //IsMainWindowDialogOpen = true;
-            //_regionManager.RequestNavigate(RegionNames.MainWindowDialogHostContentRegion, nameof(LoadProjectDialogViewModel).Replace("ViewModel", ""));
-        }
-
         private DelegateCommand _loadProjectCommand;
-        public DelegateCommand LoadProjectCommand => _loadProjectCommand ??= new DelegateCommand(ExecuteLoadProjectCommand);
-
-        private void ExecuteLoadProjectCommand()
-        {
-            IsMainWindowDialogOpen = true;
-            _regionManager.RequestNavigate(RegionNames.MainWindowDialogHostContentRegion, nameof(LoadProjectDialogViewModel).Replace("ViewModel", ""));
-        }
+        public DelegateCommand LoadProjectCommand => _loadProjectCommand ??= new DelegateCommand(async () => await ExecuteLoadProjectCommandAsync());
 
         public MainWindowViewModel(IRegionManager regionManager)
         {
             _regionManager = regionManager;
             var menuTypes = typeof(QSANNCategoriesModule).Assembly.GetExportedTypes().Where(type => type.IsAssignableTo(typeof(MenuItem)));
             var container = PrismContainerExtension.Current;
-            AllMenuItems = menuTypes.Select(item => (MenuItem)container.Resolve(item)).ToList();
+            AllMenuItems = menuTypes.Select(item =>
+            {
+                var attribute = (DisplayAttribute)Array.Find(item.GetCustomAttributes(typeof(DisplayAttribute), false), a => (a is DisplayAttribute));
+
+                return new MenuItemModel() { ViewModelName = item.Name, Title = attribute.Name };
+            }).ToList();
             MenuItems = new(AllMenuItems);
             SelectedItem = AllMenuItems[0];
+
+            ProjectViewModel = container.Resolve<ProjectDialogViewModel>();
+            ProjectViewModel.ExecuteLoadedCommandAsync().Await();
         }
 
         private object FilterCategories()
@@ -115,6 +124,19 @@ namespace QSANN.ViewModels
             MenuItems = new(AllMenuItems.Where(item => string.IsNullOrEmpty(SearchKeyword) || item.Title.Contains(SearchKeyword, StringComparison.OrdinalIgnoreCase)));
 
             return MenuItems;
+        }
+
+        private Task ExecuteLoadProjectCommandAsync()
+        {
+            IsSaveMode = false;
+            IsMainWindowDialogOpen = true;
+            return Task.CompletedTask;
+        }
+
+        private void ExecuteSaveProjectCommand()
+        {
+            IsSaveMode = true;
+            IsMainWindowDialogOpen = true;
         }
     }
 }

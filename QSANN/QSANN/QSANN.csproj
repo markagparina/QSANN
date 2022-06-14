@@ -32,14 +32,6 @@
 		<ProjectReference Include="..\Services\QSANN.Services\QSANN.Services.csproj" />
 	</ItemGroup>
 	<ItemGroup>
-	  <Compile Update="Dialogs\LoadProjectDialog.xaml.cs">
-	    <SubType>Code</SubType>
-	  </Compile>
-	</ItemGroup>
-	<ItemGroup>
-	  <Page Update="Dialogs\LoadProjectDialog.xaml">
-	    <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-	    <SubType>Designer</SubType>
-	  </Page>
+	  <Folder Include="Dialogs\" />
 	</ItemGroup>
 </Project>

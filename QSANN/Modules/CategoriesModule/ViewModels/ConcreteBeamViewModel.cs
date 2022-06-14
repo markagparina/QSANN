@@ -29,14 +29,6 @@ public class ConcreteBeamViewModel : ViewModelBase<ConcreteBeamInputModel, Concr
     public override ConcreteBeamInputModel InputModel { get; set; } = new();
     public ConcreteBeamOutputModel OutputModel { get; set; } = new();
 
-    private bool _isResultVisible;
-
-    public bool IsResultVisible
-    {
-        get { return _isResultVisible; }
-        set { SetProperty(ref _isResultVisible, value); }
-    }
-
     public ConcreteBeamViewModel(IConcreteCalculatorService concreteCalculatorService, AppDbContext context, IEventAggregator eventAggregator)
     : base(context, eventAggregator)
     {
@@ -67,18 +59,4 @@ public class ConcreteBeamViewModel : ViewModelBase<ConcreteBeamInputModel, Concr
         OutputModel.Gravel = $"{(volume * 1)}m\xB3 (3/4\") of Gravel";
         IsResultVisible = true;
     }
-
-    //private void LoadProjectInput(Guid projectId)
-    //{
-    //    var beamProject = _context.Set<ConcreteBeamInput>().FirstOrDefault(beam => beam.ProjectId == projectId);
-
-    //    if (beamProject is not null)
-    //    {
-    //        InputModel.LengthOfBeam = beamProject.LengthOfBeam;
-    //        InputModel.WidthOfBeam = beamProject.WidthOfBeam;
-    //        InputModel.HeightOfBeam = beamProject.HeightOfBeam;
-    //        InputModel.NumbersOfCount = beamProject.NumbersOfCount;
-    //        InputModel.ClassMixture = beamProject.ClassMixture;
-    //    }
-    //}
 }

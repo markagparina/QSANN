@@ -25,7 +25,7 @@
                      materialDesign:HintAssist.Hint="3m">
                 <TextBox.Text>
                     <Binding Path="InputModel.LengthOfBeam"
-                             UpdateSourceTrigger="LostFocus">
+                             UpdateSourceTrigger="PropertyChanged">
                         <Binding.ValidationRules>
                             <validations:RequiredNumericRule InitialMessage="This field is required"
                                                              ErrorMessage="Invalid value for Height of Wall"
@@ -46,7 +46,7 @@
                      materialDesign:HintAssist.Hint="3m">
                 <TextBox.Text>
                     <Binding Path="InputModel.WidthOfBeam"
-                             UpdateSourceTrigger="LostFocus">
+                             UpdateSourceTrigger="PropertyChanged">
                         <Binding.ValidationRules>
                             <validations:RequiredNumericRule InitialMessage="This field is required"
                                                              ErrorMessage="Invalid value for Width of Beam"
@@ -67,7 +67,7 @@
                      materialDesign:HintAssist.Hint="3m">
                 <TextBox.Text>
                     <Binding Path="InputModel.HeightOfBeam"
-                             UpdateSourceTrigger="LostFocus">
+                             UpdateSourceTrigger="PropertyChanged">
                         <Binding.ValidationRules>
                             <validations:RequiredNumericRule InitialMessage="This field is required"
                                                              ErrorMessage="Invalid value for Height of Beam"
@@ -89,7 +89,7 @@
                      materialDesign:HintAssist.Hint="3">
                 <TextBox.Text>
                     <Binding Path="InputModel.NumberOfCounts"
-                             UpdateSourceTrigger="LostFocus">
+                             UpdateSourceTrigger="PropertyChanged">
                         <Binding.ValidationRules>
                             <validations:RequiredNumericRule InitialMessage="This field is required"
                                                              ErrorMessage="Invalid value for Numbers of Count/s"

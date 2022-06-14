@@ -9,7 +9,7 @@ using System.Windows.Controls;
 
 namespace QSANN.Core.Commands
 {
-    public class DelegateCommandWithValidator<TValidatable, TValidator> : DelegateCommand
+    public class DelegateCommandWithValidator<TValidatable, TValidator> : CustomDelegateCommand
         where TValidatable : BindableBase
         where TValidator : AbstractValidator<TValidatable>
     {
@@ -26,7 +26,12 @@ namespace QSANN.Core.Commands
             _errorDialogControl = errorDialogControl;
         }
 
-        protected override async void Execute(object parameter)
+        protected override void Execute(object parameter)
+        {
+            Execute();
+        }
+
+        public override async void Execute()
         {
             var validationResult = _validator.Validate(_validatable);
 
@@ -34,9 +39,11 @@ namespace QSANN.Core.Commands
             {
                 _errorDialogControl.DataContext = new ErrorDialogViewModel(validationResult.Errors.Select(failure => failure.ErrorMessage));
 
-                var dialogResult = await DialogHost.Show(_errorDialogControl);
-
-                return;
+                if (!DialogHost.IsDialogOpen(null))
+                {
+                    var dialogResult = await DialogHost.Show(_errorDialogControl);
+                    return;
+                }
             }
             _executeMethod();
         }

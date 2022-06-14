@@ -25,7 +25,7 @@ namespace QSANN.Core.Converters
                 return parameter.ToString();
             }
 
-            return string.Empty;
+            return Binding.DoNothing;
         }
     }
 }

@@ -26,7 +26,7 @@
                          materialDesign:HintAssist.Hint="3m">
                     <TextBox.Text>
                         <Binding Path="InputModel.LengthOfFooting"
-                                 UpdateSourceTrigger="LostFocus">
+                                 UpdateSourceTrigger="PropertyChanged">
                             <Binding.ValidationRules>
                                 <validations:RequiredNumericRule InitialMessage="This field is required"
                                                                  ErrorMessage="Invalid value for Length of Footing"
@@ -47,7 +47,7 @@
                          materialDesign:HintAssist.Hint="3m">
                     <TextBox.Text>
                         <Binding Path="InputModel.WidthOfFooting"
-                                 UpdateSourceTrigger="LostFocus">
+                                 UpdateSourceTrigger="PropertyChanged">
                             <Binding.ValidationRules>
                                 <validations:RequiredNumericRule InitialMessage="This field is required"
                                                                  ErrorMessage="Invalid value for Width of Footing"
@@ -68,7 +68,7 @@
                          materialDesign:HintAssist.Hint="3">
                     <TextBox.Text>
                         <Binding Path="InputModel.NumbersOfFooting"
-                                 UpdateSourceTrigger="LostFocus">
+                                 UpdateSourceTrigger="PropertyChanged">
                             <Binding.ValidationRules>
                                 <validations:RequiredNumericRule InitialMessage="This field is required"
                                                                  ErrorMessage="Invalid value for Numbers of Footing"
@@ -89,7 +89,7 @@
                          materialDesign:HintAssist.Hint="3 millimeters">
                     <TextBox.Text>
                         <Binding Path="InputModel.SizeOfSteelbar"
-                                 UpdateSourceTrigger="LostFocus">
+                                 UpdateSourceTrigger="PropertyChanged">
                             <Binding.ValidationRules>
                                 <validations:RequiredNumericRule InitialMessage="This field is required"
                                                                  ErrorMessage="Invalid value for Size of Steelbar"
@@ -111,7 +111,7 @@
                          materialDesign:HintAssist.Hint="3m">
                     <TextBox.Text>
                         <Binding Path="InputModel.SpacingOfSteelbar"
-                                 UpdateSourceTrigger="LostFocus">
+                                 UpdateSourceTrigger="PropertyChanged">
                             <Binding.ValidationRules>
                                 <validations:RequiredNumericRule InitialMessage="This field is required"
                                                                  ErrorMessage="Invalid value for Spacing of Steelbar"

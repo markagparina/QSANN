@@ -2,9 +2,11 @@
 using Prism.Regions;
 using QSANN.Core;
 using QSANN.Core.Navigation;
+using System.ComponentModel.DataAnnotations;
 
 namespace CategoriesModule.ViewModels
 {
+    [Display(Name = "Concrete")]
     public class ConcreteViewModel : MenuItem
     {
         public override string Title => "Concrete";
