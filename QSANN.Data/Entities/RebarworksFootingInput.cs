@@ -8,7 +8,7 @@ namespace QSANN.Data.Entities
 
         public string WidthOfFooting { get; set; }
 
-        public string NumbersOfFoooting { get; set; }
+        public string NumbersOfFooting { get; set; }
 
         public string SizeOfSteelbar { get; set; }
 

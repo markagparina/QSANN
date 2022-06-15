@@ -5,16 +5,6 @@
 		<UseWPF>true</UseWPF>
 	</PropertyGroup>
 	<ItemGroup>
-		<Compile Remove="ViewModels\Categories\**" />
-		<Compile Remove="Views\Categories\**" />
-		<EmbeddedResource Remove="ViewModels\Categories\**" />
-		<EmbeddedResource Remove="Views\Categories\**" />
-		<None Remove="ViewModels\Categories\**" />
-		<None Remove="Views\Categories\**" />
-		<Page Remove="ViewModels\Categories\**" />
-		<Page Remove="Views\Categories\**" />
-	</ItemGroup>
-	<ItemGroup>
 		<PackageReference Include="Mapster" Version="7.3.0" />
 		<PackageReference Include="MaterialDesignThemes" Version="4.5.0" />
 		<PackageReference Include="Prism.Unity" Version="8.1.97" />
@@ -32,6 +22,6 @@
 		<ProjectReference Include="..\Services\QSANN.Services\QSANN.Services.csproj" />
 	</ItemGroup>
 	<ItemGroup>
-	  <Folder Include="Dialogs\" />
+		<Folder Include="Dialogs\" />
 	</ItemGroup>
 </Project>

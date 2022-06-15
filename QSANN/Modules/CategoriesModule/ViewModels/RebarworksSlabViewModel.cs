@@ -46,14 +46,13 @@ namespace CategoriesModule.ViewModels
         {
             _rebarworksSlabCalculatorService = rebarworksSlabCalculatorService;
             _context = context;
-            //eventAggregator.GetEvent<LoadProjectEvent>().Subscribe(LoadProjectInput, ThreadOption.UIThread);
             Multipliers = new ObservableCollection<RebarworksSlabTypeMultiplier>(_rebarworksSlabCalculatorService.GetMultipliers());
         }
 
         private void ExecuteCalculateCommand()
         {
             var multiplier = Multipliers.FirstOrDefault(multiplier => multiplier.SlabType == (int)InputModel.OneWayOrTwoWay
-                                                                           && multiplier.Name == InputModel.SteelBarSpacing);
+                                                                           && multiplier.Name == InputModel.SteelbarSpacing);
 
             decimal steelbar = _rebarworksSlabCalculatorService.CalculateSteelbar(InputModel.FloorArea.StripAndParseAsDecimal(), multiplier.SteelbarMultiplier);
             decimal tiewire = _rebarworksSlabCalculatorService.CalculateSteelbar(InputModel.FloorArea.StripAndParseAsDecimal(), multiplier.TiewireMultiplier);

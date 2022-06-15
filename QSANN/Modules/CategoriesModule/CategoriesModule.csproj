@@ -43,19 +43,19 @@
 		<Compile Update="Views\MasonryView.xaml.cs">
 			<SubType>Code</SubType>
 		</Compile>
-		<Compile Update="Views\Rebarworks\RebarworksBeamView.xaml.cs">
+		<Compile Update="Views\RebarworksBeamView.xaml.cs">
 		  <SubType>Code</SubType>
 		</Compile>
-		<Compile Update="Views\Rebarworks\RebarworksColumnView.xaml.cs">
+		<Compile Update="Views\RebarworksColumnView.xaml.cs">
 		  <SubType>Code</SubType>
 		</Compile>
-		<Compile Update="Views\Rebarworks\RebarworksFootingView.xaml.cs">
+		<Compile Update="Views\RebarworksFootingView.xaml.cs">
 		  <SubType>Code</SubType>
 		</Compile>
-		<Compile Update="Views\Rebarworks\RebarworksView.xaml.cs">
+		<Compile Update="Views\RebarworksView.xaml.cs">
 		  <SubType>Code</SubType>
 		</Compile>
-		<Compile Update="Views\Rebarworks\RebarworksSlabView.xaml.cs">
+		<Compile Update="Views\RebarworksSlabView.xaml.cs">
 		  <SubType>Code</SubType>
 		</Compile>
 		<Compile Update="Views\PaintworksView.xaml.cs">
@@ -102,23 +102,23 @@
 			<XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
 			<SubType>Designer</SubType>
 		</Page>
-		<Page Update="Views\Rebarworks\RebarworksBeamView.xaml">
+		<Page Update="Views\RebarworksBeamView.xaml">
 		  <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
 		  <SubType>Designer</SubType>
 		</Page>
-		<Page Update="Views\Rebarworks\RebarworksColumnView.xaml">
+		<Page Update="Views\RebarworksColumnView.xaml">
 		  <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
 		  <SubType>Designer</SubType>
 		</Page>
-		<Page Update="Views\Rebarworks\RebarworksFootingView.xaml">
+		<Page Update="Views\RebarworksFootingView.xaml">
 		  <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
 		  <SubType>Designer</SubType>
 		</Page>
-		<Page Update="Views\Rebarworks\RebarworksView.xaml">
+		<Page Update="Views\RebarworksView.xaml">
 		  <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
 		  <SubType>Designer</SubType>
 		</Page>
-		<Page Update="Views\Rebarworks\RebarworksSlabView.xaml">
+		<Page Update="Views\RebarworksSlabView.xaml">
 		  <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
 		  <SubType>Designer</SubType>
 		</Page>

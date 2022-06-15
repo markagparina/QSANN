@@ -9,6 +9,13 @@ namespace CategoriesModule.Models
 {
     public class OtherMaterialModel : BindableBase
     {
+        private Guid _id;
+
+        public Guid Id
+        {
+            get { return _id; }
+            set { SetProperty(ref _id, value); }
+        }
 
         private string _itemName;
 
@@ -33,7 +40,5 @@ namespace CategoriesModule.Models
             get { return _quantity; }
             set { SetProperty(ref _quantity, value); }
         }
-
-
     }
 }

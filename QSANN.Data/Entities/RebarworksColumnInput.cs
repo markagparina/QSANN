@@ -8,7 +8,7 @@ namespace QSANN.Data.Entities
         public string WidthOfColumn { get; set; }
         public string HeightOfColumn { get; set; }
         public string NumbersOfColumn { get; set; }
-        public string SizeOfMainBar { get; set; }
+        public string SizeOfMainbar { get; set; }
         public string SizeOfLateralties { get; set; }
 
     }

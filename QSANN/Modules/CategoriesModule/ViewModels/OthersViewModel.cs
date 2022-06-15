@@ -102,11 +102,16 @@ namespace CategoriesModule.ViewModels
             {
                 var otherMaterialsInProject = await Context.Set<OtherMaterial>().Where(other => other.ProjectId == projectId).ToListAsync();
 
-                Context.RemoveRange(otherMaterialsInProject);
+                Context.Set<OtherMaterial>().RemoveRange(otherMaterialsInProject);
 
                 var currentMaterials = OtherMaterials.Select(other => other.Adapt<OtherMaterial>()).ToList();
 
-                Context.Add(currentMaterials);
+                foreach (var currentMaterial in currentMaterials)
+                {
+                    currentMaterial.ProjectId = projectId;
+                }
+
+                Context.Set<OtherMaterial>().AddRange(currentMaterials);
 
                 Context.SaveChanges();
             }

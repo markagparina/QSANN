@@ -13,38 +13,41 @@
     </UserControl.Resources>
 
     <ScrollViewer>
-        <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch">
+        <StackPanel Orientation="Vertical"
+                    HorizontalAlignment="Stretch">
 
             <Grid Margin="50">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
-                    <ColumnDefinition  Width="*"/>
-                    <ColumnDefinition  Width="*"/>
-                    <ColumnDefinition  Width="*"/>
+                    <ColumnDefinition  Width="*" />
+                    <ColumnDefinition  Width="*" />
+                    <ColumnDefinition  Width="*" />
                 </Grid.ColumnDefinitions>
-                <Button  Grid.Column="0" Margin="5,0,5,0" Command="{Binding AddNewItemCommand}">Add New Item</Button>
+                <Button  Grid.Column="0"
+                         Margin="5,0,5,0"
+                         Command="{Binding AddNewItemCommand}">Add New Item</Button>
 
-                <Button Margin="5,0,5,0" Grid.Column="3" Command="{Binding RemoveLastItemCommand}">Remove Last Item</Button>
+                <Button Margin="5,0,5,0"
+                        Grid.Column="3"
+                        Command="{Binding RemoveLastItemCommand}">Remove Last Item</Button>
             </Grid>
 
 
-            <DataGrid
-                ItemsSource="{Binding OtherMaterials}" 
-                
-                AutoGenerateColumns="False"
-                CanUserAddRows="False">
+            <DataGrid ItemsSource="{Binding OtherMaterials}"
+                      AutoGenerateColumns="False"
+                      Style="{DynamicResource MaterialDesignDataGrid}"
+                      SelectionMode="Extended"
+                      CellStyle="{DynamicResource MaterialDesignDataGridCell}"
+                      CanUserAddRows="False">
+
                 <DataGrid.Columns>
+                    <DataGridTextColumn Header="Item Name"
+                                        Binding="{Binding ItemName}"
+                                        Width="*"
+                                        EditingElementStyle="{DynamicResource MaterialDesignTextBox}"
+                                        HeaderStyle="{DynamicResource MaterialDesignDataGridColumnHeader}"
+                                        CellStyle="{DynamicResource MaterialDesignDataGridCell}" />
                     <DataGridTemplateColumn Width="*">
-                        <DataGridTemplateColumn.Header>
-                            <TextBlock>Item Name</TextBlock>
-                        </DataGridTemplateColumn.Header>
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBox Text="{Binding ItemName}"/>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                    <DataGridTemplateColumn>
                         <DataGridTemplateColumn.Header>Construction Scope</DataGridTemplateColumn.Header>
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
@@ -53,28 +56,17 @@
                         </DataGridTemplateColumn.CellTemplate>
                         <DataGridTemplateColumn.CellEditingTemplate>
                             <DataTemplate>
-                                <ComboBox 
-                                    SelectedItem="{Binding ConstructionScope}"
-                                    ItemsSource="{Binding DataContext.ConstructionScopes, RelativeSource={RelativeSource AncestorType=UserControl}}" 
-                                          />
+                                <ComboBox SelectedItem="{Binding ConstructionScope}"
+                                          ItemsSource="{Binding DataContext.ConstructionScopes, RelativeSource={RelativeSource AncestorType=UserControl}}" />
                             </DataTemplate>
                         </DataGridTemplateColumn.CellEditingTemplate>
                     </DataGridTemplateColumn>
-                    <DataGridTemplateColumn Width=".5*">
-                        <DataGridTemplateColumn.Header>
-                            <TextBlock>Quantity</TextBlock>
-                        </DataGridTemplateColumn.Header>
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding Quantity}"/>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                        <DataGridTemplateColumn.CellEditingTemplate>
-                            <DataTemplate>
-                                <TextBox Text="{Binding Quantity}"/>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellEditingTemplate>
-                    </DataGridTemplateColumn>
+                    <DataGridTextColumn Header="Quantity"
+                                        Width=".5*"
+                                        Binding="{Binding Quantity}"
+                                        EditingElementStyle="{DynamicResource MaterialDesignTextBox}"
+                                        CellStyle="{DynamicResource MaterialDesignDataGridCell}">
+                    </DataGridTextColumn>
                 </DataGrid.Columns>
 
 

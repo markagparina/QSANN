@@ -22,7 +22,6 @@ namespace CategoriesModule.ViewModels
     {
         private ObservableCollection<TileworksMultiplierModel> _multipliers;
         private readonly ITileworksCalculatorService _tileworksCalculatorService;
-        private readonly AppDbContext _context;
         private readonly TileworksInputValidator _validator = new();
 
         public ObservableCollection<TileworksMultiplierModel> Multipliers
@@ -47,7 +46,6 @@ namespace CategoriesModule.ViewModels
             AppDbContext context) : base(regionManager, context, eventAggregator)
         {
             _tileworksCalculatorService = tileworksCalculatorService;
-            _context = context;
             Multipliers = new ObservableCollection<TileworksMultiplierModel>(_tileworksCalculatorService.GetMultipliers());
         }
 
@@ -81,10 +79,20 @@ namespace CategoriesModule.ViewModels
         {
             var tileworkProject = Context.Set<TileworksInput>().FirstOrDefault(tilework => tilework.ProjectId == projectId);
 
-            if (tileworkProject is not null)
+            var projectToSaveTo = tileworkProject ?? new TileworksInput();
+            bool saveMode = tileworkProject is null;
+
+            projectToSaveTo.SelectedMultiplier = InputModel.SelectedMultiplier?.Name;
+            projectToSaveTo.AreaOfWorkDesignation = InputModel.AreaOfWorkDesignation;
+            projectToSaveTo.ProjectId = projectId;
+
+            if (saveMode)
             {
-                tileworkProject.SelectedMultiplier = InputModel.SelectedMultiplier?.Name;
-                tileworkProject.AreaOfWorkDesignation = InputModel.AreaOfWorkDesignation;
+                Context.Set<TileworksInput>().Add(projectToSaveTo);
+            }
+            else
+            {
+                Context.Set<TileworksInput>().Update(projectToSaveTo);
             }
 
             Context.SaveChanges();

@@ -19,7 +19,7 @@ namespace CategoriesModule.ViewModels;
 public class RebarworksFootingViewModel : ViewModelBase<RebarworksFootingInputModel, RebarworksFootingInput>
 {
     private readonly IRebarworksFootingCalculatorService _rebarworksFootingCalculatorService;
-    private readonly IEventAggregator _eventAggregator;
+
     private DelegateCommandWithValidator<RebarworksFootingInputModel, RebarworksFootingInputValidator> _calculateCommand;
     private readonly RebarworksFootingInputValidator _validator = new();
 
@@ -33,7 +33,6 @@ public class RebarworksFootingViewModel : ViewModelBase<RebarworksFootingInputMo
     : base(context, eventAggregator)
     {
         _rebarworksFootingCalculatorService = rebarworksFootingCalculatorService;
-        _eventAggregator = eventAggregator;
     }
 
     private void ExecuteCalculateCommand()

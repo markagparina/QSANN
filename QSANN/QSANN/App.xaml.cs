@@ -1,6 +1,7 @@
 ﻿using CategoriesModule;
 using Prism.Ioc;
 using Prism.Modularity;
+using Prism.Mvvm;
 using Prism.Regions;
 using QSANN.Core;
 using QSANN.Data;
@@ -8,6 +9,11 @@ using QSANN.Services;
 using QSANN.Services.Interfaces;
 using QSANN.ViewModels;
 using QSANN.Views;
+using System;
+using System.Diagnostics;
+using System.Linq;
+using System.Reflection;
+using System.Threading.Tasks;
 using System.Windows;
 
 namespace QSANN;
@@ -44,15 +50,20 @@ public partial class App
     protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)
     {
         moduleCatalog.AddModule<QSANNCategoriesModule>();
+        moduleCatalog.Initialize();
     }
 
     protected override void OnStartup(StartupEventArgs e)
     {
         base.OnStartup(e);
-#if DEBUG
+
         var dbContext = Container.Resolve<AppDbContext>();
         dbContext.Database.EnsureCreated();
+#if DEBUG
         DataSeeder.Seed(dbContext);
 #endif
+        var regionManager = Container.Resolve<IRegionManager>();
+
+        regionManager.Regions.Count();
     }
 }

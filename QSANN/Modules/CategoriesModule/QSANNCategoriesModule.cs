@@ -17,7 +17,6 @@ namespace CategoriesModule
 
         public void OnInitialized(IContainerProvider containerProvider)
         {
-
             // Carpentry works
             _regionManager.RegisterViewWithRegion<CarpentryworksView>(RegionNames.MainContentRegion);
 
@@ -41,9 +40,8 @@ namespace CategoriesModule
             _regionManager.RegisterViewWithRegion<RebarworksView>(RegionNames.MainContentRegion);
             _regionManager.RegisterViewWithRegion<RebarworksColumnView>(RegionNames.RebarworksContentRegion);
             _regionManager.RegisterViewWithRegion<RebarworksBeamView>(RegionNames.RebarworksContentRegion);
-            _regionManager.RegisterViewWithRegion<RebarworksFootingView>(RegionNames.RebarworksContentRegion);
             _regionManager.RegisterViewWithRegion<RebarworksSlabView>(RegionNames.RebarworksContentRegion);
-
+            _regionManager.RegisterViewWithRegion<RebarworksFootingView>(RegionNames.RebarworksContentRegion);
 
             // Tileworks
             _regionManager.RegisterViewWithRegion<TileworksView>(RegionNames.MainContentRegion);

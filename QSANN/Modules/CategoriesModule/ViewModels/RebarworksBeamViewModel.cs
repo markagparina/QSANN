@@ -35,7 +35,6 @@ public class RebarworksBeamViewModel : ViewModelBase<RebarworksBeamInputModel, R
         _beamCalculatorService = beamCalculatorService;
         _context = context;
         eventAggregator.GetEvent<RebarworksWidthOfColumnChanged>().Subscribe(UpdateWidthOfColumn);
-        eventAggregator.GetEvent<LoadProjectEvent>().Subscribe(LoadProjectInput, ThreadOption.UIThread);
     }
 
     private void ExecuteCalculateCommand()

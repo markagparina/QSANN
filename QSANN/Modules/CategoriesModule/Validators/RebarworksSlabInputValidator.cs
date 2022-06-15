@@ -11,7 +11,7 @@ namespace CategoriesModule.Validators
                 .NotEmpty()
                 .WithMessage("Floor Area is required");
 
-            RuleFor(input => input.SteelBarSpacing)
+            RuleFor(input => input.SteelbarSpacing)
                .NotEmpty()
                .WithMessage("Steel Bar Spacing is required");
 

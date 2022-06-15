@@ -17,7 +17,7 @@ namespace CategoriesModule.Models
 
         private string _steelBarSpacing;
 
-        public string SteelBarSpacing
+        public string SteelbarSpacing
         {
             get { return _steelBarSpacing; }
             set { SetProperty(ref _steelBarSpacing, value); }

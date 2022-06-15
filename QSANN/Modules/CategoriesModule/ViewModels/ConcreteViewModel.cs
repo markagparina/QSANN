@@ -19,13 +19,10 @@ namespace CategoriesModule.ViewModels
             get { return _selectedTab; }
             set
             {
-                if (SetProperty(ref _selectedTab, value))
+                if (SetProperty(ref _selectedTab, value) && !string.IsNullOrEmpty(value))
                 {
-                    if (!string.IsNullOrEmpty(value))
-                    {
-                        string view = $"Concrete{value}View";
-                        _regionManager.RequestNavigate(RegionNames.ConcreteContentRegion, view);
-                    }
+                    string view = $"Concrete{value}View";
+                    _regionManager.RequestNavigate(RegionNames.ConcreteContentRegion, view);
                 }
             }
         }

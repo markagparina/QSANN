@@ -3,10 +3,9 @@ using System;
 
 namespace QSANN.Core.Mvvm
 {
-    public class RegionViewModelBase : ViewModelBase, IConfirmNavigationRequest, IRegionMemberLifetime
+    public class RegionViewModelBase : ViewModelBase, IConfirmNavigationRequest
     {
         protected IRegionManager RegionManager { get; private set; }
-        public bool KeepAlive => true;
 
         public RegionViewModelBase(IRegionManager regionManager)
         {

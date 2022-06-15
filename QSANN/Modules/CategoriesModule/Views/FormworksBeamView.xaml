@@ -129,7 +129,7 @@
                         Margin="0,0,0,10">
 
                 <RadioButton Margin="5"
-                             GroupName="FORMW_BEAM_LS"
+                             GroupName="FORMW_BEAM_TOP"
                              Style="{StaticResource MaterialDesignRadioButton}"
                              Tag="True"
                              IsChecked="{Binding InputModel.ThicknessOfPlywood, Converter={StaticResource stringToBooleanConverter}, ConverterParameter=1/4}"
@@ -137,7 +137,7 @@
                 </RadioButton>
 
                 <RadioButton Margin="5"
-                             GroupName="FORMW_BEAM_LS"
+                             GroupName="FORMW_BEAM_TOP"
                              Style="{StaticResource MaterialDesignRadioButton}"
                              Tag="True"
                              IsChecked="{Binding InputModel.ThicknessOfPlywood, Converter={StaticResource stringToBooleanConverter}, ConverterParameter=1/2}"

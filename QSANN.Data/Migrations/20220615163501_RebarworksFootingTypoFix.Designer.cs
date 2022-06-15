@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using QSANN.Data;
 
@@ -10,9 +11,10 @@ using QSANN.Data;
 namespace QSANN.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220615163501_RebarworksFootingTypoFix")]
+    partial class RebarworksFootingTypoFix
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.5");
@@ -493,7 +495,7 @@ namespace QSANN.Data.Migrations
                     b.Property<string>("SizeOfLateralties")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("SizeOfMainbar")
+                    b.Property<string>("SizeOfMainBar")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("WidthOfColumn")

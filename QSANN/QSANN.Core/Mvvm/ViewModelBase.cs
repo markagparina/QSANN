@@ -2,6 +2,7 @@
 using Prism.Events;
 using Prism.Mvvm;
 using Prism.Navigation;
+using Prism.Regions;
 using QSANN.Core.Events;
 using QSANN.Data;
 using QSANN.Data.Attributes;
@@ -13,9 +14,11 @@ using System.Reflection;
 
 namespace QSANN.Core.Mvvm
 {
-    public class ViewModelBase : BindableBase, IDestructible
+    public class ViewModelBase : BindableBase, IDestructible, IRegionMemberLifetime
     {
         private string _String;
+
+        public bool KeepAlive => true;
 
         public virtual string Title
         {
@@ -119,11 +122,25 @@ namespace QSANN.Core.Mvvm
                 {
                     if (propertyInfo != null && propertyInfo.CanWrite)
                     {
-                        var entityValueAsObject = categoryProject.GetType().GetProperty(propertyInfo.Name).GetValue(categoryProject, null);
+                        var entityValueAsObject = categoryProject.GetType().GetProperty(propertyInfo.Name)?.GetValue(categoryProject, null);
 
-                        var actualValue = Convert.ChangeType(entityValueAsObject, propertyInfo.PropertyType);
+                        object actualValue = null;
 
-                        propertyInfo.SetMethod?.Invoke(InputModel, new[] { actualValue });
+                        if (propertyInfo.PropertyType.IsEnum)
+                        {
+                            var enumType = Enum.GetUnderlyingType(propertyInfo.PropertyType);
+
+                            actualValue = Convert.ChangeType(entityValueAsObject, enumType);
+                        }
+                        else
+                        {
+                            actualValue = Convert.ChangeType(entityValueAsObject, propertyInfo.PropertyType);
+                        }
+
+                        if (actualValue != null)
+                        {
+                            propertyInfo.SetMethod?.Invoke(InputModel, new[] { actualValue });
+                        }
                     }
                 }
             }

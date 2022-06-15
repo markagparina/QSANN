@@ -16,8 +16,6 @@ namespace CategoriesModule.ViewModels;
 public class RebarworksColumnViewModel : ViewModelBase<RebarworksColumnInputModel, RebarworksColumnInput>
 {
     private readonly IRebarworksColumnCalculatorService _rebarworksColumnCalculatorService;
-    private readonly AppDbContext _context;
-    private readonly IEventAggregator _eventAggregator;
     private DelegateCommandWithValidator<RebarworksColumnInputModel, RebarworksColumnInputValidator> _calculateCommand;
     private readonly RebarworksColumnInputValidator _validator = new();
 
@@ -31,17 +29,14 @@ public class RebarworksColumnViewModel : ViewModelBase<RebarworksColumnInputMode
     : base(context, eventAggregator)
     {
         _rebarworksColumnCalculatorService = rebarworksColumnCalculatorService;
-        _context = context;
-        _eventAggregator = eventAggregator;
         InputModel.PropertyChanged += InputModel_PropertyChanged;
-        eventAggregator.GetEvent<LoadProjectEvent>().Subscribe(LoadProjectInput, ThreadOption.UIThread);
     }
 
     private void InputModel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
     {
         if (e.PropertyName == nameof(InputModel.WidthOfColumn))
         {
-            _eventAggregator.GetEvent<RebarworksWidthOfColumnChanged>().Publish(InputModel.WidthOfColumn);
+            EventAggregator.GetEvent<RebarworksWidthOfColumnChanged>().Publish(InputModel.WidthOfColumn);
         }
     }
 

@@ -71,7 +71,7 @@
                                  GroupName="REBW_STL_SPC"
                                  Style="{StaticResource MaterialDesignRadioButton}"
                                  Tag="True"
-                                 IsChecked="{Binding InputModel.SteelBarSpacing, Converter={StaticResource stringToBooleanConverter}, ConverterParameter=10}"
+                                 IsChecked="{Binding InputModel.SteelbarSpacing, Converter={StaticResource stringToBooleanConverter}, ConverterParameter=10}"
                                  Content="10">
                     </RadioButton>
 
@@ -79,7 +79,7 @@
                                  GroupName="REBW_STL_SPC"
                                  Style="{StaticResource MaterialDesignRadioButton}"
                                  Tag="True"
-                                 IsChecked="{Binding InputModel.SteelBarSpacing, Converter={StaticResource stringToBooleanConverter}, ConverterParameter=12.5}"
+                                 IsChecked="{Binding InputModel.SteelbarSpacing, Converter={StaticResource stringToBooleanConverter}, ConverterParameter=12.5}"
                                  Content="12.5">
                     </RadioButton>
 
@@ -87,7 +87,7 @@
                                  GroupName="REBW_STL_SPC"
                                  Style="{StaticResource MaterialDesignRadioButton}"
                                  Tag="True"
-                                 IsChecked="{Binding InputModel.SteelBarSpacing, Converter={StaticResource stringToBooleanConverter}, ConverterParameter=15}"
+                                 IsChecked="{Binding InputModel.SteelbarSpacing, Converter={StaticResource stringToBooleanConverter}, ConverterParameter=15}"
                                  Content="15">
                     </RadioButton>
 
@@ -95,7 +95,7 @@
                                  GroupName="REBW_STL_SPC"
                                  Style="{StaticResource MaterialDesignRadioButton}"
                                  Tag="True"
-                                 IsChecked="{Binding InputModel.SteelBarSpacing, Converter={StaticResource stringToBooleanConverter}, ConverterParameter=17.5}"
+                                 IsChecked="{Binding InputModel.SteelbarSpacing, Converter={StaticResource stringToBooleanConverter}, ConverterParameter=17.5}"
                                  Content="17.5">
                     </RadioButton>
 
@@ -103,7 +103,7 @@
                                  GroupName="REBW_STL_SPC"
                                  Style="{StaticResource MaterialDesignRadioButton}"
                                  Tag="True"
-                                 IsChecked="{Binding InputModel.SteelBarSpacing, Converter={StaticResource stringToBooleanConverter}, ConverterParameter=20}"
+                                 IsChecked="{Binding InputModel.SteelbarSpacing, Converter={StaticResource stringToBooleanConverter}, ConverterParameter=20}"
                                  Content="20">
                     </RadioButton>
 
@@ -111,7 +111,7 @@
                                  GroupName="REBW_STL_SPC"
                                  Style="{StaticResource MaterialDesignRadioButton}"
                                  Tag="True"
-                                 IsChecked="{Binding InputModel.SteelBarSpacing, Converter={StaticResource stringToBooleanConverter}, ConverterParameter=22.5}"
+                                 IsChecked="{Binding InputModel.SteelbarSpacing, Converter={StaticResource stringToBooleanConverter}, ConverterParameter=22.5}"
                                  Content="22.5">
                     </RadioButton>
 
@@ -119,7 +119,7 @@
                                  GroupName="REBW_STL_SPC"
                                  Style="{StaticResource MaterialDesignRadioButton}"
                                  Tag="True"
-                                 IsChecked="{Binding InputModel.SteelBarSpacing, Converter={StaticResource stringToBooleanConverter}, ConverterParameter=25}"
+                                 IsChecked="{Binding InputModel.SteelbarSpacing, Converter={StaticResource stringToBooleanConverter}, ConverterParameter=25}"
                                  Content="25">
                     </RadioButton>
                 </StackPanel>

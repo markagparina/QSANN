@@ -112,11 +112,25 @@ namespace QSANN.Core.Navigation
                 {
                     if (propertyInfo != null && propertyInfo.CanWrite)
                     {
-                        var entityValueAsObject = categoryProject.GetType().GetProperty(propertyInfo.Name).GetValue(categoryProject, null);
+                        var entityValueAsObject = categoryProject.GetType().GetProperty(propertyInfo.Name)?.GetValue(categoryProject, null);
 
-                        var actualValue = Convert.ChangeType(entityValueAsObject, propertyInfo.PropertyType);
+                        object actualValue = null;
 
-                        propertyInfo.SetValue(InputModel, actualValue, null);
+                        if (propertyInfo.PropertyType.IsEnum)
+                        {
+                            var enumType = Enum.GetUnderlyingType(propertyInfo.PropertyType);
+
+                            actualValue = Convert.ChangeType(entityValueAsObject, enumType);
+                        }
+                        else
+                        {
+                            actualValue = Convert.ChangeType(entityValueAsObject, propertyInfo.PropertyType);
+                        }
+
+                        if (actualValue != null)
+                        {
+                            propertyInfo.SetMethod?.Invoke(InputModel, new[] { actualValue });
+                        }
                     }
                 }
             }
