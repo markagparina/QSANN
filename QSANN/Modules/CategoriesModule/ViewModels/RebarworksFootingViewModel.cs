@@ -29,6 +29,8 @@ public class RebarworksFootingViewModel : ViewModelBase<RebarworksFootingInputMo
     public override RebarworksFootingInputModel InputModel { get; set; } = new();
     public RebarworksFootingOutputModel OutputModel { get; set; } = new();
 
+    public RebarworksFootingOutput OutputStorage { get; set; } = new();
+
     public RebarworksFootingViewModel(IRebarworksFootingCalculatorService rebarworksFootingCalculatorService, AppDbContext context, IEventAggregator eventAggregator)
     : base(context, eventAggregator)
     {
@@ -50,6 +52,9 @@ public class RebarworksFootingViewModel : ViewModelBase<RebarworksFootingInputMo
             InputModel.LengthOfFooting.StripAndParseAsDecimal(),
             InputModel.SpacingOfSteelbar.StripAndParseAsDecimal(),
             InputModel.NumbersOfFooting.StripAndParseAsDecimal());
+
+        OutputStorage.Steelbar = totalFooting;
+        OutputStorage.Tiewire = tiewire;
 
         OutputModel.Steelbar = $"{totalFooting:N2} pcs of 6m Mainbar";
         OutputModel.Tiewire = $"{tiewire:N2} kg/s of (#16) Tiewire";

@@ -1,4 +1,5 @@
 ﻿using CategoriesModule;
+using Monitoring;
 using Prism.Ioc;
 using Prism.Modularity;
 using Prism.Mvvm;
@@ -50,6 +51,7 @@ public partial class App
     protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)
     {
         moduleCatalog.AddModule<QSANNCategoriesModule>();
+        moduleCatalog.AddModule<MonitoringModule>();
         moduleCatalog.Initialize();
     }
 

@@ -35,6 +35,8 @@ namespace CategoriesModule.ViewModels
         public override RebarworksSlabInputModel InputModel { get; set; } = new();
         public RebarworksSlabOutputModel OutputModel { get; set; } = new();
 
+        public RebarworksSlabOutput OutputStorage { get; set; } = new();
+
         private DelegateCommandWithValidator<RebarworksSlabInputModel, RebarworksSlabInputValidator> _calculateCommand;
 
         public DelegateCommandWithValidator<RebarworksSlabInputModel, RebarworksSlabInputValidator> CalculateCommand => _calculateCommand
@@ -54,8 +56,9 @@ namespace CategoriesModule.ViewModels
             var multiplier = Multipliers.FirstOrDefault(multiplier => multiplier.SlabType == (int)InputModel.OneWayOrTwoWay
                                                                            && multiplier.Name == InputModel.SteelbarSpacing);
 
-            decimal steelbar = _rebarworksSlabCalculatorService.CalculateSteelbar(InputModel.FloorArea.StripAndParseAsDecimal(), multiplier.SteelbarMultiplier);
-            decimal tiewire = _rebarworksSlabCalculatorService.CalculateSteelbar(InputModel.FloorArea.StripAndParseAsDecimal(), multiplier.TiewireMultiplier);
+            decimal steelbar = OutputStorage.Steelbar = _rebarworksSlabCalculatorService.CalculateSteelbar(InputModel.FloorArea.StripAndParseAsDecimal(), multiplier.SteelbarMultiplier);
+            decimal tiewire = OutputStorage.Tiewire = _rebarworksSlabCalculatorService.CalculateSteelbar(InputModel.FloorArea.StripAndParseAsDecimal(), multiplier.TiewireMultiplier);
+
 
             OutputModel.Steelbar = $"{steelbar} pcs of 6m Steel Bar";
             OutputModel.Tiewire = $"{tiewire} kgs of #16 Tie Wire";

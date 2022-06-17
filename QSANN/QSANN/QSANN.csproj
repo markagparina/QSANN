@@ -15,6 +15,7 @@
 		</PackageReference>
 	</ItemGroup>
 	<ItemGroup>
+		<ProjectReference Include="..\..\Monitoring\Monitoring.csproj" />
 		<ProjectReference Include="..\..\QSANN.Data\QSANN.Data.csproj" />
 		<ProjectReference Include="..\Modules\CategoriesModule\CategoriesModule.csproj" />
 		<ProjectReference Include="..\QSANN.Core\QSANN.Core.csproj" />

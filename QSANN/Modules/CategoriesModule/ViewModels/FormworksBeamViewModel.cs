@@ -26,6 +26,7 @@ namespace CategoriesModule.ViewModels
 
         public override FormworksBeamInputModel InputModel { get; set; } = new();
         public FormworksBeamOutputModel OutputModel { get; set; } = new();
+        public FormworksBeamOutput OutputStorage { get; set; } = new();
 
         public FormworksBeamViewModel(IFormworksBeamCalculatorService formworksBeamCalculatorService, AppDbContext context, IEventAggregator eventAggregator)
         : base(context, eventAggregator)
@@ -39,6 +40,9 @@ namespace CategoriesModule.ViewModels
             decimal area = _formworksBeamCalculatorService.CalculateArea(perimeter, InputModel.LengthOfBeam.StripAndParseAsDecimal(), InputModel.NumberOfCounts.StripAndParseAsDecimal());
             decimal numberOfPlywood = _formworksBeamCalculatorService.CalculateNumberOfPlywood(area);
             decimal numberOfBoardFeetLumber = _formworksBeamCalculatorService.CalculateNumberOfBoardFeetLumber(numberOfPlywood, InputModel.LumberSize, InputModel.ThicknessOfPlywood);
+
+            OutputStorage.NumberOfPlywood = numberOfPlywood;
+            OutputStorage.NumberOfBoardFeetLumber = numberOfBoardFeetLumber;
 
             OutputModel.NumberOfPlywood = $"{numberOfPlywood:N2} pcs of 4'x8' Plywood";
             OutputModel.NumberOfBoardFeetLumber = $"{numberOfBoardFeetLumber:N2} Bd.ft Lumber";

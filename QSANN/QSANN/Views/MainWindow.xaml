@@ -12,7 +12,6 @@
         TextElement.FontWeight="Medium"
         TextElement.FontSize="14"
         xmlns:converters="clr-namespace:QSANN.Core.Converters;assembly=QSANN.Core"
-        xmlns:materialConverters="clr-namespace:System.Windows.Converters;assembly=WindowsBase"
         FontFamily="{materialDesign:MaterialDesignFont}"
         Style="{StaticResource MaterialDesignWindow}"
         Title="{Binding Title}"
@@ -57,7 +56,6 @@
                                 </GridView>
                             </ListView.View>
                         </ListView>
-
                     </Border>
 
                     <StackPanel Orientation="Horizontal"

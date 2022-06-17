@@ -26,6 +26,8 @@ namespace CategoriesModule.ViewModels
 
         public override MasonryInputModel InputModel { get; set; } = new();
         public MasonryOutputModel OutputModel { get; set; } = new();
+
+        public MasonryOutput OutputStorage { get; set; } = new();
         public ErrorDialog ErrorDialog { get; set; } = new();
 
         private DelegateCommandWithValidator<MasonryInputModel, MasonryInputModelValidator> _calculateCommand;
@@ -64,6 +66,12 @@ namespace CategoriesModule.ViewModels
 
             decimal horizontalBars = numberOfPiecesByHeight * InputModel.LengthOfWall.StripAndParseAsDecimal() * 1.1m / 6m;
             decimal verticalBars = numberOfPiecesByLength * InputModel.HeightOfWall.StripAndParseAsDecimal() * 1.2m / 6m;
+
+            OutputStorage.ConcreteHollowBlocks = concreteHollowblocks;
+            OutputStorage.Cement = cementTotal;
+            OutputStorage.Sand = sandTotal;
+            OutputStorage.HorizontalBars = horizontalBars;
+            OutputStorage.VerticalBars = verticalBars;
 
             OutputModel.ConcreteHollowBlocks = $"{concreteHollowblocks} pcs of Hollowblocks";
             OutputModel.Cement = $"{cementTotal} Bags of Cement";

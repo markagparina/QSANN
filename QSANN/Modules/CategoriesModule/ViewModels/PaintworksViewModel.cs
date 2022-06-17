@@ -32,6 +32,7 @@ namespace CategoriesModule.ViewModels
 
         public override PaintworksInputModel InputModel { get; set; } = new();
         public PaintworksOutputModel OutputModel { get; set; } = new();
+        public PaintworksOutput OutputStorage { get; set; } = new();
 
         public override string Title => "Paint works";
 
@@ -60,6 +61,10 @@ namespace CategoriesModule.ViewModels
             decimal coating = _paintWorksCalculatorService.CalculateCoating(InputModel.AreaOfApplication.StripAndParseAsDecimal(), paintWorksMultiplier.Multiplier);
 
             decimal neutralizer = _paintWorksCalculatorService.CalculateNeutralizer(primerPaint);
+
+            OutputStorage.PrimerPaint = primerPaint;
+            OutputStorage.SideBySideCoating = coating;
+            OutputStorage.Neutralizer = neutralizer;
 
             OutputModel.PrimerPaint = $"{primerPaint:N2} gallons of Primer Paint";
             OutputModel.SideBySideCoating = $"{coating:N2} gallons of Coating (Side by Side)";

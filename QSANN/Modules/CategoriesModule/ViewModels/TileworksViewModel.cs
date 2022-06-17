@@ -32,6 +32,7 @@ namespace CategoriesModule.ViewModels
 
         public override TileworksInputModel InputModel { get; set; } = new();
         public TileworksOutputModel OutputModel { get; set; } = new();
+        public TileworksOutput OutputStorage { get; set; } = new();
 
         public override string Title => "Tile works";
 
@@ -55,6 +56,11 @@ namespace CategoriesModule.ViewModels
             decimal numberOf40KgBagsOfCement = _tileworksCalculatorService.CalculateBagsOfCement(InputModel.AreaOfWorkDesignation.StripAndParseAsDecimal());
             decimal numberOfBagsOfAdhesive = _tileworksCalculatorService.CalculateBagsOfAdhesive(InputModel.AreaOfWorkDesignation.StripAndParseAsDecimal());
             decimal numberOfGrout = _tileworksCalculatorService.CalculateNumberOfGrout(InputModel.AreaOfWorkDesignation.StripAndParseAsDecimal());
+
+            OutputStorage.NumberOfPieces = pieces;
+            OutputStorage.NumberOf40KgBagsOfCement = numberOf40KgBagsOfCement;
+            OutputStorage.NumberOfBagOfAdhesive = numberOfBagsOfAdhesive;
+            OutputStorage.NumberOfKgOfGrout = numberOfGrout;
 
             OutputModel.NumberOfPieces = $"{pieces} number of pieces";
             OutputModel.NumberOf40KgBagsOfCement = $"{numberOf40KgBagsOfCement} number of 40 kg. bag of Cement";

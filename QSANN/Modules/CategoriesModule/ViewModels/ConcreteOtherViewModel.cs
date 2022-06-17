@@ -53,7 +53,6 @@ public class ConcreteOtherViewModel : ViewModelBase<ConcreteOtherInputModel, Con
     {
         _concreteCalculatorService = concreteCalculatorService;
         _context = context;
-        eventAggregator.GetEvent<LoadProjectEvent>().Subscribe(LoadProjectInput, ThreadOption.UIThread);
     }
 
     private void ExecuteCalculateCommand()
@@ -86,4 +85,9 @@ public class ConcreteOtherViewModel : ViewModelBase<ConcreteOtherInputModel, Con
     //        InputModel.ClassMixture = project.ClassMixture;
     //    }
     //}
+
+    protected override void SaveProjectInput(Guid projectId)
+    {
+        base.SaveProjectInput(projectId);
+    }
 }

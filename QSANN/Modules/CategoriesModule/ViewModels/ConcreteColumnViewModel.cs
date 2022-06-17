@@ -28,6 +28,7 @@ public class ConcreteColumnViewModel : ViewModelBase<ConcreteColumnInputModel, C
 
     public override ConcreteColumnInputModel InputModel { get; set; } = new();
     public ConcreteColumnOutputModel OutputModel { get; set; } = new();
+    public ConcreteColumnOutput OutputStorage { get; set; } = new();
 
     public ConcreteColumnViewModel(IConcreteCalculatorService concreteCalculatorService, AppDbContext context, IEventAggregator eventAggregator)
     : base(context, eventAggregator)
@@ -54,9 +55,13 @@ public class ConcreteColumnViewModel : ViewModelBase<ConcreteColumnInputModel, C
             _ => throw new ArgumentException("Invalid value for Class Mixture")
         };
 
+        OutputStorage.CementMixture = bagsOfCement;
+        OutputStorage.Sand = (volume * .5m);
+        OutputStorage.Gravel = (volume * 1m);
+
         OutputModel.CementMixture = $"{bagsOfCement} Bags of Cement";
-        OutputModel.Sand = $"{(volume * .5m)}m\xB3 of Sand";
-        OutputModel.Gravel = $"{(volume * 1)}m\xB3 (3/4\") of Gravel";
+        OutputModel.Sand = $"{volume * .5m}m\xB3 of Sand";
+        OutputModel.Gravel = $"{volume * 1}m\xB3 (3/4\") of Gravel";
         IsResultVisible = true;
     }
 

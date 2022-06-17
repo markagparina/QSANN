@@ -34,6 +34,8 @@ namespace CategoriesModule.ViewModels
         public override CarpentryworksInputModel InputModel { get; set; } = new();
         public CarpentryworksOutputModel OutputModel { get; set; } = new();
 
+        public CarpentryWorksOutput OutputStorage { get; set; } = new();
+
         public override string Title => "Carpentry Works";
 
         private DelegateCommandWithValidator<CarpentryworksInputModel, CarpentryworksInputValidator> _calculateCommand;
@@ -53,9 +55,9 @@ namespace CategoriesModule.ViewModels
         {
             var lumberMultiplier = Multipliers.FirstOrDefault(multiplier => multiplier.SizeOfLumber == InputModel.SizeOfLumber);
 
-            decimal plyboard = _carpentryworksCalculatorService.CalculatePlyboard(InputModel.AreaOfDesignation.StripAndParseAsDecimal());
-            decimal lumber = _carpentryworksCalculatorService.CalculateSizeOfLumber(InputModel.AreaOfDesignation.StripAndParseAsDecimal(), lumberMultiplier.Multiplier);
-            decimal commonWireNail = _carpentryworksCalculatorService.CalculateCommonWireNail(InputModel.AreaOfDesignation.StripAndParseAsDecimal());
+            decimal plyboard = OutputStorage.Plyboard = _carpentryworksCalculatorService.CalculatePlyboard(InputModel.AreaOfDesignation.StripAndParseAsDecimal());
+            decimal lumber = OutputStorage.SizeOfLumber = _carpentryworksCalculatorService.CalculateSizeOfLumber(InputModel.AreaOfDesignation.StripAndParseAsDecimal(), lumberMultiplier.Multiplier);
+            decimal commonWireNail = OutputStorage.CommonWireNail = _carpentryworksCalculatorService.CalculateCommonWireNail(InputModel.AreaOfDesignation.StripAndParseAsDecimal());
 
             OutputModel.Plyboard = $"{plyboard:N2} pcs of 4'x8' Plyboard";
             OutputModel.SizeOfLumber = $"{lumber:N2} bd.ft of Lumber @ 40x40 Spacing";

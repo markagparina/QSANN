@@ -29,6 +29,8 @@ public class ConcreteFootingViewModel : ViewModelBase<ConcreteFootingInputModel,
     public override ConcreteFootingInputModel InputModel { get; set; } = new();
     public ConcreteFootingOutputModel OutputModel { get; set; } = new();
 
+    public ConcreteFootingOutput OutputStorage { get; set; } = new();
+
     public ConcreteFootingViewModel(IConcreteCalculatorService concreteCalculatorService, AppDbContext context, IEventAggregator eventAggregator)
     : base(context, eventAggregator)
     {
@@ -53,6 +55,10 @@ public class ConcreteFootingViewModel : ViewModelBase<ConcreteFootingInputModel,
             "C" => volume * 6.5m,
             _ => throw new ArgumentException("Invalid value for Class Mixture")
         };
+
+        OutputStorage.CementMixture = bagsOfCement;
+        OutputStorage.Sand = (volume * .5m);
+        OutputStorage.Gravel = (volume * 1m);
 
         OutputModel.CementMixture = $"{bagsOfCement} Bags of Cement";
         OutputModel.Sand = $"{(volume * .5m)}m\xB3 of Sand";

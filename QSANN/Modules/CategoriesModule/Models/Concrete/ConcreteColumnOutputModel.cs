@@ -4,12 +4,12 @@ namespace CategoriesModule.Models;
 
 public class ConcreteColumnOutputModel : BindableBase
 {
-    private string _cementM;
+    private string _cementMixture;
 
     public string CementMixture
     {
-        get { return _cementM; }
-        set { SetProperty(ref _cementM, value); }
+        get { return _cementMixture; }
+        set { SetProperty(ref _cementMixture, value); }
     }
 
     private string _sand;
