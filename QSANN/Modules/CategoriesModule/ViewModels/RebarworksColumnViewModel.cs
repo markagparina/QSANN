@@ -13,7 +13,7 @@ using System;
 
 namespace CategoriesModule.ViewModels;
 
-public class RebarworksColumnViewModel : ViewModelBase<RebarworksColumnInputModel, RebarworksColumnInput>
+public class RebarworksColumnViewModel : ViewModelBase<RebarworksColumnInputModel, RebarworksColumnInput, RebarworksColumnOutput>
 {
     private readonly IRebarworksColumnCalculatorService _rebarworksColumnCalculatorService;
     private DelegateCommandWithValidator<RebarworksColumnInputModel, RebarworksColumnInputValidator> _calculateCommand;
@@ -24,6 +24,7 @@ public class RebarworksColumnViewModel : ViewModelBase<RebarworksColumnInputMode
 
     public override RebarworksColumnInputModel InputModel { get; set; } = new();
     public RebarworksColumnOutputModel OutputModel { get; set; } = new();
+    public override RebarworksColumnOutput OutputStorage { get; set; } = new();
 
     public RebarworksColumnViewModel(IRebarworksColumnCalculatorService rebarworksColumnCalculatorService, AppDbContext context, IEventAggregator eventAggregator)
     : base(context, eventAggregator)
@@ -64,6 +65,10 @@ public class RebarworksColumnViewModel : ViewModelBase<RebarworksColumnInputMode
         decimal lateralTies = _rebarworksColumnCalculatorService.CalculateLateralTies(ties, pieces);
 
         decimal tiewire = _rebarworksColumnCalculatorService.CalculateTieWire(pieces, steel, InputModel.NumbersOfColumn.StripAndParseAsDecimal());
+
+        OutputStorage.Mainbar = mainbarColumn;
+        OutputStorage.Tiewire = tiewire;
+        OutputStorage.LateralTies = lateralTies;
 
         OutputModel.Mainbar = $"{mainbarColumn:N2} pcs of 6m Mainbar";
         OutputModel.Tiewire = $"{tiewire:N2} kg/s of (#16) Tiewire";

@@ -3,6 +3,8 @@ using Prism.Ioc;
 using Prism.Modularity;
 using Prism.Regions;
 using QSANN.Core;
+using QSANN.Services;
+using QSANN.Services.Interfaces;
 
 namespace CategoriesModule
 {
@@ -55,28 +57,17 @@ namespace CategoriesModule
 
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            //containerRegistry.RegisterForNavigation<MasonryView>(nameof(MasonryView));
-
-            // Concrete Tabs
-            //containerRegistry.RegisterForNavigation<ConcreteView>(nameof(ConcreteView));
-            //containerRegistry.RegisterForNavigation<ConcreteColumnView>(nameof(ConcreteColumnView));
-            //containerRegistry.RegisterForNavigation<ConcreteBeamView>(nameof(ConcreteBeamView));
-            //containerRegistry.RegisterForNavigation<ConcreteSlabView>(nameof(ConcreteSlabView));
-            //containerRegistry.RegisterForNavigation<ConcreteFootingView>(nameof(ConcreteFootingView));
-            //containerRegistry.RegisterForNavigation<ConcreteOtherView>(nameof(ConcreteOtherView));
-
-            //// Formworks Tabs
-            //containerRegistry.RegisterForNavigation<FormworksView>(nameof(FormworksView));
-            //containerRegistry.RegisterForNavigation<FormworksColumnView>(nameof(FormworksColumnView));
-            //containerRegistry.RegisterForNavigation<FormworksBeamView>(nameof(FormworksBeamView));
-
-            //// Tile works
-            //containerRegistry.RegisterForNavigation<TileworksView>(nameof(TileworksView));
-
-            //// Rebarworks
-            //containerRegistry.RegisterForNavigation<RebarworksView>(nameof(RebarworksView));
-            //containerRegistry.RegisterForNavigation<RebarworksColumnView>(nameof(RebarworksColumnView));
-            //containerRegistry.RegisterForNavigation<RebarworksBeamView>(nameof(RebarworksBeamView));
+            containerRegistry.Register<IMasonryCalculatorService, MasonryCalculatorService>();
+            containerRegistry.Register<IConcreteCalculatorService, ConcreteCalculatorService>();
+            containerRegistry.Register<IFormworksColumnCalculatorService, FormworksColumnCalculatorService>();
+            containerRegistry.Register<IFormworksBeamCalculatorService, FormworksBeamCalculatorService>();
+            containerRegistry.Register<ITileworksCalculatorService, TileworksCalculatorService>();
+            containerRegistry.Register<IRebarworksColumnCalculatorService, RebarworksColumnCalculatorService>();
+            containerRegistry.Register<IRebarworksBeamCalculatorService, RebarworksBeamCalculatorService>();
+            containerRegistry.Register<IRebarworksFootingCalculatorService, RebarworksFootingCalculatorService>();
+            containerRegistry.Register<IRebarworksSlabCalculatorService, RebarworksSlabCalculatorService>();
+            containerRegistry.Register<IPaintworksCalculatorService, PaintworksCalculatorService>();
+            containerRegistry.Register<ICarpentryworksCalculatorService, CarpentryworksCalculatorService>();
         }
     }
 }

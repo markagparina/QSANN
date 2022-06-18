@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 namespace CategoriesModule.ViewModels
 {
     [Display(Name = "Other Materials")]
-    public class OthersViewModel : MenuItem<OtherMaterialModel, OtherMaterial>
+    public class OthersViewModel : MenuItem<OtherMaterialModel, OtherMaterial, OtherMaterialOutput>
     {
         private ObservableCollection<OtherMaterialModel> _otherMaterials;
 

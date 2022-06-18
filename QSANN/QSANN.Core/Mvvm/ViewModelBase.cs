@@ -35,17 +35,20 @@ namespace QSANN.Core.Mvvm
         }
     }
 
-    public class ViewModelBase<TInputModel, TEntityType> : ViewModelBase
+    public class ViewModelBase<TInputModel, TEntityType, TOutputStorage> : ViewModelBase
     where TInputModel : BindableBase
     where TEntityType : AuditableProjectEntity, new()
+    where TOutputStorage : AuditableMonitoringProjectEntity
     {
         protected AppDbContext Context { get; }
         protected IEventAggregator EventAggregator { get; }
 
         public virtual TInputModel InputModel { get; set; }
+        public virtual TOutputStorage OutputStorage { get; set; }
 
         public virtual LoadProjectEvent LoadProjectEvent { get; set; }
         public virtual SaveProjectEvent SaveProjectEvent { get; set; }
+        public virtual SaveMonitoringProjectEvent SaveMonitoringProjectEvent { get; set; }
 
         private bool _isResultVisible;
 
@@ -61,9 +64,23 @@ namespace QSANN.Core.Mvvm
             EventAggregator = eventAggregator;
             LoadProjectEvent = EventAggregator.GetEvent<LoadProjectEvent>();
             SaveProjectEvent = EventAggregator.GetEvent<SaveProjectEvent>();
+            SaveMonitoringProjectEvent = EventAggregator.GetEvent<SaveMonitoringProjectEvent>();
 
+            LoadProjectEvent.Unsubscribe(LoadProjectInput);
             LoadProjectEvent.Subscribe(LoadProjectInput, ThreadOption.UIThread);
+
+            SaveProjectEvent.Unsubscribe(SaveProjectOutput);
             SaveProjectEvent.Subscribe(SaveProjectInput, ThreadOption.UIThread);
+
+            SaveMonitoringProjectEvent.Unsubscribe(SaveProjectOutput);
+            SaveMonitoringProjectEvent.Subscribe(SaveProjectOutput, ThreadOption.UIThread);
+        }
+
+        private void SaveProjectOutput(Guid monitoringProjectId)
+        {
+            OutputStorage.MonitoringProjectId = monitoringProjectId;
+            Context.Set<TOutputStorage>().Add(OutputStorage);
+            Context.SaveChanges();
         }
 
         protected virtual void SaveProjectInput(Guid projectId)

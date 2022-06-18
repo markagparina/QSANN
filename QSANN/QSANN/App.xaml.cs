@@ -33,18 +33,6 @@ public partial class App
     {
         containerRegistry.RegisterScoped<AppDbContext>();
 
-        containerRegistry.Register<IMasonryCalculatorService, MasonryCalculatorService>();
-        containerRegistry.Register<IConcreteCalculatorService, ConcreteCalculatorService>();
-        containerRegistry.Register<IFormworksColumnCalculatorService, FormworksColumnCalculatorService>();
-        containerRegistry.Register<IFormworksBeamCalculatorService, FormworksBeamCalculatorService>();
-        containerRegistry.Register<ITileworksCalculatorService, TileworksCalculatorService>();
-        containerRegistry.Register<IRebarworksColumnCalculatorService, RebarworksColumnCalculatorService>();
-        containerRegistry.Register<IRebarworksBeamCalculatorService, RebarworksBeamCalculatorService>();
-        containerRegistry.Register<IRebarworksFootingCalculatorService, RebarworksFootingCalculatorService>();
-        containerRegistry.Register<IRebarworksSlabCalculatorService, RebarworksSlabCalculatorService>();
-        containerRegistry.Register<IPaintworksCalculatorService, PaintworksCalculatorService>();
-        containerRegistry.Register<ICarpentryworksCalculatorService, CarpentryworksCalculatorService>();
-
         containerRegistry.RegisterScoped<ProjectDialogViewModel>();
     }
 
@@ -65,6 +53,9 @@ public partial class App
         DataSeeder.Seed(dbContext);
 #endif
         var regionManager = Container.Resolve<IRegionManager>();
+        regionManager.RegisterViewWithRegion<HomeView>(RegionNames.ModuleRegion);
+        regionManager.RegisterViewWithRegion<QuantitySurveyingView>(RegionNames.ModuleRegion);
+        regionManager.RegisterViewWithRegion<MonitoringView>(RegionNames.ModuleRegion);
 
         regionManager.Regions.Count();
     }

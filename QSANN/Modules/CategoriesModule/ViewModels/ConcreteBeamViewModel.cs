@@ -16,7 +16,7 @@ using System.Linq;
 
 namespace CategoriesModule.ViewModels;
 
-public class ConcreteBeamViewModel : ViewModelBase<ConcreteBeamInputModel, ConcreteBeamInput>
+public class ConcreteBeamViewModel : ViewModelBase<ConcreteBeamInputModel, ConcreteBeamInput, ConcreteBeamOutput>
 {
     private readonly IConcreteCalculatorService _concreteCalculatorService;
     private readonly AppDbContext _context;
@@ -28,7 +28,7 @@ public class ConcreteBeamViewModel : ViewModelBase<ConcreteBeamInputModel, Concr
 
     public override ConcreteBeamInputModel InputModel { get; set; } = new();
     public ConcreteBeamOutputModel OutputModel { get; set; } = new();
-    public ConcreteBeamOutput OutputStorage { get; set; } = new();
+    public override ConcreteBeamOutput OutputStorage { get; set; } = new();
 
     public ConcreteBeamViewModel(IConcreteCalculatorService concreteCalculatorService, AppDbContext context, IEventAggregator eventAggregator)
     : base(context, eventAggregator)

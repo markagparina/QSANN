@@ -19,7 +19,7 @@ using System.ComponentModel.DataAnnotations;
 namespace CategoriesModule.ViewModels
 {
     [Display(Name = "Carpentry Works")]
-    public class CarpentryworksViewModel : MenuItem<CarpentryworksInputModel, CarpentryworksInput>
+    public class CarpentryworksViewModel : MenuItem<CarpentryworksInputModel, CarpentryworksInput, CarpentryWorksOutput>
     {
         private ObservableCollection<CarpentryworksMultiplierModel> _multipliers;
         private readonly ICarpentryworksCalculatorService _carpentryworksCalculatorService;
@@ -33,8 +33,7 @@ namespace CategoriesModule.ViewModels
 
         public override CarpentryworksInputModel InputModel { get; set; } = new();
         public CarpentryworksOutputModel OutputModel { get; set; } = new();
-
-        public CarpentryWorksOutput OutputStorage { get; set; } = new();
+        public override CarpentryWorksOutput OutputStorage { get; set; } = new();
 
         public override string Title => "Carpentry Works";
 
@@ -61,7 +60,7 @@ namespace CategoriesModule.ViewModels
 
             OutputModel.Plyboard = $"{plyboard:N2} pcs of 4'x8' Plyboard";
             OutputModel.SizeOfLumber = $"{lumber:N2} bd.ft of Lumber @ 40x40 Spacing";
-            OutputModel.CommonWireNail = $"{commonWireNail:N2} kg of Coommon Wire Nail";
+            OutputModel.CommonWireNail = $"{commonWireNail:N2} kg of Common Wire Nail";
 
             IsResultVisible = true;
         }

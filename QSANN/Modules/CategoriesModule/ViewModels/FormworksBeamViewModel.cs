@@ -15,7 +15,7 @@ using System.Linq;
 
 namespace CategoriesModule.ViewModels
 {
-    public class FormworksBeamViewModel : ViewModelBase<FormworksBeamInputModel, FormworksBeamInput>
+    public class FormworksBeamViewModel : ViewModelBase<FormworksBeamInputModel, FormworksBeamInput, FormworksBeamOutput>
     {
         private readonly IFormworksBeamCalculatorService _formworksBeamCalculatorService;
         private DelegateCommandWithValidator<FormworksBeamInputModel, FormworksBeamInputValidator> _calculateCommand;
@@ -26,7 +26,7 @@ namespace CategoriesModule.ViewModels
 
         public override FormworksBeamInputModel InputModel { get; set; } = new();
         public FormworksBeamOutputModel OutputModel { get; set; } = new();
-        public FormworksBeamOutput OutputStorage { get; set; } = new();
+        public override FormworksBeamOutput OutputStorage { get; set; } = new();
 
         public FormworksBeamViewModel(IFormworksBeamCalculatorService formworksBeamCalculatorService, AppDbContext context, IEventAggregator eventAggregator)
         : base(context, eventAggregator)

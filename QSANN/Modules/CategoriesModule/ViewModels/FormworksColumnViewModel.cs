@@ -14,7 +14,7 @@ using System.Linq;
 
 namespace CategoriesModule.ViewModels
 {
-    public class FormworksColumnViewModel : ViewModelBase<FormworksColumnInputModel, FormworksColumnInput>
+    public class FormworksColumnViewModel : ViewModelBase<FormworksColumnInputModel, FormworksColumnInput, FormworksColumnOutput>
     {
         private readonly IFormworksColumnCalculatorService _formworksColumnCalculatorService;
         private readonly AppDbContext _context;
@@ -26,6 +26,7 @@ namespace CategoriesModule.ViewModels
 
         public override FormworksColumnInputModel InputModel { get; set; } = new();
         public FormworksColumnOutputModel OutputModel { get; set; } = new();
+        public override FormworksColumnOutput OutputStorage { get; set; } = new();
 
         public FormworksColumnViewModel(IFormworksColumnCalculatorService formworksColumnCalculatorService, AppDbContext context, IEventAggregator eventAggregator)
         : base(context, eventAggregator)
@@ -41,6 +42,9 @@ namespace CategoriesModule.ViewModels
             decimal area = _formworksColumnCalculatorService.CalculateArea(perimeter, InputModel.HeightOfColumn.StripAndParseAsDecimal(), InputModel.NumberOfCounts.StripAndParseAsDecimal());
             decimal numberOfPlywood = _formworksColumnCalculatorService.CalculateNumberOfPlywood(area);
             decimal numberOfBoardFeetLumber = _formworksColumnCalculatorService.CalculateNumberOfBoardFeetLumber(numberOfPlywood, InputModel.LumberSize, InputModel.ThicknessOfPlywood);
+
+            OutputStorage.NumberOfPlywood = numberOfPlywood;
+            OutputStorage.NumberOfBoardFeetLumber = numberOfBoardFeetLumber;
 
             OutputModel.NumberOfPlywood = $"{numberOfPlywood:N2} pcs of 4'x8' Plywood";
             OutputModel.NumberOfBoardFeetLumber = $"{numberOfBoardFeetLumber:N2} Bd.ft Lumber";

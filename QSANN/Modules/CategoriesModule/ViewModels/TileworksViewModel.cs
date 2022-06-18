@@ -18,7 +18,7 @@ using System.Linq;
 namespace CategoriesModule.ViewModels
 {
     [Display(Name = "Tile works")]
-    public class TileworksViewModel : MenuItem<TileworksInputModel, TileworksInput>
+    public class TileworksViewModel : MenuItem<TileworksInputModel, TileworksInput, TileworksOutput>
     {
         private ObservableCollection<TileworksMultiplierModel> _multipliers;
         private readonly ITileworksCalculatorService _tileworksCalculatorService;
@@ -32,7 +32,7 @@ namespace CategoriesModule.ViewModels
 
         public override TileworksInputModel InputModel { get; set; } = new();
         public TileworksOutputModel OutputModel { get; set; } = new();
-        public TileworksOutput OutputStorage { get; set; } = new();
+        public override TileworksOutput OutputStorage { get; set; } = new();
 
         public override string Title => "Tile works";
 

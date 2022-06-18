@@ -18,7 +18,7 @@ using System.Threading.Tasks;
 namespace CategoriesModule.ViewModels
 {
     [Display(Name = "Masonry")]
-    public class MasonryViewModel : MenuItem<MasonryInputModel, MasonryInput>
+    public class MasonryViewModel : MenuItem<MasonryInputModel, MasonryInput, MasonryOutput>
     {
         private readonly IMasonryCalculatorService _masonryCalculatorService;
         private readonly AppDbContext _context;
@@ -26,8 +26,7 @@ namespace CategoriesModule.ViewModels
 
         public override MasonryInputModel InputModel { get; set; } = new();
         public MasonryOutputModel OutputModel { get; set; } = new();
-
-        public MasonryOutput OutputStorage { get; set; } = new();
+        public override MasonryOutput OutputStorage { get; set; } = new();
         public ErrorDialog ErrorDialog { get; set; } = new();
 
         private DelegateCommandWithValidator<MasonryInputModel, MasonryInputModelValidator> _calculateCommand;

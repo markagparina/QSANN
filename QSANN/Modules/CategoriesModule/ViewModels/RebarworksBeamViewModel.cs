@@ -16,7 +16,7 @@ using System.Linq;
 
 namespace CategoriesModule.ViewModels;
 
-public class RebarworksBeamViewModel : ViewModelBase<RebarworksBeamInputModel, RebarworksBeamInput>
+public class RebarworksBeamViewModel : ViewModelBase<RebarworksBeamInputModel, RebarworksBeamInput, RebarworksBeamOutput>
 {
     private readonly IRebarworksBeamCalculatorService _beamCalculatorService;
     private readonly AppDbContext _context;
@@ -28,6 +28,7 @@ public class RebarworksBeamViewModel : ViewModelBase<RebarworksBeamInputModel, R
 
     public override RebarworksBeamInputModel InputModel { get; set; } = new();
     public RebarworksBeamOutputModel OutputModel { get; set; } = new();
+    public override RebarworksBeamOutput OutputStorage { get; set; } = new();
 
     public RebarworksBeamViewModel(IRebarworksBeamCalculatorService beamCalculatorService, AppDbContext context, IEventAggregator eventAggregator)
     : base(context, eventAggregator)
@@ -62,6 +63,11 @@ public class RebarworksBeamViewModel : ViewModelBase<RebarworksBeamInputModel, R
         decimal lateralTies = _beamCalculatorService.CalculateStirrups(stirrups, pieces);
 
         decimal tiewire = _beamCalculatorService.CalculateTieWire(pieces, steel, InputModel.NumbersOfBeam.StripAndParseAsDecimal());
+
+        OutputStorage.Mainbar = mainbarBeam;
+        OutputStorage.ShortBeamLength = sbl;
+        OutputStorage.Tiewire = tiewire;
+        OutputStorage.LateralTies = lateralTies;
 
         OutputModel.Mainbar = $"{mainbarBeam:N2} pcs of 6m Mainbar";
         OutputModel.ShortBeamLength = $"{sbl:N2} pcs of 6m Bendbars";

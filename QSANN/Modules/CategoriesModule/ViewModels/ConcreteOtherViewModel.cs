@@ -17,7 +17,7 @@ using System.Linq;
 
 namespace CategoriesModule.ViewModels;
 
-public class ConcreteOtherViewModel : ViewModelBase<ConcreteOtherInputModel, ConcreteOtherInput>
+public class ConcreteOtherViewModel : ViewModelBase<ConcreteOtherInputModel, ConcreteOtherInput, ConcreteOtherOutput>
 {
     private readonly IConcreteCalculatorService _concreteCalculatorService;
     private readonly AppDbContext _context;
@@ -73,18 +73,6 @@ public class ConcreteOtherViewModel : ViewModelBase<ConcreteOtherInputModel, Con
         OutputModel.Gravel = $"{(volume * 1)}m\xB3 (3/4\") of Gravel";
         IsResultVisible = true;
     }
-
-    //private void LoadProjectInput(Guid projectId)
-    //{
-    //    var project = _context.Set<ConcreteOtherInput>().FirstOrDefault(slab => slab.ProjectId == projectId);
-
-    //    if (project is not null)
-    //    {
-    //        InputModel.TotalVolume = project.TotalVolume;
-    //        InputModel.NumbersOfCount = project.NumbersOfCount;
-    //        InputModel.ClassMixture = project.ClassMixture;
-    //    }
-    //}
 
     protected override void SaveProjectInput(Guid projectId)
     {

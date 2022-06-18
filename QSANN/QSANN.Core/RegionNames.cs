@@ -7,5 +7,7 @@
         public const string ConcreteContentRegion = "ConcreteContentRegion";
         public const string RebarworksContentRegion = "RebarworksContentRegion";
         public const string MainWindowDialogHostContentRegion = "MainWindowDialogHostContentRegion";
+        public const string ModuleRegion = "ModuleRegion";
+        public const string MonitoringContentRegion = "MonitoringContentRegion";
     }
 }

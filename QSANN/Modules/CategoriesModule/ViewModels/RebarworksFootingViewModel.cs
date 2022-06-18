@@ -16,7 +16,7 @@ using System;
 
 namespace CategoriesModule.ViewModels;
 
-public class RebarworksFootingViewModel : ViewModelBase<RebarworksFootingInputModel, RebarworksFootingInput>
+public class RebarworksFootingViewModel : ViewModelBase<RebarworksFootingInputModel, RebarworksFootingInput, RebarworksFootingOutput>
 {
     private readonly IRebarworksFootingCalculatorService _rebarworksFootingCalculatorService;
 
@@ -29,7 +29,7 @@ public class RebarworksFootingViewModel : ViewModelBase<RebarworksFootingInputMo
     public override RebarworksFootingInputModel InputModel { get; set; } = new();
     public RebarworksFootingOutputModel OutputModel { get; set; } = new();
 
-    public RebarworksFootingOutput OutputStorage { get; set; } = new();
+    public override RebarworksFootingOutput OutputStorage { get; set; } = new();
 
     public RebarworksFootingViewModel(IRebarworksFootingCalculatorService rebarworksFootingCalculatorService, AppDbContext context, IEventAggregator eventAggregator)
     : base(context, eventAggregator)

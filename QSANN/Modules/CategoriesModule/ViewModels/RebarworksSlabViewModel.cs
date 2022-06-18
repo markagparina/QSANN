@@ -19,7 +19,7 @@ using System.Linq;
 
 namespace CategoriesModule.ViewModels
 {
-    public class RebarworksSlabViewModel : ViewModelBase<RebarworksSlabInputModel, RebarworksSlabInput>
+    public class RebarworksSlabViewModel : ViewModelBase<RebarworksSlabInputModel, RebarworksSlabInput, RebarworksSlabOutput>
     {
         private ObservableCollection<RebarworksSlabTypeMultiplier> _multipliers;
         private readonly IRebarworksSlabCalculatorService _rebarworksSlabCalculatorService;
@@ -35,7 +35,7 @@ namespace CategoriesModule.ViewModels
         public override RebarworksSlabInputModel InputModel { get; set; } = new();
         public RebarworksSlabOutputModel OutputModel { get; set; } = new();
 
-        public RebarworksSlabOutput OutputStorage { get; set; } = new();
+        public override RebarworksSlabOutput OutputStorage { get; set; } = new();
 
         private DelegateCommandWithValidator<RebarworksSlabInputModel, RebarworksSlabInputValidator> _calculateCommand;
 
@@ -58,7 +58,6 @@ namespace CategoriesModule.ViewModels
 
             decimal steelbar = OutputStorage.Steelbar = _rebarworksSlabCalculatorService.CalculateSteelbar(InputModel.FloorArea.StripAndParseAsDecimal(), multiplier.SteelbarMultiplier);
             decimal tiewire = OutputStorage.Tiewire = _rebarworksSlabCalculatorService.CalculateSteelbar(InputModel.FloorArea.StripAndParseAsDecimal(), multiplier.TiewireMultiplier);
-
 
             OutputModel.Steelbar = $"{steelbar} pcs of 6m Steel Bar";
             OutputModel.Tiewire = $"{tiewire} kgs of #16 Tie Wire";

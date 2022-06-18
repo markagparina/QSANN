@@ -17,7 +17,7 @@ using System.Linq;
 namespace CategoriesModule.ViewModels
 {
     [Display(Name = "Paint works")]
-    public class PaintworksViewModel : MenuItem<PaintworksInputModel, PaintworksInput>
+    public class PaintworksViewModel : MenuItem<PaintworksInputModel, PaintworksInput, PaintworksOutput>
     {
         private ObservableCollection<PaintworksMultiplierModel> _multipliers;
         private readonly IPaintworksCalculatorService _paintWorksCalculatorService;
@@ -32,7 +32,7 @@ namespace CategoriesModule.ViewModels
 
         public override PaintworksInputModel InputModel { get; set; } = new();
         public PaintworksOutputModel OutputModel { get; set; } = new();
-        public PaintworksOutput OutputStorage { get; set; } = new();
+        public override PaintworksOutput OutputStorage { get; set; } = new();
 
         public override string Title => "Paint works";
 

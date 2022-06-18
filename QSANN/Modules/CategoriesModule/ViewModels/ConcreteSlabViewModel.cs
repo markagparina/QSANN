@@ -16,7 +16,7 @@ using System.Linq;
 
 namespace CategoriesModule.ViewModels;
 
-public class ConcreteSlabViewModel : ViewModelBase<ConcreteSlabInputModel, ConcreteSlabInput>
+public class ConcreteSlabViewModel : ViewModelBase<ConcreteSlabInputModel, ConcreteSlabInput, ConcreteSlabOutput>
 {
     private readonly IConcreteCalculatorService _concreteCalculatorService;
     private readonly AppDbContext _context;
@@ -28,8 +28,7 @@ public class ConcreteSlabViewModel : ViewModelBase<ConcreteSlabInputModel, Concr
 
     public override ConcreteSlabInputModel InputModel { get; set; } = new();
     public ConcreteSlabOutputModel OutputModel { get; set; } = new();
-
-    public ConcreteSlabOutput OutputStorage { get; set; }
+    public override ConcreteSlabOutput OutputStorage { get; set; }
 
     public ConcreteSlabViewModel(IConcreteCalculatorService concreteCalculatorService, AppDbContext context, IEventAggregator eventAggregator)
     : base(context, eventAggregator)
