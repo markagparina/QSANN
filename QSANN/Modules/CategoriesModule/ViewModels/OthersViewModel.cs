@@ -1,9 +1,12 @@
-﻿using CategoriesModule.Models;
+﻿using CategoriesModule.Dialogs;
+using CategoriesModule.Models;
+using FluentValidation;
 using Mapster;
 using Microsoft.EntityFrameworkCore;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Regions;
+using QSANN.Core.Commands;
 using QSANN.Core.Navigation;
 using QSANN.Data;
 using QSANN.Data.Entities;
@@ -16,7 +19,7 @@ using System.Threading.Tasks;
 namespace CategoriesModule.ViewModels
 {
     [Display(Name = "Other Materials")]
-    public class OthersViewModel : MenuItem<OtherMaterialModel, OtherMaterial, OtherMaterialOutput>
+    public class OthersViewModel : MenuItem<OtherMaterialModel, OtherMaterial, OtherMaterialOutput, AbstractValidator<OtherMaterialModel>>
     {
         private ObservableCollection<OtherMaterialModel> _otherMaterials;
 
@@ -31,6 +34,9 @@ namespace CategoriesModule.ViewModels
         private DelegateCommand _removeLastItemCommand;
 
         public DelegateCommand RemoveLastItemCommand => _removeLastItemCommand ??= new DelegateCommand(RemoveLastItem);
+
+        public override DelegateCommandWithValidator<OtherMaterialModel, AbstractValidator<OtherMaterialModel>> CalculateCommand =>
+            new DelegateCommandWithValidator<OtherMaterialModel, AbstractValidator<OtherMaterialModel>>(() => { }, new OtherMaterialModel(), new InlineValidator<OtherMaterialModel>(), new ErrorDialog());
 
         private void RemoveLastItem()
         {
@@ -112,6 +118,23 @@ namespace CategoriesModule.ViewModels
                 }
 
                 Context.Set<OtherMaterial>().AddRange(currentMaterials);
+
+                Context.SaveChanges();
+            }
+        }
+
+        protected override async void SaveProjectOutput(Guid monitoringProjectId)
+        {
+            if (OtherMaterials.Count > 0)
+            {
+                var outputMaterials = OtherMaterials.Select(other => other.Adapt<OtherMaterialOutput>()).ToList();
+
+                foreach (var outputMaterial in outputMaterials)
+                {
+                    outputMaterial.MonitoringProjectId = monitoringProjectId;
+                }
+
+                Context.Set<OtherMaterialOutput>().AddRange(outputMaterials);
 
                 Context.SaveChanges();
             }

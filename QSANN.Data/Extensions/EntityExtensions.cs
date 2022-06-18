@@ -13,7 +13,7 @@ namespace QSANN.Data.Extensions
             return assembly.ExportedTypes
                     .Where(type => !type.IsAbstract
                                 && !type.IsInterface
-                                && type.IsAssignableTo(typeof(AuditableProjectEntity))).ToList();
+                                && type.IsAssignableTo(assignableType)).ToList();
         }
     }
 }

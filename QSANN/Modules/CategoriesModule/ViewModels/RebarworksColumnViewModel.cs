@@ -13,13 +13,13 @@ using System;
 
 namespace CategoriesModule.ViewModels;
 
-public class RebarworksColumnViewModel : ViewModelBase<RebarworksColumnInputModel, RebarworksColumnInput, RebarworksColumnOutput>
+public class RebarworksColumnViewModel : ViewModelBase<RebarworksColumnInputModel, RebarworksColumnInput, RebarworksColumnOutput, RebarworksColumnInputValidator>
 {
     private readonly IRebarworksColumnCalculatorService _rebarworksColumnCalculatorService;
     private DelegateCommandWithValidator<RebarworksColumnInputModel, RebarworksColumnInputValidator> _calculateCommand;
     private readonly RebarworksColumnInputValidator _validator = new();
 
-    public DelegateCommandWithValidator<RebarworksColumnInputModel, RebarworksColumnInputValidator> CalculateCommand => _calculateCommand
+    public override DelegateCommandWithValidator<RebarworksColumnInputModel, RebarworksColumnInputValidator> CalculateCommand => _calculateCommand
         ??= new DelegateCommandWithValidator<RebarworksColumnInputModel, RebarworksColumnInputValidator>(ExecuteCalculateCommand, InputModel, _validator, new ErrorDialog());
 
     public override RebarworksColumnInputModel InputModel { get; set; } = new();

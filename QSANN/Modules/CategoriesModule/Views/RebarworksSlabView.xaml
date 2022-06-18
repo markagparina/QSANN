@@ -15,8 +15,8 @@
         <converters:ComparisonConverter x:Key="comparisonConverter" />
     </UserControl.Resources>
 
-    <materialDesign:DialogHost>
-        <AdornerDecorator>
+    <AdornerDecorator>
+        <materialDesign:DialogHost>
             <StackPanel Orientation="Vertical">
                 <TextBlock Margin="0,20,0,0"
                            Padding="5"
@@ -176,6 +176,6 @@
                     </GroupBox>
                 </Grid>
             </StackPanel>
-        </AdornerDecorator>
-    </materialDesign:DialogHost>
+        </materialDesign:DialogHost>
+    </AdornerDecorator>
 </UserControl>

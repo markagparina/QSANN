@@ -17,8 +17,10 @@
         Title="{Binding Title}"
         WindowStartupLocation="CenterScreen"
         Icon="../Resources/logo.png"
-        Height="525"
-        Width="525">
+        ResizeMode="NoResize"
+        Height="800"
+
+        Width="1000">
     <Window.Resources>
         <converters:StringToBooleanConverter x:Key="stringToBooleanConverter" />
         <converters:DecimalToBooleanConverter x:Key="decimalToBooleanConverter" />

@@ -16,19 +16,19 @@ using System.Linq;
 
 namespace CategoriesModule.ViewModels;
 
-public class ConcreteSlabViewModel : ViewModelBase<ConcreteSlabInputModel, ConcreteSlabInput, ConcreteSlabOutput>
+public class ConcreteSlabViewModel : ViewModelBase<ConcreteSlabInputModel, ConcreteSlabInput, ConcreteSlabOutput, ConcreteSlabInputValidator>
 {
     private readonly IConcreteCalculatorService _concreteCalculatorService;
     private readonly AppDbContext _context;
     private DelegateCommandWithValidator<ConcreteSlabInputModel, ConcreteSlabInputValidator> _calculateCommand;
     private readonly ConcreteSlabInputValidator _validator = new();
 
-    public DelegateCommandWithValidator<ConcreteSlabInputModel, ConcreteSlabInputValidator> CalculateCommand => _calculateCommand
+    public override DelegateCommandWithValidator<ConcreteSlabInputModel, ConcreteSlabInputValidator> CalculateCommand => _calculateCommand
         ??= new DelegateCommandWithValidator<ConcreteSlabInputModel, ConcreteSlabInputValidator>(ExecuteCalculateCommand, InputModel, _validator, new ErrorDialog());
 
     public override ConcreteSlabInputModel InputModel { get; set; } = new();
     public ConcreteSlabOutputModel OutputModel { get; set; } = new();
-    public override ConcreteSlabOutput OutputStorage { get; set; }
+    public override ConcreteSlabOutput OutputStorage { get; set; } = new();
 
     public ConcreteSlabViewModel(IConcreteCalculatorService concreteCalculatorService, AppDbContext context, IEventAggregator eventAggregator)
     : base(context, eventAggregator)

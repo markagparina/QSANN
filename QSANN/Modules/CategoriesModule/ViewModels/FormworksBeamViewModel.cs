@@ -15,13 +15,13 @@ using System.Linq;
 
 namespace CategoriesModule.ViewModels
 {
-    public class FormworksBeamViewModel : ViewModelBase<FormworksBeamInputModel, FormworksBeamInput, FormworksBeamOutput>
+    public class FormworksBeamViewModel : ViewModelBase<FormworksBeamInputModel, FormworksBeamInput, FormworksBeamOutput, FormworksBeamInputValidator>
     {
         private readonly IFormworksBeamCalculatorService _formworksBeamCalculatorService;
         private DelegateCommandWithValidator<FormworksBeamInputModel, FormworksBeamInputValidator> _calculateCommand;
         private readonly FormworksBeamInputValidator _validator = new();
 
-        public DelegateCommandWithValidator<FormworksBeamInputModel, FormworksBeamInputValidator> CalculateCommand => _calculateCommand
+        public override DelegateCommandWithValidator<FormworksBeamInputModel, FormworksBeamInputValidator> CalculateCommand => _calculateCommand
             ??= new DelegateCommandWithValidator<FormworksBeamInputModel, FormworksBeamInputValidator>(ExecuteCalculateCommand, InputModel, _validator, new ErrorDialog());
 
         public override FormworksBeamInputModel InputModel { get; set; } = new();

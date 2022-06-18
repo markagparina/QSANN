@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace QSANN.Data.Entities.Base
 {
-    public class AuditableMonitoringProjectEntity : AuditableEntity
+    public abstract class AuditableMonitoringProjectEntity : AuditableEntity
     {
         [MappingIgnored]
         public MonitoringProject MonitoringProject { get; set; }

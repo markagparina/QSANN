@@ -1,8 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using FluentValidation;
+using Microsoft.EntityFrameworkCore;
 using Prism.Events;
 using Prism.Mvvm;
 using Prism.Navigation;
 using Prism.Regions;
+using QSANN.Core.Commands;
 using QSANN.Core.Events;
 using QSANN.Data;
 using QSANN.Data.Attributes;
@@ -35,10 +37,11 @@ namespace QSANN.Core.Mvvm
         }
     }
 
-    public class ViewModelBase<TInputModel, TEntityType, TOutputStorage> : ViewModelBase
+    public abstract class ViewModelBase<TInputModel, TEntityType, TOutputStorage, TValidator> : ViewModelBase
     where TInputModel : BindableBase
     where TEntityType : AuditableProjectEntity, new()
     where TOutputStorage : AuditableMonitoringProjectEntity
+    where TValidator : AbstractValidator<TInputModel>
     {
         protected AppDbContext Context { get; }
         protected IEventAggregator EventAggregator { get; }
@@ -58,6 +61,8 @@ namespace QSANN.Core.Mvvm
             set { SetProperty(ref _isResultVisible, value); }
         }
 
+        public virtual DelegateCommandWithValidator<TInputModel, TValidator> CalculateCommand { get; set; }
+
         protected ViewModelBase(AppDbContext context, IEventAggregator eventAggregator)
         {
             Context = context;
@@ -74,9 +79,11 @@ namespace QSANN.Core.Mvvm
 
             SaveMonitoringProjectEvent.Unsubscribe(SaveProjectOutput);
             SaveMonitoringProjectEvent.Subscribe(SaveProjectOutput, ThreadOption.UIThread);
+
+            EventAggregator.GetEvent<CalculateAllCategoriesEvent>().Subscribe(() => CalculateCommand.Execute());
         }
 
-        private void SaveProjectOutput(Guid monitoringProjectId)
+        protected virtual void SaveProjectOutput(Guid monitoringProjectId)
         {
             OutputStorage.MonitoringProjectId = monitoringProjectId;
             Context.Set<TOutputStorage>().Add(OutputStorage);

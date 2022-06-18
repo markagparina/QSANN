@@ -47,6 +47,7 @@ namespace QSANN.ViewModels
             {
                 SetProperty(ref _projectName, value);
                 SaveNewProjectCommand.RaiseCanExecuteChanged();
+                SaveNewMonitoringProjectCommand.RaiseCanExecuteChanged();
             }
         }
 
@@ -72,6 +73,37 @@ namespace QSANN.ViewModels
 
         public DelegateCommand SaveNewProjectCommand => _saveNewProjectCommand ??= new DelegateCommand(async () => await ExecuteSaveNewProjectCommandAsync(),
             () => !string.IsNullOrEmpty(ProjectName));
+
+        private DelegateCommand _saveNewMonitoringProjectCommand;
+
+        public DelegateCommand SaveNewMonitoringProjectCommand => _saveNewMonitoringProjectCommand ??= new DelegateCommand(async () => await ExecuteSaveNewMonitoringProjectCommandAsync(),
+            () => !string.IsNullOrEmpty(ProjectName));
+
+        private async Task ExecuteSaveNewMonitoringProjectCommandAsync()
+        {
+            using var transaction = await _context.Database.BeginTransactionAsync();
+            try
+            {
+                var project = new MonitoringProject () { Name = ProjectName };
+
+                _context.Set<MonitoringProject>().Add(project);
+
+                _context.SaveChanges();
+
+                _eventAggregator.GetEvent<SaveMonitoringProjectEvent>().Publish(project.Id);
+
+                await ExecuteLoadedCommandAsync();
+                await transaction.CommitAsync();
+            }
+            catch (Exception ex)
+            {
+                await transaction.RollbackAsync();
+            }
+            finally
+            {
+                DialogHost.Close("MainWindowDialogHost");
+            }
+        }
 
         public ProjectDialogViewModel(IRegionManager regionManager, IEventAggregator eventAggregator, AppDbContext context) : base(regionManager)
         {

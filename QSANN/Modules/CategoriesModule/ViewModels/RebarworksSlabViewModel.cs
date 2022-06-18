@@ -19,7 +19,7 @@ using System.Linq;
 
 namespace CategoriesModule.ViewModels
 {
-    public class RebarworksSlabViewModel : ViewModelBase<RebarworksSlabInputModel, RebarworksSlabInput, RebarworksSlabOutput>
+    public class RebarworksSlabViewModel : ViewModelBase<RebarworksSlabInputModel, RebarworksSlabInput, RebarworksSlabOutput, RebarworksSlabInputValidator>
     {
         private ObservableCollection<RebarworksSlabTypeMultiplier> _multipliers;
         private readonly IRebarworksSlabCalculatorService _rebarworksSlabCalculatorService;
@@ -39,7 +39,7 @@ namespace CategoriesModule.ViewModels
 
         private DelegateCommandWithValidator<RebarworksSlabInputModel, RebarworksSlabInputValidator> _calculateCommand;
 
-        public DelegateCommandWithValidator<RebarworksSlabInputModel, RebarworksSlabInputValidator> CalculateCommand => _calculateCommand
+        public override DelegateCommandWithValidator<RebarworksSlabInputModel, RebarworksSlabInputValidator> CalculateCommand => _calculateCommand
             ??= new DelegateCommandWithValidator<RebarworksSlabInputModel, RebarworksSlabInputValidator>(ExecuteCalculateCommand, InputModel, _validator, new ErrorDialog());
 
         public RebarworksSlabViewModel(IRebarworksSlabCalculatorService rebarworksSlabCalculatorService,
@@ -49,6 +49,7 @@ namespace CategoriesModule.ViewModels
             _rebarworksSlabCalculatorService = rebarworksSlabCalculatorService;
             _context = context;
             Multipliers = new ObservableCollection<RebarworksSlabTypeMultiplier>(_rebarworksSlabCalculatorService.GetMultipliers());
+            _validator = new(Multipliers);
         }
 
         private void ExecuteCalculateCommand()
@@ -56,7 +57,7 @@ namespace CategoriesModule.ViewModels
             var multiplier = Multipliers.FirstOrDefault(multiplier => multiplier.SlabType == (int)InputModel.OneWayOrTwoWay
                                                                            && multiplier.Name == InputModel.SteelbarSpacing);
 
-            decimal steelbar = OutputStorage.Steelbar = _rebarworksSlabCalculatorService.CalculateSteelbar(InputModel.FloorArea.StripAndParseAsDecimal(), multiplier.SteelbarMultiplier);
+            decimal steelbar = OutputStorage.Steelbar = _rebarworksSlabCalculatorService.CalculateSteelbar(InputModel.FloorArea.StripAndParseAsDecimal(), multiplier?.SteelbarMultiplier ?? 0);
             decimal tiewire = OutputStorage.Tiewire = _rebarworksSlabCalculatorService.CalculateSteelbar(InputModel.FloorArea.StripAndParseAsDecimal(), multiplier.TiewireMultiplier);
 
             OutputModel.Steelbar = $"{steelbar} pcs of 6m Steel Bar";

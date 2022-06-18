@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using Humanizer;
 using MaterialDesignThemes.Wpf;
 using Prism.Commands;
 using Prism.Mvvm;
@@ -35,15 +36,18 @@ namespace QSANN.Core.Commands
         {
             var validationResult = _validator.Validate(_validatable);
 
+            var entityName = _validatable.GetType().Name.Replace("InputModel", string.Empty).Humanize(LetterCasing.Title);
+
             if (!validationResult.IsValid)
             {
-                _errorDialogControl.DataContext = new ErrorDialogViewModel(validationResult.Errors.Select(failure => failure.ErrorMessage));
+                _errorDialogControl.DataContext = new ErrorDialogViewModel(entityName, validationResult.Errors.Select(failure => failure.ErrorMessage));
 
                 if (!DialogHost.IsDialogOpen(null))
                 {
                     var dialogResult = await DialogHost.Show(_errorDialogControl);
                     return;
                 }
+                return;
             }
             _executeMethod();
         }

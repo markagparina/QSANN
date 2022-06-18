@@ -16,14 +16,14 @@ using System.Linq;
 
 namespace CategoriesModule.ViewModels;
 
-public class RebarworksBeamViewModel : ViewModelBase<RebarworksBeamInputModel, RebarworksBeamInput, RebarworksBeamOutput>
+public class RebarworksBeamViewModel : ViewModelBase<RebarworksBeamInputModel, RebarworksBeamInput, RebarworksBeamOutput, RebarworksBeamInputValidator>
 {
     private readonly IRebarworksBeamCalculatorService _beamCalculatorService;
     private readonly AppDbContext _context;
     private DelegateCommandWithValidator<RebarworksBeamInputModel, RebarworksBeamInputValidator> _calculateCommand;
     private readonly RebarworksBeamInputValidator _validator = new();
 
-    public DelegateCommandWithValidator<RebarworksBeamInputModel, RebarworksBeamInputValidator> CalculateCommand => _calculateCommand
+    public override DelegateCommandWithValidator<RebarworksBeamInputModel, RebarworksBeamInputValidator> CalculateCommand => _calculateCommand
         ??= new DelegateCommandWithValidator<RebarworksBeamInputModel, RebarworksBeamInputValidator>(ExecuteCalculateCommand, InputModel, _validator, new ErrorDialog());
 
     public override RebarworksBeamInputModel InputModel { get; set; } = new();

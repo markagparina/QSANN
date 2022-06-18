@@ -14,9 +14,20 @@ namespace QSANN.ViewModels
             set { SetProperty(ref _validationErrors, value); }
         }
 
-        public ErrorDialogViewModel(IEnumerable<string> errors = null)
+        private string _entityName;
+
+        public string EntityName
+        {
+            get { return _entityName; }
+            set { SetProperty(ref _entityName, value); }
+        }
+
+
+
+        public ErrorDialogViewModel(string entityName, IEnumerable<string> errors = null)
         {
             ValidationErrors = new ObservableCollection<string>(errors);
+            EntityName = entityName;
         }
     }
 }

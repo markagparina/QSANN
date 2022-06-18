@@ -11,6 +11,8 @@ using System.Linq;
 using System.Reflection;
 using Microsoft.EntityFrameworkCore;
 using QSANN.Data.Entities;
+using FluentValidation;
+using QSANN.Core.Commands;
 
 namespace QSANN.Core.Navigation
 {
@@ -21,16 +23,18 @@ namespace QSANN.Core.Navigation
         }
     }
 
-    public class MenuItem<TInputModel, TEntityType, TOutputStorage> : MenuItem
+    public class MenuItem<TInputModel, TEntityType, TOutputStorage, TValidator> : MenuItem
             where TInputModel : BindableBase
             where TEntityType : AuditableProjectEntity, new()
             where TOutputStorage : AuditableMonitoringProjectEntity
+            where TValidator : AbstractValidator<TInputModel>
     {
         protected AppDbContext Context { get; }
         protected IEventAggregator EventAggregator { get; }
-
         public virtual TInputModel InputModel { get; set; }
         public virtual TOutputStorage OutputStorage { get; set; }
+
+        public virtual DelegateCommandWithValidator<TInputModel, TValidator> CalculateCommand { get; set; }
 
         private bool _isResultVisible;
 
@@ -61,9 +65,11 @@ namespace QSANN.Core.Navigation
 
             SaveMonitoringProjectEvent.Unsubscribe(SaveProjectOutput);
             SaveMonitoringProjectEvent.Subscribe(SaveProjectOutput, ThreadOption.UIThread);
+
+            EventAggregator.GetEvent<CalculateAllCategoriesEvent>().Subscribe(() => CalculateCommand.Execute());
         }
 
-        private void SaveProjectOutput(Guid monitoringProjectId)
+        protected virtual void SaveProjectOutput(Guid monitoringProjectId)
         {
             OutputStorage.MonitoringProjectId = monitoringProjectId;
             Context.Set<TOutputStorage>().Add(OutputStorage);

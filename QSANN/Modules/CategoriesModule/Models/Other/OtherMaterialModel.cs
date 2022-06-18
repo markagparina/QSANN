@@ -1,9 +1,5 @@
 ﻿using Prism.Mvvm;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CategoriesModule.Models
 {
@@ -23,6 +19,14 @@ namespace CategoriesModule.Models
         {
             get { return _itemName; }
             set { SetProperty(ref _itemName, value); }
+        }
+
+        private string _description;
+
+        public string Description
+        {
+            get { return _description; }
+            set { SetProperty(ref _description, value); }
         }
 
         private string _constructionScope;

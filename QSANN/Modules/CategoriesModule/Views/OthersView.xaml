@@ -47,6 +47,12 @@
                                         EditingElementStyle="{DynamicResource MaterialDesignTextBox}"
                                         HeaderStyle="{DynamicResource MaterialDesignDataGridColumnHeader}"
                                         CellStyle="{DynamicResource MaterialDesignDataGridCell}" />
+                    <DataGridTextColumn Header="Item Name"
+                                        Binding="{Binding Description}"
+                                        Width="*"
+                                        EditingElementStyle="{DynamicResource MaterialDesignTextBox}"
+                                        HeaderStyle="{DynamicResource MaterialDesignDataGridColumnHeader}"
+                                        CellStyle="{DynamicResource MaterialDesignDataGridCell}" />
                     <DataGridTemplateColumn Width="*">
                         <DataGridTemplateColumn.Header>Construction Scope</DataGridTemplateColumn.Header>
                         <DataGridTemplateColumn.CellTemplate>

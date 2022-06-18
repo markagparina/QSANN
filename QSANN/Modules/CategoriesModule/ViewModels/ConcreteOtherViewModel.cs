@@ -2,14 +2,12 @@
 using CategoriesModule.Models;
 using CategoriesModule.Validators;
 using Prism.Events;
-using Prism.Mvvm;
-using Prism.Regions;
 using QSANN.Core.Commands;
-using QSANN.Core.Events;
 using QSANN.Core.Extensions;
 using QSANN.Core.Mvvm;
 using QSANN.Data;
 using QSANN.Data.Entities;
+using QSANN.Data.Microsoft.EntityFrameworkCore;
 using QSANN.Services.Interfaces;
 using System;
 using System.Collections.ObjectModel;
@@ -17,18 +15,19 @@ using System.Linq;
 
 namespace CategoriesModule.ViewModels;
 
-public class ConcreteOtherViewModel : ViewModelBase<ConcreteOtherInputModel, ConcreteOtherInput, ConcreteOtherOutput>
+public class ConcreteOtherViewModel : ViewModelBase<ConcreteOtherInputModel, ConcreteOtherInput, ConcreteOtherOutput, ConcreteOtherInputValidator>
 {
     private readonly IConcreteCalculatorService _concreteCalculatorService;
     private readonly AppDbContext _context;
     private DelegateCommandWithValidator<ConcreteOtherInputModel, ConcreteOtherInputValidator> _calculateCommand;
     private readonly ConcreteOtherInputValidator _validator = new();
 
-    public DelegateCommandWithValidator<ConcreteOtherInputModel, ConcreteOtherInputValidator> CalculateCommand => _calculateCommand
+    public override DelegateCommandWithValidator<ConcreteOtherInputModel, ConcreteOtherInputValidator> CalculateCommand => _calculateCommand
         ??= new DelegateCommandWithValidator<ConcreteOtherInputModel, ConcreteOtherInputValidator>(ExecuteCalculateCommand, InputModel, _validator, new ErrorDialog());
 
     public override ConcreteOtherInputModel InputModel { get; set; } = new();
     public ConcreteOtherOutputModel OutputModel { get; set; } = new();
+    public override ConcreteOtherOutput OutputStorage { get; set; } = new();
 
     public ObservableCollection<ConcreteSpecificationModel> Specifications { get; set; } = new(
         new ConcreteSpecificationModel[]
@@ -68,14 +67,65 @@ public class ConcreteOtherViewModel : ViewModelBase<ConcreteOtherInputModel, Con
             _ => throw new ArgumentException("Invalid value for Class Mixture")
         };
 
+        OutputStorage.CementMixture = bagsOfCement;
+        OutputStorage.Sand = volume * .5m;
+        OutputStorage.Gravel = volume * 1;
+
         OutputModel.CementMixture = $"{bagsOfCement} Bags of Cement";
         OutputModel.Sand = $"{(volume * .5m)}m\xB3 of Sand";
         OutputModel.Gravel = $"{(volume * 1)}m\xB3 (3/4\") of Gravel";
         IsResultVisible = true;
     }
 
-    protected override void SaveProjectInput(Guid projectId)
+    protected override void SaveProjectOutput(Guid monitoringProjectId)
     {
-        base.SaveProjectInput(projectId);
+        var specificationName = SelectedSpecification?.Name;
+        if (specificationName.Equals("Slab"))
+        {
+            var existingProject = Context.Set<ConcreteSlabOutput>().FirstOrDefault(proj => proj.MonitoringProjectId == monitoringProjectId);
+
+            if (existingProject != null)
+            {
+                existingProject.CementMixture += OutputStorage.CementMixture;
+                existingProject.Sand += OutputStorage.Sand;
+                existingProject.Gravel += OutputStorage.Gravel;
+            }
+
+        }
+        else if (specificationName.Equals("Beam"))
+        {
+            var existingProject = Context.Set<ConcreteBeamOutput>().FirstOrDefault(proj => proj.MonitoringProjectId == monitoringProjectId);
+
+            if (existingProject != null)
+            {
+                existingProject.CementMixture += OutputStorage.CementMixture;
+                existingProject.Sand += OutputStorage.Sand;
+                existingProject.Gravel += OutputStorage.Gravel;
+            }
+        }
+        else if (specificationName.Equals("Column"))
+        {
+            var existingProject = Context.Set<ConcreteColumnOutput>().FirstOrDefault(proj => proj.MonitoringProjectId == monitoringProjectId);
+
+            if (existingProject != null)
+            {
+                existingProject.CementMixture += OutputStorage.CementMixture;
+                existingProject.Sand += OutputStorage.Sand;
+                existingProject.Gravel += OutputStorage.Gravel;
+            }
+        }
+        else if (specificationName.Equals("Footing"))
+        {
+            var existingProject = Context.Set<ConcreteFootingOutput>().FirstOrDefault(proj => proj.MonitoringProjectId == monitoringProjectId);
+
+            if (existingProject != null)
+            {
+                existingProject.CementMixture += OutputStorage.CementMixture;
+                existingProject.Sand += OutputStorage.Sand;
+                existingProject.Gravel += OutputStorage.Gravel;
+            }
+        }
+
+        Context.SaveChanges();
     }
 }

@@ -17,7 +17,7 @@ using System.Linq;
 namespace CategoriesModule.ViewModels
 {
     [Display(Name = "Paint works")]
-    public class PaintworksViewModel : MenuItem<PaintworksInputModel, PaintworksInput, PaintworksOutput>
+    public class PaintworksViewModel : MenuItem<PaintworksInputModel, PaintworksInput, PaintworksOutput, PaintworksInputValidator>
     {
         private ObservableCollection<PaintworksMultiplierModel> _multipliers;
         private readonly IPaintworksCalculatorService _paintWorksCalculatorService;
@@ -38,7 +38,7 @@ namespace CategoriesModule.ViewModels
 
         private DelegateCommandWithValidator<PaintworksInputModel, PaintworksInputValidator> _calculateCommand;
 
-        public DelegateCommandWithValidator<PaintworksInputModel, PaintworksInputValidator> CalculateCommand => _calculateCommand
+        public override DelegateCommandWithValidator<PaintworksInputModel, PaintworksInputValidator> CalculateCommand => _calculateCommand
             ??= new DelegateCommandWithValidator<PaintworksInputModel, PaintworksInputValidator>(ExecuteCalculateCommand, InputModel, _validator, new ErrorDialog());
 
         public PaintworksViewModel(IRegionManager regionManager,

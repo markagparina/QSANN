@@ -19,7 +19,7 @@ using System.ComponentModel.DataAnnotations;
 namespace CategoriesModule.ViewModels
 {
     [Display(Name = "Carpentry Works")]
-    public class CarpentryworksViewModel : MenuItem<CarpentryworksInputModel, CarpentryworksInput, CarpentryWorksOutput>
+    public class CarpentryworksViewModel : MenuItem<CarpentryworksInputModel, CarpentryworksInput, CarpentryWorksOutput, CarpentryworksInputValidator>
     {
         private ObservableCollection<CarpentryworksMultiplierModel> _multipliers;
         private readonly ICarpentryworksCalculatorService _carpentryworksCalculatorService;
@@ -39,7 +39,7 @@ namespace CategoriesModule.ViewModels
 
         private DelegateCommandWithValidator<CarpentryworksInputModel, CarpentryworksInputValidator> _calculateCommand;
 
-        public DelegateCommandWithValidator<CarpentryworksInputModel, CarpentryworksInputValidator> CalculateCommand => _calculateCommand
+        public override DelegateCommandWithValidator<CarpentryworksInputModel, CarpentryworksInputValidator> CalculateCommand => _calculateCommand
             ??= new DelegateCommandWithValidator<CarpentryworksInputModel, CarpentryworksInputValidator>(ExecuteCalculateCommand, InputModel, _validator, new ErrorDialog());
 
         public CarpentryworksViewModel(IRegionManager regionManager,

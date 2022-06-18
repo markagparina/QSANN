@@ -16,14 +16,14 @@ using System;
 
 namespace CategoriesModule.ViewModels;
 
-public class RebarworksFootingViewModel : ViewModelBase<RebarworksFootingInputModel, RebarworksFootingInput, RebarworksFootingOutput>
+public class RebarworksFootingViewModel : ViewModelBase<RebarworksFootingInputModel, RebarworksFootingInput, RebarworksFootingOutput, RebarworksFootingInputValidator>
 {
     private readonly IRebarworksFootingCalculatorService _rebarworksFootingCalculatorService;
 
     private DelegateCommandWithValidator<RebarworksFootingInputModel, RebarworksFootingInputValidator> _calculateCommand;
     private readonly RebarworksFootingInputValidator _validator = new();
 
-    public DelegateCommandWithValidator<RebarworksFootingInputModel, RebarworksFootingInputValidator> CalculateCommand => _calculateCommand
+    public override DelegateCommandWithValidator<RebarworksFootingInputModel, RebarworksFootingInputValidator> CalculateCommand => _calculateCommand
         ??= new DelegateCommandWithValidator<RebarworksFootingInputModel, RebarworksFootingInputValidator>(ExecuteCalculateCommand, InputModel, _validator, new ErrorDialog());
 
     public override RebarworksFootingInputModel InputModel { get; set; } = new();

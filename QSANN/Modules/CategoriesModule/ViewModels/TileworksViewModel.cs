@@ -18,7 +18,7 @@ using System.Linq;
 namespace CategoriesModule.ViewModels
 {
     [Display(Name = "Tile works")]
-    public class TileworksViewModel : MenuItem<TileworksInputModel, TileworksInput, TileworksOutput>
+    public class TileworksViewModel : MenuItem<TileworksInputModel, TileworksInput, TileworksOutput, TileworksInputValidator>
     {
         private ObservableCollection<TileworksMultiplierModel> _multipliers;
         private readonly ITileworksCalculatorService _tileworksCalculatorService;
@@ -38,7 +38,7 @@ namespace CategoriesModule.ViewModels
 
         private DelegateCommandWithValidator<TileworksInputModel, TileworksInputValidator> _calculateCommand;
 
-        public DelegateCommandWithValidator<TileworksInputModel, TileworksInputValidator> CalculateCommand => _calculateCommand
+        public override DelegateCommandWithValidator<TileworksInputModel, TileworksInputValidator> CalculateCommand => _calculateCommand
             ??= new DelegateCommandWithValidator<TileworksInputModel, TileworksInputValidator>(ExecuteCalculateCommand, InputModel, _validator, new ErrorDialog());
 
         public TileworksViewModel(IRegionManager regionManager,

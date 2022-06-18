@@ -14,7 +14,7 @@
     </UserControl.Resources>
 
     <AdornerDecorator>
-        <materialDesign:DialogHost Identifier="{Binding Title}">
+        <materialDesign:DialogHost>
 
             <ScrollViewer>
                 <StackPanel Orientation="Vertical">

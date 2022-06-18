@@ -14,14 +14,14 @@ using System.Linq;
 
 namespace CategoriesModule.ViewModels
 {
-    public class FormworksColumnViewModel : ViewModelBase<FormworksColumnInputModel, FormworksColumnInput, FormworksColumnOutput>
+    public class FormworksColumnViewModel : ViewModelBase<FormworksColumnInputModel, FormworksColumnInput, FormworksColumnOutput, FormworksColumnInputValidator>
     {
         private readonly IFormworksColumnCalculatorService _formworksColumnCalculatorService;
         private readonly AppDbContext _context;
         private DelegateCommandWithValidator<FormworksColumnInputModel, FormworksColumnInputValidator> _calculateCommand;
         private readonly FormworksColumnInputValidator _validator = new();
 
-        public DelegateCommandWithValidator<FormworksColumnInputModel, FormworksColumnInputValidator> CalculateCommand => _calculateCommand
+        public override DelegateCommandWithValidator<FormworksColumnInputModel, FormworksColumnInputValidator> CalculateCommand => _calculateCommand
             ??= new DelegateCommandWithValidator<FormworksColumnInputModel, FormworksColumnInputValidator>(ExecuteCalculateCommand, InputModel, _validator, new ErrorDialog());
 
         public override FormworksColumnInputModel InputModel { get; set; } = new();

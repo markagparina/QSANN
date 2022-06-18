@@ -1,9 +1,11 @@
 ﻿using CategoriesModule;
 using Prism.Commands;
+using Prism.Events;
 using Prism.Ioc;
 using Prism.Regions;
 using Prism.Unity;
 using QSANN.Core;
+using QSANN.Core.Events;
 using QSANN.Core.Mvvm;
 using QSANN.Core.Navigation;
 using QSANN.Models;
@@ -19,6 +21,7 @@ namespace QSANN.ViewModels
     public class QuantitySurveyingViewModel : ViewModelBase
     {
         private readonly IRegionManager _regionManager;
+        private readonly IEventAggregator _eventAggregator;
 
         public List<MenuItemModel> AllMenuItems { get; set; }
 
@@ -102,9 +105,14 @@ namespace QSANN.ViewModels
         private DelegateCommand _saveMonitoringProjectCommand;
         public DelegateCommand SaveMonitoringProjectCommand => _saveMonitoringProjectCommand ??= new DelegateCommand(async () => await ExecuteSaveMonitoringProjectCommandAsync());
 
-        public QuantitySurveyingViewModel(IRegionManager regionManager)
+        private DelegateCommand _calculateAllCategoriesCommand;
+        public DelegateCommand CalculateAllCategoriesCommand => _calculateAllCategoriesCommand ??= new DelegateCommand(async () => await ExecuteCalculateAllCategoriesCommandAsync());
+
+
+        public QuantitySurveyingViewModel(IRegionManager regionManager, IEventAggregator eventAggregator)
         {
             _regionManager = regionManager;
+            _eventAggregator = eventAggregator;
             var menuTypes = typeof(QSANNCategoriesModule).Assembly.GetExportedTypes().Where(type => type.IsAssignableTo(typeof(MenuItem)));
             var container = PrismContainerExtension.Current;
             AllMenuItems = menuTypes.Select(item =>
@@ -144,6 +152,12 @@ namespace QSANN.ViewModels
         {
             PopupMode = "Save Monitoring Project";
             IsMainWindowDialogOpen = true;
+            return Task.CompletedTask;
+        }
+        private Task ExecuteCalculateAllCategoriesCommandAsync()
+        {
+            _eventAggregator.GetEvent<CalculateAllCategoriesEvent>().Publish();
+
             return Task.CompletedTask;
         }
     }

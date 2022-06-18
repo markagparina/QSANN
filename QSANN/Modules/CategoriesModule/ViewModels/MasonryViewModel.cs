@@ -18,7 +18,7 @@ using System.Threading.Tasks;
 namespace CategoriesModule.ViewModels
 {
     [Display(Name = "Masonry")]
-    public class MasonryViewModel : MenuItem<MasonryInputModel, MasonryInput, MasonryOutput>
+    public class MasonryViewModel : MenuItem<MasonryInputModel, MasonryInput, MasonryOutput, MasonryInputModelValidator>
     {
         private readonly IMasonryCalculatorService _masonryCalculatorService;
         private readonly AppDbContext _context;
@@ -31,7 +31,7 @@ namespace CategoriesModule.ViewModels
 
         private DelegateCommandWithValidator<MasonryInputModel, MasonryInputModelValidator> _calculateCommand;
 
-        public DelegateCommandWithValidator<MasonryInputModel, MasonryInputModelValidator> CalculateCommand
+        public override DelegateCommandWithValidator<MasonryInputModel, MasonryInputModelValidator> CalculateCommand
             => _calculateCommand ??= new DelegateCommandWithValidator<MasonryInputModel, MasonryInputModelValidator>
             (async () => await ExecuteCalculateCommandAsync(), InputModel, _validator, ErrorDialog);
 
