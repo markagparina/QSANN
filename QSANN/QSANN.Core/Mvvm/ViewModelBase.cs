@@ -86,6 +86,7 @@ namespace QSANN.Core.Mvvm
         protected virtual void SaveProjectOutput(Guid monitoringProjectId)
         {
             OutputStorage.MonitoringProjectId = monitoringProjectId;
+            OutputStorage.Id = Guid.NewGuid();
             Context.Set<TOutputStorage>().Add(OutputStorage);
             Context.SaveChanges();
         }

@@ -3,6 +3,7 @@ using CategoriesModule.Models;
 using CategoriesModule.Validators;
 using Prism.Events;
 using QSANN.Core.Commands;
+using QSANN.Core.Events;
 using QSANN.Core.Extensions;
 using QSANN.Core.Mvvm;
 using QSANN.Data;
@@ -51,7 +52,6 @@ public class ConcreteOtherViewModel : ViewModelBase<ConcreteOtherInputModel, Con
     : base(context, eventAggregator)
     {
         _concreteCalculatorService = concreteCalculatorService;
-        _context = context;
     }
 
     private void ExecuteCalculateCommand()
@@ -80,52 +80,59 @@ public class ConcreteOtherViewModel : ViewModelBase<ConcreteOtherInputModel, Con
     protected override void SaveProjectOutput(Guid monitoringProjectId)
     {
         var specificationName = SelectedSpecification?.Name;
-        if (specificationName.Equals("Slab"))
+
+        EventAggregator.GetEvent<ConcreteOtherCategoryCalculatedEvent>()
+        .Publish(new ConcreteOtherCategoryCalculatedEventPayload()
         {
-            var existingProject = Context.Set<ConcreteSlabOutput>().FirstOrDefault(proj => proj.MonitoringProjectId == monitoringProjectId);
+            SpecificationName = specificationName,
+            Output = OutputStorage
+        });
 
-            if (existingProject != null)
-            {
-                existingProject.CementMixture += OutputStorage.CementMixture;
-                existingProject.Sand += OutputStorage.Sand;
-                existingProject.Gravel += OutputStorage.Gravel;
-            }
+        //if (specificationName.Equals("Slab"))
+        //{
+        //    var existingProject = Context.Set<ConcreteSlabOutput>().FirstOrDefault(proj => proj.MonitoringProjectId == monitoringProjectId);
 
-        }
-        else if (specificationName.Equals("Beam"))
-        {
-            var existingProject = Context.Set<ConcreteBeamOutput>().FirstOrDefault(proj => proj.MonitoringProjectId == monitoringProjectId);
+        //    if (existingProject != null)
+        //    {
+        //        existingProject.CementMixture += OutputStorage.CementMixture;
+        //        existingProject.Sand += OutputStorage.Sand;
+        //        existingProject.Gravel += OutputStorage.Gravel;
+        //    }
+        //}
+        //else if (specificationName.Equals("Beam"))
+        //{
+        //    var existingProject = Context.Set<ConcreteBeamOutput>().FirstOrDefault(proj => proj.MonitoringProjectId == monitoringProjectId);
 
-            if (existingProject != null)
-            {
-                existingProject.CementMixture += OutputStorage.CementMixture;
-                existingProject.Sand += OutputStorage.Sand;
-                existingProject.Gravel += OutputStorage.Gravel;
-            }
-        }
-        else if (specificationName.Equals("Column"))
-        {
-            var existingProject = Context.Set<ConcreteColumnOutput>().FirstOrDefault(proj => proj.MonitoringProjectId == monitoringProjectId);
+        //    if (existingProject != null)
+        //    {
+        //        existingProject.CementMixture += OutputStorage.CementMixture;
+        //        existingProject.Sand += OutputStorage.Sand;
+        //        existingProject.Gravel += OutputStorage.Gravel;
+        //    }
+        //}
+        //else if (specificationName.Equals("Column"))
+        //{
+        //    var existingProject = Context.Set<ConcreteColumnOutput>().FirstOrDefault(proj => proj.MonitoringProjectId == monitoringProjectId);
 
-            if (existingProject != null)
-            {
-                existingProject.CementMixture += OutputStorage.CementMixture;
-                existingProject.Sand += OutputStorage.Sand;
-                existingProject.Gravel += OutputStorage.Gravel;
-            }
-        }
-        else if (specificationName.Equals("Footing"))
-        {
-            var existingProject = Context.Set<ConcreteFootingOutput>().FirstOrDefault(proj => proj.MonitoringProjectId == monitoringProjectId);
+        //    if (existingProject != null)
+        //    {
+        //        existingProject.CementMixture += OutputStorage.CementMixture;
+        //        existingProject.Sand += OutputStorage.Sand;
+        //        existingProject.Gravel += OutputStorage.Gravel;
+        //    }
+        //}
+        //else if (specificationName.Equals("Footing"))
+        //{
+        //    var existingProject = Context.Set<ConcreteFootingOutput>().FirstOrDefault(proj => proj.MonitoringProjectId == monitoringProjectId);
 
-            if (existingProject != null)
-            {
-                existingProject.CementMixture += OutputStorage.CementMixture;
-                existingProject.Sand += OutputStorage.Sand;
-                existingProject.Gravel += OutputStorage.Gravel;
-            }
-        }
+        //    if (existingProject != null)
+        //    {
+        //        existingProject.CementMixture += OutputStorage.CementMixture;
+        //        existingProject.Sand += OutputStorage.Sand;
+        //        existingProject.Gravel += OutputStorage.Gravel;
+        //    }
+        //}
 
-        Context.SaveChanges();
+        //Context.SaveChanges();
     }
 }

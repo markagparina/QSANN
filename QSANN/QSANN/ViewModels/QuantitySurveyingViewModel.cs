@@ -109,6 +109,11 @@ namespace QSANN.ViewModels
         public DelegateCommand CalculateAllCategoriesCommand => _calculateAllCategoriesCommand ??= new DelegateCommand(async () => await ExecuteCalculateAllCategoriesCommandAsync());
 
 
+        private DelegateCommand _backToMainMenuCommand;
+        public DelegateCommand BackToMainMenuCommand => _backToMainMenuCommand ??= new DelegateCommand(ExecuteBackToMainMenuCommand);
+
+
+
         public QuantitySurveyingViewModel(IRegionManager regionManager, IEventAggregator eventAggregator)
         {
             _regionManager = regionManager;
@@ -159,6 +164,12 @@ namespace QSANN.ViewModels
             _eventAggregator.GetEvent<CalculateAllCategoriesEvent>().Publish();
 
             return Task.CompletedTask;
+        }
+
+
+        void ExecuteBackToMainMenuCommand()
+        {
+            _regionManager.RequestNavigate(RegionNames.ModuleRegion, "HomeView");
         }
     }
 }

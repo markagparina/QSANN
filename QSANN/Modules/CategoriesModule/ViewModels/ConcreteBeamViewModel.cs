@@ -35,7 +35,24 @@ public class ConcreteBeamViewModel : ViewModelBase<ConcreteBeamInputModel, Concr
     {
         _concreteCalculatorService = concreteCalculatorService;
         _context = context;
-        //eventAggregator.GetEvent<LoadProjectEvent>().Subscribe(LoadProjectInput, ThreadOption.UIThread);
+        EventAggregator.GetEvent<ConcreteOtherCategoryCalculatedEvent>().Subscribe(AddOtherToTotal, ThreadOption.UIThread, false, FilterIsEqualToBeam);
+    }
+
+    private bool FilterIsEqualToBeam(ConcreteOtherCategoryCalculatedEventPayload obj)
+    {
+        return obj.SpecificationName == "Beam";
+    }
+
+    private void AddOtherToTotal(ConcreteOtherCategoryCalculatedEventPayload payload)
+    {
+        OutputStorage.CementMixture += payload.Output.CementMixture;
+        OutputStorage.Sand += payload.Output.Sand;
+        OutputStorage.Gravel += payload.Output.Gravel;
+
+
+        Context.Update(OutputStorage);
+
+        Context.SaveChanges();
     }
 
     private void ExecuteCalculateCommand()

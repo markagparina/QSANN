@@ -279,7 +279,7 @@
                         </ListBox>
 
 
-                        <Button Grid.Row="1" VerticalAlignment="Bottom">Back to Main Menu</Button>
+                        <Button Grid.Row="1" VerticalAlignment="Bottom" Command="{Binding BackToMainMenuCommand}">Back to Main Menu</Button>
                     </Grid>
                 </DockPanel>
             </materialDesign:DrawerHost.LeftDrawerContent>
