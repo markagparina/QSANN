@@ -1,4 +1,5 @@
 ﻿using CategoriesModule;
+using MaterialDesignThemes.Wpf;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Ioc;
@@ -108,25 +109,22 @@ namespace QSANN.ViewModels
         private DelegateCommand _calculateAllCategoriesCommand;
         public DelegateCommand CalculateAllCategoriesCommand => _calculateAllCategoriesCommand ??= new DelegateCommand(async () => await ExecuteCalculateAllCategoriesCommandAsync());
 
-
         private DelegateCommand _backToMainMenuCommand;
         public DelegateCommand BackToMainMenuCommand => _backToMainMenuCommand ??= new DelegateCommand(ExecuteBackToMainMenuCommand);
-
-
 
         public QuantitySurveyingViewModel(IRegionManager regionManager, IEventAggregator eventAggregator)
         {
             _regionManager = regionManager;
             _eventAggregator = eventAggregator;
-            var menuTypes = typeof(QSANNCategoriesModule).Assembly.GetExportedTypes().Where(type => type.IsAssignableTo(typeof(MenuItem)));
-            var container = PrismContainerExtension.Current;
+            IEnumerable<Type> menuTypes = typeof(QSANNCategoriesModule).Assembly.GetExportedTypes().Where(type => type.IsAssignableTo(typeof(MenuItem)));
+            IContainerExtension container = PrismContainerExtension.Current;
             AllMenuItems = menuTypes.Select(item =>
             {
                 var attribute = (DisplayAttribute)Array.Find(item.GetCustomAttributes(typeof(DisplayAttribute), false), a => (a is DisplayAttribute));
 
                 return new MenuItemModel() { ViewModelName = item.Name, Title = attribute.Name };
             }).ToList();
-            MenuItems = new(AllMenuItems);
+            MenuItems = new ObservableCollection<MenuItemModel>(AllMenuItems);
             SelectedItem = AllMenuItems[0];
 
             ProjectViewModel = container.Resolve<ProjectDialogViewModel>();
@@ -135,7 +133,7 @@ namespace QSANN.ViewModels
 
         private object FilterCategories()
         {
-            MenuItems = new(AllMenuItems.Where(item => string.IsNullOrEmpty(SearchKeyword) || item.Title.Contains(SearchKeyword, StringComparison.OrdinalIgnoreCase)));
+            MenuItems = new ObservableCollection<MenuItemModel>(AllMenuItems.Where(item => string.IsNullOrEmpty(SearchKeyword) || item.Title.Contains(SearchKeyword, StringComparison.OrdinalIgnoreCase)));
 
             return MenuItems;
         }
@@ -159,6 +157,7 @@ namespace QSANN.ViewModels
             IsMainWindowDialogOpen = true;
             return Task.CompletedTask;
         }
+
         private Task ExecuteCalculateAllCategoriesCommandAsync()
         {
             _eventAggregator.GetEvent<CalculateAllCategoriesEvent>().Publish();
@@ -166,8 +165,7 @@ namespace QSANN.ViewModels
             return Task.CompletedTask;
         }
 
-
-        void ExecuteBackToMainMenuCommand()
+        private void ExecuteBackToMainMenuCommand()
         {
             _regionManager.RequestNavigate(RegionNames.ModuleRegion, "HomeView");
         }
