@@ -31,6 +31,10 @@
 	    <SubType>Code</SubType>
 	    <DependentUpon>ConcreteMonitoringView.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="Views\OthersMonitoringView.xaml.cs">
+	    <SubType>Code</SubType>
+	    <DependentUpon>OthersMonitoringView.xaml</DependentUpon>
+	  </Compile>
 	</ItemGroup>
 	<ItemGroup>
 	  <Page Update="Views\RebarworksMonitoringView.xaml">
@@ -54,6 +58,9 @@
 	    <SubType>Designer</SubType>
 	  </Page>
 	  <Page Update="Views\ConcreteMonitoringView.xaml">
+	    <SubType>Designer</SubType>
+	  </Page>
+	  <Page Update="Views\OthersMonitoringView.xaml">
 	    <SubType>Designer</SubType>
 	  </Page>
 	</ItemGroup>

@@ -47,7 +47,7 @@
                                         EditingElementStyle="{DynamicResource MaterialDesignTextBox}"
                                         HeaderStyle="{DynamicResource MaterialDesignDataGridColumnHeader}"
                                         CellStyle="{DynamicResource MaterialDesignDataGridCell}" />
-                    <DataGridTextColumn Header="Item Name"
+                    <DataGridTextColumn Header="Description"
                                         Binding="{Binding Description}"
                                         Width="*"
                                         EditingElementStyle="{DynamicResource MaterialDesignTextBox}"

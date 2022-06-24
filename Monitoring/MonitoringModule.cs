@@ -20,7 +20,9 @@ namespace Monitoring
             _regionManager.RegisterViewWithRegion<CarpentryworksMonitoringView>(RegionNames.MonitoringContentRegion);
             _regionManager.RegisterViewWithRegion<ConcreteMonitoringView>(RegionNames.MonitoringContentRegion);
             _regionManager.RegisterViewWithRegion<PaintworksMonitoringView>(RegionNames.MonitoringContentRegion);
+            _regionManager.RegisterViewWithRegion<PaintworksMonitoringView>(RegionNames.MonitoringContentRegion);
             _regionManager.RegisterViewWithRegion<MasonryMonitoringView>(RegionNames.MonitoringContentRegion);
+            _regionManager.RegisterViewWithRegion<OthersMonitoringView>(RegionNames.MonitoringContentRegion);
             _regionManager.RegisterViewWithRegion<TileworksMonitoringView>(RegionNames.MonitoringContentRegion);
             _regionManager.RegisterViewWithRegion<FormworksMonitoringView>(RegionNames.MonitoringContentRegion);
             _regionManager.RegisterViewWithRegion<RebarworksMonitoringView>(RegionNames.MonitoringContentRegion);
