@@ -166,12 +166,12 @@
                                 <!--ShortBeamLength-->
                                 <TextBlock FontSize="32"
                                            Text="{Binding OutputModel.ShortBeamLength}" />
-                                <!--LateralTies-->
-                                <TextBlock FontSize="32"
-                                           Text="{Binding OutputModel.LateralTies}" />
                                 <!--Tiewire-->
                                 <TextBlock FontSize="32"
                                            Text="{Binding OutputModel.Tiewire}" />
+                                <!--LateralTies-->
+                                <TextBlock FontSize="32"
+                                           Text="{Binding OutputModel.LateralTies}" />
                             </StackPanel>
                         </GroupBox.Content>
                     </GroupBox>

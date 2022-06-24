@@ -35,7 +35,24 @@ public class ConcreteSlabViewModel : ViewModelBase<ConcreteSlabInputModel, Concr
     {
         _concreteCalculatorService = concreteCalculatorService;
         _context = context;
-        //eventAggregator.GetEvent<LoadProjectEvent>().Subscribe(LoadProjectInput, ThreadOption.UIThread);
+        EventAggregator.GetEvent<ConcreteOtherCategoryCalculatedEvent>().Subscribe(AddOtherToTotal, ThreadOption.UIThread, false, FilterIsEqualToSlab);
+    }
+
+    private bool FilterIsEqualToSlab(ConcreteOtherCategoryCalculatedEventPayload payload)
+    {
+        return payload.SpecificationName == "Slab";
+    }
+
+    private void AddOtherToTotal(ConcreteOtherCategoryCalculatedEventPayload payload)
+    {
+        OutputStorage.CementMixture += payload.Output.CementMixture;
+        OutputStorage.Sand += payload.Output.Sand;
+        OutputStorage.Gravel += payload.Output.Gravel;
+
+
+        Context.Update(OutputStorage);
+
+        Context.SaveChanges();
     }
 
     private void ExecuteCalculateCommand()

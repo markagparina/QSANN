@@ -1,6 +1,7 @@
 ﻿using CategoriesModule.Dialogs;
 using CategoriesModule.Models;
 using CategoriesModule.Validators;
+using MaterialDesignThemes.Wpf;
 using Prism.Events;
 using Prism.Mvvm;
 using Prism.Regions;
@@ -35,7 +36,24 @@ public class ConcreteColumnViewModel : ViewModelBase<ConcreteColumnInputModel, C
     {
         _concreteCalculatorService = concreteCalculatorService;
         _context = context;
-        //eventAggregator.GetEvent<LoadProjectEvent>().Subscribe(LoadProjectInput);
+        EventAggregator.GetEvent<ConcreteOtherCategoryCalculatedEvent>()
+           .Subscribe(AddOtherToTotal, ThreadOption.UIThread, false, FilterIsEqualToColumn);
+    }
+
+    private void AddOtherToTotal(ConcreteOtherCategoryCalculatedEventPayload payload)
+    {
+        OutputStorage.CementMixture += payload.Output.CementMixture;
+        OutputStorage.Sand += payload.Output.Sand;
+        OutputStorage.Gravel += payload.Output.Gravel;
+
+        Context.Update(OutputStorage);
+
+        Context.SaveChanges();
+    }
+
+    private bool FilterIsEqualToColumn(ConcreteOtherCategoryCalculatedEventPayload payload)
+    {
+        return payload.SpecificationName == "Column";
     }
 
     private void ExecuteCalculateCommand()

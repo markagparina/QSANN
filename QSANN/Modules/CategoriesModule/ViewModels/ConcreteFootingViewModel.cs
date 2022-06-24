@@ -35,7 +35,23 @@ public class ConcreteFootingViewModel : ViewModelBase<ConcreteFootingInputModel,
     {
         _concreteCalculatorService = concreteCalculatorService;
         _context = context;
-        //eventAggregator.GetEvent<LoadProjectEvent>().Subscribe(LoadProjectInput, ThreadOption.UIThread);
+        EventAggregator.GetEvent<ConcreteOtherCategoryCalculatedEvent>().Subscribe(AddOtherToTotal, ThreadOption.UIThread, false, FilterIsEqualToFooting);
+    }
+
+    private bool FilterIsEqualToFooting(ConcreteOtherCategoryCalculatedEventPayload payload)
+    {
+        return payload.SpecificationName == "Footing";
+    }
+
+    private void AddOtherToTotal(ConcreteOtherCategoryCalculatedEventPayload payload)
+    {
+        OutputStorage.CementMixture += payload.Output.CementMixture;
+        OutputStorage.Sand += payload.Output.Sand;
+        OutputStorage.Gravel += payload.Output.Gravel;
+
+        Context.Update(OutputStorage);
+
+        Context.SaveChanges();
     }
 
     private void ExecuteCalculateCommand()
@@ -64,18 +80,4 @@ public class ConcreteFootingViewModel : ViewModelBase<ConcreteFootingInputModel,
         OutputModel.Gravel = $"{(volume * 1)}m\xB3 (3/4\") of Gravel";
         IsResultVisible = true;
     }
-
-    //private void LoadProjectInput(Guid projectId)
-    //{
-    //    var footingProject = _context.Set<ConcreteFootingInput>().FirstOrDefault(footing => footing.ProjectId == projectId);
-
-    //    if (footingProject is not null)
-    //    {
-    //        InputModel.LengthOfFooting = footingProject.LengthOfFooting;
-    //        InputModel.WidthOfFooting = footingProject.WidthOfFooting;
-    //        InputModel.ThicknessOfFooting = footingProject.ThicknessOfFooting;
-    //        InputModel.NumbersOfCount = footingProject.NumbersOfCount;
-    //        InputModel.ClassMixture = footingProject.ClassMixture;
-    //    }
-    //}
 }

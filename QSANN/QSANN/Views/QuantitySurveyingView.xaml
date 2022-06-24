@@ -23,6 +23,7 @@
     </UserControl.Resources>
 
     <materialDesign:DialogHost Identifier="MainWindowDialogHost"
+                               SnackbarMessageQueue="{Binding MessageQueue}"
                                IsOpen="{Binding IsMainWindowDialogOpen}">
         <materialDesign:DialogHost.DialogContent>
             <StackPanel>
@@ -33,16 +34,19 @@
                         <Style TargetType="StackPanel">
                             <Style.Triggers>
                                 <DataTrigger Binding="{Binding PopupMode}"
-                                     Value="Load Project">
-                                    <Setter Property="Visibility" Value="Visible" />
+                                             Value="Load Project">
+                                    <Setter Property="Visibility"
+                                            Value="Visible" />
                                 </DataTrigger>
                                 <DataTrigger Binding="{Binding PopupMode}"
-                                  Value="Save Project">
-                                    <Setter Property="Visibility" Value="Collapsed" />
+                                             Value="Save Project">
+                                    <Setter Property="Visibility"
+                                            Value="Collapsed" />
                                 </DataTrigger>
                                 <DataTrigger Binding="{Binding PopupMode}"
-                                  Value="Save Monitoring Project">
-                                    <Setter Property="Visibility" Value="Collapsed" />
+                                             Value="Save Monitoring Project">
+                                    <Setter Property="Visibility"
+                                            Value="Collapsed" />
                                 </DataTrigger>
                             </Style.Triggers>
                         </Style>
@@ -104,16 +108,19 @@
                         <Style TargetType="StackPanel">
                             <Style.Triggers>
                                 <DataTrigger Binding="{Binding PopupMode}"
-                                     Value="Save Project">
-                                    <Setter Property="Visibility" Value="Visible" />
+                                             Value="Save Project">
+                                    <Setter Property="Visibility"
+                                            Value="Visible" />
                                 </DataTrigger>
                                 <DataTrigger Binding="{Binding PopupMode}"
-                                  Value="Load Project">
-                                    <Setter Property="Visibility" Value="Collapsed" />
+                                             Value="Load Project">
+                                    <Setter Property="Visibility"
+                                            Value="Collapsed" />
                                 </DataTrigger>
                                 <DataTrigger Binding="{Binding PopupMode}"
-                                  Value="Save Monitoring Project">
-                                    <Setter Property="Visibility" Value="Collapsed" />
+                                             Value="Save Monitoring Project">
+                                    <Setter Property="Visibility"
+                                            Value="Collapsed" />
                                 </DataTrigger>
                             </Style.Triggers>
                         </Style>
@@ -187,16 +194,19 @@
                         <Style TargetType="StackPanel">
                             <Style.Triggers>
                                 <DataTrigger Binding="{Binding PopupMode}"
-                                     Value="Save Monitoring Project">
-                                    <Setter Property="Visibility" Value="Visible" />
+                                             Value="Save Monitoring Project">
+                                    <Setter Property="Visibility"
+                                            Value="Visible" />
                                 </DataTrigger>
                                 <DataTrigger Binding="{Binding PopupMode}"
-                                  Value="Save Project">
-                                    <Setter Property="Visibility" Value="Collapsed" />
+                                             Value="Save Project">
+                                    <Setter Property="Visibility"
+                                            Value="Collapsed" />
                                 </DataTrigger>
                                 <DataTrigger Binding="{Binding PopupMode}"
-                                  Value="Load Project">
-                                    <Setter Property="Visibility" Value="Collapsed" />
+                                             Value="Load Project">
+                                    <Setter Property="Visibility"
+                                            Value="Collapsed" />
                                 </DataTrigger>
                             </Style.Triggers>
                         </Style>
@@ -206,7 +216,8 @@
                         <TextBlock FontSize="18">Save Monitoring Project:</TextBlock>
                     </StackPanel>
 
-                    <TextBox materialDesign:HintAssist.Hint="Input monitoring Project Name" Text="{Binding ProjectViewModel.ProjectName, UpdateSourceTrigger=PropertyChanged}" />
+                    <TextBox materialDesign:HintAssist.Hint="Input monitoring Project Name"
+                             Text="{Binding ProjectViewModel.ProjectName, UpdateSourceTrigger=PropertyChanged}" />
 
                     <StackPanel Orientation="Horizontal"
                                 Margin="0 16 0 0">
@@ -259,27 +270,28 @@
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="3*" />
-                            <RowDefinition Height=".5*"/>
+                            <RowDefinition Height=".5*" />
                         </Grid.RowDefinitions>
 
                         <ListBox Margin="0 16 0 16"
-                             SelectedItem="{Binding SelectedItem, UpdateSourceTrigger=PropertyChanged}"
-                             ItemsSource="{Binding MenuItems}"
-                             Style="{StaticResource MaterialDesignNavigationPrimaryListBox}">
+                                 SelectedItem="{Binding SelectedItem, UpdateSourceTrigger=PropertyChanged}"
+                                 ItemsSource="{Binding MenuItems}"
+                                 Style="{StaticResource MaterialDesignNavigationPrimaryListBox}">
                             <ListBox.Resources>
                                 <Style TargetType="ScrollBar"
-                                   BasedOn="{StaticResource MaterialDesignScrollBarMinimal}" />
+                                       BasedOn="{StaticResource MaterialDesignScrollBarMinimal}" />
                             </ListBox.Resources>
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding Title}"
-                                           Margin="24 4 0 4" />
+                                               Margin="24 4 0 4" />
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
                         </ListBox>
 
-
-                        <Button Grid.Row="1" VerticalAlignment="Bottom" Command="{Binding BackToMainMenuCommand}">Back to Main Menu</Button>
+                        <Button Grid.Row="1"
+                                VerticalAlignment="Bottom"
+                                Command="{Binding BackToMainMenuCommand}">Back to Main Menu</Button>
                     </Grid>
                 </DockPanel>
             </materialDesign:DrawerHost.LeftDrawerContent>
@@ -329,7 +341,6 @@
                         </materialDesign:PopupBox>
                     </Grid>
                 </materialDesign:ColorZone>
-
                 <!-- The default behavior of the DockPanel is to have the last child fill the middle -->
                 <ContentControl prism:RegionManager.RegionName="{x:Static core:RegionNames.MainContentRegion}" />
             </DockPanel>

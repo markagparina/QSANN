@@ -2,19 +2,12 @@
 using Monitoring;
 using Prism.Ioc;
 using Prism.Modularity;
-using Prism.Mvvm;
 using Prism.Regions;
 using QSANN.Core;
 using QSANN.Data;
-using QSANN.Services;
-using QSANN.Services.Interfaces;
 using QSANN.ViewModels;
 using QSANN.Views;
-using System;
-using System.Diagnostics;
 using System.Linq;
-using System.Reflection;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace QSANN;
@@ -32,7 +25,6 @@ public partial class App
     protected override void RegisterTypes(IContainerRegistry containerRegistry)
     {
         containerRegistry.RegisterScoped<AppDbContext>();
-
         containerRegistry.RegisterScoped<ProjectDialogViewModel>();
     }
 

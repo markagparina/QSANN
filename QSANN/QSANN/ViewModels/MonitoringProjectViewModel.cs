@@ -13,6 +13,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace QSANN.ViewModels
 {
@@ -31,7 +32,6 @@ namespace QSANN.ViewModels
                 SetProperty(ref _selectedProject, value);
                 ProjectName = SelectedProject?.Name ?? string.Empty;
                 LoadProjectCommand.RaiseCanExecuteChanged();
-                OverwriteSelectedProjectCommand.RaiseCanExecuteChanged();
                 SaveNewProjectCommand.RaiseCanExecuteChanged();
             }
         }
@@ -61,11 +61,6 @@ namespace QSANN.ViewModels
         public DelegateCommand LoadProjectCommand => _loadProjectCommand ??= new DelegateCommand(async () => await ExecuteLoadProjectCommandAsync(),
             () => SelectedProject is not null);
 
-        private DelegateCommand _overwriteSelectedProjectCommand;
-
-        public DelegateCommand OverwriteSelectedProjectCommand => _overwriteSelectedProjectCommand ??= new DelegateCommand(async () => await ExecuteOverwriteProjectCommandAsync(),
-            () => SelectedProject is not null && !string.IsNullOrEmpty(SelectedProject.Name));
-
         private DelegateCommand _saveNewProjectCommand;
 
         public DelegateCommand SaveNewProjectCommand => _saveNewProjectCommand ??= new DelegateCommand(async () => await ExecuteSaveNewProjectCommandAsync(),
@@ -85,34 +80,18 @@ namespace QSANN.ViewModels
 
         private Task ExecuteLoadProjectCommandAsync()
         {
-            _eventAggregator.GetEvent<LoadProjectEvent>().Publish(SelectedProject.Id);
-            DialogHost.Close("MainWindowDialogHost");
+            if (Application.Current.Resources.Contains("LoadedMonitoringProject"))
+            {
+                Application.Current.Resources["LoadedMonitoringProject"] = SelectedProject.Id;
+            }
+            else
+            {
+                Application.Current.Resources.Add("LoadedMonitoringProject", SelectedProject.Id);
+            }
+
+            _eventAggregator.GetEvent<LoadMonitoringProjectEvent>().Publish(SelectedProject.Id);
+            DialogHost.Close("MainMonitoringDialogHost");
             return Task.CompletedTask;
-        }
-
-        private async Task ExecuteOverwriteProjectCommandAsync()
-        {
-            using var transaction = await _context.Database.BeginTransactionAsync();
-            try
-            {
-                var existingProject = _context.Set<MonitoringProject>().FirstOrDefault(project => project.Id == SelectedProject.Id);
-
-                if (existingProject is not null)
-                {
-                    existingProject.Name = ProjectName;
-                    _eventAggregator.GetEvent<SaveMonitoringProjectEvent>().Publish(existingProject.Id);
-                }
-
-                await ExecuteLoadedCommandAsync();
-            }
-            catch (Exception ex)
-            {
-                await transaction.RollbackAsync();
-            }
-            finally
-            {
-                DialogHost.Close("MainWindowDialogHost");
-            }
         }
 
         private async Task ExecuteSaveNewProjectCommandAsync()

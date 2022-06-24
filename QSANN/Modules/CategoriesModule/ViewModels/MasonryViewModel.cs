@@ -72,11 +72,11 @@ namespace CategoriesModule.ViewModels
             OutputStorage.HorizontalBars = horizontalBars;
             OutputStorage.VerticalBars = verticalBars;
 
-            OutputModel.ConcreteHollowBlocks = $"{concreteHollowblocks} pcs of Hollowblocks";
-            OutputModel.Cement = $"{cementTotal} Bags of Cement";
-            OutputModel.Sand = $"{sandTotal}m\xB3 of Sand";
-            OutputModel.HorizontalBars = $"{horizontalBars} pieces of 6 meter Horizontal Bars";
-            OutputModel.VerticalBars = $"{verticalBars} pieces of 6 meter Vertical Bars";
+            OutputModel.ConcreteHollowBlocks = $"{concreteHollowblocks:N2} pcs of Hollowblocks";
+            OutputModel.Cement = $"{cementTotal:N2} Bags of Cement";
+            OutputModel.Sand = $"{sandTotal:N2}m\xB3 of Sand";
+            OutputModel.HorizontalBars = $"{horizontalBars:N2} pieces of 6 meter Horizontal Bars";
+            OutputModel.VerticalBars = $"{verticalBars:N2} pieces of 6 meter Vertical Bars";
             IsResultVisible = true;
             return Task.CompletedTask;
         }

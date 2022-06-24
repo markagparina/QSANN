@@ -1,39 +1,62 @@
-﻿using Monitoring.Models;
+﻿using Prism.Commands;
+using Prism.Events;
 using Prism.Regions;
+using QSANN.Core.Events;
+using QSANN.Core.Models;
 using QSANN.Core.Mvvm;
-using QSANN.Core.Navigation;
+using QSANN.Data;
 using QSANN.Data.Entities;
+using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Windows;
 
 namespace Monitoring.ViewModels
 {
     [Display(Name = "Carpentry Works")]
-    public class CarpentryworksMonitoringViewModel : MonitoringMenuItemBase<CarpentryWorksOutput>
+    public class CarpentryworksMonitoringViewModel : MonitoringMenuItemBase
     {
-        private ObservableCollection<MonitoringCategoryModel> _categories;
+        private readonly IEventAggregator _eventAggregator;
 
-        public ObservableCollection<MonitoringCategoryModel> Categories
+        private DelegateCommand _updateCommand;
+        public DelegateCommand UpdateCommand => _updateCommand ??= new DelegateCommand(ExecuteUpdateCommand);
+
+        public CarpentryworksMonitoringViewModel(IRegionManager regionManager, IEventAggregator eventAggregator, AppDbContext context) : base(regionManager, context, eventAggregator)
         {
-            get { return _categories; }
-            set { SetProperty(ref _categories, value); }
+            _eventAggregator = eventAggregator;
+            _eventAggregator.GetEvent<LoadMonitoringProjectEvent>().Subscribe(LoadMonitoringProject);
         }
 
-        public CarpentryworksMonitoringViewModel(IRegionManager regionManager) : base(regionManager)
+        public override void LoadMonitoringProject(Guid monitoringProjectId)
         {
-            Categories = new ObservableCollection<MonitoringCategoryModel>()
+            var projectContent = Context.Set<CarpentryWorksOutput>()
+                            .FirstOrDefault(proj => proj.MonitoringProjectId == monitoringProjectId);
+
+            if (projectContent is not null)
             {
-                new MonitoringCategoryModel()
+                Categories = new()
                 {
-                     Name = "Carpentry Works",
-                     MonitoringItems = new ObservableCollection<MonitoringItemModel>()
-                     {
-                        new MonitoringItemModel() { Budgeted = 3, Description = "pcs of 4'x8' Plyboard", RunningCost = 0, TotalCost = 2 },
-                        new MonitoringItemModel() { Budgeted = 5, Description = "bd.ft of Lumber @ 40x40 Spacing", RunningCost = 0, TotalCost = 2 },
-                        new MonitoringItemModel() { Budgeted = 10, Description = "kg of Common Wire Nail", RunningCost = 0, TotalCost = 5 }
-                     }
-                }
-            };
+                    new MonitoringCategoryModel()
+                    {
+                         Name = "",
+                         MonitoringItems = new ObservableCollection<MonitoringItemModel>()
+                         {
+                            new MonitoringItemModel() { Budgeted = projectContent.Plyboard, Description = "pcs of 4'x8' Plyboard", RunningCost = 0, TotalCost = projectContent.TotalDeliveredPlyboard, PropertyName = nameof(CarpentryWorksOutput.Plyboard) },
+                            new MonitoringItemModel() { Budgeted = projectContent.SizeOfLumber, Description = "bd.ft of Lumber @ 40x40 Spacing", RunningCost = 0, TotalCost = projectContent.TotalDeliveredSizeOfLumber, PropertyName = nameof(CarpentryWorksOutput.SizeOfLumber) },
+                            new MonitoringItemModel() { Budgeted = projectContent.CommonWireNail, Description = "kg of Common Wire Nail", RunningCost = 0, TotalCost = projectContent.TotalDeliveredCommonWireNail, PropertyName = nameof(CarpentryWorksOutput.CommonWireNail) }
+                         },
+                         StorageType = typeof(CarpentryWorksOutput)
+                    }
+                };
+            }
+        }
+
+        public override void ExecuteUpdateCommand()
+        {
+            Update<CarpentryWorksOutput>();
+            var projectId = (Guid)Application.Current.Resources["LoadedMonitoringProject"];
+            LoadMonitoringProject(projectId);
         }
     }
 }

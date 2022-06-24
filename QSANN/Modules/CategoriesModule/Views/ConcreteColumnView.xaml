@@ -13,7 +13,6 @@
         <converters:BoolToVisibleOrHidden x:Key="booleanToVisibilityConverter" />
     </UserControl.Resources>
     <materialDesign:DialogHost>
-
         <AdornerDecorator>
             <StackPanel Orientation="Vertical"
                         Name="ConcreteColumn">
@@ -172,6 +171,7 @@
                         </GroupBox.Content>
                     </GroupBox>
                 </Grid>
+                <materialDesign:Snackbar MessageQueue="{Binding MessageQueue}" />
             </StackPanel>
         </AdornerDecorator>
     </materialDesign:DialogHost>

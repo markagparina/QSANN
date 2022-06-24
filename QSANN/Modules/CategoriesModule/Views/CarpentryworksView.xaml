@@ -15,7 +15,6 @@
 
     <materialDesign:DialogHost>
         <AdornerDecorator>
-
             <ScrollViewer>
                 <StackPanel Orientation="Vertical">
                     <TextBlock Margin="0,20,0,0"

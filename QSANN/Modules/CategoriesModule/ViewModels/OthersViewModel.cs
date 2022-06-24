@@ -125,6 +125,11 @@ namespace CategoriesModule.ViewModels
 
         protected override async void SaveProjectOutput(Guid monitoringProjectId)
         {
+            await SaveProjectOutputAsync(monitoringProjectId);
+        }
+
+        private async Task SaveProjectOutputAsync(Guid monitoringProjectId)
+        {
             if (OtherMaterials.Count > 0)
             {
                 var outputMaterials = OtherMaterials.Select(other => other.Adapt<OtherMaterialOutput>()).ToList();
@@ -136,7 +141,7 @@ namespace CategoriesModule.ViewModels
 
                 Context.Set<OtherMaterialOutput>().AddRange(outputMaterials);
 
-                Context.SaveChanges();
+                await Context.SaveChangesAsync();
             }
         }
     }

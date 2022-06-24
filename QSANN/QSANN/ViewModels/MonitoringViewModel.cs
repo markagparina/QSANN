@@ -1,4 +1,6 @@
 ﻿using Monitoring;
+using Prism.Commands;
+using Prism.Ioc;
 using Prism.Regions;
 using Prism.Unity;
 using QSANN.Core;
@@ -10,6 +12,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace QSANN.ViewModels
 {
@@ -41,6 +44,22 @@ namespace QSANN.ViewModels
             set => SetProperty(ref _isMenuOpen, value);
         }
 
+        private bool _isSaveMode;
+
+        public bool IsSaveMode
+        {
+            get { return _isSaveMode; }
+            set { SetProperty(ref _isSaveMode, value); }
+        }
+
+        private bool _isMonitoringWindowDialogOpen;
+
+        public bool IsMonitoringWindowDialogOpen
+        {
+            get { return _isMonitoringWindowDialogOpen; }
+            set { SetProperty(ref _isMonitoringWindowDialogOpen, value); }
+        }
+
         private MenuItemModel _selectedItem;
         private readonly IRegionManager _regionManager;
 
@@ -57,11 +76,19 @@ namespace QSANN.ViewModels
 
                     if (value is not null)
                     {
-                        _regionManager.RequestNavigate(RegionNames.MainContentRegion, viewName);
+                        _regionManager.RequestNavigate(RegionNames.MonitoringContentRegion, viewName);
                     }
                 }
             }
         }
+
+        public MonitoringProjectViewModel ProjectViewModel { get; private set; }
+
+        private DelegateCommand _backToMainMenuCommand;
+        public DelegateCommand BackToMainMenuCommand => _backToMainMenuCommand ??= new DelegateCommand(ExecuteBackToMainMenuCommand);
+
+        private DelegateCommand _loadProjectCommand;
+        public DelegateCommand LoadProjectCommand => _loadProjectCommand ??= new DelegateCommand(ExecuteLoadProjectCommand);
 
         public MonitoringViewModel(IRegionManager regionManager)
         {
@@ -77,8 +104,25 @@ namespace QSANN.ViewModels
             MenuItems = new(AllMenuItems);
             SelectedItem = AllMenuItems[0];
 
-            //ProjectViewModel = container.Resolve<ProjectDialogViewModel>();
-            //ProjectViewModel.ExecuteLoadedCommandAsync().Await();
+            ProjectViewModel = container.Resolve<MonitoringProjectViewModel>();
+            ProjectViewModel.ExecuteLoadedCommandAsync().Await();
+        }
+
+        private void ExecuteBackToMainMenuCommand()
+        {
+            _regionManager.RequestNavigate(RegionNames.ModuleRegion, "HomeView");
+        }
+
+        private async void ExecuteLoadProjectCommand()
+        {
+            await ExecuteLoadProjectCommandAsync();
+        }
+
+        private async Task ExecuteLoadProjectCommandAsync()
+        {
+            IsSaveMode = false;
+            IsMonitoringWindowDialogOpen = true;
+            await ProjectViewModel.ExecuteLoadedCommandAsync();
         }
     }
 }

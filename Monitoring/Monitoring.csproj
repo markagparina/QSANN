@@ -11,4 +11,50 @@
 	  <ProjectReference Include="..\QSANN\QSANN.Core\QSANN.Core.csproj" />
 	  <ProjectReference Include="..\QSANN\Services\QSANN.Services\QSANN.Services.csproj" />
 	</ItemGroup>
+	<ItemGroup>
+	  <Compile Update="Views\RebarworksMonitoringView.xaml.cs">
+	    <SubType>Code</SubType>
+	  </Compile>
+	  <Compile Update="Views\MasonryMonitoringView.xaml.cs">
+	    <SubType>Code</SubType>
+	  </Compile>
+	  <Compile Update="Views\FormworksMonitoringView.xaml.cs">
+	    <SubType>Code</SubType>
+	  </Compile>
+	  <Compile Update="Views\TileworksMonitoringView.xaml.cs">
+	    <SubType>Code</SubType>
+	  </Compile>
+	  <Compile Update="Views\PaintworksMonitoringView.xaml.cs">
+	    <SubType>Code</SubType>
+	  </Compile>
+	  <Compile Update="Views\ConcreteMonitoringView.xaml.cs">
+	    <SubType>Code</SubType>
+	    <DependentUpon>ConcreteMonitoringView.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+	<ItemGroup>
+	  <Page Update="Views\RebarworksMonitoringView.xaml">
+	    <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+	    <SubType>Designer</SubType>
+	  </Page>
+	  <Page Update="Views\MasonryMonitoringView.xaml">
+	    <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+	    <SubType>Designer</SubType>
+	  </Page>
+	  <Page Update="Views\FormworksMonitoringView.xaml">
+	    <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+	    <SubType>Designer</SubType>
+	  </Page>
+	  <Page Update="Views\TileworksMonitoringView.xaml">
+	    <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+	    <SubType>Designer</SubType>
+	  </Page>
+	  <Page Update="Views\PaintworksMonitoringView.xaml">
+	    <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+	    <SubType>Designer</SubType>
+	  </Page>
+	  <Page Update="Views\ConcreteMonitoringView.xaml">
+	    <SubType>Designer</SubType>
+	  </Page>
+	</ItemGroup>
 </Project>

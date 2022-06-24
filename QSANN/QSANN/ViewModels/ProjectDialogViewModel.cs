@@ -84,7 +84,7 @@ namespace QSANN.ViewModels
             using var transaction = await _context.Database.BeginTransactionAsync();
             try
             {
-                var project = new MonitoringProject () { Name = ProjectName };
+                var project = new MonitoringProject() { Name = ProjectName };
 
                 _context.Set<MonitoringProject>().Add(project);
 
