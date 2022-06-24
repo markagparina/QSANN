@@ -8,6 +8,7 @@ using QSANN.Data.Entities;
 using QSANN.Data.Entities.Base;
 using System;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Windows;
 
@@ -23,8 +24,14 @@ namespace QSANN.Core.Mvvm
         public ObservableCollection<MonitoringCategoryModel> Categories
         {
             get { return _categories; }
-            set { SetProperty(ref _categories, value); }
+            set
+            {
+                SetProperty(ref _categories, value);
+                RaisePropertyChanged(nameof(CanUpdate));
+            }
         }
+
+        public bool CanUpdate => Categories?.Count > 0;
 
         public MonitoringMenuItemBase(IRegionManager regionManager, AppDbContext context, IEventAggregator eventAggregator) : base(regionManager)
         {
@@ -32,6 +39,12 @@ namespace QSANN.Core.Mvvm
             EventAggregator = eventAggregator;
             EventAggregator.GetEvent<LoadMonitoringProjectEvent>().Subscribe(LoadMonitoringProject);
             Categories = new ObservableCollection<MonitoringCategoryModel>();
+            Categories.CollectionChanged +=CategoriesOnCollectionChanged; 
+        }
+
+        private void CategoriesOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            RaisePropertyChanged(nameof(CanUpdate));
         }
 
         public virtual void LoadMonitoringProject(Guid monitoringProjectId)

@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
+using System.Data.Common;
 using System.Linq;
 using System.Windows;
 
@@ -35,22 +36,20 @@ namespace Monitoring.ViewModels
 
             if (ProjectContents.Any())
             {
-                Categories = new ObservableCollection<MonitoringCategoryModel>
+                IEnumerable<IGrouping<string, OtherMaterialOutput>> itemsByScope = ProjectContents.GroupBy(other => other.ConstructionScope);
+                
+                Categories = new ObservableCollection<MonitoringCategoryModel>(itemsByScope.Select(scope => new MonitoringCategoryModel()
                 {
-                    new MonitoringCategoryModel
+                    Name = scope.Key,
+                    MonitoringItems = new ObservableCollection<MonitoringItemModel>(scope.Select(item => new MonitoringItemModel()
                     {
-                        Name = "",
-                        MonitoringItems = new ObservableCollection<MonitoringItemModel>(
-                            ProjectContents.Select(other => new MonitoringItemModel
-                            {
-                                Id = other.Id,
-                                TotalCost = other.TotalCost,
-                                Budgeted = other.Quantity, 
-                                Description = $"{other.ItemName} - {other.Description}"
-                            })),
-                        StorageType = typeof(OtherMaterialOutput)
-                    }
-                };
+                        Id = item.Id,
+                        TotalCost = item.TotalCost,
+                        Budgeted = item.Quantity, 
+                        Description = $"{item.ItemName} - {item.Description}"
+                    })),
+                    StorageType = typeof(OtherMaterialOutput)
+                }));
             }
         }
 
@@ -63,7 +62,21 @@ namespace Monitoring.ViewModels
 
         public override void Update<TEntity>()
         {
-            
+            foreach (var item in ProjectContents)
+            {
+                var input = Categories.SelectMany(model => model.MonitoringItems)
+                    .FirstOrDefault(inputItem => inputItem.Id == item.Id);
+
+                if (input is not null)
+                {
+                    item.TotalCost = (input.RunningCost + item.TotalCost) <= item.Quantity
+                        ? (input.RunningCost + item.TotalCost)
+                        : item.Quantity;
+                    Context.Update(item);
+                }
+            }
+
+            Context.SaveChanges();
         }
     }
 }
