@@ -17,7 +17,7 @@ namespace QSANN.Data
 
             string folder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
 
-            string specificFolder = Path.Combine(folder, "QSANN");
+            string specificFolder = Path.Combine(folder, "QSuMM");
 
             Directory.CreateDirectory(specificFolder);
 

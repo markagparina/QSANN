@@ -17,7 +17,7 @@
         Title="{Binding Title}"
         WindowStartupLocation="CenterScreen"
         Icon="../Resources/logo.png"
-        ResizeMode="NoResize"
+        ResizeMode="CanMinimize"
         Height="800"
         Width="1000">
     <Window.Resources>

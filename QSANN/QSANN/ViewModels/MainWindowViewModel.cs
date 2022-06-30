@@ -22,19 +22,17 @@ namespace QSANN.ViewModels
     public class MainWindowViewModel : ViewModelBase
     {
         private readonly IRegionManager _regionManager;
-        private string _title = "QSANN";
+        private string _title = "QSuMM";
 
         public override string Title
         {
             get { return _title; }
-            set { SetProperty(ref _title, string.IsNullOrEmpty(value) ? "QSANN" : value); }
+            set { SetProperty(ref _title, string.IsNullOrEmpty(value) ? "QSuMM" : value); }
         }
 
         public MainWindowViewModel(IRegionManager regionManager)
         {
             _regionManager = regionManager;
         }
-
-
     }
 }

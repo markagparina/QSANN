@@ -30,21 +30,8 @@ namespace QSANN.ViewModels
             set
             {
                 SetProperty(ref _selectedProject, value);
-                ProjectName = SelectedProject?.Name ?? string.Empty;
                 LoadProjectCommand.RaiseCanExecuteChanged();
-                SaveNewProjectCommand.RaiseCanExecuteChanged();
-            }
-        }
-
-        private string _projectName;
-
-        public string ProjectName
-        {
-            get { return _projectName; }
-            set
-            {
-                SetProperty(ref _projectName, value);
-                SaveNewProjectCommand.RaiseCanExecuteChanged();
+                DeleteProjectCommand.RaiseCanExecuteChanged();
             }
         }
 
@@ -61,10 +48,34 @@ namespace QSANN.ViewModels
         public DelegateCommand LoadProjectCommand => _loadProjectCommand ??= new DelegateCommand(async () => await ExecuteLoadProjectCommandAsync(),
             () => SelectedProject is not null);
 
-        private DelegateCommand _saveNewProjectCommand;
+        private DelegateCommand _deleteProjectCommand;
 
-        public DelegateCommand SaveNewProjectCommand => _saveNewProjectCommand ??= new DelegateCommand(async () => await ExecuteSaveNewProjectCommandAsync(),
-            () => !string.IsNullOrEmpty(ProjectName));
+        public DelegateCommand DeleteProjectCommand => _deleteProjectCommand ??= new DelegateCommand(async () => await ExecuteDeleteProjectCommandAsync(), () => SelectedProject is not null);
+
+        private async Task ExecuteDeleteProjectCommandAsync()
+        {
+            using var transaction = await _context.Database.BeginTransactionAsync();
+            try
+            {
+                var project = await _context.Set<MonitoringProject>().FindAsync(SelectedProject.Id);
+
+                _context.Set<MonitoringProject>().Remove(project);
+
+                _context.SaveChanges();
+
+
+                await ExecuteLoadedCommandAsync();
+                await transaction.CommitAsync();
+            }
+            catch (Exception ex)
+            {
+                await transaction.RollbackAsync();
+            }
+            finally
+            {
+                DialogHost.Close("MainMonitoringDialogHost");
+            }
+        }
 
         public MonitoringProjectViewModel(IRegionManager regionManager, IEventAggregator eventAggregator, AppDbContext context)
         {
@@ -92,32 +103,6 @@ namespace QSANN.ViewModels
             _eventAggregator.GetEvent<LoadMonitoringProjectEvent>().Publish(SelectedProject.Id);
             DialogHost.Close("MainMonitoringDialogHost");
             return Task.CompletedTask;
-        }
-
-        private async Task ExecuteSaveNewProjectCommandAsync()
-        {
-            using var transaction = await _context.Database.BeginTransactionAsync();
-            try
-            {
-                var project = new MonitoringProject() { Name = ProjectName };
-
-                _context.Set<MonitoringProject>().Add(project);
-
-                _context.SaveChanges();
-
-                _eventAggregator.GetEvent<SaveMonitoringProjectEvent>().Publish(project.Id);
-
-                await ExecuteLoadedCommandAsync();
-                await transaction.CommitAsync();
-            }
-            catch (Exception ex)
-            {
-                await transaction.RollbackAsync();
-            }
-            finally
-            {
-                DialogHost.Close("MainWindowDialogHost");
-            }
         }
     }
 }

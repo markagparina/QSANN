@@ -65,6 +65,17 @@
                         <Button HorizontalAlignment="Center"
                                 IsDefault="True"
                                 Style="{StaticResource MaterialDesignFlatButton}"
+                                Command="{Binding ProjectViewModel.DeleteProjectCommand}">
+                            <Button.CommandParameter>
+                                <system:Boolean>True</system:Boolean>
+                            </Button.CommandParameter>
+                            Delete
+                        </Button>
+
+
+                        <Button HorizontalAlignment="Center"
+                                IsDefault="True"
+                                Style="{StaticResource MaterialDesignFlatButton}"
                                 Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
                             <Button.CommandParameter>
                                 <system:Boolean>False</system:Boolean>
@@ -220,10 +231,6 @@
                                             Command="{Binding LoadProjectCommand}"
                                             Content="Load a Project" />
 
-                                    <Button Height="30"
-                                            VerticalContentAlignment="Center"
-                                            Command="{Binding SaveProjectCommand}"
-                                            Content="Save to Project" />
                                 </StackPanel>
                             </StackPanel>
                         </materialDesign:PopupBox>

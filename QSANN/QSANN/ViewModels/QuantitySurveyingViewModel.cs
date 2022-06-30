@@ -34,12 +34,12 @@ namespace QSANN.ViewModels
             set { SetProperty(ref _menuItems, value); }
         }
 
-        private string _title = "QSANN";
+        private string _title = "QSuMM";
 
         public override string Title
         {
             get { return _title; }
-            set { SetProperty(ref _title, string.IsNullOrEmpty(value) ? "QSANN" : value); }
+            set { SetProperty(ref _title, string.IsNullOrEmpty(value) ? "QSuMM" : value); }
         }
 
         private bool _isMenuOpen;
@@ -154,6 +154,7 @@ namespace QSANN.ViewModels
         private Task ExecuteSaveMonitoringProjectCommandAsync()
         {
             PopupMode = "Save Monitoring Project";
+            ProjectViewModel.ProjectName = string.Empty;
             IsMainWindowDialogOpen = true;
             return Task.CompletedTask;
         }

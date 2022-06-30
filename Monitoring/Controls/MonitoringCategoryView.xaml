@@ -14,87 +14,87 @@
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition />
+            <RowDefinition Height="5*" />
             <RowDefinition />
         </Grid.RowDefinitions>
+        <ScrollViewer>
+            <ItemsControl Grid.Row="0"
+                          Margin="0,10,0,0"
+                          ItemsSource="{Binding Categories}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Margin="0,20,0,0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Row="0"
+                                       HorizontalAlignment="Center"
+                                       FontSize="25"
+                                       Text="{Binding Name}" />
 
-        <ItemsControl Grid.Row="0"
-                      Margin="0,10,0,0"
-                      ItemsSource="{Binding Categories}">
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <Grid Margin="0,20,0,0">
-                        <Grid.RowDefinitions>
-                            <RowDefinition />
-                            <RowDefinition />
-                        </Grid.RowDefinitions>
-                        <TextBlock Grid.Row="0"
-                                   HorizontalAlignment="Center"
-                                   FontSize="25"
-                                   Text="{Binding Name}" />
+                            <DataGrid Grid.Row="1"
+                                      ItemsSource="{Binding MonitoringItems}"
+                                      AutoGenerateColumns="False"
+                                      Style="{DynamicResource MaterialDesignDataGrid}"
+                                      SelectionMode="Single"
+                                      CellStyle="{DynamicResource MaterialDesignDataGridCell}"
+                                      CanUserAddRows="False">
 
-                        <DataGrid Grid.Row="1"
-                                  ItemsSource="{Binding MonitoringItems}"
-                                  AutoGenerateColumns="False"
-                                  Style="{DynamicResource MaterialDesignDataGrid}"
-                                  SelectionMode="Single"
-                                  CellStyle="{DynamicResource MaterialDesignDataGridCell}"
-                                  CanUserAddRows="False">
-
-                            <DataGrid.Columns>
-                                <DataGridTextColumn Header="Description"
-                                                    Binding="{Binding Description}"
-                                                    Width="2*"
-                                                    IsReadOnly="True"
-                                                    EditingElementStyle="{DynamicResource MaterialDesignTextBox}"
-                                                    HeaderStyle="{DynamicResource MaterialDesignDataGridColumnHeader}"
-                                                    CellStyle="{DynamicResource MaterialDesignDataGridCell}" />
-                                <DataGridTemplateColumn Width="*">
-                                    <DataGridTemplateColumn.Header>Budgeted</DataGridTemplateColumn.Header>
-                                    <DataGridTemplateColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <TextBlock Text="{Binding Budgeted, StringFormat={}{0:N2}}"></TextBlock>
-                                        </DataTemplate>
-                                    </DataGridTemplateColumn.CellTemplate>
-                                </DataGridTemplateColumn>
-                                <DataGridTextColumn Header="Total Cost"
-                                                    Width="1*"
-                                                    IsReadOnly="True"
-                                                    Binding="{Binding TotalCost, StringFormat={}{0:N2}}"
-                                                    EditingElementStyle="{DynamicResource MaterialDesignTextBox}"
-                                                    CellStyle="{DynamicResource MaterialDesignDataGridCell}">
-                                </DataGridTextColumn>
-                                <DataGridTextColumn Header="Running Cost"
-                                                    Width="1*"
-                                                    IsReadOnly="False"
-                                                    Binding="{Binding RunningCost, StringFormat={}{0:N2}}"
-                                                    EditingElementStyle="{DynamicResource MaterialDesignDataGridTextColumnEditingStyle}"
-                                                    CellStyle="{DynamicResource MaterialDesignDataGridCell}">
-                                </DataGridTextColumn>
-                                <DataGridTemplateColumn Width="2*">
-                                    <DataGridTemplateColumn.Header>% of Completion</DataGridTemplateColumn.Header>
-                                    <DataGridTemplateColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <Grid>
-                                                <ProgressBar Grid.Column="0"
-                                                             Margin="0,0,10,0"
-                                                             Height="25"
-                                                             Value="{Binding PercentOfCompletion, Mode=OneWay}" />
-                                                <TextBlock Grid.Column="0"
-                                                           VerticalAlignment="Center"
-                                                           HorizontalAlignment="Center"
-                                                           Text="{Binding PercentOfCompletion, Mode=Default, StringFormat={}{0:N2}%}" />
-                                            </Grid>
-                                        </DataTemplate>
-                                    </DataGridTemplateColumn.CellTemplate>
-                                </DataGridTemplateColumn>
-                            </DataGrid.Columns>
-                        </DataGrid>
-                    </Grid>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
-
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="Description"
+                                                        Binding="{Binding Description}"
+                                                        Width="2*"
+                                                        IsReadOnly="True"
+                                                        EditingElementStyle="{DynamicResource MaterialDesignTextBox}"
+                                                        HeaderStyle="{DynamicResource MaterialDesignDataGridColumnHeader}"
+                                                        CellStyle="{DynamicResource MaterialDesignDataGridCell}" />
+                                    <DataGridTemplateColumn Width="*">
+                                        <DataGridTemplateColumn.Header>Budgeted</DataGridTemplateColumn.Header>
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding Budgeted, StringFormat={}{0:N2}}"></TextBlock>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTextColumn Header="Total Cost"
+                                                        Width="1*"
+                                                        IsReadOnly="True"
+                                                        Binding="{Binding TotalCost, StringFormat={}{0:N2}}"
+                                                        EditingElementStyle="{DynamicResource MaterialDesignTextBox}"
+                                                        CellStyle="{DynamicResource MaterialDesignDataGridCell}">
+                                    </DataGridTextColumn>
+                                    <DataGridTextColumn Header="Running Cost"
+                                                        Width="1*"
+                                                        IsReadOnly="False"
+                                                        Binding="{Binding RunningCost, StringFormat={}{0:N2}}"
+                                                        EditingElementStyle="{DynamicResource MaterialDesignDataGridTextColumnEditingStyle}"
+                                                        CellStyle="{DynamicResource MaterialDesignDataGridCell}">
+                                    </DataGridTextColumn>
+                                    <DataGridTemplateColumn Width="2*">
+                                        <DataGridTemplateColumn.Header>% of Completion</DataGridTemplateColumn.Header>
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Grid>
+                                                    <ProgressBar Grid.Column="0"
+                                                                 Margin="0,0,10,0"
+                                                                 Height="25"
+                                                                 Value="{Binding PercentOfCompletion, Mode=OneWay}" />
+                                                    <TextBlock Grid.Column="0"
+                                                               VerticalAlignment="Center"
+                                                               HorizontalAlignment="Center"
+                                                               Text="{Binding PercentOfCompletion, Mode=Default, StringFormat={}{0:N2}%}" />
+                                                </Grid>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </Grid>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
         <Button Grid.Row="1"
                 Visibility="{Binding CanUpdate, Converter={StaticResource booleanToVisibilityConverter}}"
                 Command="{Binding UpdateCommand}">Update</Button>

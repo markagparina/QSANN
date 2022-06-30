@@ -93,6 +93,16 @@
                         <Button HorizontalAlignment="Center"
                                 IsDefault="True"
                                 Style="{StaticResource MaterialDesignFlatButton}"
+                                Command="{Binding ProjectViewModel.DeleteProjectCommand}">
+                            <Button.CommandParameter>
+                                <system:Boolean>True</system:Boolean>
+                            </Button.CommandParameter>
+                            Delete
+                        </Button>
+
+                        <Button HorizontalAlignment="Center"
+                                IsDefault="True"
+                                Style="{StaticResource MaterialDesignFlatButton}"
                                 Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
                             <Button.CommandParameter>
                                 <system:Boolean>False</system:Boolean>
@@ -174,6 +184,16 @@
                                 <system:Boolean>True</system:Boolean>
                             </Button.CommandParameter>
                             Save
+                        </Button>
+
+                        <Button HorizontalAlignment="Center"
+                                IsDefault="True"
+                                Style="{StaticResource MaterialDesignFlatButton}"
+                                Command="{Binding ProjectViewModel.DeleteProjectCommand}">
+                            <Button.CommandParameter>
+                                <system:Boolean>True</system:Boolean>
+                            </Button.CommandParameter>
+                            Delete
                         </Button>
 
                         <Button HorizontalAlignment="Center"

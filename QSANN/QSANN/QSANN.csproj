@@ -3,9 +3,13 @@
 		<OutputType>WinExe</OutputType>
 		<TargetFramework>net6.0-windows</TargetFramework>
 		<UseWPF>true</UseWPF>
+		<ApplicationIcon>logo.ico</ApplicationIcon>
 	</PropertyGroup>
 	<ItemGroup>
 	  <None Remove="Resources\logo.png" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Content Include="logo.ico" />
 	</ItemGroup>
 	<ItemGroup>
 		<PackageReference Include="Mapster" Version="7.3.0" />

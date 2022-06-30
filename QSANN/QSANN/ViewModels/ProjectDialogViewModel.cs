@@ -35,6 +35,7 @@ namespace QSANN.ViewModels
                 LoadProjectCommand.RaiseCanExecuteChanged();
                 OverwriteSelectedProjectCommand.RaiseCanExecuteChanged();
                 SaveNewProjectCommand.RaiseCanExecuteChanged();
+                DeleteProjectCommand.RaiseCanExecuteChanged();
             }
         }
 
@@ -78,6 +79,34 @@ namespace QSANN.ViewModels
 
         public DelegateCommand SaveNewMonitoringProjectCommand => _saveNewMonitoringProjectCommand ??= new DelegateCommand(async () => await ExecuteSaveNewMonitoringProjectCommandAsync(),
             () => !string.IsNullOrEmpty(ProjectName));
+
+        private DelegateCommand _deleteProjectCommand;
+
+        public DelegateCommand DeleteProjectCommand => _deleteProjectCommand ??= new DelegateCommand(async () => await ExecuteDeleteProjectCommandAsync(), () => SelectedProject is not null);
+
+        private async Task ExecuteDeleteProjectCommandAsync()
+        {
+            using var transaction = await _context.Database.BeginTransactionAsync();
+            try
+            {
+                var project = await _context.Set<Project>().FindAsync(SelectedProject.Id);
+
+                _context.Set<Project>().Remove(project);
+
+                _context.SaveChanges();
+
+                await ExecuteLoadedCommandAsync();
+                await transaction.CommitAsync();
+            }
+            catch (Exception ex)
+            {
+                await transaction.RollbackAsync();
+            }
+            finally
+            {
+                DialogHost.Close("MainWindowDialogHost");
+            }
+        }
 
         private async Task ExecuteSaveNewMonitoringProjectCommandAsync()
         {

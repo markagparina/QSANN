@@ -4,7 +4,5 @@
              xmlns:prism="http://prismlibrary.com/"
              xmlns:controls="clr-namespace:Monitoring.Controls"
              prism:ViewModelLocator.AutoWireViewModel="True">
-    <ScrollViewer>
-        <controls:MonitoringCategoryView DataContext="{Binding .}" />
-    </ScrollViewer>
+    <controls:MonitoringCategoryView DataContext="{Binding .}" />
 </UserControl>
